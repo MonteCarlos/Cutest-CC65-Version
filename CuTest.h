@@ -1,8 +1,8 @@
 #ifndef CU_TEST_H
 #define CU_TEST_H
 
-#include <setjmp.h>
 #include <stdarg.h>
+#include <setjmp.h>
 
 #define CUTEST_VERSION  "CuTest 1.5"
 
@@ -13,7 +13,7 @@ char* CuStrCopy(const char* old);
 
 #define CU_ALLOC(TYPE)		((TYPE*) malloc(sizeof(TYPE)))
 
-#define HUGE_STRING_LEN	8192
+#define HUGE_STRING_LEN	512
 #define STRING_MAX		256
 #define STRING_INC		256
 
@@ -64,9 +64,9 @@ void CuAssertStrEquals_LineMsg(CuTest* tc,
 void CuAssertIntEquals_LineMsg(CuTest* tc,
 	const char* file, int line, const char* message,
 	int expected, int actual);
-void CuAssertDblEquals_LineMsg(CuTest* tc,
+/*void CuAssertDblEquals_LineMsg(CuTest* tc,
 	const char* file, int line, const char* message,
-	double expected, double actual, double delta);
+	double expected, double actual, double delta);*/
 void CuAssertPtrEquals_LineMsg(CuTest* tc,
 	const char* file, int line, const char* message,
 	void* expected, void* actual);
@@ -91,14 +91,14 @@ void CuAssertPtrEquals_LineMsg(CuTest* tc,
 
 /* CuSuite */
 
-#define MAX_TEST_CASES	1024
+#define MAX_TEST_CASES	100
 
 #define SUITE_ADD_TEST(SUITE,TEST)	CuSuiteAdd(SUITE, CuTestNew(#TEST, TEST))
 
 typedef struct
 {
 	int count;
-	CuTest* list[MAX_TEST_CASES];
+	CuTest** list;
 	int failCount;
 
 } CuSuite;

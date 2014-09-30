@@ -1,9 +1,8 @@
 #include <assert.h>
-#include <setjmp.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include <math.h>
+//#include <math.h>
 
 #include "CuTest.h"
 
@@ -14,6 +13,7 @@
 char* CuStrAlloc(int size)
 {
 	char* newStr = (char*) malloc( sizeof(char) * (size) );
+	assert (NULL != newStr);
 	return newStr;
 }
 
@@ -34,6 +34,7 @@ void CuStringInit(CuString* str)
 	str->length = 0;
 	str->size = STRING_MAX;
 	str->buffer = (char*) malloc(sizeof(char) * str->size);
+	assert(str->buffer != NULL);
 	str->buffer[0] = '\0';
 }
 
@@ -43,6 +44,7 @@ CuString* CuStringNew(void)
 	str->length = 0;
 	str->size = STRING_MAX;
 	str->buffer = (char*) malloc(sizeof(char) * str->size);
+	assert(str->buffer != NULL);
 	str->buffer[0] = '\0';
 	return str;
 }
@@ -50,13 +52,16 @@ CuString* CuStringNew(void)
 void CuStringDelete(CuString *str)
 {
         if (!str) return;
+        assert(NULL != str->buffer);
         free(str->buffer);
+        assert(NULL != str);
         free(str);
 }
 
 void CuStringResize(CuString* str, int newSize)
 {
 	str->buffer = (char*) realloc(str->buffer, sizeof(char) * newSize);
+	assert(str->buffer != NULL);
 	str->size = newSize;
 }
 
@@ -70,7 +75,7 @@ void CuStringAppend(CuString* str, const char* text)
 
 	length = strlen(text);
 	if (str->length + length + 1 >= str->size)
-		CuStringResize(str, str->length + length + 1 + STRING_INC);
+		CuStringResize(str, str->length + length + 1 /*+ STRING_INC*/);
 	str->length += length;
 	strcat(str->buffer, text);
 }
@@ -86,11 +91,14 @@ void CuStringAppendChar(CuString* str, char ch)
 void CuStringAppendFormat(CuString* str, const char* format, ...)
 {
 	va_list argp;
-	char buf[HUGE_STRING_LEN];
+	char *buf = (char*)calloc(HUGE_STRING_LEN, sizeof(char));
+	assert (NULL != buf);
 	va_start(argp, format);
 	vsprintf(buf, format, argp);
 	va_end(argp);
 	CuStringAppend(str, buf);
+	assert(NULL != buf);
+	free(buf);
 }
 
 void CuStringInsert(CuString* str, const char* text, int pos)
@@ -99,7 +107,7 @@ void CuStringInsert(CuString* str, const char* text, int pos)
 	if (pos > str->length)
 		pos = str->length;
 	if (str->length + length + 1 >= str->size)
-		CuStringResize(str, str->length + length + 1 + STRING_INC);
+		CuStringResize(str, str->length + length + 1 /*+ STRING_INC*/);
 	memmove(str->buffer + pos + length, str->buffer + pos, (str->length - pos) + 1);
 	str->length += length;
 	memcpy(str->buffer + pos, text, length);
@@ -129,7 +137,10 @@ CuTest* CuTestNew(const char* name, TestFunction function)
 void CuTestDelete(CuTest *t)
 {
         if (!t) return;
+        assert (NULL != t->name);
         free(t->name);
+        //CuStringDelete(t->name);
+        assert (NULL != t);
         free(t);
 }
 
@@ -141,20 +152,23 @@ void CuTestRun(CuTest* tc)
 	{
 		(tc->function)(tc);
 		tc->ran = 1;
+
 	}
 	tc->jumpBuf = 0;
 }
 
 static void CuFailInternal(CuTest* tc, const char* file, int line, CuString* string)
 {
-	char buf[HUGE_STRING_LEN];
-
+	char* buf = (char*)calloc(HUGE_STRING_LEN, sizeof(char));
+	assert (NULL != buf);
 	sprintf(buf, "%s:%d: ", file, line);
 	CuStringInsert(string, buf, 0);
 
 	tc->failed = 1;
 	tc->message = string->buffer;
 	if (tc->jumpBuf != 0) longjmp(*(tc->jumpBuf), 0);
+	assert (NULL != buf);
+	free(buf);
 }
 
 void CuFail_Line(CuTest* tc, const char* file, int line, const char* message2, const char* message)
@@ -205,13 +219,16 @@ void CuAssertStrEquals_LineMsg(CuTest* tc, const char* file, int line, const cha
 void CuAssertIntEquals_LineMsg(CuTest* tc, const char* file, int line, const char* message,
 	int expected, int actual)
 {
-	char buf[STRING_MAX];
+	char* buf = (char*)calloc(STRING_MAX, sizeof(char));
+	assert (NULL != buf);
 	if (expected == actual) return;
 	sprintf(buf, "expected <%d> but was <%d>", expected, actual);
 	CuFail_Line(tc, file, line, message, buf);
+	assert (NULL != buf);
+	free(buf);
 }
 
-void CuAssertDblEquals_LineMsg(CuTest* tc, const char* file, int line, const char* message,
+/*void CuAssertDblEquals_LineMsg(CuTest* tc, const char* file, int line, const char* message,
 	double expected, double actual, double delta)
 {
 	char buf[STRING_MAX];
@@ -219,15 +236,18 @@ void CuAssertDblEquals_LineMsg(CuTest* tc, const char* file, int line, const cha
 	sprintf(buf, "expected <%f> but was <%f>", expected, actual);
 
 	CuFail_Line(tc, file, line, message, buf);
-}
+}*/
 
 void CuAssertPtrEquals_LineMsg(CuTest* tc, const char* file, int line, const char* message,
 	void* expected, void* actual)
 {
-	char buf[STRING_MAX];
+	char* buf = calloc(STRING_MAX, sizeof(char));
+	assert (NULL != buf);
 	if (expected == actual) return;
 	sprintf(buf, "expected pointer <0x%p> but was <0x%p>", expected, actual);
 	CuFail_Line(tc, file, line, message, buf);
+	assert (NULL != buf);
+	free(buf);
 }
 
 
@@ -239,7 +259,9 @@ void CuSuiteInit(CuSuite* testSuite)
 {
 	testSuite->count = 0;
 	testSuite->failCount = 0;
-        memset(testSuite->list, 0, sizeof(testSuite->list));
+	testSuite->list = (CuTest**)calloc(MAX_TEST_CASES, sizeof(CuTest*));//alloc and zero fill
+	assert (NULL != testSuite->list);
+	//memset(testSuite->list, 0, sizeof(testSuite->list));
 }
 
 CuSuite* CuSuiteNew(void)
@@ -252,15 +274,19 @@ CuSuite* CuSuiteNew(void)
 void CuSuiteDelete(CuSuite *testSuite)
 {
         unsigned int n;
+        assert (NULL != testSuite);
         for (n=0; n < MAX_TEST_CASES; n++)
         {
+			printf("%d\n",n);
                 if (testSuite->list[n])
                 {
                         CuTestDelete(testSuite->list[n]);
+                        //assert (NULL != testSuite->list);
+                        //free(testSuite->list);
                 }
         }
-        free(testSuite);
 
+        free(testSuite);
 }
 
 void CuSuiteAdd(CuSuite* testSuite, CuTest *testCase)
@@ -283,9 +309,12 @@ void CuSuiteAddSuite(CuSuite* testSuite, CuSuite* testSuite2)
 void CuSuiteRun(CuSuite* testSuite)
 {
 	int i;
+	CuTest* testCase = NULL;
 	for (i = 0 ; i < testSuite->count ; ++i)
 	{
-		CuTest* testCase = testSuite->list[i];
+		printf("%d:",i);
+		testCase = testSuite->list[i];
+		printf("%s\n",testCase->name);
 		CuTestRun(testCase);
 		if (testCase->failed) { testSuite->failCount += 1; }
 	}
