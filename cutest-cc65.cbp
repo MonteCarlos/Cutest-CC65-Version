@@ -18,8 +18,16 @@
 				<Option type="1" />
 				<Option compiler="cc65" />
 			</Target>
+			<Target title="Lib">
+				<Option output="../cutest-cc65" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option type="2" />
+				<Option compiler="cc65" />
+				<Option createDefFile="1" />
+			</Target>
 		</Build>
 		<Compiler>
+			<Add option="-g" />
 			<Add option="--check-stack" />
 		</Compiler>
 		<Linker>
@@ -30,6 +38,8 @@
 		</ExtraCommands>
 		<Unit filename="AllTests.c">
 			<Option compilerVar="CC" />
+			<Option target="Debug" />
+			<Option target="Release" />
 		</Unit>
 		<Unit filename="CuTest.c">
 			<Option compilerVar="CC" />
@@ -37,14 +47,35 @@
 		<Unit filename="CuTest.h" />
 		<Unit filename="CuTestTest.c">
 			<Option compilerVar="CC" />
+			<Option target="Debug" />
+			<Option target="Release" />
 		</Unit>
-		<Unit filename="README.txt" />
+		<Unit filename="CuTestTest.h" />
+		<Unit filename="CuTestTest_shared.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="CuTest_internal.h" />
+		<Unit filename="README.txt">
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
 		<Unit filename="cutest-cc65.cfg" />
-		<Unit filename="cutest-cc65.exe.lbl" />
-		<Unit filename="cutest-cc65.exe.map" />
-		<Unit filename="license.txt" />
+		<Unit filename="cutest-cc65.exe.lbl">
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="cutest-cc65.exe.map">
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="license.txt">
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
+			<Option target="Debug" />
+			<Option target="Release" />
 		</Unit>
 		<Extensions>
 			<code_completion />

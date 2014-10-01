@@ -3,147 +3,21 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "CuTest.h"
+#include "CuTest_internal.h"
 
-/*-------------------------------------------------------------------------*
- * Helper functions
- *-------------------------------------------------------------------------*/
-
-#define CompareAsserts(tc, message, expected, actual)  X_CompareAsserts((tc), __FILE__, __LINE__, (message), (expected), (actual))
-
-void TestPasses(CuTest* tc);
-
-static void X_CompareAsserts(CuTest* tc, const char *file, int line, const char* message, const char* expected, const char* actual)
-{
-	int mismatch;
-	if (expected == NULL || actual == NULL) {
-		mismatch = (expected != NULL || actual != NULL);
-	} else {
-		const char *front = __FILE__;// ":";
-		const size_t frontLen = strlen(front);
-		const size_t expectedLen = strlen(expected);
-
-		const char *matchStr = actual;
-
-		mismatch = (strncmp(matchStr, front, frontLen) != 0);
-		if (!mismatch) {
-			matchStr = strchr(matchStr + frontLen, ':');
-			mismatch |= (matchStr == NULL || strncmp(matchStr, ": ", 2));
-			if (!mismatch) {
-				matchStr += 2;
-				mismatch |= (strncmp(matchStr, expected, expectedLen) != 0);
-			}
-		}
-	}
-
-	CuAssert_Line(tc, file, line, message, !mismatch);
-}
 
 /*-------------------------------------------------------------------------*
  * CuString Test
  *-------------------------------------------------------------------------*/
-
-void TestCuStringNew(CuTest* tc)
+/*void TestCompareAsserts(CuTest* tc)
 {
-	CuString* str = CuStringNew();
-	CuAssertTrue(tc, 0 == str->length);
-	CuAssertTrue(tc, 0 != str->size);
-	CuAssertStrEquals(tc, "", str->buffer);
-}
-
-
-void TestCuStringAppend(CuTest* tc)
-{
-	CuString* str = CuStringNew();
-	CuStringAppend(str, "hello");
-	CuAssertIntEquals(tc, 5, str->length);
-	CuAssertStrEquals(tc, "hello", str->buffer);
-	CuStringAppend(str, " world");
-	CuAssertIntEquals(tc, 11, str->length);
-	CuAssertStrEquals(tc, "hello world", str->buffer);
-}
-
-
-void TestCuStringAppendNULL(CuTest* tc)
-{
-	CuString* str = CuStringNew();
-	CuStringAppend(str, NULL);
-	CuAssertIntEquals(tc, 4, str->length);
-	CuAssertStrEquals(tc, "NULL", str->buffer);
-}
-
-
-void TestCuStringAppendChar(CuTest* tc)
-{
-	CuString* str = CuStringNew();
-	CuStringAppendChar(str, 'a');
-	CuStringAppendChar(str, 'b');
-	CuStringAppendChar(str, 'c');
-	CuStringAppendChar(str, 'd');
-	CuAssertIntEquals(tc, 4, str->length);
-	CuAssertStrEquals(tc, "abcd", str->buffer);
-}
-
-
-void TestCuStringInserts(CuTest* tc)
-{
-	CuString* str = CuStringNew();
-	CuStringAppend(str, "world");
-	CuAssertIntEquals(tc, 5, str->length);
-	CuAssertStrEquals(tc, "world", str->buffer);
-	CuStringInsert(str, "hell", 0);
-	CuAssertIntEquals(tc, 9, str->length);
-	CuAssertStrEquals(tc, "hellworld", str->buffer);
-	CuStringInsert(str, "o ", 4);
-	CuAssertIntEquals(tc, 11, str->length);
-	CuAssertStrEquals(tc, "hello world", str->buffer);
-	CuStringInsert(str, "!", 11);
-	CuAssertIntEquals(tc, 12, str->length);
-	CuAssertStrEquals(tc, "hello world!", str->buffer);
-}
-
-
-void TestCuStringResizes(CuTest* tc)
-{
-	CuString* str = CuStringNew();
-	int i;
-	for(i = 0 ; i < STRING_MAX ; ++i)
-	{
-		CuStringAppend(str, "aa");
-	}
-	CuAssertTrue(tc, STRING_MAX * 2 == str->length);
-	CuAssertTrue(tc, STRING_MAX * 2 <= str->size);
-}
-
-CuSuite* CuStringGetSuite(void)
-{
-	CuSuite* suite = CuSuiteNew();
-
-	SUITE_ADD_TEST(suite, TestCuStringNew);
-	SUITE_ADD_TEST(suite, TestCuStringAppend);
-	SUITE_ADD_TEST(suite, TestCuStringAppendNULL);
-	SUITE_ADD_TEST(suite, TestCuStringAppendChar);
-	SUITE_ADD_TEST(suite, TestCuStringInserts);
-	SUITE_ADD_TEST(suite, TestCuStringResizes);
-	//alle OK
-
-	return suite;
-}
+	CompareAsserts
+	CompareAsserts()
+}*/
 
 /*-------------------------------------------------------------------------*
  * CuTest Test
  *-------------------------------------------------------------------------*/
-
-void TestPasses(CuTest* tc)
-{
-	CuAssert(tc, "test should pass", 1 == 0 + 1);
-}
-
-void zTestFails(CuTest* tc)
-{
-	CuAssert(tc, "test should fail", 1 == 1 + 1);
-}
-
 
 void TestCuTestNew(CuTest* tc)
 {
@@ -172,9 +46,11 @@ void TestCuTestInit(CuTest *tc)
 void TestCuAssert(CuTest* tc)
 {
 	CuTest tc2;
+	int value = 4;//Suppress warning about constant comparison
+
 	CuTestInit(&tc2, "MyTest", TestPasses);
 
-	CuAssert(&tc2, "test 1", 5 == 4 + 1);
+	CuAssert(&tc2, "test 1", 5 == value + 1);
 	CuAssertTrue(tc, !tc2.failed);
 	CuAssertTrue(tc, tc2.message == NULL);
 
