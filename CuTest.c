@@ -47,8 +47,9 @@ void CuTestRun(CuTest* tc)
 	tc->jumpBuf = &buf;
 	if (setjmp(buf) == 0)
 	{
-		(tc->function)(tc);
 		tc->ran = 1;
+		(tc->function)(tc);
+
 
 	}
 	tc->jumpBuf = 0;
@@ -122,10 +123,10 @@ void CuAssertIntEquals_LineMsg(CuTest* tc, const char* file, int line, const cha
 {
 	char* buf = (char*)calloc(STRING_MAX, sizeof(char));
 	assert (NULL != buf);
-	if (expected == actual) return;
-	sprintf(buf, "expected <%d> but was <%d>", expected, actual);
-	CuFail_Line(tc, file, line, message, buf);
-	assert (NULL != buf);
+	if (expected != actual){
+		sprintf(buf, "expected <%d> but was <%d>", expected, actual);
+		CuFail_Line(tc, file, line, message, buf);
+	}
 	free(buf);
 }
 
@@ -266,8 +267,8 @@ void CuSuiteDetails(CuSuite* testSuite, CuString* details)
 		}
 		CuStringAppend(details, "\n!!!FAILURES!!!\n");
 
-		CuStringAppendFormat(details, "Runs: %d ",   testSuite->count);
-		CuStringAppendFormat(details, "Passes: %d ", testSuite->count - testSuite->failCount);
-		CuStringAppendFormat(details, "Fails: %d\n",  testSuite->failCount);
+		CuStringAppendFormat(details, "Runs:%d, ",   testSuite->count);
+		CuStringAppendFormat(details, "Passes:%d, ", testSuite->count - testSuite->failCount);
+		CuStringAppendFormat(details, "Fails:%d\n",  testSuite->failCount);
 	}
 }
