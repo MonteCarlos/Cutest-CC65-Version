@@ -59,13 +59,17 @@ static void CuFailInternal(CuTest* tc, const char* file, int line, CuString* str
 	char* buf = (char*)calloc(HUGE_STRING_LEN, sizeof(char));
 	assert (NULL != buf);
 	sprintf(buf, "%s:%d: ", file, line);
-	CuStringInsert(string, buf, 0);
+	CuStringInsert(string, buf, 0);//buf is appended to string.
+
+	//buf is not needed anymore
+	free(buf);
 
 	tc->failed = 1;
 	tc->message = string->buffer;
-	if (tc->jumpBuf != 0) longjmp(*(tc->jumpBuf), 0);
-	assert (NULL != buf);
-	//free(buf);
+
+	if (tc->jumpBuf != 0) longjmp(*(tc->jumpBuf), 0); //This breaks execution on true
+
+	//This part is only reached if jumpBuf == NULL
 }
 
 void CuFail_Line(CuTest* tc, const char* file, int line, const char* message2, const char* message)

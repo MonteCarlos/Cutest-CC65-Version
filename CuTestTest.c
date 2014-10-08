@@ -7,19 +7,18 @@
 
 #define CompareAsserts(tc, message, expected, actual)  X_CompareAsserts((tc), __FILE__, __LINE__, (message), (expected), (actual))
 
-#define mkstr(str) #str
 static void X_CompareAsserts(CuTest* tc, const char *file, int line, const char* message, const char* expected, const char* actual)
 {
 	int mismatch;
 	if (expected == NULL || actual == NULL) {
 		mismatch = (expected != NULL || actual != NULL);
 	} else {
-		const char *front = mkstr(__FILE__) ":";//seems to work now
-		const size_t frontLen = strlen(front);
+		const char *front = __FILE__;//seems to work now
+		const size_t frontLen = strlen(front)+1;
 		const size_t expectedLen = strlen(expected);
 
 		const char *matchStr = actual;
-
+		
 		mismatch = (strncmp(matchStr, front, frontLen) != 0);
 		if (!mismatch) {
 			matchStr = strchr(matchStr + frontLen, ':');//This causes error because before __FILE__":" was not possible with cc65

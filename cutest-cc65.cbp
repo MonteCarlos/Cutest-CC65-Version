@@ -74,8 +74,6 @@
 		<Unit filename="CuTest_internal.h" />
 		<Unit filename="README.txt" />
 		<Unit filename="cutest-cc65.cfg" />
-		<Unit filename="cutest-cc65.exe.lbl" />
-		<Unit filename="cutest-cc65.exe.map" />
 		<Unit filename="license.txt" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
