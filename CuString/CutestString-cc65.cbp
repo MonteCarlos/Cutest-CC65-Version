@@ -13,17 +13,17 @@
 				<Option type="2" />
 				<Option compiler="cc65" />
 				<Linker>
-					<Add library="..\libcutest-cc65_Dbg.lib" />
+					<Add library="..\..\libcutest-cc65_Dbg.lib" />
 				</Linker>
 			</Target>
 			<Target title="Release">
-				<Option output="../CutestString_cc65" prefix_auto="1" extension_auto="1" />
+				<Option output="../../CutestString_cc65" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="" />
 				<Option object_output="obj/Release/" />
 				<Option type="2" />
 				<Option compiler="cc65" />
 				<Linker>
-					<Add library="..\libcutest-cc65.lib" />
+					<Add library="..\..\libcutest-cc65.lib" />
 				</Linker>
 			</Target>
 			<Target title="Selftest">
@@ -33,7 +33,7 @@
 				<Option compiler="cc65" />
 				<Option use_console_runner="0" />
 				<Linker>
-					<Add library="..\libcutest-cc65_Dbg.lib" />
+					<Add library="..\..\libcutest-cc65_Dbg.lib" />
 				</Linker>
 			</Target>
 		</Build>
@@ -42,7 +42,7 @@
 		</VirtualTargets>
 		<Compiler>
 			<Add option="--check-stack" />
-			<Add directory="../cutest-1.5" />
+			<Add directory=".." />
 		</Compiler>
 		<Linker>
 			<Add option="-C CutestString-cc65.cfg" />
