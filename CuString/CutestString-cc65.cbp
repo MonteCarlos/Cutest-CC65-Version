@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="CutestString-cc65" />
+		<Option pch_mode="2" />
+		<Option compiler="cc65" />
+		<Build>
+			<Target title="Debug">
+				<Option output="../CutestString-cc65Dbg" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option object_output="obj/Debug/" />
+				<Option type="2" />
+				<Option compiler="cc65" />
+				<Linker>
+					<Add library="..\libcutest-cc65_Dbg.lib" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="../CutestString_cc65" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option object_output="obj/Release/" />
+				<Option type="2" />
+				<Option compiler="cc65" />
+				<Linker>
+					<Add library="..\libcutest-cc65.lib" />
+				</Linker>
+			</Target>
+			<Target title="Selftest">
+				<Option output="TestCutestString-cc65.prg" prefix_auto="1" extension_auto="0" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="cc65" />
+				<Option use_console_runner="0" />
+				<Linker>
+					<Add library="..\libcutest-cc65_Dbg.lib" />
+				</Linker>
+			</Target>
+		</Build>
+		<VirtualTargets>
+			<Add alias="CuTestString, selftest contained" targets="Debug;Release;Selftest;" />
+		</VirtualTargets>
+		<Compiler>
+			<Add option="--check-stack" />
+			<Add directory="../cutest-1.5" />
+		</Compiler>
+		<Linker>
+			<Add option="-C CutestString-cc65.cfg" />
+		</Linker>
+		<ExtraCommands>
+			<Add before="echo %CC65_HOME%" />
+		</ExtraCommands>
+		<Unit filename="AllTests.c">
+			<Option compilerVar="CC" />
+			<Option target="Selftest" />
+		</Unit>
+		<Unit filename="CutestString-cc65.cfg" />
+		<Unit filename="CutestString.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="CutestString.h" />
+		<Unit filename="CutestStringTest.c">
+			<Option compilerVar="CC" />
+			<Option target="Selftest" />
+		</Unit>
+		<Unit filename="README.txt">
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="license.txt">
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="main.c">
+			<Option compilerVar="CC" />
+			<Option target="Selftest" />
+		</Unit>
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
