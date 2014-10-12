@@ -30,6 +30,19 @@ char* CuStrCopy(const char* old)
  * CuString
  *-------------------------------------------------------------------------*/
 
+char* CuStringCStr(CuString* str){
+	return str->buffer;
+}
+
+//Use long for line number to be not limited to 65535 lines per file
+CuStringAppendLineFile(CuString* str, char* file, unsigned long int line){
+	CuStringAppend(str, file);
+}
+
+CuStringComposeMessage(CuTest *tc, CuString* str, char* msg1, char* msg2, char* file, unsigned long int line){
+	CuStringAppend(str, file);
+}
+
 void CuStringInit(CuString* str)
 {
 	str->length = 0;
@@ -52,11 +65,11 @@ CuString* CuStringNew(void)
 
 void CuStringDelete(CuString *str)
 {
-        if (!str) return;
-        assert(NULL != str->buffer);
-        free(str->buffer);
-        assert(NULL != str);
-        free(str);
+	if (!str) return;
+	assert(NULL != str->buffer);
+	free(str->buffer);
+	assert(NULL != str);
+	free(str);
 }
 
 void CuStringResize(CuString* str, int newSize)

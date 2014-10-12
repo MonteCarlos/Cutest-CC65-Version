@@ -16,20 +16,6 @@ void RunAllTests(void)
 	CuSuite* suite = NULL;//CuSuiteNew();
 
 	//*********************************
-	//*** Test CuTestString			***
-	//*********************************
-	suite = CuStringGetSuite();
-	output = CuStringNew();
-
-	assert (NULL != suite); //assert initialization of suite
-	CuSuiteRun(suite);//This function does not return!
-	CuSuiteSummary(suite, output);
-	CuSuiteDetails(suite, output);
-	printf("%s\n", output->buffer);
-	CuSuiteDelete(suite);
-	CuStringDelete(output);//*/
-
-	//*********************************
 	//*** Test CuTestString	helpers	***
 	//*********************************
 	output = CuStringNew();
