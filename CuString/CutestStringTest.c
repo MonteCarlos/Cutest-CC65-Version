@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "CutestString.h"
 #include "CuTest_internal.h"
 static void X_CompareAsserts(CuTest* tc, const char *file, int line, const char* message, const char* expected, const char* actual);
 #define CompareAsserts(tc, message, expected, actual)  X_CompareAsserts((tc), __FILE__, __LINE__, (message), (expected), (actual))
@@ -263,7 +264,16 @@ void TestAssertIntEquals(CuTest* tc)
 	//compareasserts(tc, "CuAssertStrEquals failed", expectedMsg, tc2->message);
 }
 
+void TestCuStringCStr(CuTest *tc){
+	CuString str;
+	const char *desiredStr = "This is a test.";
+	CuStringInit(&str);
+	CuStringAppend(&str, desiredStr);
+	CuAssertStrEquals(tc,
+					(const char*)CuStringCStr(&str),
+					(const char*)desiredStr);
 
+}
 /*-------------------------------------------------------------------------*
  * main
  *-------------------------------------------------------------------------*/
@@ -294,7 +304,7 @@ CuSuite* CuStringGetSuite(void)
 	SUITE_ADD_TEST(suite, TestCuStringInserts);
 	SUITE_ADD_TEST(suite, TestCuStringResizes);
 	SUITE_ADD_TEST(suite, TestCuStringAppendFormat);
-
+	SUITE_ADD_TEST(suite, TestCuStringCStr);
 	//alle OK
 
 	return suite;

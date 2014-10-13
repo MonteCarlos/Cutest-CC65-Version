@@ -1,4 +1,4 @@
-#include "CuTestTest.h"
+#include "CuTest_internal.h"
 
 /*-------------------------------------------------------------------------*
  * Helper functions
