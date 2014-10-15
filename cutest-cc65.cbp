@@ -66,6 +66,7 @@
 		<Compiler>
 			<Add option="-g" />
 			<Add option="--check-stack" />
+			<Add directory="CuString" />
 		</Compiler>
 		<Linker>
 			<Add option="-C cutest-cc65.cfg" />

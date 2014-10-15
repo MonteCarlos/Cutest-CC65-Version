@@ -33,6 +33,10 @@ void CuStringAppendFormat(CuString* str, const char* format, ...);
 void CuStringInsert(CuString* str, const char* text, int pos);
 void CuStringResize(CuString* str, int newSize);
 void CuStringDelete(CuString* str);
-char* CuStringCStr(CuString* str);
 
-#endif /* CU_TEST_H */
+char* CuStringCStr(CuString* str);
+void CuStringAppendLineFile(CuString* str, char* file, unsigned long int line);
+void CuStringComposeMessage(CuTest *tc, CuString* str, char* msg1, char* msg2, char* file, unsigned long int line);
+void CuStringAppendULong(CuString *str, unsigned long int num);
+
+#endif /* CUTESTSTRING_H */

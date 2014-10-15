@@ -140,20 +140,6 @@ void TestCuStringAppendFormat(CuTest* tc)
 	CuAssert(tc, "length of str->buffer is 300", 300 == strlen(str->buffer));
 }
 
-void TestFail(CuTest* tc)
-{
-	jmp_buf buf;
-	int pointReached = 0;
-	CuTest* tc2 = CuTestNew("TestFails", zTestFails);
-	tc2->jumpBuf = &buf;
-	if (setjmp(buf) == 0)
-	{
-		CuFail(tc2, "hello world");
-		pointReached = 1;
-	}
-	CuAssert(tc, "point was not reached", pointReached == 0);
-}
-
 void TestAssertStrEquals(CuTest* tc)
 {
 	jmp_buf buf;
@@ -243,27 +229,6 @@ void TestAssertStrEquals_FailStrNULL(CuTest* tc)
 	//compareasserts(tc, "CuAssertStrEquals_FailStrNULL failed", expectedMsg, tc2->message);
 }
 
-void TestAssertIntEquals(CuTest* tc)
-{
-	jmp_buf buf;
-	CuTest *tc2 = CuTestNew("TestAssertIntEquals", zTestFails);
-	const char* expected = "expected <42> but was <32>";
-	const char* expectedMsg = "some text: expected <42> but was <32>";
-	tc2->jumpBuf = &buf;
-	if (setjmp(buf) == 0)
-	{
-		CuAssertIntEquals(tc2, 42, 32);
-	}
-	CuAssertTrue(tc, tc2->failed);
-	//compareasserts(tc, "CuAssertIntEquals failed", expected, tc2->message);
-	if (setjmp(buf) == 0)
-	{
-		CuAssertIntEquals_Msg(tc2, "some text", 42, 32);
-	}
-	CuAssertTrue(tc, tc2->failed);
-	//compareasserts(tc, "CuAssertStrEquals failed", expectedMsg, tc2->message);
-}
-
 void TestCuStringCStr(CuTest *tc){
 	CuString str;
 	const char *desiredStr = "This is a test.";
@@ -274,6 +239,16 @@ void TestCuStringCStr(CuTest *tc){
 					(const char*)desiredStr);
 
 }
+
+TestCuStringAppendLineFile(CuTest *tc){
+}
+
+TestCuStringComposeMessage(CuTest *tc){
+}
+
+TestCuStringAppendULong(CuTest *tc){
+}
+
 /*-------------------------------------------------------------------------*
  * main
  *-------------------------------------------------------------------------*/
@@ -283,7 +258,6 @@ CuSuite* CuGetSuite(void)
 	CuSuite* suite = CuSuiteNew();
 
 	SUITE_ADD_TEST(suite, TestCuStrCopy);
-	SUITE_ADD_TEST(suite, TestFail);
 	SUITE_ADD_TEST(suite, TestAssertStrEquals);
 
 	SUITE_ADD_TEST(suite, TestAssertStrEquals_NULL);
