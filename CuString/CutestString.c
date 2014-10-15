@@ -4,7 +4,6 @@
 #include <string.h>
 //#include <math.h>
 
-#include "CuTest.h"
 #include "CutestString.h"
 
 /*-------------------------------------------------------------------------*
@@ -67,8 +66,10 @@ CuString* CuStringNew(void)
 	return str;
 }
 
-CuString* CuStringConvert(char* ){
-
+CuString* CuStringConvertCStr(char* text){
+    CuString *str = CuStringNew();
+    CuStringAppend(str, text);
+    return str;
 }
 
 void CuStringDelete(CuString *str)

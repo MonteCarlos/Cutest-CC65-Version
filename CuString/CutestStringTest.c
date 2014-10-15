@@ -240,15 +240,20 @@ void TestCuStringCStr(CuTest *tc){
 
 }
 
-TestCuStringAppendLineFile(CuTest *tc){
+void TestCuStringAppendLineFile(CuTest *tc){
 }
 
-TestCuStringComposeMessage(CuTest *tc){
+void TestCuStringComposeMessage(CuTest *tc){
 }
 
-TestCuStringAppendULong(CuTest *tc){
+void TestCuStringAppendULong(CuTest *tc){
 }
 
+void TestCuStringConvertCStr(CuTest *tc){
+	char* testtext = "This is my testtext.";
+	CuString *str = CuStringConvertCStr(testtext);
+	CuAssertStrEquals(tc, testtext, CuStringCStr(str));
+}
 /*-------------------------------------------------------------------------*
  * main
  *-------------------------------------------------------------------------*/
@@ -279,6 +284,11 @@ CuSuite* CuStringGetSuite(void)
 	SUITE_ADD_TEST(suite, TestCuStringResizes);
 	SUITE_ADD_TEST(suite, TestCuStringAppendFormat);
 	SUITE_ADD_TEST(suite, TestCuStringCStr);
+	SUITE_ADD_TEST(suite, TestCuStringAppendLineFile);
+	SUITE_ADD_TEST(suite, TestCuStringComposeMessage);
+	SUITE_ADD_TEST(suite, TestCuStringAppendULong);
+	SUITE_ADD_TEST(suite, TestCuStringConvertCStr);
+
 	//alle OK
 
 	return suite;

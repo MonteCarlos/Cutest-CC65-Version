@@ -1,8 +1,16 @@
 #ifndef CUTESTSTRING_H
 #define CUTESTSTRING_H
 
+typedef struct
+{
+	int length;
+	int size;
+	char* buffer;
+} CuString;
+
 #include <stdarg.h>
 #include <setjmp.h>
+#include "CuTest.h"
 
 #define CUTEST_VERSION  "CuTest 1.5"
 
@@ -17,12 +25,7 @@ char* CuStrCopy(const char* old);
 #define STRING_MAX		256
 #define STRING_INC		256
 
-typedef struct
-{
-	int length;
-	int size;
-	char* buffer;
-} CuString;
+
 
 void CuStringInit(CuString* str);
 CuString* CuStringNew(void);
@@ -38,5 +41,6 @@ char* CuStringCStr(CuString* str);
 void CuStringAppendLineFile(CuString* str, char* file, unsigned long int line);
 void CuStringComposeMessage(CuTest *tc, CuString* str, char* msg1, char* msg2, char* file, unsigned long int line);
 void CuStringAppendULong(CuString *str, unsigned long int num);
+CuString* CuStringConvertCStr(char* text);
 
 #endif /* CUTESTSTRING_H */
