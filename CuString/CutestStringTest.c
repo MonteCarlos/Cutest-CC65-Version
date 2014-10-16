@@ -241,6 +241,11 @@ void TestCuStringCStr(CuTest *tc){
 }
 
 void TestCuStringAppendLineFile(CuTest *tc){
+	char* frontStr = "This file is: ";
+	char expected[sizeof(frontStr)+sizeof(__FILE__)+1];
+	CuString *str = CuStringConvertCStr(frontStr);
+	CuStringAppendLineFile(str, __FILE__, __LINE__);
+	strcat(expected, frontStr, __FILE__);
 }
 
 void TestCuStringComposeMessage(CuTest *tc){
@@ -253,6 +258,10 @@ void TestCuStringConvertCStr(CuTest *tc){
 	char* testtext = "This is my testtext.";
 	CuString *str = CuStringConvertCStr(testtext);
 	CuAssertStrEquals(tc, testtext, CuStringCStr(str));
+
+	testtext = NULL;
+	str = CuStringConvertCStr(testtext);
+	CuAssertStrEquals(tc, "NULL", CuStringCStr(str));
 }
 /*-------------------------------------------------------------------------*
  * main

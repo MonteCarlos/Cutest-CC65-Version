@@ -58,17 +58,13 @@ CuString* CuStringNew(void)
 {
 	CuString* str = (CuString*) malloc(sizeof(CuString));
 	CuStringInit(str);
-//	str->length = 0;
-//	str->size = STRING_MAX;
-//	str->buffer = (char*) malloc(sizeof(char) * str->size);
-//	assert(str->buffer != NULL);
-//	str->buffer[0] = '\0';
+
 	return str;
 }
 
 CuString* CuStringConvertCStr(char* text){
     CuString *str = CuStringNew();
-    CuStringAppend(str, text);
+    CuStringAppend(str, text);//NULL is handled by Append
     return str;
 }
 
@@ -106,9 +102,11 @@ void CuStringAppend(CuString* str, const char* text)
 void CuStringAppendChar(CuString* str, char ch)
 {
 	char text[2];
-	text[0] = ch;
-	text[1] = '\0';
-	CuStringAppend(str, text);
+	if ('\0' != ch){
+		text[0] = ch;
+		text[1] = '\0';
+		CuStringAppend(str, text);
+	}//do not append termination character
 }
 
 void CuStringAppendFormat(CuString* str, const char* format, ...)
