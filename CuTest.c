@@ -216,9 +216,14 @@ void CuSuiteRun(CuSuite* testSuite)
 	{
 		printf("%d:",i);
 		testCase = testSuite->list[i];
-		printf("%s\n",testCase->name);
+		fputs(testCase->name, stdout);
 		CuTestRun(testCase);
-		if (testCase->failed) { testSuite->failCount += 1; }
+		if (testCase->failed) {
+			puts("->FAILED");
+			testSuite->failCount += 1;
+		}else{
+			puts("->OK");
+		}
 	}
 }
 

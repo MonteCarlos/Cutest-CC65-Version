@@ -4,11 +4,18 @@
 #include <string.h>
 //#include <math.h>
 
-#include "CutestString.h"
+#include "CutestString_internal.h"
 
 /*-------------------------------------------------------------------------*
  * CuStr
  *-------------------------------------------------------------------------*/
+CuStringLen_t CuStringlen(CuString *str){
+	return str -> length;
+}
+
+CuStringSize_t CuStringsize(CuString *str){
+	return str -> size;
+}
 
 char* CuStrAlloc(int size)
 {
@@ -29,24 +36,25 @@ char* CuStrCopy(const char* old)
  * CuString
  *-------------------------------------------------------------------------*/
 
+
 char* CuStringCStr(CuString* str){
 	return str->buffer;
 }
 
 //Use long for line number to be not limited to 65535 lines per file
-void CuStringAppendLineFile(CuString* str, char* file, unsigned long int line){
+void CuStringAppendLineFile(CuString* str, char* file, char* linestr){
 	CuStringAppend(str, file);
 	CuStringAppendChar(str, '(');
-	CuStringAppendULong(str, line);
+	CuStringAppend(str, linestr);
 	CuStringAppendChar(str, ')');
 }
 
-void CuStringComposeMessage(CuTest *tc, CuString* str, char* msg1, char* msg2, char* file, unsigned long int line){
+void CuStringComposeMessage(CuTest *tc, CuString* str, char* msg1, char* msg2, char* file, char* line){
 	CuStringAppend(str, file);
 }
 
-void CuStringAppendULong(CuString *str, unsigned long int num){
-}
+/*void CuStringAppendULong(CuString *str, unsigned long int num){
+}*/
 
 void CuStringInit(CuString* str)
 {

@@ -7,7 +7,8 @@
 #include <string.h>
 #include <stdint.h>
 
+#include "CuString\CutestString.h"
 #include "CuTest.h"
 #include "CuTestTest.h"
-#include "CutestString.h"
+
 #endif // CUTEST_INTERNAL_H_INCLUDED

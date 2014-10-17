@@ -3,10 +3,12 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "CutestString.h"
+#include "CutestString_internal.h"
 #include "CuTest_internal.h"
 static void X_CompareAsserts(CuTest* tc, const char *file, int line, const char* message, const char* expected, const char* actual);
 #define CompareAsserts(tc, message, expected, actual)  X_CompareAsserts((tc), __FILE__, __LINE__, (message), (expected), (actual))
+
+char thisfile[] = __FILE__;
 
 static void X_CompareAsserts(CuTest* tc, const char *file, int line, const char* message, const char* expected, const char* actual)
 {
@@ -45,7 +47,7 @@ void TestCuStringNew(CuTest* tc)
 {
 	CuString* str = CuStringNew();
 	CuAssertTrue(tc, 0 == str->length);
-	CuAssertTrue(tc, 0 != str->size);
+	CuAssertTrue(tc, STRING_MAX == str->size);
 	CuAssertStrEquals(tc, "", str->buffer);
 }
 
@@ -229,6 +231,20 @@ void TestAssertStrEquals_FailStrNULL(CuTest* tc)
 	//compareasserts(tc, "CuAssertStrEquals_FailStrNULL failed", expectedMsg, tc2->message);
 }
 
+void TestCuStringlen(CuTest *tc){
+	char *teststr = "My test string";
+	CuString *str = CuStringConvertCStr(teststr);
+
+	CuAssert( tc, "Strlen err", 0 == CuStringlen(str) - strlen(teststr) );
+}
+
+void TestCuStringsize(CuTest *tc){
+	char *teststr = "Another test string";
+	CuString *str = CuStringConvertCStr(teststr);
+	CuStringResize(str, strlen(teststr));
+	CuAssert( tc, "Strsize err", 0 == CuStringsize(str) - strlen(teststr) );
+}
+
 void TestCuStringCStr(CuTest *tc){
 	CuString str;
 	const char *desiredStr = "This is a test.";
@@ -237,24 +253,32 @@ void TestCuStringCStr(CuTest *tc){
 	CuAssertStrEquals(tc,
 					(const char*)CuStringCStr(&str),
 					(const char*)desiredStr);
-
+					//check string content
+	CuAssert( tc, "Strlen err", 0 == strlen(desiredStr) - str.length );//check length of string up to \0
+	CuAssert( tc, "Strsize err", 0 == STRING_MAX - str.size );//check occupied memory
 }
 
 void TestCuStringAppendLineFile(CuTest *tc){
-	char* frontStr = "This file is: ";
-	char expected[sizeof("This file is:")+sizeof(__FILE__)+1];
+	char frontStr[] = "This file is: ";
+	char thisline[] = __LINESTR__;
+
+	char expected[sizeof(frontStr)+sizeof(thisfile)+sizeof(thisline)+2+1];
 	CuString *str = CuStringConvertCStr(frontStr);
-	CuStringAppendLineFile(str, __FILE__, __LINE__);
+	CuStringAppendLineFile(str, thisfile, thisline);
 	strcpy(expected, frontStr);
-	strcat(expected, __FILE__);
+	strcat(expected, thisfile);
+	strcat(expected, "(");
+	strcat(expected, thisline);
+	strcat(expected, ")");
+
 	CuAssertStrEquals(tc, expected, CuStringCStr(str));
 }
 
 void TestCuStringComposeMessage(CuTest *tc){
 }
 
-void TestCuStringAppendULong(CuTest *tc){
-}
+/*void TestCuStringAppendULong(CuTest *tc){
+}*/
 
 void TestCuStringConvertCStr(CuTest *tc){
 	char* testtext = "This is my testtext.";
@@ -297,8 +321,10 @@ CuSuite* CuStringGetSuite(void)
 	SUITE_ADD_TEST(suite, TestCuStringCStr);
 	SUITE_ADD_TEST(suite, TestCuStringAppendLineFile);
 	SUITE_ADD_TEST(suite, TestCuStringComposeMessage);
-	SUITE_ADD_TEST(suite, TestCuStringAppendULong);
+	//SUITE_ADD_TEST(suite, TestCuStringAppendULong);
 	SUITE_ADD_TEST(suite, TestCuStringConvertCStr);
+	SUITE_ADD_TEST(suite, TestCuStringlen);
+	SUITE_ADD_TEST(suite, TestCuStringsize);
 
 	//alle OK
 

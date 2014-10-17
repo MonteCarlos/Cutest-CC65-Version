@@ -63,6 +63,7 @@
 			<Option compilerVar="CC" />
 			<Option target="Selftest" />
 		</Unit>
+		<Unit filename="CutestString_internal.h" />
 		<Unit filename="README.txt">
 			<Option target="Debug" />
 			<Option target="Release" />

@@ -4,7 +4,6 @@
 #include <stdarg.h>
 #include <setjmp.h>
 
-#include "CutestString.h"
 #define CUTEST_VERSION  "CuTest 1.5"
 
 /* CuTest */
@@ -83,7 +82,8 @@ void CuSuiteDelete(CuSuite *testSuite);
 void CuSuiteAdd(CuSuite* testSuite, CuTest *testCase);
 void CuSuiteAddSuite(CuSuite* testSuite, CuSuite* testSuite2);
 void CuSuiteRun(CuSuite* testSuite);
-void CuSuiteSummary(CuSuite* testSuite, CuString* summary);
+void CuSuiteSummary(CuSuite* testSuite,
+					CuString* summary);
 void CuSuiteDetails(CuSuite* testSuite, CuString* details);
 
 #endif /* CU_TEST_H */

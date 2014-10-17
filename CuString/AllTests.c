@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <assert.h>
 
-#include "CutestString.h"
+#include "CutestString_internal.h"
 
 CuSuite* CuGetSuite();
 CuSuite* CuStringGetSuite();
