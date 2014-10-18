@@ -275,10 +275,30 @@ void TestCuStringAppendLineFile(CuTest *tc){
 }
 
 void TestCuStringComposeMessage(CuTest *tc){
+	char* msgpart1 = "First msg";
+	char* msgpart2 = "Second msg";
+	unsigned long int thisline = __LINE__;
+	CuString *thislineStr = CuStringNew();
+	CuString *msg = CuStringNew();
+	char* expected = malloc(strlen(msgpart1)+strlen(msgpart2)+strlen(thisfile)+21);
+	assert(NULL != expected);
+
+	CuStringAppendULong(thislineStr, thisline);
+	CuStringComposeMessage(msg, msgpart1, msgpart2, thisfile, thisline);
+	sprintf(expected, "%s: %s\n%s(%lu)", msgpart1, msgpart2, thisfile, thisline);
+	CuAssertStrEquals(tc, expected, CuStringCStr(msg));
+
+	free(expected);
 }
 
-/*void TestCuStringAppendULong(CuTest *tc){
-}*/
+void TestCuStringAppendULong(CuTest *tc){
+	unsigned long int num = 1234567890;
+	char* numStr = "1234567890";
+
+	CuString *str = CuStringNew();
+	CuStringAppendULong(str, num);
+	CuAssertStrEquals(tc, numStr, CuStringCStr(str));
+}
 
 void TestCuStringConvertCStr(CuTest *tc){
 	char* testtext = "This is my testtext.";
@@ -321,10 +341,11 @@ CuSuite* CuStringGetSuite(void)
 	SUITE_ADD_TEST(suite, TestCuStringCStr);
 	SUITE_ADD_TEST(suite, TestCuStringAppendLineFile);
 	SUITE_ADD_TEST(suite, TestCuStringComposeMessage);
-	//SUITE_ADD_TEST(suite, TestCuStringAppendULong);
+	SUITE_ADD_TEST(suite, TestCuStringAppendULong);
 	SUITE_ADD_TEST(suite, TestCuStringConvertCStr);
 	SUITE_ADD_TEST(suite, TestCuStringlen);
 	SUITE_ADD_TEST(suite, TestCuStringsize);
+	//SUITE_ADD_TEST(suite, TestCuStringsize);
 
 	//alle OK
 

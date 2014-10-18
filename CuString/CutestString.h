@@ -3,9 +3,10 @@
 
 #define CUSTRING_VERSION  "CuString 1.5"
 
+#define CUSTRID(x) x
 #define CUSTRINGIFY(x) #x
 #define SAVECUSTRINGIFY(x) CUSTRINGIFY(x)
-#define __LINESTR__ SAVECUSTRINGIFY(__LINE__)
+#define __LINESTR__ SAVECUSTRINGIFY(CUSTRID(__LINE__))
 
 typedef size_t CuStringLen_t;
 typedef size_t CuStringSize_t;
@@ -45,7 +46,7 @@ CuStringSize_t CuStringsize(CuString *str);
 
 char* CuStringCStr(CuString* str);
 void CuStringAppendLineFile(CuString* str, char* file, char* linestr);
-void CuStringComposeMessage(CuTest *tc, CuString* str, char* msg1, char* msg2, char* file, unsigned long int line);
+void CuStringComposeMessage(CuString* str, char* msg1, char* msg2, char* file, unsigned long int line);
 void CuStringAppendULong(CuString *str, unsigned long int num);
 CuString* CuStringConvertCStr(char* text);
 

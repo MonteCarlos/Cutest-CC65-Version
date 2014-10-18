@@ -49,12 +49,25 @@ void CuStringAppendLineFile(CuString* str, char* file, char* linestr){
 	CuStringAppendChar(str, ')');
 }
 
-void CuStringComposeMessage(CuTest *tc, CuString* str, char* msg1, char* msg2, char* file, char* line){
+void CuStringComposeMessage(CuString* str, char* msg1, char* msg2, char* file, unsigned long int line){
+	CuStringAppend(str, msg1);
+	if (NULL != msg2){
+		CuStringAppend(str, ": ");
+		CuStringAppend(str, msg2);
+	}
+	CuStringAppendChar(str, '\n');
 	CuStringAppend(str, file);
+	CuStringAppendChar(str, '(');
+	CuStringAppendULong(str, line);
+	CuStringAppendChar(str, ')');
+
 }
 
-/*void CuStringAppendULong(CuString *str, unsigned long int num){
-}*/
+void CuStringAppendULong(CuString *str, unsigned long int num){
+	char numStr[20];
+	sprintf(numStr, "%lu", num);
+	CuStringAppend(str, numStr);
+}
 
 void CuStringInit(CuString* str)
 {
