@@ -238,6 +238,11 @@ void TestCuStringlen(CuTest *tc){
 	CuAssert( tc, "Strlen err", 0 == CuStringlen(str) - strlen(teststr) );
 }
 
+// TODO (Stefan#1#): Implement test case!
+void TestCuStringClear(CuTest* tc){
+
+}
+
 void TestCuStringsize(CuTest *tc){
 	char *teststr = "Another test string";
 	CuString *str = CuStringConvertCStr(teststr);
@@ -288,6 +293,17 @@ void TestCuStringComposeMessage(CuTest *tc){
 	sprintf(expected, "%s: %s\n%s(%lu)", msgpart1, msgpart2, thisfile, thisline);
 	CuAssertStrEquals(tc, expected, CuStringCStr(msg));
 
+	CuStringComposeMessage(msg, NULL, msgpart2, thisfile, thisline);
+	sprintf(expected, "NULL: %s\n%s(%lu)", msgpart2, thisfile, thisline);
+	CuAssertStrEquals(tc, expected, CuStringCStr(msg));
+
+	CuStringComposeMessage(msg, NULL, NULL, thisfile, thisline);
+	sprintf(expected, "NULL\n%s(%lu)", thisfile, thisline);
+	CuAssertStrEquals(tc, expected, CuStringCStr(msg));
+
+	CuStringComposeMessage(msg, msgpart1, NULL, thisfile, thisline);
+	sprintf(expected, "%s\n%s(%lu)", msgpart1, thisfile, thisline);
+	CuAssertStrEquals(tc, expected, CuStringCStr(msg));
 	free(expected);
 }
 
@@ -345,7 +361,7 @@ CuSuite* CuStringGetSuite(void)
 	SUITE_ADD_TEST(suite, TestCuStringConvertCStr);
 	SUITE_ADD_TEST(suite, TestCuStringlen);
 	SUITE_ADD_TEST(suite, TestCuStringsize);
-	//SUITE_ADD_TEST(suite, TestCuStringsize);
+	SUITE_ADD_TEST(suite, TestCuStringClear);
 
 	//alle OK
 

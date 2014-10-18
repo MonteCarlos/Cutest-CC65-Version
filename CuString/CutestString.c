@@ -50,6 +50,7 @@ void CuStringAppendLineFile(CuString* str, char* file, char* linestr){
 }
 
 void CuStringComposeMessage(CuString* str, char* msg1, char* msg2, char* file, unsigned long int line){
+	CuStringClear(str);
 	CuStringAppend(str, msg1);
 	if (NULL != msg2){
 		CuStringAppend(str, ": ");
@@ -78,6 +79,13 @@ void CuStringInit(CuString* str)
 	str->buffer[0] = '\0';
 }
 
+void CuStringClear(CuString *str){
+	if (str->buffer){
+		free(str->buffer);
+		CuStringInit(str);
+	}
+}
+
 CuString* CuStringNew(void)
 {
 	CuString* str = (CuString*) malloc(sizeof(CuString));
@@ -101,6 +109,7 @@ void CuStringDelete(CuString *str)
 	free(str);
 }
 
+// TODO (Stefan#1#): does not adjust str->length which maintains the length of the unallocated previous string
 void CuStringResize(CuString* str, int newSize)
 {
 	str->buffer = (char*) realloc(str->buffer, sizeof(char) * newSize);
