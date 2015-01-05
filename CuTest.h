@@ -8,19 +8,10 @@
 
 /* CuTest */
 
-typedef struct CuTest CuTest;
+typedef struct CuSuite_tag CuSuite;
+typedef struct CuTest_tag CuTest;
 
 typedef void (*TestFunction)(CuTest *);
-
-struct CuTest
-{
-	char* name;
-	TestFunction function;
-	int failed;
-	int ran;
-	const char* message;
-	jmp_buf *jumpBuf;
-};
 
 void CuTestInit(CuTest* t, const char* name, TestFunction function);
 CuTest* CuTestNew(const char* name, TestFunction function);
@@ -67,13 +58,7 @@ void CuAssertPtrEquals_LineMsg(CuTest* tc,
 
 #define SUITE_ADD_TEST(SUITE,TEST)	CuSuiteAdd(SUITE, CuTestNew(#TEST, TEST))
 
-typedef struct
-{
-	int count;
-	CuTest** list;
-	int failCount;
 
-} CuSuite;
 
 
 void CuSuiteInit(CuSuite* testSuite);

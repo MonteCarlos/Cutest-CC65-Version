@@ -12,12 +12,7 @@ typedef size_t CuStringLen_t;
 typedef size_t CuStringSize_t;
 typedef char CuStringChar_t;
 
-typedef struct
-{
-	CuStringLen_t length;
-	CuStringSize_t size;
-	CuStringChar_t* buffer;
-} CuString;
+typedef struct CuString_tag CuString;
 
 #include "CuTest.h"
 
@@ -43,6 +38,7 @@ void CuStringResize(CuString* str, int newSize);
 void CuStringDelete(CuString* str);
 CuStringLen_t CuStringlen(CuString *str);
 CuStringSize_t CuStringsize(CuString *str);
+void CuStringClear(CuString *str);
 
 char* CuStringCStr(CuString* str);
 void CuStringAppendLineFile(CuString* str, char* file, char* linestr);
