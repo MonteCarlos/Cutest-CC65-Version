@@ -41,7 +41,7 @@ CuStringSize_t CuStringsize(CuString *str);
 void CuStringClear(CuString *str);
 
 char* CuStringCStr(CuString* str);
-void CuStringAppendLineFile(CuString* str, char* file, char* linestr);
+void CuStringAppendLineFile(CuString* str, char* file, unsigned long int line);
 void CuStringComposeMessage(CuString* str, char* msg1, char* msg2, char* file, unsigned long int line);
 void CuStringAppendULong(CuString *str, unsigned long int num);
 CuString* CuStringConvertCStr(char* text);

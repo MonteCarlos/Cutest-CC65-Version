@@ -68,7 +68,7 @@ static void CuFailInternal(CuTest* tc, const char* file, int line, CuString* str
 	tc->failed = 1;
 	tc->message = string->buffer;
 
-	if (tc->jumpBuf != 0) longjmp(*(tc->jumpBuf), 0); //This breaks execution on true
+	if (tc->jumpBuf != 0) longjmp(tc->jumpBuf[0], 0); //This breaks execution on true
 
 	//This part is only reached if jumpBuf == NULL
 }

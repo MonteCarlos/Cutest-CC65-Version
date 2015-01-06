@@ -265,18 +265,21 @@ void TestCuStringCStr(CuTest *tc){
 
 void TestCuStringAppendLineFile(CuTest *tc){
 	char frontStr[] = "This file is: ";
-	char thisline[] = __LINESTR__;
-
-	char expected[sizeof(frontStr)+sizeof(thisfile)+sizeof(thisline)+2+1];
+	unsigned long line = __LINE__;
+    CuString* thisline = CuStringNew();
+    char *expected;
 	CuString *str = CuStringConvertCStr(frontStr);
-	CuStringAppendLineFile(str, thisfile, thisline);
+	CuStringAppendULong(thisline, line);
+	expected = malloc(sizeof(frontStr)+sizeof(thisfile)+strlen(CuStringCStr(thisline))+2+1);
+	CuStringAppendLineFile(str, thisfile, line);
 	strcpy(expected, frontStr);
 	strcat(expected, thisfile);
 	strcat(expected, "(");
-	strcat(expected, thisline);
+	strcat(expected, CuStringCStr(thisline));
 	strcat(expected, ")");
 
 	CuAssertStrEquals(tc, expected, CuStringCStr(str));
+	free(expected);
 }
 
 void TestCuStringComposeMessage(CuTest *tc){

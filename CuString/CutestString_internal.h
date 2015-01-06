@@ -3,7 +3,7 @@
 
 #include "CutestString.h"
 #include <stdarg.h>
-#include <setjmp.h>
+//#include <setjmp.h>
 
 
 struct CuString_tag
