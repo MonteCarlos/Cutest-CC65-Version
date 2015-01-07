@@ -281,6 +281,20 @@ void TestCuStringAppendLineFile(CuTest *tc){
 	CuAssertStrEquals(tc, expected, CuStringCStr(str));
 	free(expected);
 }
+void TestCuStringAppendISvsNOT(CuTest *tc){
+    enum {TestISvsNOT_MAXSTRLEN = 100};
+
+    int desired = 100, actual = 103;
+    char* leadstr = "Inttest: ";
+    CuString *str = CuStringConvertCStr(leadstr);
+    char* tempstr = malloc(TestISvsNOT_MAXSTRLEN);
+
+    CuStringAppendISvsNOT(str, "%d", desired, actual);
+    snprintf(tempstr, TestISvsNOT_MAXSTRLEN, "%sIS %d NOT %d", leadstr, actual, desired);
+    CuAssertStrEquals(tc, CuStringCStr(str), tempstr);
+
+    free(tempstr);
+}
 
 void TestCuStringComposeMessage(CuTest *tc){
 	char* msgpart1 = "First msg";
@@ -365,7 +379,7 @@ CuSuite* CuStringGetSuite(void)
 	SUITE_ADD_TEST(suite, TestCuStringlen);
 	SUITE_ADD_TEST(suite, TestCuStringsize);
 	SUITE_ADD_TEST(suite, TestCuStringClear);
-
+    SUITE_ADD_TEST(suite, TestCuStringAppendISvsNOT);
 	//alle OK
 
 	return suite;

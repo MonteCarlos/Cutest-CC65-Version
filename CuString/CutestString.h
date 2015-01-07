@@ -8,6 +8,8 @@
 #define SAVECUSTRINGIFY(x) CUSTRINGIFY(x)
 #define __LINESTR__ SAVECUSTRINGIFY(CUSTRID(__LINE__))
 
+#pragma charmap(92, 47)
+
 typedef size_t CuStringLen_t;
 typedef size_t CuStringSize_t;
 typedef char CuStringChar_t;
@@ -44,6 +46,7 @@ char* CuStringCStr(CuString* str);
 void CuStringAppendLineFile(CuString* str, char* file, unsigned long int line);
 void CuStringComposeMessage(CuString* str, char* msg1, char* msg2, char* file, unsigned long int line);
 void CuStringAppendULong(CuString *str, unsigned long int num);
+int CuStringAppendISvsNOT(CuString *str, char* format, ...);
 CuString* CuStringConvertCStr(char* text);
 
 /*#define TAGGEDSTRLIST STR(NOMEM, "Not enough mem.")

@@ -10,6 +10,9 @@
  * CuStr
  *-------------------------------------------------------------------------*/
 CuStringLen_t CuStringlen(CuString *str){
+    assert(str -> length == strlen(str -> buffer));
+    //Assert that length field is identical to length of string in buffer
+
 	return str -> length;
 }
 
@@ -39,6 +42,19 @@ char* CuStrCopy(const char* old)
 
 char* CuStringCStr(CuString* str){
 	return str->buffer;
+}
+
+int CuStringAppendISvsNOT(CuString *str, char* format, void* is, void* isnot){
+    enum {ISvsNOTBUFLEN = 200};
+
+    va_list va;
+    char* tempstr = malloc(ISvsNOTBUFLEN);
+
+    va_start(va,format);
+    snprintf(tempstr,ISvsNOTBUFLEN,"IS %s NOT %s",format,format);
+    CuStringAppendFormat(str, tempstr, is, isnot);
+    free (tempstr);
+    return EXIT_SUCCESS;
 }
 
 //Use long for line number to be not limited to 65535 lines per file
