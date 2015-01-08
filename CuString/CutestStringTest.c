@@ -291,7 +291,7 @@ void TestCuStringAppendISvsNOT(CuTest *tc){
 
     CuStringAppendISvsNOT(str, "%d", desired, actual);
     snprintf(tempstr, TestISvsNOT_MAXSTRLEN, "%sIS %d NOT %d", leadstr, actual, desired);
-    CuAssertStrEquals(tc, CuStringCStr(str), tempstr);
+    CuAssertStrEquals(tc, tempstr, CuStringCStr(str));
 
     free(tempstr);
 }

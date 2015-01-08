@@ -9,76 +9,21 @@
 /*-------------------------------------------------------------------------*
  * CuStr
  *-------------------------------------------------------------------------*/
-CuStringLen_t CuStringlen(CuString *str){
-    assert(str -> length == strlen(str -> buffer));
-    //Assert that length field is identical to length of string in buffer
 
-	return str -> length;
-}
 
-CuStringSize_t CuStringsize(CuString *str){
-	return str -> size;
-}
 
-char* CuStrAlloc(int size)
-{
-	char* newStr = (char*) malloc( sizeof(char) * (size) );
-	assert (NULL != newStr);
-	return newStr;
-}
 
-char* CuStrCopy(const char* old)
-{
-	int len = strlen(old);
-	char* newStr = CuStrAlloc(len + 1);
-	strcpy(newStr, old);
-	return newStr;
-}
 
 /*-------------------------------------------------------------------------*
  * CuString
  *-------------------------------------------------------------------------*/
 
 
-char* CuStringCStr(CuString* str){
-	return str->buffer;
-}
 
-int CuStringAppendISvsNOT(CuString *str, char* format, void* is, void* isnot){
-    enum {ISvsNOTBUFLEN = 200};
 
-    va_list va;
-    char* tempstr = malloc(ISvsNOTBUFLEN);
 
-    va_start(va,format);
-    snprintf(tempstr,ISvsNOTBUFLEN,"IS %s NOT %s",format,format);
-    CuStringAppendFormat(str, tempstr, is, isnot);
-    free (tempstr);
-    return EXIT_SUCCESS;
-}
 
-//Use long for line number to be not limited to 65535 lines per file
-void CuStringAppendLineFile(CuString* str, char* file, unsigned long int line){
-	CuStringAppend(str, file);
-	CuStringAppendChar(str, '(');
-	CuStringAppendULong(str, line);
-	CuStringAppendChar(str, ')');
-}
 
-void CuStringComposeMessage(CuString* str, char* msg1, char* msg2, char* file, unsigned long int line){
-	CuStringClear(str);
-	CuStringAppend(str, msg1);
-	if (NULL != msg2){
-		CuStringAppend(str, ": ");
-		CuStringAppend(str, msg2);
-	}
-	CuStringAppendChar(str, '\n');
-	CuStringAppend(str, file);
-	CuStringAppendChar(str, '(');
-	CuStringAppendULong(str, line);
-	CuStringAppendChar(str, ')');
-
-}
 
 void CuStringAppendULong(CuString *str, unsigned long int num){
 	char numStr[20];

@@ -33,7 +33,7 @@
 				<Option compiler="cc65" />
 				<Option use_console_runner="0" />
 				<Linker>
-					<Add library="..\..\libcutest-cc65_Dbg.lib" />
+					<Add library="..\..\cutest-cc65_Dbg.lib" />
 				</Linker>
 			</Target>
 		</Build>
@@ -48,11 +48,35 @@
 			<Add option="-C CutestString-cc65.cfg" />
 		</Linker>
 		<ExtraCommands>
-			<Add before="echo %CC65_HOME%" />
+			<Add before="cmd /c echo %CC65_HOME%" />
 		</ExtraCommands>
 		<Unit filename="AllTests.c">
 			<Option compilerVar="CC" />
 			<Option target="Selftest" />
+		</Unit>
+		<Unit filename="CuStrAlloc.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="CuStrCopy.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="CuStringAppendISvsNOT.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="CuStringAppendLineFile.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="CuStringCStr.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="CuStringComposeMessage.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="CuStringLen.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="CuStringSize.c">
+			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="CutestString-cc65.cfg" />
 		<Unit filename="CutestString.c">
