@@ -29,7 +29,7 @@ struct CuSuite_tag
 
 };
 
-
+static void CuFailInternal(CuTest* tc, const char* file, int line, CuString* string);
 
 
 

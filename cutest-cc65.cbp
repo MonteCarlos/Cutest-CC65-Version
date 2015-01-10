@@ -33,7 +33,7 @@
 				<Option compiler="cc65" />
 				<Option use_console_runner="0" />
 				<Linker>
-					<Add library="..\libCutestString-cc65Dbg.lib" />
+					<Add library="..\CutestString-cc65Dbg.lib" />
 				</Linker>
 			</Target>
 			<Target title="Debug">
@@ -64,14 +64,13 @@
 			<Add alias="All, selftest contained" targets="CC65Debug;CC65Release;CC65Selftest;" />
 		</VirtualTargets>
 		<Compiler>
-			<Add option="-g" />
 			<Add option="--check-stack" />
 		</Compiler>
 		<Linker>
 			<Add option="-C cutest-cc65.cfg" />
 		</Linker>
 		<ExtraCommands>
-			<Add before="echo %CC65_HOME%" />
+			<Add before="cmd /c echo %CC65_HOME%" />
 		</ExtraCommands>
 		<Unit filename="AllTests.c">
 			<Option compilerVar="CC" />
@@ -83,10 +82,64 @@
 			<Option target="CC65Selftest" />
 			<Option target="Selftest" />
 		</Unit>
+		<Unit filename="CuAssertLine.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="CuTest.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="CuTest.h" />
+		<Unit filename="CuTestAddSuite.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="CuTestAssertPtrEqualsLineMsg.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="CuTestAssertStrEqualsLineMsg.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="CuTestDelete.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="CuTestFailInternal.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="CuTestFailLine.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="CuTestInit.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="CuTestIntEqualsLineMsg.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="CuTestNew.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="CuTestRun.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="CuTestSuiteAdd.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="CuTestSuiteDelete.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="CuTestSuiteDetails.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="CuTestSuiteInit.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="CuTestSuiteNew.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="CuTestSuiteRun.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="CuTestSuiteSummary.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="CuTestTest.c">
 			<Option compilerVar="CC" />
 			<Option target="CC65Selftest" />
