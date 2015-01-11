@@ -23,7 +23,7 @@ typedef struct CuString_tag CuString;
 char* CuStrAlloc(int size);
 char* CuStrCopy(const char* old);
 
-#define CU_ALLOC(TYPE)		((TYPE*) malloc(sizeof(TYPE)))
+
 
 #define HUGE_STRING_LEN	512
 #define STRING_MAX		256
