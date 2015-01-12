@@ -47,6 +47,15 @@ static void X_CompareAsserts(CuTest* tc, const char *file, int line, const char*
 /*-------------------------------------------------------------------------*
  * CuTest Test
  *-------------------------------------------------------------------------*/
+void TestCuTestAlloc(CuTest* tc){
+    enum {constTestValInt = 10054};
+
+    int *iVar = CU_ALLOC(int);
+    iVar[0] = constTestValInt;
+    CuAssertIntEquals(tc, iVar[0], constTestValInt);
+
+    free(iVar);
+}
 
 void TestCuTestNew(CuTest* tc)
 {
@@ -496,6 +505,6 @@ CuSuite* CuGetSuite(void)
 	SUITE_ADD_TEST(suite, TestCuSuiteDetails_SinglePass);
 	SUITE_ADD_TEST(suite, TestCuSuiteDetails_MultiplePasses);
 	SUITE_ADD_TEST(suite, TestCuSuiteDetails_MultipleFails);
-
+    SUITE_ADD_TEST(suite, TestCuTestAlloc);
 	return suite;
 }
