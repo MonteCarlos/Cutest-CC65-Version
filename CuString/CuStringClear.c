@@ -6,11 +6,10 @@
 //#include <math.h>
 
 #include "CutestString_internal.h"
-CuString* CuStringNew(void)
+int CuStringClear(CuString* str)
 {
-	CuString* str = (CuString*) malloc(sizeof(CuString));
-	assert(NULL!=str);
-	CuStringInit(str);
 
-	return str;
+
+	return EXIT_SUCCESS;
 }
+

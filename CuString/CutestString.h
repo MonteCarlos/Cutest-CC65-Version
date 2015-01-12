@@ -40,7 +40,7 @@ void CuStringResize(CuString* str, int newSize);
 void CuStringDelete(CuString* str);
 CuStringLen_t CuStringlen(CuString *str);
 CuStringSize_t CuStringsize(CuString *str);
-void CuStringClear(CuString *str);
+int CuStringClear(CuString *str);
 
 char* CuStringCStr(CuString* str);
 void CuStringAppendLineFile(CuString* str, char* file, unsigned long int line);

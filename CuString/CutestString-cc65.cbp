@@ -32,8 +32,12 @@
 				<Option type="1" />
 				<Option compiler="cc65" />
 				<Option use_console_runner="0" />
+				<Compiler>
+					<Add option="--check-stack" />
+				</Compiler>
 				<Linker>
 					<Add library="..\..\cutest-cc65_Dbg.lib" />
+					<Add library="..\..\CutestString-cc65Dbg.lib" />
 				</Linker>
 			</Target>
 		</Build>
@@ -41,7 +45,6 @@
 			<Add alias="CuTestString, selftest contained" targets="Debug;Release;Selftest;" />
 		</VirtualTargets>
 		<Compiler>
-			<Add option="--check-stack" />
 			<Add directory=".." />
 		</Compiler>
 		<Linker>
@@ -59,24 +62,84 @@
 		</Unit>
 		<Unit filename="CuStrCopy.c">
 			<Option compilerVar="CC" />
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="CuStringAppend.c">
+			<Option compilerVar="CC" />
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="CuStringAppendChar.c">
+			<Option compilerVar="CC" />
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="CuStringAppendFormat.c">
+			<Option compilerVar="CC" />
+			<Option target="Debug" />
+			<Option target="Release" />
 		</Unit>
 		<Unit filename="CuStringAppendISvsNOT.c">
 			<Option compilerVar="CC" />
+			<Option target="Debug" />
+			<Option target="Release" />
 		</Unit>
 		<Unit filename="CuStringAppendLineFile.c">
 			<Option compilerVar="CC" />
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="CuStringAppendULong.c">
+			<Option compilerVar="CC" />
+			<Option target="Debug" />
+			<Option target="Release" />
 		</Unit>
 		<Unit filename="CuStringCStr.c">
+			<Option compilerVar="CC" />
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="CuStringClear.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="CuStringComposeMessage.c">
 			<Option compilerVar="CC" />
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="CuStringConvertCStr.c">
+			<Option compilerVar="CC" />
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="CuStringDelete.c">
+			<Option compilerVar="CC" />
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="CuStringInit.c">
+			<Option compilerVar="CC" />
+			<Option target="Debug" />
+			<Option target="Release" />
 		</Unit>
 		<Unit filename="CuStringLen.c">
 			<Option compilerVar="CC" />
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="CuStringNew.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="CuStringResize.c">
+			<Option compilerVar="CC" />
+			<Option target="Debug" />
+			<Option target="Release" />
 		</Unit>
 		<Unit filename="CuStringSize.c">
 			<Option compilerVar="CC" />
+			<Option target="Debug" />
+			<Option target="Release" />
 		</Unit>
 		<Unit filename="CutestString-cc65.cfg" />
 		<Unit filename="CutestString.c">
