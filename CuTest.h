@@ -5,7 +5,8 @@
 #include <setjmp.h>
 
 #define CUTEST_VERSION  "CuTest 1.5"
-#define CU_ALLOC(TYPE)		((TYPE*) CuTestAlloc(sizeof(TYPE)))
+
+#include "CuString\CutestString.h"
 
 /* CuTest */
 

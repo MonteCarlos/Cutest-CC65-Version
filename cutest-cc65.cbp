@@ -92,9 +92,6 @@
 		<Unit filename="CuTestAddSuite.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="CuTestAlloc.c">
-			<Option compilerVar="CC" />
-		</Unit>
 		<Unit filename="CuTestAssertPtrEqualsLineMsg.c">
 			<Option compilerVar="CC" />
 		</Unit>

@@ -6,10 +6,12 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdint.h>
+#include <stdbool.h>
 
 #include "CuString\CutestString_internal.h"
 #include "CuTest.h"
 #include "CuTestTest.h"
+#include "CuAlloc\CuAlloc.h"
 
 struct CuTest_tag
 {
@@ -28,6 +30,7 @@ struct CuSuite_tag
 	int failCount;
 
 };
+
 
 static void CuFailInternal(CuTest* tc, const char* file, int line, CuString* string);
 void *CuTestAlloc(size_t n);
