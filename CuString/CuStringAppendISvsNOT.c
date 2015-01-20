@@ -6,21 +6,23 @@
 
 #include "CutestString_internal.h"
 
-int CuStringAppendISvsNOT(CuString *str, char* format,...){
-    enum {ISvsNOTBUFLEN = 200};
-
+int CuStringAppendISvsNOT(CuString *str, const char* format,...){
+    const uint16_t ISvsNOTBUFLEN = 512;
     va_list va;
     char* tempstr = malloc(ISvsNOTBUFLEN);
 
     va_start(va,format);
-    snprintf(tempstr,ISvsNOTBUFLEN,"IS %s NOT %s",format,format);
+    snprintf(tempstr,ISvsNOTBUFLEN,"IS \"%s\" NOT \"%s\"",format,format);
 
     if (!strcmp(format, "%s")){
-        CuStringAppendFormat(str, tempstr, va_arg(va, char*), va_arg(va, char*) );
+        char *is = va_arg(va, char*), *isnot = va_arg(va, char*);
+        CuStringAppendFormat(str, tempstr, is, isnot);
     }else if (!strcmp(format, "%d")){
-        CuStringAppendFormat(str, tempstr, va_arg(va, int), va_arg(va, int) );
+        int is = va_arg(va, int), isnot = va_arg(va, int);
+        CuStringAppendFormat(str, tempstr, is, isnot);
     }else if (!strcmp(format, "%u")){
-        CuStringAppendFormat(str, tempstr, va_arg(va, unsigned int), va_arg(va, unsigned int) );
+        unsigned int is = va_arg(va, unsigned int), isnot = va_arg(va, unsigned int);
+        CuStringAppendFormat(str, tempstr, is, isnot);
     }
 
     va_end(va);

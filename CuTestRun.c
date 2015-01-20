@@ -2,14 +2,14 @@
 
 void CuTestRun(CuTest* tc)
 {
-	jmp_buf buf;
-	tc->jumpBuf = &buf;
-	if (setjmp(buf) == 0)
-	{
-		tc->ran = 1;
+	//jmp_buf buf;
+	//tc->jumpBuf = &buf;
+	//if (setjmp(buf) == 0)
+	//{
 		(tc->function)(tc);
+    tc->ran = 1;
 
 
-	}
-	tc->jumpBuf = 0;
+	//}
+	//tc->jumpBuf = 0;
 }

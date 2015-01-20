@@ -12,9 +12,9 @@ void CuFailInternal(CuTest* tc, const char* file, int line, CuString* string)
 	free(buf);
 
 	tc->failed = 1;
-	tc->message = string->buffer;
+	tc->message = string;
 
-	if (tc->jumpBuf != 0) longjmp(tc->jumpBuf[0], 0); //This breaks execution on true
+	//if (tc->jumpBuf != 0) longjmp(tc->jumpBuf[0], 0); //This breaks execution on true
 
 	//This part is only reached if jumpBuf == NULL
 }

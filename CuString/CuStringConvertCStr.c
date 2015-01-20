@@ -6,7 +6,7 @@
 
 #include "CutestString_internal.h"
 
-CuString* CuStringConvertCStr(char* text){
+CuString* CuStringConvertCStr(const char* text){
     CuString *str = CuStringNew();
     CuStringAppend(str, text);//NULL is handled by Append
     return str;

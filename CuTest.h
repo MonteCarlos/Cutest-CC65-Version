@@ -3,6 +3,7 @@
 
 #include <stdarg.h>
 #include <setjmp.h>
+#include <stdbool.h>
 
 #define CUTEST_VERSION  "CuTest 1.5"
 
@@ -22,23 +23,25 @@ void CuTestDelete(CuTest *t);
 
 /* Internal versions of assert functions -- use the public versions */
 void CuFail_Line(CuTest* tc, const char* file, int line, const char* message2, const char* message);
-void CuAssert_Line(CuTest* tc, const char* file, int line, const char* message, int condition);
-void CuAssertStrEquals_LineMsg(CuTest* tc,
+bool CuAssert_Line(CuTest* tc, const char* file, int line, const char* message, int condition);
+bool CuAssertStrEquals_LineMsg(CuTest* tc,
 	const char* file, int line, const char* message,
 	const char* expected, const char* actual);
-void CuAssertIntEquals_LineMsg(CuTest* tc,
+bool CuAssertIntEquals_LineMsg(CuTest* tc,
 	const char* file, int line, const char* message,
 	int expected, int actual);
 /*void CuAssertDblEquals_LineMsg(CuTest* tc,
 	const char* file, int line, const char* message,
 	double expected, double actual, double delta);*/
-void CuAssertPtrEquals_LineMsg(CuTest* tc,
+bool CuAssertPtrEquals_LineMsg(CuTest* tc,
 	const char* file, int line, const char* message,
 	void* expected, void* actual);
 
 /* public assert functions */
 
-#define CuFail(tc, ms)                        CuFail_Line(  (tc), __FILE__, __LINE__, NULL, (ms))
+
+#define CuFail(tc)                            CuFail_Line(  (tc), __FILE__, __LINE__, NULL, NULL)
+#define CuFail_Msg(tc, ms)                    CuFail_Line(  (tc), __FILE__, __LINE__, NULL, (ms))
 #define CuAssert(tc, ms, cond)                CuAssert_Line((tc), __FILE__, __LINE__, (ms), (cond))
 #define CuAssertTrue(tc, cond)                CuAssert_Line((tc), __FILE__, __LINE__, "assert failed", (cond))
 
@@ -71,6 +74,12 @@ void CuSuiteAddSuite(CuSuite* testSuite, CuSuite* testSuite2);
 void CuSuiteRun(CuSuite* testSuite);
 void CuSuiteSummary(CuSuite* testSuite,
 					CuString* summary);
-void CuSuiteDetails(CuSuite* testSuite, CuString* details);
+//void CuSuiteDetails(CuSuite* testSuite, CuString* details);
+void CuSuiteDetails(CuSuite* testSuite /*CuString* details*/, FILE* file);
 
+
+int CuTestSetProgressStartEnd(unsigned long int st, unsigned long int en);
+int CuTestPrintProgressState(unsigned long int current, unsigned long int interleave);
+void CuTestReservePrintPositions(void);
+int CuTestAppendMessage(CuTest *tc, const char* format, ...);
 #endif /* CU_TEST_H */

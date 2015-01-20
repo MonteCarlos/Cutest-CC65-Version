@@ -14,6 +14,7 @@ void RunAllTests(void)
 {
 	CuString *output = NULL;
 	CuSuite* suite = NULL;//CuSuiteNew();
+    FILE *file;
 
 	//*********************************
 	//*** Test CuTestString	helpers	***
@@ -23,9 +24,14 @@ void RunAllTests(void)
 
 	assert (NULL != suite); //assert initialization of suite
 	CuSuiteRun(suite);//This function does not return!
-	CuSuiteSummary(suite, output);
-	CuSuiteDetails(suite, output);
-	printf("%s\n", output->buffer);
+	//CuSuiteSummary(suite, output);
+	CuSuiteDetails(suite, stdout/*output*/);
+	file = fopen("CuTest.log","w");
+	if (NULL != file){
+        CuSuiteDetails(suite, file/*output*/);
+	}
+	fclose(file);
+	//printf("%s\n", output->buffer);
 	CuSuiteDelete(suite);
 	CuStringDelete(output);
 }

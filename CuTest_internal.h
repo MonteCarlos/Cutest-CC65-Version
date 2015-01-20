@@ -17,9 +17,9 @@ struct CuTest_tag
 {
 	char* name;
 	TestFunction function;
-	int failed;
-	int ran;
-	const char* message;
+	bool failed;
+	bool ran;
+	CuString *message;
 	jmp_buf *jumpBuf;
 };
 
@@ -32,9 +32,12 @@ struct CuSuite_tag
 };
 
 
-static void CuFailInternal(CuTest* tc, const char* file, int line, CuString* string);
+void CuFailInternal(CuTest* tc, const char* file, int line, CuString* string);
 void *CuTestAlloc(size_t n);
-
+unsigned long int CuTestGetProgressStart(void);
+unsigned long int CuTestGetProgressEnd(void);
+unsigned long int CuTestGetProgressRange(void);
+void CuTestGenerateMessage(CuString* str, const char* msg1, const char* msg2, const char* file, unsigned long int line);
 
 
 

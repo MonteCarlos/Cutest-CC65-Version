@@ -8,7 +8,9 @@
 #define SAVECUSTRINGIFY(x) CUSTRINGIFY(x)
 #define __LINESTR__ SAVECUSTRINGIFY(CUSTRID(__LINE__))
 
-#pragma charmap(92, 47)
+#ifdef __CC65__
+    #pragma charmap(92, 47)
+#endif // __CC65__
 
 typedef size_t CuStringLen_t;
 typedef size_t CuStringSize_t;
@@ -16,7 +18,7 @@ typedef char CuStringChar_t;
 
 typedef struct CuString_tag CuString;
 
-#include "CuTest.h"
+#include "..\CuTest.h"
 
 /* CuString */
 
@@ -44,11 +46,11 @@ int CuStringClear(CuString *str);
 
 char* CuStringCStr(CuString* str);
 void CuStringAppendLineFile(CuString* str, char* file, unsigned long int line);
-void CuStringComposeMessage(CuString* str, char* msg1, char* msg2, char* file, unsigned long int line);
+void CuStringComposeMessage(CuString* str, const char* msg1, const char* msg2, const char* file, unsigned long int line);
 void CuStringAppendULong(CuString *str, unsigned long int num);
-int CuStringAppendISvsNOT(CuString *str, char* format, ...);
-CuString* CuStringConvertCStr(char* text);
-
+int CuStringAppendISvsNOT(CuString *str, const char* format, ...);
+CuString* CuStringConvertCStr(const char* text);
+void CuStringAppendVariadicFormat(CuString* str, const char* format, va_list va);
 /*#define TAGGEDSTRLIST STR(NOMEM, "Not enough mem.")
 #define STR(x,y) x,
 enum ErrorCodesEnum {CUSTRERR_MIN, TAGGEDSTRLIST};

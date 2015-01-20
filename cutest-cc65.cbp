@@ -7,23 +7,30 @@
 		<Option compiler="cc65" />
 		<Build>
 			<Target title="CC65Debug">
-				<Option output="../cutest-cc65_Dbg" prefix_auto="1" extension_auto="1" />
+				<Option output="../cutest-cc65_Dbg.lib" prefix_auto="0" extension_auto="0" />
 				<Option working_dir="" />
 				<Option object_output="cc65/obj/Debug/" />
 				<Option type="2" />
 				<Option compiler="cc65" />
 				<Linker>
+					<Add option="-C cutest-cc65.cfg" />
 					<Add library="..\libCutestString-cc65Dbg.lib" />
+					<Add library="CuAlloc\CuAllocDbg.lib" />
 				</Linker>
 			</Target>
 			<Target title="CC65Release">
-				<Option output="../cutest-cc65" prefix_auto="1" extension_auto="1" />
+				<Option output="../cutest-cc65.lib" prefix_auto="0" extension_auto="0" />
 				<Option working_dir="" />
 				<Option object_output="cc65/obj/Release/" />
 				<Option type="2" />
 				<Option compiler="cc65" />
+				<Compiler>
+					<Add option="-DNDEBUG" />
+				</Compiler>
 				<Linker>
+					<Add option="-C cutest-cc65.cfg" />
 					<Add library="..\libCutestString_cc65.lib" />
+					<Add library="CuAlloc\CuAlloc.lib" />
 				</Linker>
 			</Target>
 			<Target title="CC65Selftest">
@@ -33,7 +40,9 @@
 				<Option compiler="cc65" />
 				<Option use_console_runner="0" />
 				<Linker>
+					<Add option="-C cutest-cc65.cfg" />
 					<Add library="..\CutestString-cc65Dbg.lib" />
+					<Add library="CuAlloc\CuAllocDbg.lib" />
 				</Linker>
 			</Target>
 			<Target title="Debug">
@@ -58,17 +67,19 @@
 				<Compiler>
 					<Add option="-g" />
 				</Compiler>
+				<Linker>
+					<Add library="CuString\libCutestString-cc65_dbg.a" />
+				</Linker>
+				<ExtraCommands>
+					<Add after="cutest.exe" />
+					<Mode after="always" />
+				</ExtraCommands>
 			</Target>
 		</Build>
 		<VirtualTargets>
 			<Add alias="All, selftest contained" targets="CC65Debug;CC65Release;CC65Selftest;" />
+			<Add alias="gccall" targets="Debug;Selftest;" />
 		</VirtualTargets>
-		<Compiler>
-			<Add option="--check-stack" />
-		</Compiler>
-		<Linker>
-			<Add option="-C cutest-cc65.cfg" />
-		</Linker>
 		<ExtraCommands>
 			<Add before="cmd /c echo %CC65_HOME%" />
 		</ExtraCommands>
@@ -92,6 +103,9 @@
 		<Unit filename="CuTestAddSuite.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="CuTestAppendMessage.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="CuTestAssertPtrEqualsLineMsg.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -107,6 +121,9 @@
 		<Unit filename="CuTestFailLine.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="CuTestGenerateMessage.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="CuTestInit.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -117,6 +134,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="CuTestRun.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="CuTestSetProgressStartEnd.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="CuTestSuiteAdd.c">

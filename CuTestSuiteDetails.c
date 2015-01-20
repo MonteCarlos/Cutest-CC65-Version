@@ -1,6 +1,6 @@
 #include "CuTest_internal.h"
 
-void CuSuiteDetails(CuSuite* testSuite, CuString* details)
+void CuSuiteDetails(CuSuite* testSuite, /*CuString* details*/ FILE* file)
 {
 	int i;
 	int failCount = 0;
@@ -9,18 +9,21 @@ void CuSuiteDetails(CuSuite* testSuite, CuString* details)
 	{
 		int passCount = testSuite->count - testSuite->failCount;
 		const char* testWord = passCount == 1 ? "test" : "tests";
-		CuStringAppendFormat(details, "OK (%d %s from %d)\n", passCount, testWord, testSuite->count);
+		fprintf(file, "OK (%d %s from %d)\n", passCount, testWord, testSuite->count);
+		//CuStringAppendFormat(details, "OK (%d %s from %d)\n", passCount, testWord, testSuite->count);
 
 		if (testSuite -> count != passCount){
-			printf("Missed tests! #Registered(%d) > #Performed(%d)!\n", testSuite -> count, passCount);
+			fprintf(file, "Missed tests! #Registered(%d) > #Performed(%d)!\n", testSuite -> count, passCount);
 		}
 	}
 	else
 	{
 		if (testSuite->failCount == 1)
-			CuStringAppend(details, "There was 1 failure:\n");
+            fputs("There was 1 failure:\n", file);
+			//CuStringAppend(details, "There was 1 failure:\n");
 		else
-			CuStringAppendFormat(details, "There were %d failures:\n", testSuite->failCount);
+            fprintf(file, "There were %d failures:\n", testSuite->failCount);
+			//CuStringAppendFormat(details, "There were %d failures:\n", testSuite->failCount);
 
 		for (i = 0 ; i < testSuite->count ; ++i)
 		{
@@ -28,14 +31,18 @@ void CuSuiteDetails(CuSuite* testSuite, CuString* details)
 			if (testCase->failed)
 			{
 				failCount++;
-				CuStringAppendFormat(details, "%d) %s: %s\n",
-					failCount, testCase->name, testCase->message);
+                fprintf(file, "%s: %s\n", CuStringCStr(testCase->message), testCase->name);
+				//CuStringAppendFormat(details, "%d) %s: %s\n",
+					//failCount, testCase->name, CuStringCStr(testCase->message));
 			}
 		}
-		CuStringAppend(details, "\n!!!FAILURES!!!\n");
-
-		CuStringAppendFormat(details, "Runs:%d, ",   testSuite->count);
-		CuStringAppendFormat(details, "Passes:%d, ", testSuite->count - testSuite->failCount);
-		CuStringAppendFormat(details, "Fails:%d\n",  testSuite->failCount);
+		fprintf(file, "\n!!!FAILURES!!!\n");
+		//CuStringAppend(details, "\n!!!FAILURES!!!\n");
+        fprintf(file,"Runs:%d, ",   testSuite->count);
+        fprintf(file,"Passes:%d, ", testSuite->count - testSuite->failCount);
+        fprintf(file,"Fails:%d\n",  testSuite->failCount);
+		//CuStringAppendFormat(details, "Runs:%d, ",   testSuite->count);
+		//CuStringAppendFormat(details, "Passes:%d, ", testSuite->count - testSuite->failCount);
+		//CuStringAppendFormat(details, "Fails:%d\n",  testSuite->failCount);
 	}
 }

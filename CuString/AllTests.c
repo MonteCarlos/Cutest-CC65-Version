@@ -19,29 +19,29 @@ void RunAllTests(void)
 	//*** Test CuTestString			***
 	//*********************************
 	suite = CuStringGetSuite();
-	output = CuStringNew();
+	//output = CuStringNew();
 
 	assert (NULL != suite); //assert initialization of suite
 	CuSuiteRun(suite);//This function does not return!
-	CuSuiteSummary(suite, output);
-	CuSuiteDetails(suite, output);
-	printf("%s\n", output->buffer);
+	//CuSuiteSummary(suite, output);
+	CuSuiteDetails(suite, stdout/*output*/);
+	//printf("%s\n", output->buffer);
 	CuSuiteDelete(suite);
-	CuStringDelete(output);//*/
+	//CuStringDelete(output);//*/
 
 	//*********************************
 	//*** Test CuTestString	helpers	***
 	//*********************************
-	output = CuStringNew();
+	//output = CuStringNew();
 	suite = CuGetSuite();
 
 	assert (NULL != suite); //assert initialization of suite
 	CuSuiteRun(suite);//This function does not return!
-	CuSuiteSummary(suite, output);
-	CuSuiteDetails(suite, output);
-	printf("%s\n", output->buffer);
+	//CuSuiteSummary(suite, output);
+	CuSuiteDetails(suite, stdout/*output*/);
+	//printf("%s\n", output->buffer);
 	CuSuiteDelete(suite);
-	CuStringDelete(output);
+	//CuStringDelete(output);
 }
 
 
