@@ -12,6 +12,8 @@
     #pragma charmap(92, 47)
 #endif // __CC65__
 
+#include <stddef.h>
+
 typedef size_t CuStringLen_t;
 typedef size_t CuStringSize_t;
 typedef char CuStringChar_t;

@@ -5,8 +5,9 @@
 
 void testCuFree(CuTest* tc){
     int *iVar = CuAlloc(sizeof(int));
-    bool freeResult = CuFree(iVar);
+    bool freeResult;
     CuAssertIntEquals(tc, false, CuAlloc_getBufferValidity(iVar));
+    freeResult = CuFree(iVar);
     CuAssertIntEquals(tc, true, freeResult);
 
 }
@@ -40,19 +41,11 @@ void main(void){
     //atexit(resetVIC);
 
     CuSuite* suite = NULL; //
-    CuString *output = NULL;
     suite = CuAlloc_requestTests();
-    output = CuStringNew();
-    //*/
-    printf("Performing tests...\n");
 
     assert(NULL != suite);
     CuSuiteRun(suite);//This function does not return!
-    assert(NULL != output);
-	CuSuiteSummary(suite, output);
-	CuSuiteDetails(suite, output);
-	printf("%s\n", CuStringCStr(output));
+ 	CuSuiteDetails(suite, stdout);
 
 	CuSuiteDelete(suite);
-	CuStringDelete(output);//*/
 }
