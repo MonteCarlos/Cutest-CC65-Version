@@ -59,113 +59,128 @@ void TestCuTestNew(CuTest* tc)
 	CuAssertTrue(tc, tc2->function == &TestPasses);
 	CuAssertTrue(tc, tc2->ran == 0);
 	CuAssertTrue(tc, tc2->jumpBuf == NULL);
+
+	CuTestDelete(tc2);
 }
 
 
 void TestCuTestInit(CuTest *tc)
 {
-	CuTest tc2;
-	CuTestInit(&tc2, "MyTest", TestPasses);
-	CuAssertStrEquals(tc, "MyTest", tc2.name);
-	CuAssertTrue(tc, !tc2.failed);
+	CuTest *tc2 = CuTestNew("MyTest", TestPasses);;
+
+	CuAssertStrEquals(tc, "MyTest", tc2->name);
+	CuAssertTrue(tc, !tc2->failed);
 	CuAssertIntEquals(tc, 0, CuStringlen(tc->message));
-	CuAssertTrue(tc, tc2.function == &TestPasses);
-	CuAssertTrue(tc, tc2.ran == 0);
-	CuAssertTrue(tc, tc2.jumpBuf == NULL);
+	CuAssertTrue(tc, tc2->function == &TestPasses);
+	CuAssertTrue(tc, tc2->ran == 0);
+	CuAssertTrue(tc, tc2->jumpBuf == NULL);
+
+	CuTestDelete(tc2);
 }
 
 void TestCuAssert(CuTest* tc)
 {
-	CuTest tc2;
+	CuTest *tc2 = CuTestNew("MyTest", TestPasses);
 	int value = 4;//Suppress warning about constant comparison
 
-	CuTestInit(&tc2, "MyTest", TestPasses);
+	//CuTestInit(&tc2, "MyTest", TestPasses);
 
-	CuAssert(&tc2, "test 1", 5 == value + 1);
-	CuAssertTrue(tc, !tc2.failed);
+	CuAssert(tc2, "test 1", 5 == value + 1);
+	CuAssertTrue(tc, !tc2->failed);
 	CuAssertIntEquals(tc, 0, CuStringlen(tc->message));
 
-	CuAssert(&tc2, "test 2", 0);
-	CuAssertTrue(tc, tc2.failed);
+	CuAssert(tc2, "test 2", 0);
+	CuAssertTrue(tc, tc2->failed);
 	//CompareAsserts(tc, "CuAssert didn't fail", "test 2", tc2.message);
 
-	CuAssert(&tc2, "test 3", 1);
-	CuAssertTrue(tc, tc2.failed);
+	CuAssert(tc2, "test 3", 1);
+	CuAssertTrue(tc, tc2->failed);
 	//CompareAsserts(tc, "CuAssert didn't fail", "test 2", tc2.message);
 
-	CuAssert(&tc2, "test 4", 0);
-	CuAssertTrue(tc, tc2.failed);
+	CuAssert(tc2, "test 4", 0);
+	CuAssertTrue(tc, tc2->failed);
 	//CompareAsserts(tc, "CuAssert didn't fail", "test 4", tc2.message);
 
+	CuTestDelete(tc2);
 }
 
 void TestCuAssertPtrEquals_Success(CuTest* tc)
 {
-	CuTest tc2;
+	CuTest *tc2 = CuTestNew("MyTest", TestPasses);
 	int x;
 
-	CuTestInit(&tc2, "MyTest", TestPasses);
+	//CuTestInit(&tc2, "MyTest", TestPasses);
 
 	/* test success case */
-	CuAssertPtrEquals(&tc2, &x, &x);
-	CuAssertTrue(tc, ! tc2.failed);
-	CuAssertIntEquals(tc, 0, CuStringlen(tc2.message));
+	CuAssertPtrEquals(tc2, &x, &x);
+	CuAssertTrue(tc, ! tc2->failed);
+	CuAssertIntEquals(tc, 0, CuStringlen(tc2->message));
+
+	CuTestDelete(tc2);
 }
 
 void TestCuAssertPtrEquals_Failure(CuTest* tc)
 {
-	CuTest tc2;
+	CuTest *tc2 = CuTestNew("MyTest", TestPasses);
 	int x;
 	int* nullPtr = NULL;
 	char* expected_message = (char*)calloc(STRING_MAX, sizeof(char) );
 	assert(NULL != expected_message);
 
-	CuTestInit(&tc2, "MyTest", TestPasses);
+	//CuTestInit(&tc2, "MyTest", TestPasses);
 
 	/* test failing case */
 	sprintf(expected_message, "expected pointer <0x%p> but was <0x%p>", nullPtr, &x);
-	CuAssertPtrEquals(&tc2, NULL, &x);
-	CuAssertTrue(tc, tc2.failed);
+	CuAssertPtrEquals(tc2, NULL, &x);
+	CuAssertTrue(tc, tc2->failed);
 	//CompareAsserts(tc, "CuAssertPtrEquals failed", expected_message, tc2.message);
 	free(expected_message);
+
+	CuTestDelete(tc2);
 }
 
 void TestCuAssertPtrNotNull_Success(CuTest* tc)
 {
-	CuTest tc2;
+	CuTest *tc2 = CuTestNew("MyTest", TestPasses);
 	int x;
 
-	CuTestInit(&tc2, "MyTest", TestPasses);
+	//CuTestInit(&tc2, "MyTest", TestPasses);
 
 	/* test success case */
-	CuAssertPtrNotNull(&tc2, &x);
-	CuAssertTrue(tc, ! tc2.failed);
-	CuAssertIntEquals(tc, 0, CuStringlen(tc2.message));
+	CuAssertPtrNotNull(tc2, &x);
+	CuAssertTrue(tc, ! tc2->failed);
+	CuAssertIntEquals(tc, 0, CuStringlen(tc2->message));
+
+	CuTestDelete(tc2);
 }
 
 void TestCuAssertPtrNotNull_Failure(CuTest* tc)
 {
-	CuTest tc2;
+	CuTest *tc2 = CuTestNew("MyTest", TestPasses);
 	/* test failing case */
 	void* const ptrIsNULL = NULL;
 
-    CuTestInit(&tc2, "Should pass", TestPasses);
+    CuTestInit(tc2, "Should pass", TestPasses);
 
-	CuAssertPtrNotNull(&tc2, ptrIsNULL);
-	CuAssertTrue(tc, tc2.failed);
+	CuAssertPtrNotNull(tc2, ptrIsNULL);
+	CuAssertTrue(tc, tc2->failed);
 	//CompareAsserts(tc, "CuAssertPtrNotNull failed", "null pointer unexpected", tc2.message);
+
+	CuTestDelete(tc2);
 }
 
 void TestCuTestRun(CuTest* tc)
 {
-	CuTest tc2;
-	CuTestInit(&tc2, "MyTest", zTestFails);
-	CuTestRun(&tc2);
+	CuTest *tc2 = CuTestNew("MyTest", TestPasses);
+	//CuTestInit(tc2, "MyTest", zTestFails);
+	CuTestRun(tc2);
 
-	CuAssertStrEquals(tc, "MyTest", tc2.name);
-	CuAssertTrue(tc, tc2.failed);
-	CuAssertTrue(tc, tc2.ran);
+	CuAssertStrEquals(tc, "MyTest", tc2->name);
+	CuAssertTrue(tc, tc2->failed);
+	CuAssertTrue(tc, tc2->ran);
 	//CompareAsserts(tc, "TestRun failed", "test should fail", tc2.message);
+
+	CuTestDelete(tc2);
 }
 
 /*-------------------------------------------------------------------------*
@@ -174,10 +189,12 @@ void TestCuTestRun(CuTest* tc)
 
 void TestCuSuiteInit(CuTest* tc)
 {
-	CuSuite ts;
-	CuSuiteInit(&ts);
-	CuAssertTrue(tc, ts.count == 0);
-	CuAssertTrue(tc, ts.failCount == 0);
+	CuSuite *ts = CuSuiteNew();
+	//CuSuiteInit(&ts);
+	CuAssertTrue(tc, ts->count == 0);
+	CuAssertTrue(tc, ts->failCount == 0);
+
+	CuSuiteDelete(ts);
 }
 
 void TestCuSuiteNew(CuTest* tc)
@@ -185,20 +202,26 @@ void TestCuSuiteNew(CuTest* tc)
 	CuSuite* ts = CuSuiteNew();
 	CuAssertTrue(tc, ts->count == 0);
 	CuAssertTrue(tc, ts->failCount == 0);
+
+	CuSuiteDelete(ts);
 }
 
 void TestCuSuiteAddTest(CuTest* tc)
 {
-	CuSuite ts;
-	CuTest tc2;
+	CuSuite* ts = CuSuiteNew();
+	CuTest *tc2 = CuTestNew("MyTest", TestPasses);
+	//CuTest tc2;
 
-	CuSuiteInit(&ts);
-	CuTestInit(&tc2, "MyTest", zTestFails);
+	//CuSuiteInit(ts);
+	//CuTestInit(&tc2, "MyTest", zTestFails);
 
-	CuSuiteAdd(&ts, &tc2);
-	CuAssertTrue(tc, ts.count == 1);
+	CuSuiteAdd(ts, tc2);
+	CuAssertTrue(tc, ts->count == 1);
 
-	CuAssertStrEquals(tc, "MyTest", ts.list[0]->name);
+	CuAssertStrEquals(tc, "MyTest", ts->list[0]->name);
+
+	CuSuiteDelete(ts);
+	CuTestDelete(tc2);
 }
 
 void TestCuSuiteAddSuite(CuTest* tc)
@@ -515,10 +538,11 @@ void TestAssertIntEquals(CuTest* tc)
 
 CuSuite* CuGetSuite(void)
 {
-	CuSuite* suite = CuSuiteNew();
-
+	CuSuite* suite;
+	suite = CuSuiteNew();
+    printf("Alloc Count after SuiteNew:%lu %lu\n", CuAlloc_getAllocCount(), CuAlloc_getFreeCount());
 	SUITE_ADD_TEST(suite, TestFail);
-
+    printf("Alloc Count after ADD_TEST:%lu %lu\n", CuAlloc_getAllocCount(), CuAlloc_getFreeCount());
 	SUITE_ADD_TEST(suite, TestAssertIntEquals);
 
 	SUITE_ADD_TEST(suite, TestCuTestNew);
@@ -545,5 +569,6 @@ CuSuite* CuGetSuite(void)
 */
 	SUITE_ADD_TEST(suite, TestSetProgressStartEnd);
 	SUITE_ADD_TEST(suite, TestPrintProgressState);
+	printf("Registered #%d testcases\n", suite->count);
 	return suite;
 }

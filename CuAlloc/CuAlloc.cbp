@@ -70,6 +70,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="CuAlloc.h" />
+		<Unit filename="CuAlloc_Realloc.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="CuAlloc_getBufferValidity.c">
 			<Option compilerVar="CC" />
 		</Unit>

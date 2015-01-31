@@ -12,28 +12,29 @@ CuSuite* CuStringGetSuite();
 //- solve memory allocation problems (sometimes (m)(c)alloc returns NULL)
 void RunAllTests(void)
 {
-	CuString *output = NULL;
 	CuSuite* suite = NULL;//CuSuiteNew();
     FILE *file;
 
 	//*********************************
 	//*** Test CuTestString	helpers	***
 	//*********************************
-	output = CuStringNew();
+	printf("Alloc Count before getSuite:%lu %lu\n", CuAlloc_getAllocCount(), CuAlloc_getFreeCount());
 	suite = CuGetSuite();
-
+    printf("Alloc Count after getSuite:%lu %lu\n", CuAlloc_getAllocCount(), CuAlloc_getFreeCount());
 	assert (NULL != suite); //assert initialization of suite
-	CuSuiteRun(suite);//This function does not return!
+	/*CuSuiteRun(suite);//This function does not return!
+	printf("Alloc Count after SuiteRun:%lu\n", CuAlloc_getAllocCount());
 	//CuSuiteSummary(suite, output);
-	CuSuiteDetails(suite, stdout/*output*/);
+	CuSuiteDetails(suite, stdout);
 	file = fopen("CuTest.log","w");
 	if (NULL != file){
-        CuSuiteDetails(suite, file/*output*/);
+        CuSuiteDetails(suite, file);
 	}
 	fclose(file);
 	//printf("%s\n", output->buffer);
+	printf("Alloc Count before SuiteDelete:%lu\n", CuAlloc_getAllocCount());*/
 	CuSuiteDelete(suite);
-	CuStringDelete(output);
+	printf("Alloc Count after SuiteDelete:%lu %lu\n", CuAlloc_getAllocCount(), CuAlloc_getFreeCount());
 }
 
 

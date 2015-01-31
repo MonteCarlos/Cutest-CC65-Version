@@ -2,18 +2,25 @@
 
 void CuSuiteDelete(CuSuite *testSuite)
 {
-        unsigned int n;
+        long int n = testSuite->count-1;
+        bool freereturn;
+
         assert (NULL != testSuite);
-        for (n=0; n < MAX_TEST_CASES; n++)
+        printf("Removing testcases:\n");
+        for (; n >=0; --n)
         {
 			//printf("%d\n",n);
+
                 if (testSuite->list[n])
                 {
+                        printf("%s\n",testSuite->list[n]->name);
                         CuTestDelete(testSuite->list[n]);
                         //assert (NULL != testSuite->list);
                         //free(testSuite->list);
                 }
         }
-
-        free(testSuite);
+        freereturn = CuFree(testSuite->list);
+        assert(freereturn);
+        freereturn = CuFree(testSuite);
+        assert(freereturn);
 }
