@@ -9,7 +9,7 @@
 
 char* CuStrAlloc(int size)
 {
-	char* newStr = (char*) malloc( sizeof(char) * (size) );
+	char* newStr = (char*) CuAlloc ( sizeof(char) * (size) );
 	assert (NULL != newStr);
 	return newStr;
 }

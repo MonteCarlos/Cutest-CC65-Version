@@ -8,9 +8,12 @@
 
 void CuStringDelete(CuString *str)
 {
+    bool freeresult;
 	if (!str) return;
 	assert(NULL != str->buffer);
-	free(str->buffer);
+	freeresult = CuFree(str->buffer);
+	assert(true == freeresult);
 	assert(NULL != str);
-	free(str);
+	freeresult = CuFree(str);
+	assert(true == freeresult);
 }

@@ -2,6 +2,7 @@
 #define CUTESTSTRING_INTERNAL_H_INCLUDED
 
 #include "CutestString.h"
+#include "..\CuAlloc\CuAlloc.h"
 #include <stdarg.h>
 #include <stdint.h>
 //#include <setjmp.h>

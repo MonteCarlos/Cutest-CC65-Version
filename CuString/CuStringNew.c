@@ -8,7 +8,7 @@
 #include "CutestString_internal.h"
 CuString* CuStringNew(void)
 {
-	CuString* str = (CuString*) malloc(sizeof(CuString));
+	CuString* str = (CuString*) CuAlloc(sizeof(CuString));
 	assert(NULL!=str);
 	CuStringInit(str);
 
