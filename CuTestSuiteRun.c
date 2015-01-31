@@ -9,7 +9,7 @@ void CuSuiteRun(CuSuite* testSuite)
 	{
 		printf("%d:",i);
 		testCase = testSuite->list[i];
-		fputs(testCase->name, stdout);
+		fputs(CuStringCStr(testCase->name), stdout);
 
 		pendingfrees = CuAlloc_getPendingFrees();
 		CuTestRun(testCase);

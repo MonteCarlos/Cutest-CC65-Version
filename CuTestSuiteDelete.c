@@ -13,7 +13,7 @@ void CuSuiteDelete(CuSuite *testSuite)
 
                 if (testSuite->list[n])
                 {
-                        printf("%s\n",testSuite->list[n]->name);
+                        printf("%s\n",CuStringCStr(testSuite->list[n]->name));
                         CuTestDelete(testSuite->list[n]);
                         //assert (NULL != testSuite->list);
                         //free(testSuite->list);

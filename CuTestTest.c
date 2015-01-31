@@ -52,7 +52,7 @@ static void X_CompareAsserts(CuTest* tc, const char *file, int line, const char*
 void TestCuTestNew(CuTest* tc)
 {
 	CuTest* tc2 = CuTestNew("MyTest", TestPasses);
-	CuAssertStrEquals(tc, "MyTest", tc2->name);
+	CuAssertStrEquals(tc, "MyTest", CuStringCStr(tc2->name));
 	CuAssertTrue(tc, !tc2->failed);
 	//CuAssertTrue(tc, tc2->message == NULL);
 	CuAssertIntEquals(tc, 0, CuStringlen(tc->message));
@@ -68,7 +68,7 @@ void TestCuTestInit(CuTest *tc)
 {
 	CuTest *tc2 = CuTestNew("MyTest", TestPasses);;
 
-	CuAssertStrEquals(tc, "MyTest", tc2->name);
+	CuAssertStrEquals(tc, "MyTest", CuStringCStr(tc2->name));
 	CuAssertTrue(tc, !tc2->failed);
 	CuAssertIntEquals(tc, 0, CuStringlen(tc->message));
 	CuAssertTrue(tc, tc2->function == &TestPasses);
@@ -175,7 +175,7 @@ void TestCuTestRun(CuTest* tc)
 	//CuTestInit(tc2, "MyTest", zTestFails);
 	CuTestRun(tc2);
 
-	CuAssertStrEquals(tc, "MyTest", tc2->name);
+	CuAssertStrEquals(tc, "MyTest", CuStringCStr(tc2->name));
 	CuAssertTrue(tc, tc2->failed);
 	CuAssertTrue(tc, tc2->ran);
 	//CompareAsserts(tc, "TestRun failed", "test should fail", tc2.message);
@@ -218,7 +218,7 @@ void TestCuSuiteAddTest(CuTest* tc)
 	CuSuiteAdd(ts, tc2);
 	CuAssertTrue(tc, ts->count == 1);
 
-	CuAssertStrEquals(tc, "MyTest", ts->list[0]->name);
+	CuAssertStrEquals(tc, "MyTest", CuStringCStr(ts->list[0]->name));
 
 	CuSuiteDelete(ts);
 	CuTestDelete(tc2);
@@ -238,10 +238,10 @@ void TestCuSuiteAddSuite(CuTest* tc)
 	CuSuiteAddSuite(ts1, ts2);
 	CuAssertIntEquals(tc, 4, ts1->count);
 
-	CuAssertStrEquals(tc, "TestFails1", ts1->list[0]->name);
-	CuAssertStrEquals(tc, "TestFails2", ts1->list[1]->name);
-	CuAssertStrEquals(tc, "TestFails3", ts1->list[2]->name);
-	CuAssertStrEquals(tc, "TestFails4", ts1->list[3]->name);
+	CuAssertStrEquals(tc, "TestFails1", CuStringCStr(ts1->list[0]->name));
+	CuAssertStrEquals(tc, "TestFails2", CuStringCStr(ts1->list[1]->name));
+	CuAssertStrEquals(tc, "TestFails3", CuStringCStr(ts1->list[2]->name));
+	CuAssertStrEquals(tc, "TestFails4", CuStringCStr(ts1->list[3]->name));
 }
 
 void TestCuSuiteRun(CuTest* tc)
