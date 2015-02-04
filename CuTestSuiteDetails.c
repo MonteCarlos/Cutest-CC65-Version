@@ -31,7 +31,7 @@ void CuSuiteDetails(CuSuite* testSuite, /*CuString* details*/ FILE* file)
 			if (testCase->failed)
 			{
 				failCount++;
-                fprintf(file, "%s: %s\n", CuStringCStr(testCase->message), testCase->name);
+                fprintf(file, "%s: %s\n", CuStringCStr(testCase->message), CuStringCStr(testCase->name));
 				//CuStringAppendFormat(details, "%d) %s: %s\n",
 					//failCount, testCase->name, CuStringCStr(testCase->message));
 			}

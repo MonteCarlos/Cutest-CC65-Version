@@ -8,7 +8,7 @@ void CuTestDelete(CuTest *t)
         CuStringDelete(t->message);
 	}
 	assert (NULL != t->name);
-	freeresult = CuFree(t->name);
+	CuStringDelete(t->name);
 	//assert(freeresult);
 	//CuStringDelete(t->name);
 	//CuStringDelete(t->name);

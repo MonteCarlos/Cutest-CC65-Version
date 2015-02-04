@@ -290,7 +290,7 @@ void TestCuStringAppendISvsNOT(CuTest *tc){
     char* tempstr = malloc(TestISvsNOT_MAXSTRLEN);
 
     CuStringAppendISvsNOT(str, "%d", desired, actual);
-    snprintf(tempstr, TestISvsNOT_MAXSTRLEN, "%sIS %d NOT %d", leadstr, desired, actual);
+    snprintf(tempstr, TestISvsNOT_MAXSTRLEN, "%sIS \"%d\" NOT \"%d\"", leadstr, desired, actual);
     CuAssertStrEquals(tc, tempstr, CuStringCStr(str));
 
     free(tempstr);

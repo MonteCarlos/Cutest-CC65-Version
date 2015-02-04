@@ -15,7 +15,7 @@
 
 struct CuTest_tag
 {
-	char* name;
+	CuString *name;
 	TestFunction function;
 	bool failed;
 	bool ran;
