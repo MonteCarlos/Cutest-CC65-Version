@@ -5,6 +5,7 @@
 #include <stdlib.h>
 
 void *CuAlloc(size_t n);
+void *CuCalloc(size_t n);
 void *CuRealloc(void* old, size_t n);
 size_t CuAlloc_getDataSize(void *ptr);
 size_t CuAlloc_getTotalSize(void *ptr);
