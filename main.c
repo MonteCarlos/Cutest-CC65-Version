@@ -2,13 +2,14 @@
 #include <stdlib.h>
 #include <assert.h>
 
-void RunAllTests(void);
+int RunAllTests(void);
 
 int main(void)
 {
+    int NoFails = 1;
 	printf("CuTest V1.5 running...\n");
     assert(0 == CuAlloc_getPendingFrees());
-	RunAllTests();
+	NoFails = RunAllTests();
 	assert(0 == CuAlloc_getPendingFrees());
-	return 0;
+	return NoFails;
 }

@@ -9,8 +9,9 @@ bool CuAssertIntEquals_LineMsg(CuTest* tc, const char* file, int line, const cha
 	if (expected != actual){
 		//sprintf(buf, "expected <%d> but was <%d>", expected, actual);
 		CuFail_Line(tc, file, line, message, NULL);
-		CuStringAppend(tc->message, ", ");
+		CuStringAppendChar(tc->message, '#');
         CuStringAppendISvsNOT(tc->message, "%d", expected, actual);
+		CuStringAppendChar(tc->message, '#');
 		return true;
 	}
 	//free(buf);

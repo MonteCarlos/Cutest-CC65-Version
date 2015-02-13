@@ -11,7 +11,7 @@ void *CuAlloc(size_t n){
     ptr -> datasize = n;
     ptr -> totalsize = n+sizeof(CuAlloc_t);
     ptr -> isvalid = true;
-//    ptr -> this = ptr;
+    ptr -> this = ptr;
     ++alloccount;
     return &(ptr->array);
 }
