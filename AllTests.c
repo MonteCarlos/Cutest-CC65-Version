@@ -26,6 +26,7 @@ int RunAllTests(void)
 	CuSuiteRun(suite);//This function does not return!
 	printf("Alloc Count after SuiteRun:%lu\n", CuAlloc_getAllocCount());
 	//CuSuiteSummary(suite, output);
+
 	CuSuiteDetails(suite, stdout);
 	/*file = fopen("CuTest.log","w");
 	if (NULL != file){
@@ -37,6 +38,7 @@ int RunAllTests(void)
 	NoFails = CuSuiteGetFailcount(suite);
 	CuSuiteDelete(suite);
 	printf("Alloc Count after SuiteDelete:%lu %lu\n", CuAlloc_getAllocCount(), CuAlloc_getFreeCount());
+
     return NoFails;
 }
 

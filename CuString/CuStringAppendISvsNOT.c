@@ -12,7 +12,7 @@ int CuStringAppendISvsNOT(CuString *str, const char* format,...){
     char* tempstr = malloc(ISvsNOTBUFLEN);
 
     va_start(va,format);
-    snprintf(tempstr,ISvsNOTBUFLEN,"IS \"%s\" NOT \"%s\"",format,format);
+    snprintf(tempstr,ISvsNOTBUFLEN,"is \"%s\" not \"%s\"",format,format);
 
     if (!strcmp(format, "%s")){
         char *is = va_arg(va, char*), *isnot = va_arg(va, char*);

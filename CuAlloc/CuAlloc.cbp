@@ -46,9 +46,13 @@
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
 				<Compiler>
+<<<<<<< HEAD
 					<Add option="-Wall" />
 					<Add option="-g" />
 					<Add option="-fplan9-extensions" />
+=======
+					<Add option="-fplan9-extensions -std=c99" />
+>>>>>>> 223219eb5f7f6ea18d993237d4b519f61b413e3d
 				</Compiler>
 			</Target>
 			<Target title="gccUTest">
@@ -58,9 +62,13 @@
 				<Option compiler="gcc" />
 				<Option use_console_runner="0" />
 				<Compiler>
+<<<<<<< HEAD
 					<Add option="-Wall" />
 					<Add option="-g" />
 					<Add option="-fplan9-extensions" />
+=======
+					<Add option="-fplan9-extensions -std=c99" />
+>>>>>>> 223219eb5f7f6ea18d993237d4b519f61b413e3d
 				</Compiler>
 				<Linker>
 					<Add library="..\libcutest_Dbg.a" />
@@ -89,9 +97,19 @@
 =======
 				<Option object_output="obj/gccRelease" />
 				<Option type="2" />
-				<Option compiler="cc65" />
+				<Option compiler="gcc" />
 				<Option createDefFile="1" />
+<<<<<<< HEAD
 >>>>>>> 9a0a2b4665e253dd5e3b2dd07d5062beb203d1cc
+=======
+				<Compiler>
+					<Add option="-Os" />
+					<Add option="-fplan9-extensions -std=c99" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+>>>>>>> 223219eb5f7f6ea18d993237d4b519f61b413e3d
 			</Target>
 		</Build>
 		<VirtualTargets>

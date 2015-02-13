@@ -6,8 +6,11 @@ bool CuAssertPtrEquals_LineMsg(CuTest* tc, const char* file, int line, const cha
 	char* buf = CuAlloc(STRING_MAX*sizeof(char));
 	assert (NULL != buf);
 	if (expected == actual) return false;
-	sprintf(buf, "expected pointer <0x%p> but was <0x%p>", expected, actual);
-	CuFail_Line(tc, file, line, message, buf);
+	CuFail_Line(tc, file, line, message, " ");
+	//CuStringAppend(tc->message, ": ");
+	CuStringAppendISvsNOT(tc->message, "%p", expected, actual);
+	//sprintf(buf, "expected pointer <0x%p> but was <0x%p>", expected, actual);
+	//CuFail_Line(tc, file, line, message, buf);
 	assert (NULL != buf);
 	CuFree(buf);
 	return true;

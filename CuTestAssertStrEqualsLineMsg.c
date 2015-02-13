@@ -11,8 +11,8 @@ bool CuAssertStrEquals_LineMsg(CuTest* tc, const char* file, int line, const cha
 		return false;
 	}
 
-	CuFail_Line(tc, file, line, message, NULL);
-	CuStringAppend(tc->message, ", ");
+	CuFail_Line(tc, file, line, message, " ");
+	//CuStringAppend(tc->message, ", ");
     CuStringAppendISvsNOT(tc->message, "%s", expected, actual);
 
 	return true;

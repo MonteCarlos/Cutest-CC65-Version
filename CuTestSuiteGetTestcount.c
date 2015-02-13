@@ -2,7 +2,7 @@
 
 size_t CuSuiteGetTestcount(CuSuite* testSuite)
 {
-	return testSuite->Count;
+	return testSuite->count;
 }
 
 

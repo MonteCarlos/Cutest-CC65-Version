@@ -19,7 +19,7 @@ void CuTestGenerateMessage(CuString* str, const char* msg1, const char* msg2, co
     }
 
 	if (NULL != msg2){
-		CuStringAppend(str, ", ");
+		//CuStringAppend(str, ", ");
 		CuStringAppend(str, msg2);
 	}
 

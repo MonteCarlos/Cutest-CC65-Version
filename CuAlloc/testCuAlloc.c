@@ -130,16 +130,11 @@ CuSuite *CuAlloc_requestTests(void){
 	//SUITE_ADD_TEST(suite, test_chartranslation);
 	return suite;
 }
-<<<<<<< HEAD
 
-int main(void){
-    //atexit(resetVIC);
-    //unsigned long int alloccount;
-=======
+
 
 int main(void){
     int Nofails;
->>>>>>> 9a0a2b4665e253dd5e3b2dd07d5062beb203d1cc
 
     CuSuite* suite = NULL; //
     printf("Registering tests...\n");
@@ -151,16 +146,14 @@ int main(void){
     CuSuiteDetails(suite, stdout);
     printf("Alloc Count after SuiteRun:%lu %lu %lu\n", CuAlloc_getAllocCount(), CuAlloc_getFreeCount(), CuAlloc_getReallocCount());
  	printf("End testing\n");
- 	Nofails = CuSuiteGetFailcount();
+ 	Nofails = CuSuiteGetFailcount(suite);
 
 	CuSuiteDelete(suite);
 	printf("Alloc Count after SuiteDelete:%lu %lu %lu\n", CuAlloc_getAllocCount(), CuAlloc_getFreeCount(), CuAlloc_getReallocCount());
 
-<<<<<<< HEAD
 	assert (0 == CuAlloc_getPendingFrees());
 	return EXIT_SUCCESS;
-=======
+
 	assert (0 == CuAlloc_getPendingFrees());
 	return Nofails;
->>>>>>> 9a0a2b4665e253dd5e3b2dd07d5062beb203d1cc
 }

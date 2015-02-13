@@ -296,127 +296,97 @@ void TestCuSuiteSummary(CuTest* tc)
 void TestCuSuiteDetails_SingleFail(CuTest* tc)
 {
 	CuSuite *ts = CuSuiteNew();
-	CuTest *tc1 = CuTestNew("TestPasses", TestPasses), *tc2 = CuTestNew("TestFails",  zTestFails);
-	CuString details;
-	const char* front;
-	const char* back;
-    FILE* file;
 
-	CuSuiteAdd(ts, tc1);
-	CuSuiteAdd(ts, tc2);
-	CuSuiteRun(ts, file);
+	SUITE_ADD_TEST(ts, zTestFails);
 
+	CuSuiteRun(ts);
+	CuSuiteDetails(ts, NULL);
+	CuAssertIntEquals(tc, ts->count, ts->report->performedTests);
+	CuAssertIntEquals(tc, ts->count, ts->report->reportedTests);
+	CuAssertIntEquals(tc, ts->count, ts->report->reportedFails);
+	CuAssertIntEquals(tc, 0, ts->report->reportedPasses);
+	CuSuiteDelete(ts);
 }
 
 
 void TestCuSuiteDetails_SinglePass(CuTest* tc)
 {
 	CuSuite *ts = CuSuiteNew();
-	CuTest *tc1 = CuTestNew("TestPasses", TestPasses);
-	const char* expected;
 
-	CuSuiteAdd(ts, tc1);
+    SUITE_ADD_TEST(ts, TestPasses);
+
 	CuSuiteRun(ts);
-
-	CuSuiteDetails(ts, stdout);
-
-    //Needs implementation of output testing
-
-    //Does not belong here
-	//CuAssertTrue(tc, ts.count == 1);
-	//CuAssertTrue(tc, ts.failCount == 0);
-
-	/*expected =
-		"OK (1 test from 1)";
-
-	CuAssertStrEquals(tc, expected, details.buffer);*/
+	CuSuiteDetails(ts, NULL);
+	CuAssertIntEquals(tc, ts->count, ts->report->performedTests);
+	CuAssertIntEquals(tc, ts->count, ts->report->reportedTests);
+	CuAssertIntEquals(tc, 0, ts->report->reportedFails);
+	CuAssertIntEquals(tc, ts->count, ts->report->reportedPasses);
 	CuSuiteDelete(ts);
-	CuAssertTrue(tc, true);
 }
 
 void TestCuSuiteDetails_MultiplePasses(CuTest* tc)
 {
-	/*CuSuite ts;
-	CuTest tc1, tc2;
-	CuString details;
-	const char* expected;
+	CuSuite *ts = CuSuiteNew();
 
-	CuSuiteInit(&ts);
-	CuTestInit(&tc1, "TestPasses", TestPasses);
-	CuTestInit(&tc2, "TestPasses", TestPasses);
-	CuStringInit(&details);
+    SUITE_ADD_TEST(ts, TestPasses);
+	SUITE_ADD_TEST(ts, TestPasses);
+	SUITE_ADD_TEST(ts, TestPasses);
 
-	CuSuiteAdd(&ts, &tc1);
-	CuSuiteAdd(&ts, &tc2);
-	CuSuiteRun(&ts);
-
-//	CuSuiteDetails(&ts, &details);
-
-	CuAssertTrue(tc, ts.count == 2);
-	CuAssertTrue(tc, ts.failCount == 0);
-
-	expected =
-		"OK (2 tests from 2)";
-
-	CuAssertStrEquals(tc, expected, details.buffer);*/
-    CuAssertTrue(tc, true);//knock out test
+	CuSuiteRun(ts);
+	CuSuiteDetails(ts, NULL);
+	CuAssertIntEquals(tc, ts->count, ts->report->performedTests);
+	CuAssertIntEquals(tc, ts->count, ts->report->reportedTests);
+	CuAssertIntEquals(tc, 0, ts->report->reportedFails);
+	CuAssertIntEquals(tc, ts->count, ts->report->reportedPasses);
+	CuSuiteDelete(ts);
 }
 
 void TestCuSuiteDetails_MultipleFails(CuTest* tc)
 {
-	/*CuSuite ts;
-	CuTest tc1, tc2;
-	CuString details;
-	const char* front;
-	const char* mid;
-	const char* back;
+	CuSuite *ts = CuSuiteNew();
 
-	CuSuiteInit(&ts);
-	CuTestInit(&tc1, "TestFails1", zTestFails);
-	CuTestInit(&tc2, "TestFails2", zTestFails);
-	CuStringInit(&details);
+    SUITE_ADD_TEST(ts, zTestFails);
+	SUITE_ADD_TEST(ts, zTestFails);
+	SUITE_ADD_TEST(ts, zTestFails);
 
-	CuSuiteAdd(&ts, &tc1);
-	CuSuiteAdd(&ts, &tc2);
-	CuSuiteRun(&ts);
-
-//	CuSuiteDetails(&ts, &details);
-
-	CuAssertTrue(tc, ts.count == 2);
-	CuAssertTrue(tc, ts.failCount == 2);
-
-	front =
-		"There were 2 failures:\n"
-		"1) TestFails1: ";
-	mid =   "test should fail\n"
-		"2) TestFails2: ";
-	back =  "test should fail\n"
-		"\n!!!FAILURES!!!\n"
-		"Runs:2, Passes:0, Fails:2\n";
-
-	CuAssertStrEquals(tc, back, details.buffer + strlen(details.buffer) - strlen(back));
-	CuAssert(tc, "Couldn't find middle", strstr(details.buffer, mid) != NULL);
-	details.buffer[strlen(front)] = 0;
-	CuAssertStrEquals(tc, front, details.buffer);*/
-	CuAssertTrue(tc, true);//knock out test
+	CuSuiteRun(ts);
+	CuSuiteDetails(ts, NULL);
+	CuAssertIntEquals(tc, ts->count, ts->report->performedTests);
+	CuAssertIntEquals(tc, ts->count, ts->report->reportedTests);
+	CuAssertIntEquals(tc, ts->count, ts->report->reportedFails);
+	CuAssertIntEquals(tc, 0, ts->report->reportedPasses);
+	CuSuiteDelete(ts);
 }
 
+void TestCuSuiteDetails_PassesAndFails(CuTest* tc)
+{
+	CuSuite *ts = CuSuiteNew();
 
+    SUITE_ADD_TEST(ts, zTestFails);
+	SUITE_ADD_TEST(ts, zTestFails);
+	SUITE_ADD_TEST(ts, TestPasses);
+	SUITE_ADD_TEST(ts, zTestFails);
+	SUITE_ADD_TEST(ts, TestPasses);
+	SUITE_ADD_TEST(ts, TestPasses);
+	SUITE_ADD_TEST(ts, zTestFails);
+	SUITE_ADD_TEST(ts, TestPasses);
+	SUITE_ADD_TEST(ts, TestPasses);
+
+	CuSuiteRun(ts);
+	CuSuiteDetails(ts, NULL);
+	CuAssertIntEquals(tc, ts->count, ts->report->performedTests);
+	CuAssertIntEquals(tc, ts->count, ts->report->reportedTests);
+	CuAssertIntEquals(tc, 4, ts->report->reportedFails);
+	CuAssertIntEquals(tc, 5, ts->report->reportedPasses);
+	CuSuiteDelete(ts);
+}
 
 
 void TestFail(CuTest* tc)
 {
-	//jmp_buf buf;
-	//int pointReached = 0;
 	CuTest* tc2 = CuTestNew("TestFails", zTestFails);
-	//tc2->jumpBuf = &buf;
-	//if (setjmp(buf) == 0)
-	//{
-    CuFail(tc2);
+	CuTestRun(tc2);
     CuAssertTrue(tc, tc2 -> failed == true);
-	//	pointReached = 1;
-	//}
-	//CuAssert(tc, "point was not reached", pointReached == 0);
 	CuTestDelete(tc2);
 }
 
@@ -580,7 +550,7 @@ CuSuite* CuGetSuite(void)
 	SUITE_ADD_TEST(suite, TestCuSuiteDetails_SinglePass);
 	SUITE_ADD_TEST(suite, TestCuSuiteDetails_MultiplePasses);
 	SUITE_ADD_TEST(suite, TestCuSuiteDetails_MultipleFails);
-
+	SUITE_ADD_TEST(suite, TestCuSuiteDetails_PassesAndFails);
 	SUITE_ADD_TEST(suite, TestSetProgressStartEnd);
 	SUITE_ADD_TEST(suite, TestPrintProgressState);
 	SUITE_ADD_TEST(suite, TestAssertArrayEquals);
