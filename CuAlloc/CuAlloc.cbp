@@ -42,7 +42,7 @@
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
 				<Compiler>
-					<Add option="-fplan9-extensions" />
+					<Add option="-fplan9-extensions -std=c99" />
 				</Compiler>
 			</Target>
 			<Target title="gccUTest">
@@ -52,7 +52,7 @@
 				<Option compiler="gcc" />
 				<Option use_console_runner="0" />
 				<Compiler>
-					<Add option="-fplan9-extensions" />
+					<Add option="-fplan9-extensions -std=c99" />
 				</Compiler>
 				<Linker>
 					<Add library="..\..\libcutest_Dbg.a" />
@@ -67,8 +67,15 @@
 				<Option working_dir="" />
 				<Option object_output="obj/gccRelease" />
 				<Option type="2" />
-				<Option compiler="cc65" />
+				<Option compiler="gcc" />
 				<Option createDefFile="1" />
+				<Compiler>
+					<Add option="-Os" />
+					<Add option="-fplan9-extensions -std=c99" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
 			</Target>
 		</Build>
 		<VirtualTargets>

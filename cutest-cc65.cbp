@@ -110,6 +110,9 @@
 		<Unit filename="CuTestAppendMessage.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="CuTestAssertArrayEqualsLineMsg.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="CuTestAssertPtrEqualsLineMsg.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -137,6 +140,12 @@
 		<Unit filename="CuTestNew.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="CuTestReportDestroy.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="CuTestReportNew.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="CuTestRun.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -150,6 +159,12 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="CuTestSuiteDetails.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="CuTestSuiteGetFailcount.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="CuTestSuiteGetTestcount.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="CuTestSuiteInit.c">
