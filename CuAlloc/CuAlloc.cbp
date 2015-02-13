@@ -58,7 +58,7 @@
 					<Add option="-fplan9-extensions" />
 				</Compiler>
 				<Linker>
-					<Add library="..\..\libcutest_Dbg.a" />
+					<Add library="..\libcutest_Dbg.a" />
 					<Add library="..\CuString\libCutestString-cc65_dbg.a" />
 				</Linker>
 				<ExtraCommands>

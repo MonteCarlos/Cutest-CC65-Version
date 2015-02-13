@@ -51,9 +51,9 @@ CuSuite *CuAlloc_requestTests(void){
 	return suite;
 }
 
-void main(void){
+int main(void){
     //atexit(resetVIC);
-    unsigned long int alloccount;
+    //unsigned long int alloccount;
 
     CuSuite* suite = NULL; //
     printf("Registering tests...\n");
@@ -68,4 +68,5 @@ void main(void){
 	printf("Alloc Count after SuiteDelete:%lu %lu %lu\n", CuAlloc_getAllocCount(), CuAlloc_getFreeCount(), CuAlloc_getReallocCount());
 
 	assert (0 == CuAlloc_getPendingFrees());
+	return EXIT_SUCCESS;
 }

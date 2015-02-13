@@ -46,7 +46,7 @@
 				</Linker>
 			</Target>
 			<Target title="Debug">
-				<Option output="../cutest_Dbg" prefix_auto="1" extension_auto="1" />
+				<Option output="cutest_Dbg" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="" />
 				<Option object_output="obj/Debug" />
 				<Option type="2" />
@@ -72,12 +72,26 @@
 				</Compiler>
 				<Linker>
 					<Add library="CuString\libCutestString-cc65_dbg.a" />
-					<Add library="CuAlloc\libCuAlloc.lib.a" />
+					<Add library="CuAlloc\libCuAllocDbg.a" />
 				</Linker>
 				<ExtraCommands>
 					<Add after="cutest.exe" />
 					<Mode after="always" />
 				</ExtraCommands>
+			</Target>
+			<Target title="Release">
+				<Option output="cutest.a" prefix_auto="1" extension_auto="0" />
+				<Option working_dir="" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Compiler>
+					<Add option="-Os" />
+					<Add option="-Wextra" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
 			</Target>
 		</Build>
 		<VirtualTargets>
@@ -168,6 +182,7 @@
 			<Option compilerVar="CC" />
 			<Option target="CC65Selftest" />
 			<Option target="Selftest" />
+			<Option target="Release" />
 		</Unit>
 		<Unit filename="CuTestTest.h">
 			<Option target="CC65Selftest" />
@@ -175,6 +190,11 @@
 		</Unit>
 		<Unit filename="CuTestTest_shared.c">
 			<Option compilerVar="CC" />
+			<Option target="CC65Debug" />
+			<Option target="CC65Release" />
+			<Option target="CC65Selftest" />
+			<Option target="Debug" />
+			<Option target="Selftest" />
 		</Unit>
 		<Unit filename="CuTest_internal.h" />
 		<Unit filename="README.txt">
@@ -182,22 +202,26 @@
 			<Option target="CC65Release" />
 			<Option target="CC65Selftest" />
 			<Option target="Selftest" />
+			<Option target="Release" />
 		</Unit>
 		<Unit filename="cutest-cc65.cfg">
 			<Option target="CC65Debug" />
 			<Option target="CC65Release" />
 			<Option target="CC65Selftest" />
+			<Option target="Release" />
 		</Unit>
 		<Unit filename="license.txt">
 			<Option target="CC65Debug" />
 			<Option target="CC65Release" />
 			<Option target="CC65Selftest" />
 			<Option target="Selftest" />
+			<Option target="Release" />
 		</Unit>
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 			<Option target="CC65Selftest" />
 			<Option target="Selftest" />
+			<Option target="Release" />
 		</Unit>
 		<Extensions>
 			<code_completion />

@@ -55,7 +55,7 @@
 					<Add option="-g" />
 				</Compiler>
 				<Linker>
-					<Add library="..\..\libcutest_Dbg.a" />
+					<Add library="..\libcutest_Dbg.a" />
 				</Linker>
 			</Target>
 			<Target title="gccRelease">
@@ -70,7 +70,7 @@
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
-					<Add library="..\..\libcutest_Dbg.a" />
+					<Add library="..\libcutest.a" />
 				</Linker>
 			</Target>
 			<Target title="gccSelftest">
@@ -84,8 +84,8 @@
 					<Add option="-g" />
 				</Compiler>
 				<Linker>
-					<Add library="..\..\libcutest_Dbg.a" />
-					<Add library="..\CuAlloc\libCuAlloc.lib.a" />
+					<Add library="..\libcutest_Dbg.a" />
+					<Add library="..\CuAlloc\libCuAllocDbg.a" />
 				</Linker>
 				<ExtraCommands>
 					<Add after="CutestString-cc65_test.exe" />
