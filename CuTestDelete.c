@@ -3,7 +3,9 @@
 void CuTestDelete(CuTest *t)
 {
     bool freeresult;
-	if (!t) return;
+	//if (NULL == t) return;
+	assert (NULL != t);
+
 	if (NULL != t->message){
         CuStringDelete(t->message);
 	}
@@ -12,7 +14,7 @@ void CuTestDelete(CuTest *t)
 	//assert(freeresult);
 	//CuStringDelete(t->name);
 	//CuStringDelete(t->name);
-	assert (NULL != t);
+	//assert (NULL != t);
 	freeresult = CuFree(t);
 	assert(freeresult);
 }

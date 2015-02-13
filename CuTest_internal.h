@@ -19,16 +19,25 @@ struct CuTest_tag
 	TestFunction function;
 	bool failed;
 	bool ran;
+	bool reported;
 	CuString *message;
 	jmp_buf *jumpBuf;
 };
 
 struct CuSuite_tag
 {
-	int count;
+	size_t count;
 	CuTest** list;
-	int failCount;
+	size_t failCount;
 
+};
+
+struct CuReport_tag{
+    size_t reportedTests;
+    size_t performedTests;
+    size_t reportedFails;
+    size_t reportedPasses;
+    CuString *reportStr;
 };
 
 

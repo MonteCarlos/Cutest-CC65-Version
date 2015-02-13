@@ -17,7 +17,7 @@ struct CuAlloc_BufHeader_tag{
     bool isvalid;
     size_t datasize;
     size_t totalsize;
-
+    CuAlloc_t *this;
 };
 
 struct CuAlloc_tag {
