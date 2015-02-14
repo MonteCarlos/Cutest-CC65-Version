@@ -96,4 +96,5 @@ size_t CuSuiteGetFailcount(CuSuite* testSuite);
 size_t CuSuiteGetTestcount(CuSuite* testSuite);
 CuReport_t *CuReportNew(void);
 bool CuReportDestroy(CuReport_t *rep);
+
 #endif /* CU_TEST_H */

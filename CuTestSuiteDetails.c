@@ -1,13 +1,4 @@
 #include "CuTest_internal.h"
-size_t my_fprintf(FILE* file, char* format, ...){
-	va_list va;
-	va_start(va, format);
-
-	if (NULL != file){
-		vfprintf(file, format, va);
-	}
-	va_end(va);
-}
 
 void CuSuiteDetails(CuSuite* testSuite, FILE* file)
 {

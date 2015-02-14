@@ -1,9 +1,11 @@
 #include "CuTest_internal.h"
 
-CuString *CuTestGenerateReportString(CuSuite *suite){
+CuString *CuTestGenerateReportString(size_t runs, size_t passes, size_t fails){
 	CuString *str = CuStringNew();
-	size_t count = suite->count, fails = suite->failCount;
-	CuStringAppendFormat(str,"Runs:%u, Passes:%u, Fails:%u\n", count, count-fails, fails);
+
+	//Warning! format string and parameter list must match!!!
+	//Only pass size_t or unsigned int!
+	CuStringAppendFormat(str,CUTEST_STR_SUMMARY(runs, passes, fails));
 	return str;
 }
 

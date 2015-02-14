@@ -145,6 +145,9 @@
 		<Unit filename="CuTestFailLine.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="CuTestFprintf.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="CuTestGenerateMessage.c">
 			<Option compilerVar="CC" />
 		</Unit>

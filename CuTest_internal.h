@@ -13,6 +13,8 @@
 #include "CuTestTest.h"
 #include "CuAlloc\CuAlloc.h"
 
+#define CUTEST_STR_SUMMARY(runs, passes, fails) "Runs:%u, Passes:%u, Fails:%u\n", runs, passes, fails
+
 struct CuTest_tag
 {
 	CuString *name;
@@ -47,7 +49,7 @@ unsigned long int CuTestGetProgressStart(void);
 unsigned long int CuTestGetProgressEnd(void);
 unsigned long int CuTestGetProgressRange(void);
 void CuTestGenerateMessage(CuString* str, const char* msg1, const char* msg2, const char* file, unsigned long int line);
-
+size_t CuTestFprintf(FILE* file, char* format, ...);
 
 
 #endif // CUTEST_INTERNAL_H_INCLUDED
