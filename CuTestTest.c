@@ -292,6 +292,17 @@ void TestCuSuiteSummary(CuTest* tc)
 	CuAssertTrue(tc, true);
 }
 
+void TestCuTestFormatReportString(CuTest* tc)
+{
+	CuSuite *ts = CuSuiteNew();
+	size_t runs = 10, passes = 7, fails = 3;
+	char buf[100];
+
+    CuTestFormatReportString(ts->report->reportStr, runs, passes, fails);
+	snprintf(buf, sizeof(buf)-1, CUTEST_STR_SUMMARY(runs, passes, fails));
+	CuAssertStrEquals(tc, buf, CuStringCStr(ts->report->reportStr));
+	CuSuiteDelete(ts);
+}
 
 void TestCuSuiteDetails_SingleFail(CuTest* tc)
 {
@@ -554,7 +565,7 @@ CuSuite* CuGetSuite(void)
 	SUITE_ADD_TEST(suite, TestSetProgressStartEnd);
 	SUITE_ADD_TEST(suite, TestPrintProgressState);
 	SUITE_ADD_TEST(suite, TestAssertArrayEquals);
-
+	SUITE_ADD_TEST(suite, TestCuTestFormatReportString);
 	printf("Registered #%d testcases\n", suite->count);
 	return suite;
 }

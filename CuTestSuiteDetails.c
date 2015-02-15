@@ -8,33 +8,17 @@ void CuSuiteDetails(CuSuite* testSuite, FILE* file)
     size_t reportedPasses = 0;
     size_t testcount = CuSuiteGetTestcount(testSuite);
     size_t failCount = CuSuiteGetFailcount(testSuite);
+    size_t passCount = testcount - failCount;
 	CuReport_t *report = testSuite->report;
 
 	if (failCount == 0)
 	{
-		size_t passCount = testcount - failCount;
-		const char* plural_s = passCount == 1 ? "" : "s";
-		CuTestFprintf(file, "OK (%u test%s from %u)\n", passCount, plural_s, testSuite->count);
-		//CuStringAppendFormat(details, "OK (%d %s from %d)\n", passCount, testWord, testSuite->count);
+		CuTestFprintf(file, "OK");
 
-		if (testSuite -> count != passCount){
-			CuTestFprintf(file, "Missed tests! #Registered(%u) > #Performed(%u)!\n", testSuite -> count, passCount);
-		}
 		reported = reportedPasses = testcount;
 	}
 	else
 	{
-		/*char* isWasOrWere = "was";
-		char* plural_s = "";//empty string->singular
-
-		if (failCount  > 1){
-            isWasOrWere = "were";
-            plural_s = "s";
-		}*/
-
-        CuTestFprintf(file, "\n!!!FAILURES!!!\n");
-		//my_fprintf(file, "There %s %u failure%s", isWasOrWere, failCount , plural_s);
-
 		for (i = 0 ; i < testSuite->count ; ++i)
 		{
 			CuTest* testCase = testSuite->list[i];
@@ -49,10 +33,14 @@ void CuSuiteDetails(CuSuite* testSuite, FILE* file)
 			testCase->reported = true;
 			++reported;
 		}
-
+		CuTestFprintf(file, "\n!!!FAILURES!!!\n");
 	}
 
 	CuTestFormatReportString(report->reportStr, testcount, testcount-failCount, failCount);
+
+	if (testSuite -> count - testSuite->failCount != passCount){
+		CuTestFprintf(file, "Missed tests! #Registered(%u) > #Performed(%u)!\n", testSuite -> count, passCount);
+	}
 
 	assert(NULL != report);
 	assert(CuAlloc_getBufferValidity(report));
