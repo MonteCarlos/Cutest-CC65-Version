@@ -83,8 +83,7 @@ void CuSuiteDelete(CuSuite *testSuite);
 void CuSuiteAdd(CuSuite* testSuite, CuTest *testCase);
 void CuSuiteAddSuite(CuSuite* testSuite, CuSuite* testSuite2);
 void CuSuiteRun(CuSuite* testSuite);
-void CuSuiteSummary(CuSuite* testSuite,
-					CuString* summary);
+void CuSuiteSummary(CuSuite* testSuite, FILE* file);
 //void CuSuiteDetails(CuSuite* testSuite, CuString* details);
 void CuSuiteDetails(CuSuite* testSuite, FILE* file);
 
@@ -96,5 +95,6 @@ size_t CuSuiteGetFailcount(CuSuite* testSuite);
 size_t CuSuiteGetTestcount(CuSuite* testSuite);
 CuReport_t *CuReportNew(void);
 bool CuReportDestroy(CuReport_t *rep);
+int CuTestFormatReportString(CuString *str, size_t runs, size_t passes, size_t fails);
 
 #endif /* CU_TEST_H */
