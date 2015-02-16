@@ -133,6 +133,7 @@ void TestCuAssertPtrEquals_Failure(CuTest* tc)
 	sprintf(expected_message, "expected pointer <0x%p> but was <0x%p>", nullPtr, &x);
 	CuAssertPtrEquals(tc2, NULL, &x);
 	CuAssertTrue(tc, tc2->failed);
+
 	//CompareAsserts(tc, "CuAssertPtrEquals failed", expected_message, tc2.message);
 	free(expected_message);
 
@@ -156,11 +157,11 @@ void TestCuAssertPtrNotNull_Success(CuTest* tc)
 
 void TestCuAssertPtrNotNull_Failure(CuTest* tc)
 {
-	CuTest *tc2 = CuTestNew("MyTest", TestPasses);
+	CuTest *tc2 = CuTestNew("Should pass", TestPasses);
 	/* test failing case */
 	void* const ptrIsNULL = NULL;
 
-    CuTestInit(tc2, "Should pass", TestPasses);
+    //CuTestInit(tc2, "Should pass", TestPasses);
 
 	CuAssertPtrNotNull(tc2, ptrIsNULL);
 	CuAssertTrue(tc, tc2->failed);
@@ -187,6 +188,7 @@ void TestCuTestRun(CuTest* tc)
  * CuSuite Test
  *-------------------------------------------------------------------------*/
 
+// TODO (MyAcer#1#): test for suite init should be different from suiteNew
 void TestCuSuiteInit(CuTest* tc)
 {
 	CuSuite *ts = CuSuiteNew();
@@ -208,8 +210,9 @@ void TestCuSuiteNew(CuTest* tc)
 
 void TestCuSuiteAddTest(CuTest* tc)
 {
+	char* testname = "New test";
 	CuSuite* ts = CuSuiteNew();
-	CuTest *tc2 = CuTestNew("MyTest", TestPasses);
+	CuTest *tc2 = CuTestNew(testname, TestPasses);
 	//CuTest tc2;
 
 	//CuSuiteInit(ts);
@@ -218,10 +221,10 @@ void TestCuSuiteAddTest(CuTest* tc)
 	CuSuiteAdd(ts, tc2);
 	CuAssertTrue(tc, ts->count == 1);
 
-	CuAssertStrEquals(tc, "MyTest", CuStringCStr(ts->list[0]->name));
+	CuAssertStrEquals(tc, testname, CuStringCStr(ts->list[0]->name));
 
-	CuSuiteDelete(ts);
-	CuTestDelete(tc2);
+	CuSuiteDelete(ts);//test is deleted with suite if it is added properly before
+	//CuTestDelete(tc2);
 }
 
 void TestCuSuiteAddSuite(CuTest* tc)
@@ -243,8 +246,8 @@ void TestCuSuiteAddSuite(CuTest* tc)
 	CuAssertStrEquals(tc, "TestFails3", CuStringCStr(ts1->list[2]->name));
 	CuAssertStrEquals(tc, "TestFails4", CuStringCStr(ts1->list[3]->name));
 
-	CuSuiteDelete(ts1);
-	CuSuiteDelete(ts2);
+	CuSuiteDelete(ts1);//also other suites are deleted with deletion of master suite
+	//CuSuiteDelete(ts2);
 }
 
 void TestCuSuiteRun(CuTest* tc)
@@ -271,25 +274,37 @@ void TestCuSuiteRun(CuTest* tc)
 
 void TestCuSuiteSummary(CuTest* tc)
 {
-	/*CuSuite ts;
-	CuTest tc1, tc2;
-	CuString summary;
+	CuSuite *ts = CuSuiteNew();
+	size_t runs = 10, passes = 7, fails = 3;
+	char buf[100];
+	char buf2[100];
 
-	CuSuiteInit(&ts);
-	CuTestInit(&tc1, "TestPasses", TestPasses);
-	CuTestInit(&tc2, "TestFails",  zTestFails);
-	CuStringInit(&summary);
+    //Imitate generation of result string by providing mock values
+	CuTestFormatReportString(ts->report->reportStr, runs, passes, fails);
+    FILE* file = fopen("summarytest.txt", "w");
+    //Check fopen OK
+    if (NULL == file) {
+        perror(NULL);
+        CuFail_Msg(tc, "fopen error");
+        goto cleanup;
+    }
 
-	CuSuiteAdd(&ts, &tc1);
-	CuSuiteAdd(&ts, &tc2);
-	CuSuiteRun(&ts);
+    CuSuiteSummary(ts, file);
+    fclose(file);
+    file = fopen("summarytest.txt", "r");
 
-	CuSuiteSummary(&ts, &summary);
+    if (NULL == file) {
+        perror(NULL);
+        CuFail_Msg(tc, "fopen error");
+        goto cleanup;
+    }
+	snprintf(buf, sizeof(buf)-1, CUTEST_STR_SUMMARY(runs, passes, fails));
+	fgets(buf2,strlen(buf)+1,file);
+	CuAssertStrEquals(tc, buf, buf2);
 
-	CuAssertTrue(tc, ts.count == 2);
-	CuAssertTrue(tc, ts.failCount == 1);
-	CuAssertStrEquals(tc, ".F\n\n", summary.buffer);*/
-	CuAssertTrue(tc, true);
+	cleanup:
+	CuSuiteDelete(ts);
+	fclose(file);
 }
 
 void TestCuTestFormatReportString(CuTest* tc)
@@ -544,17 +559,17 @@ CuSuite* CuGetSuite(void)
 	SUITE_ADD_TEST(suite, TestCuTestInit);
 
 	SUITE_ADD_TEST(suite, TestCuAssert);
-	//SUITE_ADD_TEST(suite, TestCuAssertPtrEquals_Success);
+	SUITE_ADD_TEST(suite, TestCuAssertPtrEquals_Success);
 	SUITE_ADD_TEST(suite, TestCuAssertPtrEquals_Failure);
 
 	SUITE_ADD_TEST(suite, TestCuAssertPtrNotNull_Success);
-	//SUITE_ADD_TEST(suite, TestCuAssertPtrNotNull_Failure);
+	SUITE_ADD_TEST(suite, TestCuAssertPtrNotNull_Failure);
 	SUITE_ADD_TEST(suite, TestCuTestRun);
 
 	SUITE_ADD_TEST(suite, TestCuSuiteInit);
 	SUITE_ADD_TEST(suite, TestCuSuiteNew);
-	//SUITE_ADD_TEST(suite, TestCuSuiteAddTest);
-	//SUITE_ADD_TEST(suite, TestCuSuiteAddSuite);
+	SUITE_ADD_TEST(suite, TestCuSuiteAddTest);
+	SUITE_ADD_TEST(suite, TestCuSuiteAddSuite);
 	SUITE_ADD_TEST(suite, TestCuSuiteRun);
 	SUITE_ADD_TEST(suite, TestCuSuiteSummary);
 	SUITE_ADD_TEST(suite, TestCuSuiteDetails_SingleFail);

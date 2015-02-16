@@ -72,7 +72,8 @@ bool CuAssertArrayEqualsStepFunc_LineMsg(CuTest* tc, const char* file, int line,
 
 /* CuSuite */
 
-#define MAX_TEST_CASES	100
+#define CUTEST_LIST_STORAGERESERVE	20
+#define CUSUITE_LIST_STORAGERESERVE	10
 
 #define SUITE_ADD_TEST(SUITE,TEST)	CuSuiteAdd(SUITE, CuTestNew(#TEST, TEST))
 #define SUITE_ADD_SUITE(SUITE1, SUITE2) CuSuite* SUITE2 = CuSuiteNew();CuSuiteAddSuite(SUITE1, SUITE2)

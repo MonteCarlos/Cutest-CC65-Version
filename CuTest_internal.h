@@ -28,8 +28,11 @@ struct CuTest_tag
 
 struct CuSuite_tag
 {
-	size_t count;
-	CuTest** list;
+	size_t testcount;
+	size_t suitecount;
+
+	CuTest** testlist;
+	CuSuite** suitelist;
 	size_t failCount;
 	CuReport_t *report;
 };
