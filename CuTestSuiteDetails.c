@@ -9,43 +9,48 @@ void CuSuiteDetails(CuSuite* testSuite, FILE* file)
     size_t testcount = CuSuiteGetTestcount(testSuite);
     size_t failCount = CuSuiteGetFailcount(testSuite);
     size_t passCount = testcount - failCount;
-	CuReport_t *report = testSuite->report;
+	register CuReport_t *report = testSuite->report;
+    register CuTestPtr_t *testlist = testSuite->testlist;
 
-	if (failCount == 0)
-	{
-		CuTestFprintf(file, "OK");
-
-		reported = reportedPasses = testcount;
-	}
-	else
-	{
-		for (i = 0 ; i < testSuite->count ; ++i)
-		{
-			CuTest* testCase = testSuite->list[i];
-			if (testCase->failed)
-			{
-				failCount++;
-                CuTestFprintf(file, "%s: %s\n", CuStringCStr(testCase->message), CuStringCStr(testCase->name));
-	            ++reportedFails;
-			}else{
+	for (i = 0 ; i < testSuite->testcount ; ++i)
+    {
+        CuTestPtr_t testCase = testlist[i];
+        if (testCase.isSuite){
+            CuSuiteDetails(testCase.suite, file);
+        }else{
+            register CuTest *test = testCase.test;
+            if (test->failed)
+            {
+                CuTestFprintf(file, "%s: %s\n", CuStringCStr(test->message), CuStringCStr(test->name));
+                ++reportedFails;
+            }else{
                 ++reportedPasses;
             }
-			testCase->reported = true;
-			++reported;
-		}
-		CuTestFprintf(file, "\n!!!FAILURES!!!\n");
-	}
+            test->reported = true;
+            ++reported;
+        }
+    }
 
+    if (failCount == 0)
+	{
+		CuTestFprintf(file, "\n---OK---\n");
+	}else{
+	    CuTestFprintf(file, "\n!!!FAILURES!!!\n");
+	}
 	CuTestFormatReportString(report->reportStr, testcount, testcount-failCount, failCount);
 
-	if (testSuite -> count - testSuite->failCount != passCount){
-		CuTestFprintf(file, "Missed tests! #Registered(%u) > #Performed(%u)!\n", testSuite -> count, passCount);
+	if (testcount - failCount != passCount){
+		CuTestFprintf(file, "Missed tests! #Registered(%u) > #Performed(%u)!\n", testcount, passCount);
 	}
-
+    /*f (reported - reportedFails != reportedPasses){
+		CuTestFprintf(file, "Missed tests! #Registered(%u) > #Performed(%u)!\n", testSuite -> testcount, passCount);
+	}*/
 	assert(NULL != report);
 	assert(CuAlloc_getBufferValidity(report));
 	report -> reportedTests = reported;
 	report -> reportedFails = reportedFails;
 	report -> reportedPasses = reportedPasses;
 	report -> performedTests = testcount;
+
+	CuSuiteSummary(testSuite, file);
 }

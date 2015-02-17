@@ -1,11 +1,15 @@
 #include "CuTest_internal.h"
 
-void CuSuiteAdd(CuSuite* testSuite, CuTest *testCase)
+void CuSuiteAdd(CuSuite* testSuite, CuTest *newtest)
 {
-    size_t testcount;
+    size_t testcount = testSuite->testcount;
+    size_t residualBytesToNextAlloc = CUTEST_LIST_STORAGERESERVE-testcount % CUTEST_LIST_STORAGERESERVE;
+    register CuTestPtr_t *testlist = testSuite->testlist;
 
-	if ( (testcount = testSuite->count)%CUTEST_LIST_STORAGERESERVE == (CUTEST_LIST_STORAGERESERVE-1) ){
-        testSuite->testlist = CuRealloc(testSuite->testlist, testcount+1+CUTEST_LIST_STORAGERESERVE);
-	} testSuite->list[(testSuite->count)++] = testCase;
+	if ( residualBytesToNextAlloc  == 1 ){
+        testlist = CuRealloc(testlist, (testcount+1+CUTEST_LIST_STORAGERESERVE)*sizeof(CuTestPtr_t*));
+	}
+	testlist[testcount].test = newtest;
+	testlist[testcount].isSuite = false;
 	//++testSuite->count;
 }

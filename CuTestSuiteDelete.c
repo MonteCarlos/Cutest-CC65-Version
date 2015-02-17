@@ -2,24 +2,31 @@
 
 void CuSuiteDelete(CuSuite *testSuite)
 {
-        long int n = testSuite->count-1;
+        long int n = testSuite->testcount-1;
         bool freereturn;
+        CuTestPtr_t *testlist = testSuite->testlist;
 
         assert (NULL != testSuite);
         printf("Removing testcases:\n");
         for (; n >=0; --n)
         {
-			//printf("%d\n",n);
+			register CuTestPtr_t test = testlist[n];
 
-                if (testSuite->list[n])
-                {
-                        printf("%s\n",CuStringCStr(testSuite->list[n]->name));
-                        CuTestDelete(testSuite->list[n]);
-                        //assert (NULL != testSuite->list);
-                        //free(testSuite->list);
+            if (test.test)
+            {
+                if (test.isSuite){
+                    CuSuiteDelete(test.suite);
+                }else{
+                    printf("%s\n",CuStringCStr(test.test->name));
+                    CuTestDelete(test.test);
+                    //assert (NULL != testSuite->list);
+                    //free(testSuite->list);
                 }
+            }
         }
-        freereturn = CuFree(testSuite->list);
+
+
+        freereturn = CuFree(testlist);
         assert(freereturn);
         freereturn = CuReportDestroy(testSuite->report);
         assert(freereturn);

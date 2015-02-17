@@ -26,13 +26,19 @@ struct CuTest_tag
 	jmp_buf *jumpBuf;
 };
 
+typedef struct CuTestPtr_tag{
+    union{
+        CuTest* test;
+        CuSuite* suite;
+    };
+    bool isSuite;
+} CuTestPtr_t;
+
 struct CuSuite_tag
 {
 	size_t testcount;
-	size_t suitecount;
 
-	CuTest** testlist;
-	CuSuite** suitelist;
+	CuTestPtr_t** testlist;
 	size_t failCount;
 	CuReport_t *report;
 };

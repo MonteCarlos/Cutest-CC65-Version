@@ -193,7 +193,7 @@ void TestCuSuiteInit(CuTest* tc)
 {
 	CuSuite *ts = CuSuiteNew();
 	//CuSuiteInit(&ts);
-	CuAssertTrue(tc, ts->count == 0);
+	CuAssertTrue(tc, ts->testcount == 0);
 	CuAssertTrue(tc, ts->failCount == 0);
 
 	CuSuiteDelete(ts);
@@ -202,7 +202,7 @@ void TestCuSuiteInit(CuTest* tc)
 void TestCuSuiteNew(CuTest* tc)
 {
 	CuSuite* ts = CuSuiteNew();
-	CuAssertTrue(tc, ts->count == 0);
+	CuAssertTrue(tc, ts->testcount == 0);
 	CuAssertTrue(tc, ts->failCount == 0);
 
 	CuSuiteDelete(ts);
@@ -219,9 +219,9 @@ void TestCuSuiteAddTest(CuTest* tc)
 	//CuTestInit(&tc2, "MyTest", zTestFails);
 
 	CuSuiteAdd(ts, tc2);
-	CuAssertTrue(tc, ts->count == 1);
+	CuAssertTrue(tc, ts->testcount == 1);
 
-	CuAssertStrEquals(tc, testname, CuStringCStr(ts->list[0]->name));
+	CuAssertStrEquals(tc, testname, CuStringCStr(ts->testlist[0]->test->name));
 
 	CuSuiteDelete(ts);//test is deleted with suite if it is added properly before
 	//CuTestDelete(tc2);
@@ -239,12 +239,12 @@ void TestCuSuiteAddSuite(CuTest* tc)
 	CuSuiteAdd(ts2, CuTestNew("TestFails4", zTestFails));
 
 	CuSuiteAddSuite(ts1, ts2);
-	CuAssertIntEquals(tc, 4, ts1->count);
+	CuAssertIntEquals(tc, 4, ts1->testcount);
 
-	CuAssertStrEquals(tc, "TestFails1", CuStringCStr(ts1->list[0]->name));
-	CuAssertStrEquals(tc, "TestFails2", CuStringCStr(ts1->list[1]->name));
-	CuAssertStrEquals(tc, "TestFails3", CuStringCStr(ts1->list[2]->name));
-	CuAssertStrEquals(tc, "TestFails4", CuStringCStr(ts1->list[3]->name));
+	CuAssertStrEquals(tc, "TestFails1", CuStringCStr(ts1->testlist[0]->test->name));
+	CuAssertStrEquals(tc, "TestFails2", CuStringCStr(ts1->testlist[1]->test->name));
+	CuAssertStrEquals(tc, "TestFails3", CuStringCStr(ts1->testlist[2]->test->name));
+	CuAssertStrEquals(tc, "TestFails4", CuStringCStr(ts1->testlist[3]->test->name));
 
 	CuSuiteDelete(ts1);//also other suites are deleted with deletion of master suite
 	//CuSuiteDelete(ts2);
@@ -263,10 +263,10 @@ void TestCuSuiteRun(CuTest* tc)
 	CuSuiteAdd(ts, tc3);
 	CuSuiteAdd(ts, tc4);
 
-	CuAssertTrue(tc, ts->count == 4);
+	CuAssertTrue(tc, ts->testcount == 4);
 
 	CuSuiteRun(ts);
-	CuAssertTrue(tc, ts->count - ts->failCount == 2);
+	CuAssertTrue(tc, ts->testcount - ts->failCount == 2);
 	CuAssertTrue(tc, ts->failCount == 2);
 
 	CuSuiteDelete(ts);//Deletes also corresponding test cases
@@ -327,9 +327,9 @@ void TestCuSuiteDetails_SingleFail(CuTest* tc)
 
 	CuSuiteRun(ts);
 	CuSuiteDetails(ts, NULL);
-	CuAssertIntEquals(tc, ts->count, ts->report->performedTests);
-	CuAssertIntEquals(tc, ts->count, ts->report->reportedTests);
-	CuAssertIntEquals(tc, ts->count, ts->report->reportedFails);
+	CuAssertIntEquals(tc, ts->testcount, ts->report->performedTests);
+	CuAssertIntEquals(tc, ts->testcount, ts->report->reportedTests);
+	CuAssertIntEquals(tc, ts->testcount, ts->report->reportedFails);
 	CuAssertIntEquals(tc, 0, ts->report->reportedPasses);
 	CuSuiteDelete(ts);
 }
@@ -343,10 +343,10 @@ void TestCuSuiteDetails_SinglePass(CuTest* tc)
 
 	CuSuiteRun(ts);
 	CuSuiteDetails(ts, NULL);
-	CuAssertIntEquals(tc, ts->count, ts->report->performedTests);
-	CuAssertIntEquals(tc, ts->count, ts->report->reportedTests);
+	CuAssertIntEquals(tc, ts->testcount, ts->report->performedTests);
+	CuAssertIntEquals(tc, ts->testcount, ts->report->reportedTests);
 	CuAssertIntEquals(tc, 0, ts->report->reportedFails);
-	CuAssertIntEquals(tc, ts->count, ts->report->reportedPasses);
+	CuAssertIntEquals(tc, ts->testcount, ts->report->reportedPasses);
 	CuSuiteDelete(ts);
 }
 
@@ -360,10 +360,10 @@ void TestCuSuiteDetails_MultiplePasses(CuTest* tc)
 
 	CuSuiteRun(ts);
 	CuSuiteDetails(ts, NULL);
-	CuAssertIntEquals(tc, ts->count, ts->report->performedTests);
-	CuAssertIntEquals(tc, ts->count, ts->report->reportedTests);
+	CuAssertIntEquals(tc, ts->testcount, ts->report->performedTests);
+	CuAssertIntEquals(tc, ts->testcount, ts->report->reportedTests);
 	CuAssertIntEquals(tc, 0, ts->report->reportedFails);
-	CuAssertIntEquals(tc, ts->count, ts->report->reportedPasses);
+	CuAssertIntEquals(tc, ts->testcount, ts->report->reportedPasses);
 	CuSuiteDelete(ts);
 }
 
@@ -377,9 +377,9 @@ void TestCuSuiteDetails_MultipleFails(CuTest* tc)
 
 	CuSuiteRun(ts);
 	CuSuiteDetails(ts, NULL);
-	CuAssertIntEquals(tc, ts->count, ts->report->performedTests);
-	CuAssertIntEquals(tc, ts->count, ts->report->reportedTests);
-	CuAssertIntEquals(tc, ts->count, ts->report->reportedFails);
+	CuAssertIntEquals(tc, ts->testcount, ts->report->performedTests);
+	CuAssertIntEquals(tc, ts->testcount, ts->report->reportedTests);
+	CuAssertIntEquals(tc, ts->testcount, ts->report->reportedFails);
 	CuAssertIntEquals(tc, 0, ts->report->reportedPasses);
 	CuSuiteDelete(ts);
 }
@@ -400,8 +400,8 @@ void TestCuSuiteDetails_PassesAndFails(CuTest* tc)
 
 	CuSuiteRun(ts);
 	CuSuiteDetails(ts, NULL);
-	CuAssertIntEquals(tc, ts->count, ts->report->performedTests);
-	CuAssertIntEquals(tc, ts->count, ts->report->reportedTests);
+	CuAssertIntEquals(tc, ts->testcount, ts->report->performedTests);
+	CuAssertIntEquals(tc, ts->testcount, ts->report->reportedTests);
 	CuAssertIntEquals(tc, 4, ts->report->reportedFails);
 	CuAssertIntEquals(tc, 5, ts->report->reportedPasses);
 	CuSuiteDelete(ts);
@@ -581,6 +581,6 @@ CuSuite* CuGetSuite(void)
 	SUITE_ADD_TEST(suite, TestPrintProgressState);
 	SUITE_ADD_TEST(suite, TestAssertArrayEquals);
 	SUITE_ADD_TEST(suite, TestCuTestFormatReportString);
-	printf("Registered #%d testcases\n", suite->count);
+	printf("Registered #%d testcases\n", suite->testcount);
 	return suite;
 }

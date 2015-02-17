@@ -39,7 +39,7 @@ int RunAllTests(void)
 	NoFails = CuSuiteGetFailcount(suite);
 	CuSuiteDelete(suite);
 	printf("Alloc Count after SuiteDelete:%lu %lu\n", CuAlloc_getAllocCount(), CuAlloc_getFreeCount());
-	CuSuiteSummary(suite, stdout);
+
     return NoFails;
 }
 

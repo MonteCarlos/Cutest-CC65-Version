@@ -4,7 +4,15 @@
 void CuSuiteAddSuite(CuSuite* testSuite, CuSuite* testSuite2)
 {
 	//int i;
-	testSuite -> suitelist[suitecount++] = testSuite2;
+	size_t testcount = testSuite->testcount;
+    size_t residualBytesToNextAlloc = CUTEST_LIST_STORAGERESERVE-testcount % CUTEST_LIST_STORAGERESERVE;
+    register CuTestPtr_t* testlist = testSuite->testlist;
+
+	if ( residualBytesToNextAlloc  == 1 ){
+        testlist = CuRealloc(testlist, (testcount+1+CUTEST_LIST_STORAGERESERVE)*sizeof(CuTestPtr_t));
+	}
+	testlist[testcount].suite = testSuite2;
+	testlist[testcount++].isSuite = true;
 	/*for (i = 0 ; i < testSuite2->count ; ++i)
 	{
 		CuSuiteAdd(testSuite, testSuite2->list[i]);

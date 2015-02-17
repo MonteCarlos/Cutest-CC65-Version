@@ -6,25 +6,27 @@ void CuSuiteRun(CuSuite* testSuite)
 	int i;
 	unsigned long int pendingfrees;
 	CuTest* testCase = NULL;
-	for (i = 0 ; i < testSuite->count ; ++i)
+	for (i = 0 ; i < testSuite->testcount ; ++i)
 	{
+		register CuTestPtr_t *testCase = (testSuite->testlist)[i];
+
 		printf("%d:",i);
-		testCase = testSuite->list[i];
-		fputs(CuStringCStr(testCase->name), stdout);
-
-		pendingfrees = CuAlloc_getPendingFrees();
-		CuTestRun(testCase);
-		if (testCase->failed) {
-			puts("->FAILED");
-			testSuite->failCount += 1;
+		if (testCase->isSuite){
+            CuSuiteRun(testCase->suite);
 		}else{
-			puts("->OK");
-		}
-		CuAssert(testCase, " Memory leak detected!", pendingfrees = CuAlloc_getPendingFrees());
-	}
+            register CuTest *test = testCase->test;
 
-    //Run other suites in test
-	for (i = 0; i< testSuite->suitecount; ++i){
-        CuSuiteRun(testSuite->suitelist[i]);
+            fputs(CuStringCStr(test->name), stdout);
+
+            pendingfrees = CuAlloc_getPendingFrees();
+            CuTestRun(test);
+            if (test->failed) {
+                puts("->FAILED");
+                testSuite->failCount += 1;
+            }else{
+                puts("->OK");
+            }
+            CuAssert(test, " Memory leak detected!", pendingfrees == CuAlloc_getPendingFrees());
+		}
 	}
 }
