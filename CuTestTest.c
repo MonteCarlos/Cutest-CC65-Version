@@ -384,7 +384,6 @@ void TestCuSuiteDetails_MultiplePasses(CuTest* tc)
 	CuSuiteDelete(ts);
 }
 
-// TODO (MyAcer#1#): This function crashes when called from suiteRun. Probably has something to do with CuSuiteAddSuite function
 void TestCuSuiteDetails_MultipleFails(CuTest* tc)
 {
 	CuSuite *ts = CuSuiteNew();
@@ -399,6 +398,7 @@ void TestCuSuiteDetails_MultipleFails(CuTest* tc)
 	CuAssertIntEquals(tc, ts->testcount, ts->report->reportedTests);
 	CuAssertIntEquals(tc, ts->testcount, ts->report->reportedFails);
 	CuAssertIntEquals(tc, 0, ts->report->reportedPasses);
+
 	CuSuiteDelete(ts);
 }
 
@@ -593,12 +593,12 @@ CuSuite* CuGetSuite(void)
 	SUITE_ADD_TEST(suite, TestCuSuiteDetails_SingleFail);
 	SUITE_ADD_TEST(suite, TestCuSuiteDetails_SinglePass);
 	SUITE_ADD_TEST(suite, TestCuSuiteDetails_MultiplePasses);
-	/*SUITE_ADD_TEST(suite, TestCuSuiteDetails_MultipleFails);
+	SUITE_ADD_TEST(suite, TestCuSuiteDetails_MultipleFails);
 	SUITE_ADD_TEST(suite, TestCuSuiteDetails_PassesAndFails);
 	SUITE_ADD_TEST(suite, TestSetProgressStartEnd);
 	SUITE_ADD_TEST(suite, TestPrintProgressState);
 	SUITE_ADD_TEST(suite, TestAssertArrayEquals);
-	SUITE_ADD_TEST(suite, TestCuTestFormatReportString);*/
+	SUITE_ADD_TEST(suite, TestCuTestFormatReportString);
 	printf("Registered #%d testcases\n", suite->testcount);
 	return suite;
 }

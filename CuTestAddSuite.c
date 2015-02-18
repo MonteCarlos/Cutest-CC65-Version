@@ -15,6 +15,7 @@ void CuSuiteAddSuite(CuSuite* testSuite, CuSuite* testSuite2)
 	testlist[testcount].isSuite = true;
 
 	testSuite->testcount += 1;
+	testSuite->testlist = testlist;
 	/*for (i = 0 ; i < testSuite2->count ; ++i)
 	{
 		CuSuiteAdd(testSuite, testSuite2->list[i]);
