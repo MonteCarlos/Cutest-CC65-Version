@@ -8,7 +8,7 @@ void CuSuiteRun(CuSuite* testSuite)
 	CuTest* testCase = NULL;
 	for (i = 0 ; i < testSuite->testcount ; ++i)
 	{
-		register CuTestPtr_t *testCase = (testSuite->testlist)[i];
+		CuTestPtr_t *testCase = &(testSuite->testlist[i]);
 
 		printf("%d:",i);
 		if (testCase->isSuite){

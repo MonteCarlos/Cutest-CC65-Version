@@ -7,9 +7,10 @@ void CuSuiteAdd(CuSuite* testSuite, CuTest *newtest)
     register CuTestPtr_t *testlist = testSuite->testlist;
 
 	if ( residualBytesToNextAlloc  == 1 ){
-        testlist = CuRealloc(testlist, (testcount+1+CUTEST_LIST_STORAGERESERVE)*sizeof(CuTestPtr_t*));
+        testlist = CuRealloc(testlist, (testcount+1+CUTEST_LIST_STORAGERESERVE)*sizeof(CuTestPtr_t));
 	}
 	testlist[testcount].test = newtest;
 	testlist[testcount].isSuite = false;
+	testSuite->testcount+=1;
 	//++testSuite->count;
 }

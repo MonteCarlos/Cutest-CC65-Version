@@ -12,7 +12,9 @@ void CuSuiteAddSuite(CuSuite* testSuite, CuSuite* testSuite2)
         testlist = CuRealloc(testlist, (testcount+1+CUTEST_LIST_STORAGERESERVE)*sizeof(CuTestPtr_t));
 	}
 	testlist[testcount].suite = testSuite2;
-	testlist[testcount++].isSuite = true;
+	testlist[testcount].isSuite = true;
+
+	testSuite->testcount += 1;
 	/*for (i = 0 ; i < testSuite2->count ; ++i)
 	{
 		CuSuiteAdd(testSuite, testSuite2->list[i]);

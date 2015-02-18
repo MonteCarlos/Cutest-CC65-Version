@@ -12,7 +12,7 @@ void CuSuiteDelete(CuSuite *testSuite)
         {
 			register CuTestPtr_t test = testlist[n];
 
-            if (test.test)
+            if (NULL!=test.test)
             {
                 if (test.isSuite){
                     CuSuiteDelete(test.suite);

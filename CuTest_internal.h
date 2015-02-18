@@ -38,7 +38,7 @@ struct CuSuite_tag
 {
 	size_t testcount;
 
-	CuTestPtr_t** testlist;
+	CuTestPtr_t *testlist;
 	size_t failCount;
 	CuReport_t *report;
 };
