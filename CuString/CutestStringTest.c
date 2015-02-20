@@ -49,6 +49,7 @@ void TestCuStringNew(CuTest* tc)
 	CuAssertTrue(tc, 0 == str->length);
 	CuAssertTrue(tc, STRING_MAX == str->size);
 	CuAssertStrEquals(tc, "", str->buffer);
+	CuStringDelete(str);
 }
 
 
@@ -61,6 +62,7 @@ void TestCuStringAppend(CuTest* tc)
 	CuStringAppend(str, " world");
 	CuAssertIntEquals(tc, 11, str->length);
 	CuAssertStrEquals(tc, "hello world", str->buffer);
+	CuStringDelete(str);
 }
 
 
@@ -70,6 +72,7 @@ void TestCuStringAppendNULL(CuTest* tc)
 	CuStringAppend(str, NULL);
 	CuAssertIntEquals(tc, 4, str->length);
 	CuAssertStrEquals(tc, "NULL", str->buffer);
+	CuStringDelete(str);
 }
 
 
@@ -82,6 +85,7 @@ void TestCuStringAppendChar(CuTest* tc)
 	CuStringAppendChar(str, 'd');
 	CuAssertIntEquals(tc, 4, str->length);
 	CuAssertStrEquals(tc, "abcd", str->buffer);
+	CuStringDelete(str);
 }
 
 
@@ -100,6 +104,7 @@ void TestCuStringInserts(CuTest* tc)
 	CuStringInsert(str, "!", 11);
 	CuAssertIntEquals(tc, 12, str->length);
 	CuAssertStrEquals(tc, "hello world!", str->buffer);
+	CuStringDelete(str);
 }
 
 
@@ -113,6 +118,7 @@ void TestCuStringResizes(CuTest* tc)
 	}
 	CuAssertTrue(tc, STRING_MAX * 2 == str->length);
 	CuAssertTrue(tc, STRING_MAX * 2 <= str->size);
+	CuStringDelete(str);
 }
 
 /*-------------------------------------------------------------------------*
@@ -122,8 +128,9 @@ void TestCuStringResizes(CuTest* tc)
 void TestCuStrCopy(CuTest* tc)
 {
 	const char* old = "hello world";
-	const char* newStr = CuStrCopy(old);
+	char* newStr = CuStrCopy(old);
 	CuAssert(tc, "old is new", strcmp(old, newStr) == 0);
+	CuFree(newStr);
 }
 
 
@@ -140,8 +147,12 @@ void TestCuStringAppendFormat(CuTest* tc)
 	/* buffer limit raised to HUGE_STRING_LEN so no overflow */
 
 	CuAssert(tc, "length of str->buffer is 300", 300 == strlen(str->buffer));
+	CuStringDelete(str);
+	CuFree(text);
+
 }
 
+// TODO (MyAcer#1#): strEquals functions belong in CuTest not CuString
 void TestAssertStrEquals(CuTest* tc)
 {
 	jmp_buf buf;
@@ -163,6 +174,7 @@ void TestAssertStrEquals(CuTest* tc)
 	}
 	CuAssertTrue(tc, tc2->failed);
 	//CompareAsserts(tc, "CuAssertStrEquals failed", expectedMsg, tc2->message);
+	CuTestDelete(tc2);
 }
 
 void TestAssertStrEquals_NULL(CuTest* tc)
@@ -183,6 +195,7 @@ void TestAssertStrEquals_NULL(CuTest* tc)
 	}
 	CuAssertTrue(tc, !tc2->failed);
 	//compareasserts(tc, "CuAssertStrEquals_NULL failed", NULL, tc2->message);
+	CuTestDelete(tc2);
 }
 
 void TestAssertStrEquals_FailNULLStr(CuTest* tc)
@@ -206,6 +219,7 @@ void TestAssertStrEquals_FailNULLStr(CuTest* tc)
 	}
 	CuAssertTrue(tc, tc2->failed);
 	//compareasserts(tc, "CuAssertStrEquals_FailNULLStr failed", expectedMsg, tc2->message);
+	CuTestDelete(tc2);
 }
 
 void TestAssertStrEquals_FailStrNULL(CuTest* tc)
@@ -229,6 +243,7 @@ void TestAssertStrEquals_FailStrNULL(CuTest* tc)
 	}
 	CuAssertTrue(tc, tc2->failed);
 	//compareasserts(tc, "CuAssertStrEquals_FailStrNULL failed", expectedMsg, tc2->message);
+	CuTestDelete(tc2);
 }
 
 void TestCuStringlen(CuTest *tc){
@@ -236,6 +251,7 @@ void TestCuStringlen(CuTest *tc){
 	CuString *str = CuStringConvertCStr(teststr);
 
 	CuAssert( tc, "Strlen err", 0 == CuStringlen(str) - strlen(teststr) );
+	CuStringDelete(str);
 }
 
 // TODO (Stefan#1#): Implement test case!
@@ -248,19 +264,21 @@ void TestCuStringsize(CuTest *tc){
 	CuString *str = CuStringConvertCStr(teststr);
 	CuStringResize(str, strlen(teststr));
 	CuAssert( tc, "Strsize err", 0 == CuStringsize(str) - strlen(teststr) );
+	CuStringDelete(str);
 }
 
 void TestCuStringCStr(CuTest *tc){
-	CuString str;
+	CuString *str = CuStringNew();
 	const char *desiredStr = "This is a test.";
-	CuStringInit(&str);
-	CuStringAppend(&str, desiredStr);
+	//CuStringInit(&str);
+	CuStringAppend(str, desiredStr);
 	CuAssertStrEquals(tc,
-					(const char*)CuStringCStr(&str),
+					(const char*)CuStringCStr(str),
 					(const char*)desiredStr);
 					//check string content
-	CuAssert( tc, "Strlen err", 0 == strlen(desiredStr) - str.length );//check length of string up to \0
-	CuAssert( tc, "Strsize err", 0 == STRING_MAX - str.size );//check occupied memory
+	CuAssert( tc, "Strlen err", 0 == strlen(desiredStr) - str->length );//check length of string up to \0
+	CuAssert( tc, "Strsize err", 0 == STRING_MAX - str->size );//check occupied memory
+	CuStringDelete(str);
 }
 
 void TestCuStringAppendLineFile(CuTest *tc){
@@ -280,6 +298,8 @@ void TestCuStringAppendLineFile(CuTest *tc){
 
 	CuAssertStrEquals(tc, expected, CuStringCStr(str));
 	free(expected);
+	CuStringDelete(str);
+	CuStringDelete(thisline);
 }
 void TestCuStringAppendISvsNOT(CuTest *tc){
     enum {TestISvsNOT_MAXSTRLEN = 100};
@@ -290,10 +310,11 @@ void TestCuStringAppendISvsNOT(CuTest *tc){
     char* tempstr = malloc(TestISvsNOT_MAXSTRLEN);
 
     CuStringAppendISvsNOT(str, "%d", desired, actual);
-    snprintf(tempstr, TestISvsNOT_MAXSTRLEN, "%sIS \"%d\" NOT \"%d\"", leadstr, desired, actual);
+    snprintf(tempstr, TestISvsNOT_MAXSTRLEN, "%sis \"%d\" not \"%d\"", leadstr, desired, actual);
     CuAssertStrEquals(tc, tempstr, CuStringCStr(str));
 
     free(tempstr);
+    CuStringDelete(str);
 }
 
 /*void TestCuStringComposeMessage(CuTest *tc){
@@ -331,6 +352,7 @@ void TestCuStringAppendULong(CuTest *tc){
 	CuString *str = CuStringNew();
 	CuStringAppendULong(str, num);
 	CuAssertStrEquals(tc, numStr, CuStringCStr(str));
+	CuStringDelete(str);
 }
 
 void TestCuStringConvertCStr(CuTest *tc){
@@ -339,9 +361,41 @@ void TestCuStringConvertCStr(CuTest *tc){
 	CuAssertStrEquals(tc, testtext, CuStringCStr(str));
 
 	testtext = NULL;
+	CuStringDelete(str);
+
 	str = CuStringConvertCStr(testtext);
 	CuAssertStrEquals(tc, "NULL", CuStringCStr(str));
+	CuStringDelete(str);
 }
+
+bool helper_TestCuStringAppendVariadicFormat(CuString *str, char* format, ...){
+    va_list va;
+
+    va_start(va, format);
+    CuStringAppendVariadicFormat(str, format, va);
+    va_end(va);
+    return false;
+}
+
+void TestCuStringAppendVariadicFormat(CuTest *tc){
+    int myInt = -543;
+    char* myStr = "test!";
+    char myChar = '#';
+
+	char* format = "Int:%d, Str:%s, Char:%c";
+	CuString *str = CuStringNew();
+	CuString *str2 = CuStringNew();
+
+	bool err = helper_TestCuStringAppendVariadicFormat(str, format, myInt, myStr, myChar);
+	CuStringAppendFormat(str2, format, myInt, myStr, myChar);
+
+	CuAssertStrEquals(tc, CuStringCStr(str2), CuStringCStr(str));
+    CuAssertFalse(tc, err);
+
+	CuStringDelete(str);
+	CuStringDelete(str2);
+}
+
 /*-------------------------------------------------------------------------*
  * main
  *-------------------------------------------------------------------------*/
@@ -351,9 +405,9 @@ CuSuite* CuGetSuite(void)
 	CuSuite* suite = CuSuiteNew();
 
 	SUITE_ADD_TEST(suite, TestCuStrCopy);
-	SUITE_ADD_TEST(suite, TestAssertStrEquals);
+	//SUITE_ADD_TEST(suite, TestAssertStrEquals);
 
-	SUITE_ADD_TEST(suite, TestAssertStrEquals_NULL);
+	//SUITE_ADD_TEST(suite, TestAssertStrEquals_NULL);
 	//SUITE_ADD_TEST(suite, TestAssertStrEquals_FailStrNULL);
 	//SUITE_ADD_TEST(suite, TestAssertStrEquals_FailNULLStr);
 
@@ -380,6 +434,7 @@ CuSuite* CuStringGetSuite(void)
 	SUITE_ADD_TEST(suite, TestCuStringsize);
 	SUITE_ADD_TEST(suite, TestCuStringClear);
     SUITE_ADD_TEST(suite, TestCuStringAppendISvsNOT);
+    SUITE_ADD_TEST(suite, TestCuStringAppendVariadicFormat);
 	//alle OK
 
 	return suite;

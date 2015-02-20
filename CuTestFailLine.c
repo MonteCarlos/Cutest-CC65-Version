@@ -9,7 +9,7 @@ void CuFail_Line(CuTest* tc, const char* file, int line, const char* message, co
         CuStringAppendChar(tc->message,'\n');
 	}
 	CuTestGenerateMessage(tc->message, message, message2, file, line);
-	tc->failed = 1;
+	tc->failed = true;
 	//tc->message = string;
 	/*if (message2 != NULL)
 	{

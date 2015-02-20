@@ -434,6 +434,35 @@ void TestFail(CuTest* tc)
 	CuTestDelete(tc2);
 }
 
+bool arrayprovider(size_t index, void *expected){
+    *((int*)expected) = index*3+5;
+    return false;
+}
+
+void TestAssertArrayEqualsStepFunc(CuTest* tc)
+{
+	//Create new test so that failed test does not appear in final statistics
+	CuTest *tc2 = CuTestNew("ArrayEquals", TestPasses);
+	int array1[] = {5,8,11,14,17};
+    int array2[] = {5,8,13,14,7};
+
+	//77const char* expected = "expected <42> but was <32>";
+	//const char* expectedMsg = "some text: expected <42> but was <32>";
+	bool assertResult = CuAssertArrayEqualsStepFunc(tc2, arrayprovider, array1, sizeof(array1[0]), sizeof(array1)/sizeof(array1[0]));
+
+	//However, the tests of the results of the previous test should appear in the final statistics
+	CuAssertFalse(tc, assertResult);
+	CuAssertFalse(tc, tc2->failed);
+    //CuTestRun(tc2);
+	assertResult = CuAssertArrayEqualsStepFunc(tc2, arrayprovider, array2, sizeof(array2[0]), sizeof(array2)/sizeof(array2[0]));
+
+	//However, the tests of the results of the previous test should appear in the final statistics
+	CuAssertTrue(tc, assertResult);
+	CuAssertTrue(tc, tc2->failed);
+
+	CuTestDelete(tc2);
+}
+
 void TestAssertArrayEquals(CuTest* tc)
 {
 	//Create new test so that failed test does not appear in final statistics
@@ -462,29 +491,17 @@ void TestAssertArrayEquals(CuTest* tc)
 
 void TestAssertIntEquals(CuTest* tc)
 {
-	//jmp_buf buf;
-
 	//Create new test so that failed test does not appear in final statistics
 	CuTest *tc2 = CuTestNew("IntEquals", zTestFails);
 	//77const char* expected = "expected <42> but was <32>";
 	//const char* expectedMsg = "some text: expected <42> but was <32>";
 	bool assertResult = CuAssertIntEquals(tc2, 42, 32);
 
-	//tc2->jumpBuf = &buf;
-	//if (setjmp(buf) == 0)
-	//{
-
-	//}
-
-	//However, the tests of the results of the previous test should appear in the final statistics
 	CuAssertTrue(tc, assertResult);
 	CuAssertTrue(tc, tc2->failed);
-	//CompareAsserts(tc, "CuAssertIntEquals failed", expected, tc2->message);
-	//if (setjmp(buf) == 0)
-	//{
-		assertResult = CuAssertIntEquals_Msg(tc2, "Ints not equal", 42, 32);
-		CuAssertTrue(tc, assertResult);
-	//}
+
+	assertResult = CuAssertIntEquals_Msg(tc2, "Ints not equal", 42, 32);
+	CuAssertTrue(tc, assertResult);
 	CuAssertTrue(tc, tc2->failed);
 	//CompareAsserts(tc, "CuAssertStrEquals failed", expectedMsg, tc2->message);
 	CuTestDelete(tc2);
@@ -560,28 +577,54 @@ void TestAssertIntEquals(CuTest* tc)
     CuTestSetProgressStartEnd(en, st);
 
  }
+
+ void TestAppendMessage(CuTest *tc){
+    CuTest* t = CuTestNew("new test", TestPasses);
+
+    CuTestAppendMessage(t, "%s:%d:%c", "text", 100, '#');
+    CuAssertStrEquals(tc, "text:100:#", CuStringCStr(t->message));
+    CuTestDelete(t);
+ }
+
 /*-------------------------------------------------------------------------*
  * main
  *-------------------------------------------------------------------------*/
 
-CuSuite* CuGetSuite(void)
-{
-	CuSuite* suite;
-	suite = CuSuiteNew();
-    printf("Alloc Count after SuiteNew:%lu %lu\n", CuAlloc_getAllocCount(), CuAlloc_getFreeCount());
-	SUITE_ADD_TEST(suite, TestFail);
-    printf("Alloc Count after ADD_TEST:%lu %lu\n", CuAlloc_getAllocCount(), CuAlloc_getFreeCount());
-	SUITE_ADD_TEST(suite, TestAssertIntEquals);
+CuSuite* CuGetAssertTests(void){
+    CuSuite* suite = CuSuiteNew();
 
-	SUITE_ADD_TEST(suite, TestCuTestNew);
-	SUITE_ADD_TEST(suite, TestCuTestInit);
-
-	SUITE_ADD_TEST(suite, TestCuAssert);
+    SUITE_ADD_TEST(suite, TestAssertIntEquals);
+    SUITE_ADD_TEST(suite, TestCuAssert);
 	SUITE_ADD_TEST(suite, TestCuAssertPtrEquals_Success);
 	SUITE_ADD_TEST(suite, TestCuAssertPtrEquals_Failure);
 
 	SUITE_ADD_TEST(suite, TestCuAssertPtrNotNull_Success);
 	SUITE_ADD_TEST(suite, TestCuAssertPtrNotNull_Failure);
+
+	SUITE_ADD_TEST(suite, TestAssertArrayEquals);
+	SUITE_ADD_TEST(suite, TestAssertArrayEqualsStepFunc);
+    return suite;
+}
+
+CuSuite* CuGetOtherTests(void){
+    CuSuite* suite = CuSuiteNew();
+    SUITE_ADD_TEST(suite, TestSetProgressStartEnd);
+	SUITE_ADD_TEST(suite, TestPrintProgressState);
+	SUITE_ADD_TEST(suite, TestCuTestFormatReportString);
+	SUITE_ADD_TEST(suite, TestAppendMessage);
+    return suite;
+}
+
+CuSuite* CuGetSuiteTests(void)
+{
+	CuSuite* suite = CuSuiteNew();
+    printf("Alloc Count after SuiteNew:%lu %lu\n", CuAlloc_getAllocCount(), CuAlloc_getFreeCount());
+	SUITE_ADD_TEST(suite, TestFail);
+    printf("Alloc Count after ADD_TEST:%lu %lu\n", CuAlloc_getAllocCount(), CuAlloc_getFreeCount());
+
+	SUITE_ADD_TEST(suite, TestCuTestNew);
+	SUITE_ADD_TEST(suite, TestCuTestInit);
+
 	SUITE_ADD_TEST(suite, TestCuTestRun);
 
 	SUITE_ADD_TEST(suite, TestCuSuiteInit);
@@ -595,10 +638,8 @@ CuSuite* CuGetSuite(void)
 	SUITE_ADD_TEST(suite, TestCuSuiteDetails_MultiplePasses);
 	SUITE_ADD_TEST(suite, TestCuSuiteDetails_MultipleFails);
 	SUITE_ADD_TEST(suite, TestCuSuiteDetails_PassesAndFails);
-	SUITE_ADD_TEST(suite, TestSetProgressStartEnd);
-	SUITE_ADD_TEST(suite, TestPrintProgressState);
-	SUITE_ADD_TEST(suite, TestAssertArrayEquals);
-	SUITE_ADD_TEST(suite, TestCuTestFormatReportString);
+
+
 	printf("Registered #%d testcases\n", suite->testcount);
 	return suite;
 }

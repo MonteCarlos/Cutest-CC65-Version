@@ -166,6 +166,9 @@
 		<Unit filename="CuTestNew.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="CuTestOutputResult.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="CuTestReportDestroy.c">
 			<Option compilerVar="CC" />
 		</Unit>

@@ -7,6 +7,8 @@ bool CuAssertArrayEqualsStepFunc_LineMsg(CuTest* tc, const char* file, int line,
     size_t i=0,j=0;
     size_t arrayIndex = 0;
 	void* expected = CuAlloc(elementsize);
+    bool error = false;
+    uint8_t expectedelement, actualelement;
 
     if (0 == elementsize) {
         CuFail_Line(tc, file, line, "0==elementsize", NULL);
@@ -18,15 +20,21 @@ bool CuAssertArrayEqualsStepFunc_LineMsg(CuTest* tc, const char* file, int line,
     }
 
     for (j = 0; j < len; ++j){
+        if ( stepfunc(j, expected) ){
+            CuFail_Line(tc, file, line, "Callback failed at pos ", NULL);
+            CuTestAppendMessage(tc, "%d.", j);
+
+            error = true;
+            break;
+        }
         for (i = 0; i < elementsize; ++i){
-			if ( !stepfunc(j, expected) ){
-				CuFail_Line(tc, file, line, "Callback failed at pos ", NULL);
-				CuTestAppendMessage(tc, "%d.", j);
-				goto endfunc;
-			}
-            if ( ((uint8_t*)expected)[arrayIndex] != ((uint8_t*)actual)[arrayIndex] ){
+            expectedelement = ((uint8_t*)expected)[i];
+            actualelement = ((uint8_t*)actual)[arrayIndex];
+            if (  expectedelement != actualelement ){
                 CuFail_Line(tc, file, line, "Arrays not equal at pos ", NULL);
-                CuTestAppendMessage(tc, "%d.", j);
+                CuTestAppendMessage(tc, "%u(%u).", j,i);
+                CuStringAppendISvsNOT(tc->message, "%d", (int)expectedelement, (int)actualelement);
+                error = true;
                 goto endfunc;
             }
             arrayIndex += 1;
@@ -35,6 +43,6 @@ bool CuAssertArrayEqualsStepFunc_LineMsg(CuTest* tc, const char* file, int line,
 	endfunc:
 
 	CuFree(expected);
-	return false;
+	return error;
 }
 
