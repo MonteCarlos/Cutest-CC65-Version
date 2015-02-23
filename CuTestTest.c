@@ -295,10 +295,10 @@ void TestCuSuiteSummary(CuTest* tc)
 	size_t runs = 10, passes = 7, fails = 3;
 	char buf[100];
 	char buf2[100];
+    FILE *file = fopen("summarytest.txt", "w");
 
     //Imitate generation of result string by providing mock values
 	CuTestFormatReportString(ts->report->reportStr, runs, passes, fails);
-    FILE* file = fopen("summarytest.txt", "w");
     //Check fopen OK
     if (NULL == file) {
         perror(NULL);

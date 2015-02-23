@@ -7,18 +7,19 @@
 		<Option compiler="cc65" />
 		<Build>
 			<Target title="Debug">
-				<Option output="../../CutestString-cc65Dbg.lib" prefix_auto="0" extension_auto="0" />
+				<Option output="CutestString-cc65Dbg.lib" prefix_auto="0" extension_auto="0" />
 				<Option working_dir="" />
 				<Option object_output="obj/Debug/" />
 				<Option type="2" />
 				<Option compiler="cc65" />
 				<Linker>
 					<Add option="-C CutestString-cc65.cfg" />
-					<Add library="..\..\libcutest-cc65_Dbg.lib" />
+					<Add library="..\libcutest-cc65_Dbg.lib" />
+					<Add library="..\CuAlloc\CuAllocDbg.lib" />
 				</Linker>
 			</Target>
 			<Target title="Release">
-				<Option output="../../CutestString_cc65.lib" prefix_auto="0" extension_auto="0" />
+				<Option output="CutestString_cc65.lib" prefix_auto="0" extension_auto="0" />
 				<Option working_dir="" />
 				<Option object_output="obj/Release/" />
 				<Option type="2" />
@@ -28,7 +29,8 @@
 				</Compiler>
 				<Linker>
 					<Add option="-C CutestString-cc65.cfg" />
-					<Add library="..\..\libcutest-cc65.lib" />
+					<Add library="..\libcutest-cc65.lib" />
+					<Add library="..\CuAlloc\CuAlloc.lib" />
 				</Linker>
 			</Target>
 			<Target title="Selftest">
@@ -39,8 +41,9 @@
 				<Option use_console_runner="0" />
 				<Linker>
 					<Add option="-C CutestString-cc65.cfg" />
-					<Add library="..\..\cutest-cc65_Dbg.lib" />
-					<Add library="..\..\CutestString-cc65Dbg.lib" />
+					<Add library="..\cutest-cc65_Dbg.lib" />
+					<Add library="..\CuAlloc\CuAllocDbg.lib" />
+					<Add library=".\CutestString-cc65Dbg.lib" />
 				</Linker>
 			</Target>
 			<Target title="gccDebug">

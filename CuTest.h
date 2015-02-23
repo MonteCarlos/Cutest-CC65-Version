@@ -37,11 +37,13 @@ bool CuAssertIntEquals_LineMsg(CuTest* tc,
 	double expected, double actual, double delta);*/
 bool CuAssertPtrEquals_LineMsg(CuTest* tc,
 	const char* file, int line, const char* message,
-	void* expected, void* actual);
+	const void* expected, const void* actual);
 bool CuAssertArrayEquals_LineMsg(CuTest* tc, const char* file, int line, const char* message,
-	void* expected, void* actual, size_t elementsize, size_t len);
+	const void* expected, const void* actual, size_t elementsize, size_t len);
 bool CuAssertArrayEqualsStepFunc_LineMsg(CuTest* tc, const char* file, int line, const char* message,
-	bool (*stepfunc)(size_t index, void* expected), void* actual, size_t elementsize, size_t len);
+	bool (*stepfunc)(size_t index, void* expected), const void* actual, size_t elementsize, size_t len);
+bool CuAssertArrayElementsConstant_LineMsg(CuTest* tc, const char* file, int line, const char* message,
+	const void* expected, const void* actual, size_t elementsize, size_t len);
 
 /* public assert functions */
 
@@ -64,21 +66,28 @@ bool CuAssertArrayEqualsStepFunc_LineMsg(CuTest* tc, const char* file, int line,
 #define CuAssertArrayEquals_Msg(tc,ms,ex,ac,elemsize,len)    CuAssertArrayEquals_LineMsg((tc),__FILE__,__LINE__,(ms),(ex),(ac),elemsize,len)
 #define CuAssertArrayEqualsStepFunc(tc,func,ac,elemsize,len)           CuAssertArrayEqualsStepFunc_LineMsg((tc),__FILE__,__LINE__,#ac,(func),(ac),elemsize,len)
 #define CuAssertArrayEqualsStepFunc_Msg(tc,ms,func,ac,elemsize,len)    CuAssertArrayEqualsStepFunc_LineMsg((tc),__FILE__,__LINE__,(ms),(func),(ac),elemsize,len)
+#define CuAssertArrayElementsConstant(tc,ex,ac,elemsize,len)           CuAssertArrayElementsConstant_LineMsg((tc),__FILE__,__LINE__,#ac,(ex),(ac),elemsize,len)
+#define CuAssertArrayElementsConstant_Msg(tc,ms,ex,ac,elemsize,len)    CuAssertArrayElementsConstant_LineMsg((tc),__FILE__,__LINE__,(ms),(ex),(ac),elemsize,len)
 
 #define CuAssertPtrNotNull(tc,p)        CuAssert_Line((tc),__FILE__,__LINE__,"null pointer unexpected",((p) != NULL))
 #define CuAssertPtrNotNullMsg(tc,msg,p) CuAssert_Line((tc),__FILE__,__LINE__,(msg),((p) != NULL))
 
 #define CUSUITE_OPEN(suite) CuSuite* suite = CuSuiteNew()
 #define CUSUITE_CLOSE(suite) CuSuiteDelete(suite)
-#define CUTEST(func) void test_##func(CuTest *tc)
+
+#define CUEVAL(x) (x)
+#define CUCONCAT(a,b) a##b
+#define CUTEST(func) void CUCONCAT(test_,func)(CuTest *tc)
+#define TESTNAME(func) CUCONCAT(test_,func)
 
 /* CuSuite */
 
 #define CUTEST_LIST_STORAGERESERVE	20
 #define CUSUITE_LIST_STORAGERESERVE	10
 
-#define SUITE_ADD_TEST(SUITE,TEST)	CuSuiteAdd(SUITE, CuTestNew(#TEST, TEST))
+#define SUITE_ADD_TEST(SUITE,TEST)	CuSuiteAdd(SUITE, CuTestNew(SAVECUSTRINGIFY(TEST), TEST))
 #define SUITE_ADD_SUITE(SUITE1, SUITE2) CuSuite* SUITE2 = CuSuiteNew();CuSuiteAddSuite(SUITE1, SUITE2)
+#define CUTEST_ADD(SUITE,TEST) CuSuiteAdd(SUITE, CuTestNew(SAVECUSTRINGIFY(TESTNAME(TEST)), TEST))
 
 void CuSuiteInit(CuSuite* testSuite);
 CuSuite* CuSuiteNew(void);

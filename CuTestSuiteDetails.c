@@ -14,11 +14,11 @@ void CuSuiteDetails(CuSuite* testSuite, FILE* file)
 
 	for (i = 0 ; i < testSuite->testcount ; ++i)
     {
-        CuTestPtr_t testCase = testlist[i];
-        if (testCase.isSuite){
-            CuSuiteDetails(testCase.suite, file);
+        register CuTestPtr_t *testCase = &testlist[i];
+        if (testCase->isSuite){
+            CuSuiteDetails(testCase->suite, file);
         }else{
-            register CuTest *test = testCase.test;
+            register CuTest *test = testCase->test;
             if (test->failed)
             {
                 CuTestFprintf(file, "%s: %s\n", CuStringCStr(test->message), CuStringCStr(test->name));
