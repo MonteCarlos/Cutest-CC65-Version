@@ -87,7 +87,7 @@ bool CuAssertArrayElementsConstant_LineMsg(CuTest* tc, const char* file, int lin
 
 #define SUITE_ADD_TEST(SUITE,TEST)	CuSuiteAdd(SUITE, CuTestNew(SAVECUSTRINGIFY(TEST), TEST))
 #define SUITE_ADD_SUITE(SUITE1, SUITE2) CuSuite* SUITE2 = CuSuiteNew();CuSuiteAddSuite(SUITE1, SUITE2)
-#define CUTEST_ADD(SUITE,TEST) CuSuiteAdd(SUITE, CuTestNew(SAVECUSTRINGIFY(TESTNAME(TEST)), TEST))
+#define CUTEST_ADD(SUITE,TEST) CuSuiteAdd(SUITE, CuTestNew(SAVECUSTRINGIFY(TESTNAME(TEST)), TESTNAME(TEST)))
 
 void CuSuiteInit(CuSuite* testSuite);
 CuSuite* CuSuiteNew(void);

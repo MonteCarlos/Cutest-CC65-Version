@@ -3,7 +3,7 @@
 // TODO (MyAcer#1#): find solution for messed output with sub tests
 void CuSuiteRun(CuSuite* testSuite)
 {
-	int i;
+	size_t i;
 	unsigned long int pendingfrees;
 	CuTest* testCase = NULL;
 	for (i = 0 ; i < testSuite->testcount ; ++i)
@@ -26,7 +26,9 @@ void CuSuiteRun(CuSuite* testSuite)
             }else{
                 puts("->OK");
             }
-            CuAssert(test, " Memory leak detected!", pendingfrees == CuAlloc_getPendingFrees());
+            CuAssert(test, " Memory leak detected in \"", pendingfrees == CuAlloc_getPendingFrees());
+            CuTestAppendMessage(test, "%s\". Pending frees before: %u, after: %u\n",
+                            CuStringCStr(test->name), pendingfrees, CuAlloc_getPendingFrees());
 		}
 	}
 }

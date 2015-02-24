@@ -36,7 +36,7 @@ void CuTestReservePrintPositions(void){
 
 int CuTestPrintProgressState(unsigned long int current, unsigned long int interleave){
     int percent;
-    static int call = 0;
+    static unsigned long int call = 0;
 
 
     if (0 != progressrange){

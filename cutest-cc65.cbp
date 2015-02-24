@@ -99,7 +99,7 @@
 		</Build>
 		<VirtualTargets>
 			<Add alias="All, selftest contained" targets="CC65Debug;CC65Release;CC65Selftest;" />
-			<Add alias="gccall" targets="Debug;Selftest;" />
+			<Add alias="gccall" targets="Debug;Selftest;Release;" />
 		</VirtualTargets>
 		<ExtraCommands>
 			<Add before="cmd /c echo %CC65_HOME%" />
@@ -125,6 +125,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="CuTestAppendMessage.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="CuTestAssertArrayElementsConstant.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="CuTestAssertArrayEqualsLineMsg.c">
