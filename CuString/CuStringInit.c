@@ -6,7 +6,7 @@
 //#include <math.h>
 
 #include "CutestString_internal.h"
-void CuStringInit(CuString* str)
+void CuStringInit(register CuString* str)
 {
 	str->length = 0;
 	str->size = STRING_MAX;

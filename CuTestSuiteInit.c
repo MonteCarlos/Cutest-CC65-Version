@@ -1,6 +1,6 @@
 #include "CuTest_internal.h"
 
-void CuSuiteInit(CuSuite* testSuite)
+void CuSuiteInit(register CuSuite* testSuite)
 {
 	testSuite->testcount = 0;
 	testSuite->failCount = 0;

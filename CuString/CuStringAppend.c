@@ -6,7 +6,7 @@
 
 #include "CutestString_internal.h"
 
-void CuStringAppend(CuString* str, const char* text)
+void CuStringAppend(register CuString* str, const char* text)
 {
 	int length;
 

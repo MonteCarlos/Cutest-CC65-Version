@@ -23,6 +23,9 @@ int CuStringAppendISvsNOT(CuString *str, const char* format,...){
     }else if (!strcmp(format, "%u")){
         unsigned int is = va_arg(va, unsigned int), isnot = va_arg(va, unsigned int);
         CuStringAppendFormat(str, tempstr, isnot, is);
+    }else if (!strcmp(format, "%p")){
+        uintptr_t is = va_arg(va, uintptr_t), isnot = va_arg(va, uintptr_t);
+        CuStringAppendFormat(str, tempstr, isnot, is);
     }
 
     va_end(va);

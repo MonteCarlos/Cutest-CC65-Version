@@ -18,9 +18,9 @@ void testCuFree(CuTest* tc){
 void testCuCalloc(CuTest* tc){
     int intArray[] = {100,200,300,400,500,23};
     int *ptr2IntArray = CuCalloc(sizeof(intArray));
-
+    int8_t i;
     //Test, if block is empty
-    for (int8_t i = sizeof(intArray)/sizeof(*intArray)-1; i>0; --i){
+    for ( i = sizeof(intArray)/sizeof(*intArray)-1; i>0; --i){
         if (0 != ptr2IntArray[i]){
             CuFail_Msg(tc, "Buf not empty");
             CuTestAppendMessage(tc, " at pos %d",i);

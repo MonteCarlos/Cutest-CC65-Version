@@ -13,7 +13,7 @@
 #include "CuTestTest.h"
 #include "CuAlloc\CuAlloc.h"
 
-#define CUTEST_STR_SUMMARY(runs, passes, fails) "Runs:%u, Passes:%u, Fails:%u\n", runs, passes, fails
+#define CUTEST_STR_SUMMARY(runs, passes, fails, leaks) "Runs:%u, Passes:%u, Fails:%u, Leaks:%u\n", runs, passes, fails, leaks
 
 struct CuTest_tag
 {
@@ -22,6 +22,7 @@ struct CuTest_tag
 	bool failed;
 	bool ran;
 	bool reported;
+	bool memoryleak;
 	CuString *message;
 	jmp_buf *jumpBuf;
 };

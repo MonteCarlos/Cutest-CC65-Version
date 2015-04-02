@@ -49,7 +49,7 @@ bool CuAssertArrayElementsConstant_LineMsg(CuTest* tc, const char* file, int lin
 
 
 #define CuFail(tc)                            CuFail_Line(  (tc), __FILE__, __LINE__, NULL, NULL)
-#define CuFail_Msg(tc, ms)                    CuFail_Line(  (tc), __FILE__, __LINE__, NULL, (ms))
+#define CuFail_Msg(tc, ms)                    CuFail_Line(  (tc), __FILE__, __LINE__, (ms), NULL)
 #define CuAssert(tc, ms, cond)                CuAssert_Line((tc), __FILE__, __LINE__, (ms), (cond))
 #define CuAssertTrue(tc, cond)                CuAssert_Line((tc), __FILE__, __LINE__, "assert failed", (cond))
 #define CuAssertFalse(tc, cond)               CuAssert_Line((tc), __FILE__, __LINE__, "assert failed", !(cond))
@@ -107,6 +107,6 @@ size_t CuSuiteGetFailcount(CuSuite* testSuite);
 size_t CuSuiteGetTestcount(CuSuite* testSuite);
 CuReport_t *CuReportNew(void);
 bool CuReportDestroy(CuReport_t *rep);
-int CuTestFormatReportString(CuString *str, size_t runs, size_t passes, size_t fails);
+int CuTestFormatReportString(CuString *str, size_t runs, size_t passes, size_t fails, size_t leaks);
 
 #endif /* CU_TEST_H */

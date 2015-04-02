@@ -20,7 +20,7 @@ bool CuAssertArrayEquals_LineMsg(CuTest* tc, const char* file, int line, const c
         for (i = 0; i < elementsize; ++i){
             if ( ((uint8_t*)expected)[arrayIndex] != ((uint8_t*)actual)[arrayIndex] ){
                 CuFail_Line(tc, file, line, "Arrays not equal at pos ", NULL);
-                CuTestAppendMessage(tc, "%d.", j);
+                CuTestAppendMessage(tc, "%d/%d (%d/%d).", j,i,((uint8_t*)expected)[arrayIndex],((uint8_t*)actual)[arrayIndex]);
                 return true;
             }
             arrayIndex += 1;

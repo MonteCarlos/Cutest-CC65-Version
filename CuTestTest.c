@@ -292,13 +292,13 @@ void TestCuSuiteRun(CuTest* tc)
 void TestCuSuiteSummary(CuTest* tc)
 {
 	CuSuite *ts = CuSuiteNew();
-	size_t runs = 10, passes = 7, fails = 3;
+	size_t runs = 10, passes = 7, fails = 3, leaks = 5;
 	char buf[100];
 	char buf2[100];
     FILE *file = fopen("summarytest.txt", "w");
 
     //Imitate generation of result string by providing mock values
-	CuTestFormatReportString(ts->report->reportStr, runs, passes, fails);
+	CuTestFormatReportString(ts->report->reportStr, runs, passes, fails, leaks);
     //Check fopen OK
     if (NULL == file) {
         perror(NULL);
@@ -315,7 +315,7 @@ void TestCuSuiteSummary(CuTest* tc)
         CuFail_Msg(tc, "fopen error");
         goto cleanup;
     }
-	snprintf(buf, sizeof(buf)-1, CUTEST_STR_SUMMARY(runs, passes, fails));
+	snprintf(buf, sizeof(buf)-1, CUTEST_STR_SUMMARY(runs, passes, fails, leaks));
 	fgets(buf2,strlen(buf)+1,file);
 	CuAssertStrEquals(tc, buf, buf2);
 
@@ -327,11 +327,11 @@ void TestCuSuiteSummary(CuTest* tc)
 void TestCuTestFormatReportString(CuTest* tc)
 {
 	CuSuite *ts = CuSuiteNew();
-	size_t runs = 10, passes = 7, fails = 3;
+	size_t runs = 10, passes = 7, fails = 3, leaks = 5;
 	char buf[100];
 
-    CuTestFormatReportString(ts->report->reportStr, runs, passes, fails);
-	snprintf(buf, sizeof(buf)-1, CUTEST_STR_SUMMARY(runs, passes, fails));
+    CuTestFormatReportString(ts->report->reportStr, runs, passes, fails, leaks);
+	snprintf(buf, sizeof(buf)-1, CUTEST_STR_SUMMARY(runs, passes, fails, leaks));
 	CuAssertStrEquals(tc, buf, CuStringCStr(ts->report->reportStr));
 	CuSuiteDelete(ts);
 }
