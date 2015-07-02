@@ -98,6 +98,7 @@
 			<Option target="Release" />
 			<Option target="UTest" />
 		</Unit>
+		<Unit filename="CuAllocTests.prg.map" />
 		<Unit filename="CuAlloc_Realloc.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -110,6 +111,9 @@
 		<Unit filename="CuAlloc_getFreeCount.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="CuAlloc_getHeaderAddr.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="CuAlloc_getMalloccount.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -120,6 +124,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="CuAlloc_getTotalSize.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="CuAlloc_initHeader.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="CuAlloc_internal.h" />

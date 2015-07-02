@@ -29,5 +29,7 @@ extern unsigned long int alloccount;
 extern unsigned long int freecount;
 extern unsigned long int realloccount;
 
+void CuAlloc_initHeader(CuAlloc_t* ptr, size_t n);
+CuAlloc_t *CuAlloc_getHeaderAddr(void* ptr);
 
 #endif // CUALLOC_INTERNAL_H_INCLUDED

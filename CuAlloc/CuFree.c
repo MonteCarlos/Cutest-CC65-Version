@@ -1,7 +1,7 @@
 #include "CuAlloc_internal.h"
 
 bool CuFree(void *ptr){
-    CuAlloc_t *ptr2 = (CuAlloc_t*)( (uint8_t*)ptr-sizeof(CuAlloc_BufHeader_t) );
+    CuAlloc_t *ptr2 = CuAlloc_getHeaderAddr(ptr);
     //(uintptr_t)ptr -= sizeof(CuAlloc_BufHeader_t);
     //assert( ptr2 -> isvalid );
     if ( !CuAlloc_getBufferValidity(ptr) )  return false;
