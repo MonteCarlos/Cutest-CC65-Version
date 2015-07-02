@@ -44,6 +44,7 @@ void testCuRealloc(CuTest* tc){
     int *ptr2IntArray = NULL;
     unsigned long int alloccount = CuAlloc_getAllocCount();
     unsigned long int realloccount = CuAlloc_getReallocCount();
+	int8_t i;
 
     ptr2IntArray = CuRealloc(NULL, sizeof(intArray1));
 
@@ -70,7 +71,7 @@ void testCuRealloc(CuTest* tc){
     CuAssertIntEquals(tc, realloccount+1, CuAlloc_getReallocCount());
 
     //Now check content
-    for (int8_t i = sizeof(intArray1)/sizeof(*intArray1)-1; i>0; --i){
+    for (i = sizeof(intArray1)/sizeof(*intArray1)-1; i>0; --i){
         if (intArray1[i] != ptr2IntArray[i]){
             CuFail_Msg(tc, "Buf not equals source");
             CuTestAppendMessage(tc, "Pos:%d",i);
@@ -131,7 +132,14 @@ CuSuite *CuAlloc_requestTests(void){
 	return suite;
 }
 
-
+size_t getCuAllocMemSize(void){
+	extern uint8_t _BEGIN_LOAD__;
+	extern uint8_t _END_LOAD__;
+	return &_END_LOAD__-&_BEGIN_LOAD__;
+}
+/*
+	$4762 (02.07.2015)
+*/
 
 int main(void){
     int Nofails;
@@ -152,8 +160,9 @@ int main(void){
 	printf("Alloc Count after SuiteDelete:%lu %lu %lu\n", CuAlloc_getAllocCount(), CuAlloc_getFreeCount(), CuAlloc_getReallocCount());
 
 	assert (0 == CuAlloc_getPendingFrees());
-	return EXIT_SUCCESS;
 
 	assert (0 == CuAlloc_getPendingFrees());
+
+	printf("CuAlloc total size: $%x", getCuAllocMemSize());
 	return Nofails;
 }

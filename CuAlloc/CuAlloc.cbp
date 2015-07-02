@@ -31,28 +31,21 @@
 				<Option compiler="cc65" />
 				<Option use_console_runner="0" />
 				<Linker>
-					<Add library="..\..\cutest-cc65_Dbg.lib" />
-					<Add library="..\..\CutestString-cc65Dbg.lib" />
+					<Add option="-C CuAllocTest.cfg" />
+					<Add library="..\cutest-cc65_Dbg.lib" />
+					<Add library="..\CuString\CutestString-cc65Dbg.lib" />
 				</Linker>
 			</Target>
 			<Target title="gccDebug">
-<<<<<<< HEAD
-				<Option output="libCuAllocDbg.a" prefix_auto="0" extension_auto="0" />
-=======
 				<Option output="CuAllocDbg" prefix_auto="1" extension_auto="1" />
->>>>>>> 9a0a2b4665e253dd5e3b2dd07d5062beb203d1cc
 				<Option working_dir="" />
 				<Option type="2" />
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
 				<Compiler>
-<<<<<<< HEAD
-					<Add option="-Wall" />
 					<Add option="-g" />
 					<Add option="-fplan9-extensions" />
-=======
 					<Add option="-fplan9-extensions -std=c99" />
->>>>>>> 223219eb5f7f6ea18d993237d4b519f61b413e3d
 				</Compiler>
 			</Target>
 			<Target title="gccUTest">
@@ -62,13 +55,9 @@
 				<Option compiler="gcc" />
 				<Option use_console_runner="0" />
 				<Compiler>
-<<<<<<< HEAD
-					<Add option="-Wall" />
 					<Add option="-g" />
 					<Add option="-fplan9-extensions" />
-=======
 					<Add option="-fplan9-extensions -std=c99" />
->>>>>>> 223219eb5f7f6ea18d993237d4b519f61b413e3d
 				</Compiler>
 				<Linker>
 					<Add library="..\libcutest_Dbg.a" />
@@ -81,9 +70,9 @@
 			<Target title="gccRelease">
 				<Option output="libCuAlloc.a" prefix_auto="0" extension_auto="0" />
 				<Option working_dir="" />
-<<<<<<< HEAD
+				<Option object_output="obj/gccRelease" />
 				<Option type="2" />
-				<Option compiler="cc65" />
+				<Option compiler="gcc" />
 				<Option createDefFile="1" />
 				<Compiler>
 					<Add option="-fomit-frame-pointer" />
@@ -94,22 +83,6 @@
 				<Linker>
 					<Add option="-s" />
 				</Linker>
-=======
-				<Option object_output="obj/gccRelease" />
-				<Option type="2" />
-				<Option compiler="gcc" />
-				<Option createDefFile="1" />
-<<<<<<< HEAD
->>>>>>> 9a0a2b4665e253dd5e3b2dd07d5062beb203d1cc
-=======
-				<Compiler>
-					<Add option="-Os" />
-					<Add option="-fplan9-extensions -std=c99" />
-				</Compiler>
-				<Linker>
-					<Add option="-s" />
-				</Linker>
->>>>>>> 223219eb5f7f6ea18d993237d4b519f61b413e3d
 			</Target>
 		</Build>
 		<VirtualTargets>
@@ -120,6 +93,11 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="CuAlloc.h" />
+		<Unit filename="CuAllocTest.cfg">
+			<Option target="Debug" />
+			<Option target="Release" />
+			<Option target="UTest" />
+		</Unit>
 		<Unit filename="CuAlloc_Realloc.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -145,6 +123,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="CuAlloc_internal.h" />
+		<Unit filename="CuAlloc_sements.s">
+			<Option target="UTest" />
+		</Unit>
 		<Unit filename="CuCalloc.c">
 			<Option compilerVar="CC" />
 		</Unit>
