@@ -31,5 +31,7 @@ extern unsigned long int realloccount;
 
 void CuAlloc_initHeader(CuAlloc_t* ptr, size_t n);
 CuAlloc_t *CuAlloc_getHeaderAddr(void* ptr);
+void *CuAlloc_getDataAddr(CuAlloc_t*  ptr);
+size_t CuAlloc_calculateTotalSize(size_t n);
 
 #endif // CUALLOC_INTERNAL_H_INCLUDED

@@ -9,7 +9,7 @@
 /*-------------------------------------------------------------------------*
  * CuStr
  *-------------------------------------------------------------------------*/
-CuStringLen_t CuStringlen(CuString *str){
+CuStringLen_t CuStringLen(CuString *str){
     assert(str -> length == strlen(str -> buffer));
     //Assert that length field is identical to length of string in buffer
 

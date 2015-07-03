@@ -8,13 +8,12 @@
 
 void CuStringAppend(register CuString* str, const char* text)
 {
-	int length;
+	int length = strlen(text);
 
 	if (text == NULL) {
 		text = "NULL";
 	}
 
-	length = strlen(text);
 	if (str->length + length + 1 >= str->size)
 		CuStringResize(str, str->length + length + 1 /*+ STRING_INC*/);
 	str->length += length;

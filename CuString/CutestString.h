@@ -24,7 +24,7 @@ typedef struct CuString_tag CuString;
 
 /* CuString */
 
-char* CuStrAlloc(int size);
+char* CuStrAlloc(CuStringSize_t size);
 char* CuStrCopy(const char* old);
 
 
@@ -42,8 +42,8 @@ void CuStringAppendFormat(CuString* str, const char* format, ...);
 void CuStringInsert(CuString* str, const char* text, int pos);
 void CuStringResize(CuString* str, int newSize);
 void CuStringDelete(CuString* str);
-CuStringLen_t CuStringlen(CuString *str);
-CuStringSize_t CuStringsize(CuString *str);
+CuStringLen_t CuStringLen(CuString *str);
+CuStringSize_t CuStringSize(CuString *str);
 int CuStringClear(CuString *str);
 
 char* CuStringCStr(CuString* str);

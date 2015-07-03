@@ -6,6 +6,6 @@
 
 #include "CutestString_internal.h"
 
-CuStringSize_t CuStringsize(CuString *str){
+CuStringSize_t CuStringSize(CuString *str){
 	return str -> size;
 }

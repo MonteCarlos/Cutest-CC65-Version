@@ -142,6 +142,8 @@ size_t getCuAllocMemSize(void){
 	$4747 (using getHeaderAddr and initHeader)
 	$40c2 (compiled with -Or)
 	$3885 (-or switch also on CuString and CuTest)
+	$383f (no register vars)
+	$3854 (using getDataAddr)
 */
 
 int main(void){

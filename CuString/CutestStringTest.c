@@ -246,11 +246,11 @@ void TestAssertStrEquals_FailStrNULL(CuTest* tc)
 	CuTestDelete(tc2);
 }
 
-void TestCuStringlen(CuTest *tc){
+void TestCuStringLen(CuTest *tc){
 	char *teststr = "My test string";
 	CuString *str = CuStringConvertCStr(teststr);
 
-	CuAssert( tc, "Strlen err", 0 == CuStringlen(str) - strlen(teststr) );
+	CuAssert( tc, "Strlen err", 0 == CuStringLen(str) - strlen(teststr) );
 	CuStringDelete(str);
 }
 
@@ -259,11 +259,11 @@ void TestCuStringClear(CuTest* tc){
 
 }
 
-void TestCuStringsize(CuTest *tc){
+void TestCuStringSize(CuTest *tc){
 	char *teststr = "Another test string";
 	CuString *str = CuStringConvertCStr(teststr);
 	CuStringResize(str, strlen(teststr));
-	CuAssert( tc, "Strsize err", 0 == CuStringsize(str) - strlen(teststr) );
+	CuAssert( tc, "Strsize err", 0 == CuStringSize(str) - strlen(teststr) );
 	CuStringDelete(str);
 }
 
@@ -430,8 +430,8 @@ CuSuite* CuStringGetSuite(void)
 //	SUITE_ADD_TEST(suite, TestCuStringComposeMessage);
 	SUITE_ADD_TEST(suite, TestCuStringAppendULong);
 	SUITE_ADD_TEST(suite, TestCuStringConvertCStr);
-	SUITE_ADD_TEST(suite, TestCuStringlen);
-	SUITE_ADD_TEST(suite, TestCuStringsize);
+	SUITE_ADD_TEST(suite, TestCuStringLen);
+	SUITE_ADD_TEST(suite, TestCuStringSize);
 	SUITE_ADD_TEST(suite, TestCuStringClear);
     SUITE_ADD_TEST(suite, TestCuStringAppendISvsNOT);
     SUITE_ADD_TEST(suite, TestCuStringAppendVariadicFormat);
