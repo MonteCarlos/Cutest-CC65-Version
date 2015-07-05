@@ -9,15 +9,9 @@
 void CuStringAppendFormat(CuString* str, const char* format, ...)
 {
 	va_list argp;
-	char *buf;
-
 	va_start(argp, format);
-	//use (v)snprintf trick to determine number of characters to be printed, beforehand
-	buf = (char*)CuAlloc( vsnprintf(NULL,0,format,argp) );
-	assert (NULL != buf);
-	vsprintf(buf, format, argp);
-	va_end(argp);
-	CuStringAppend(str, buf);
+	CuStringAppendVariadicFormat(str, format, argp);
 
-	CuFree(buf);
+	va_end(argp);
+
 }

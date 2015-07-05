@@ -6,6 +6,9 @@
 CuSuite* CuGetSuite();
 CuSuite* CuStringGetSuite();
 
+//17,89kB (executable prg), 04.07.2015
+//17,74
+
 // TODO (Stefan#1#): cutest-cc65 is still broken: ...
 //
 //- solve CuStringDelete and CuSuiteDelete problem

@@ -8,12 +8,10 @@
 
 void CuStringAppendVariadicFormat(CuString* str, const char* format, va_list va)
 {
-	char *buf = (char*)calloc(HUGE_STRING_LEN, sizeof(char));
+	char *buf = CuStrVaFormat(format, va);
 	assert (NULL != buf);
-	//va_start(va, format);
-	vsprintf(buf, format, va);
-	//va_end(va);
+
 	CuStringAppend(str, buf);
 
-	free(buf);
+	CuFree(buf);
 }

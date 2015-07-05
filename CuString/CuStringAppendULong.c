@@ -7,10 +7,6 @@
 #include "CutestString_internal.h"
 
 void CuStringAppendULong(CuString *str, unsigned long int num){
-	char *numStr;
-	numStr = CuAlloc( snprintf(NULL, 0, "%lu", num) );
-	sprintf(numStr, "%lu", num);
-	CuStringAppend(str, numStr);
-	CuFree(numStr);
+	CuStringAppendFormat(str, "%lu", num);
 }
 

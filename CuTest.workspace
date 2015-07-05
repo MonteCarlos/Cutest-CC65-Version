@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_workspace_file>
+	<Workspace title="Workspace">
+		<Project filename="cutest-cc65.cbp" />
+		<Project filename="CuString/CutestString-cc65.cbp" />
+		<Project filename="CuAlloc/CuAlloc.cbp" />
+	</Workspace>
+</CodeBlocks_workspace_file>

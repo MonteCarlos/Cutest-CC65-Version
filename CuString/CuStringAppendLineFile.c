@@ -8,8 +8,5 @@
 
 //Use long for line number to be not limited to 65535 lines per file
 void CuStringAppendLineFile(CuString* str, char* file, unsigned long int line){
-	CuStringAppend(str, file);
-	CuStringAppendChar(str, '(');
-	CuStringAppendULong(str, line);
-	CuStringAppendChar(str, ')');
+	CuStringAppendFormat(str,"%s (%lu)", file, line);
 }

@@ -121,6 +121,12 @@
 			<Option target="gccRelease" />
 			<Option target="gccDebug" />
 		</Unit>
+		<Unit filename="CuStrFormat.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="CuStrVaFormat.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="CuStringAppend.c">
 			<Option compilerVar="CC" />
 			<Option target="Debug" />
