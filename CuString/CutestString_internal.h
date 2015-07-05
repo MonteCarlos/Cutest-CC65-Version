@@ -5,6 +5,9 @@
 #include "..\CuAlloc\CuAlloc.h"
 #include <stdarg.h>
 #include <stdint.h>
+#include <assert.h>
+#include <stdio.h>
+#include <string.h>
 //#include <setjmp.h>
 
 

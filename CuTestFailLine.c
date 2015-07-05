@@ -5,7 +5,7 @@ void CuFail_Line(CuTest* tc, const char* file, int line, const char* message, co
 	//CuString *string = CuStringNew();
 
 	//CuStringInit(&string);
-	if ( 0 != CuStringlen(tc->message) ) {
+	if ( 0 != CuStringLen(tc->message) ) {
         CuStringAppendChar(tc->message,'\n');
 	}
 	CuTestGenerateMessage(tc->message, message, message2, file, line);

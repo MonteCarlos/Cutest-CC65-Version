@@ -9,12 +9,15 @@
 void CuStringAppendFormat(CuString* str, const char* format, ...)
 {
 	va_list argp;
-	char *buf = (char*)calloc(HUGE_STRING_LEN, sizeof(char));
-	assert (NULL != buf);
+	char *buf;
+
 	va_start(argp, format);
+	//use (v)snprintf trick to determine number of characters to be printed, beforehand
+	buf = (char*)CuAlloc( vsnprintf(NULL,0,format,argp) );
+	assert (NULL != buf);
 	vsprintf(buf, format, argp);
 	va_end(argp);
 	CuStringAppend(str, buf);
-	assert(NULL != buf);
-	free(buf);
+
+	CuFree(buf);
 }

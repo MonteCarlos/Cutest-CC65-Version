@@ -55,7 +55,7 @@ void TestCuTestNew(CuTest* tc)
 	CuAssertStrEquals(tc, "MyTest", CuStringCStr(tc2->name));
 	CuAssertTrue(tc, !tc2->failed);
 	//CuAssertTrue(tc, tc2->message == NULL);
-	CuAssertIntEquals(tc, 0, CuStringlen(tc->message));
+	CuAssertIntEquals(tc, 0, CuStringLen(tc->message));
 	CuAssertTrue(tc, tc2->function == &TestPasses);
 	CuAssertTrue(tc, tc2->ran == 0);
 	CuAssertTrue(tc, tc2->jumpBuf == NULL);
@@ -70,7 +70,7 @@ void TestCuTestInit(CuTest *tc)
 
 	CuAssertStrEquals(tc, "MyTest", CuStringCStr(tc2->name));
 	CuAssertTrue(tc, !tc2->failed);
-	CuAssertIntEquals(tc, 0, CuStringlen(tc->message));
+	CuAssertIntEquals(tc, 0, CuStringLen(tc->message));
 	CuAssertTrue(tc, tc2->function == &TestPasses);
 	CuAssertTrue(tc, tc2->ran == 0);
 	CuAssertTrue(tc, tc2->jumpBuf == NULL);
@@ -87,7 +87,7 @@ void TestCuAssert(CuTest* tc)
 
 	CuAssert(tc2, "test 1", 5 == value + 1);
 	CuAssertTrue(tc, !tc2->failed);
-	CuAssertIntEquals(tc, 0, CuStringlen(tc->message));
+	CuAssertIntEquals(tc, 0, CuStringLen(tc->message));
 
 	CuAssert(tc2, "test 2", 0);
 	CuAssertTrue(tc, tc2->failed);
@@ -114,7 +114,7 @@ void TestCuAssertPtrEquals_Success(CuTest* tc)
 	/* test success case */
 	CuAssertPtrEquals(tc2, &x, &x);
 	CuAssertTrue(tc, ! tc2->failed);
-	CuAssertIntEquals(tc, 0, CuStringlen(tc2->message));
+	CuAssertIntEquals(tc, 0, CuStringLen(tc2->message));
 
 	CuTestDelete(tc2);
 }
@@ -150,7 +150,7 @@ void TestCuAssertPtrNotNull_Success(CuTest* tc)
 	/* test success case */
 	CuAssertPtrNotNull(tc2, &x);
 	CuAssertTrue(tc, ! tc2->failed);
-	CuAssertIntEquals(tc, 0, CuStringlen(tc2->message));
+	CuAssertIntEquals(tc, 0, CuStringLen(tc2->message));
 
 	CuTestDelete(tc2);
 }

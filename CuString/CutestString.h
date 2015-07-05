@@ -26,7 +26,8 @@ typedef struct CuString_tag CuString;
 
 char* CuStrAlloc(CuStringSize_t size);
 char* CuStrCopy(const char* old);
-
+char *CuStrVaFormat(char* format, va_list va);
+char *CuStrFormat(char* format, ...);
 
 
 #define HUGE_STRING_LEN	512
