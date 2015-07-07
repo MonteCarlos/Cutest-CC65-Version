@@ -9,7 +9,7 @@
 void CuStringInit(register CuString* str)
 {
 	str->length = 0;
-	str->size = STRING_MAX;
+	str->size = CUSTRING_LEN_NEW;
 	str->buffer = (char*) CuAlloc(sizeof(char) * str->size);
 	assert(str->buffer != NULL);
 	str->buffer[0] = '\0';

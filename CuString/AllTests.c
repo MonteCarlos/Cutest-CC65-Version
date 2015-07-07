@@ -4,7 +4,8 @@
 #include "CutestString_internal.h"
 
 CuSuite* CuGetSuite();
-CuSuite* CuStringGetSuite();
+CuSuite* CuStringGetSuite1();
+CuSuite* CuStringGetSuite2();
 
 //17,89kB (executable prg), 04.07.2015
 //17,74
@@ -13,38 +14,49 @@ CuSuite* CuStringGetSuite();
 //
 //- solve CuStringDelete and CuSuiteDelete problem
 //- solve memory allocation problems (sometimes (m)(c)alloc returns NULL)
+
+typedef CuSuitePtr getSuitefnc_t(void);
+
+CuSuite *GetSuite(getSuitefnc_t* getSuitefnc){
+    CuSuite* suite = NULL;
+    suite = getSuitefnc();
+    assert (NULL != suite);
+    return suite;
+}
+
+size_t testRunner(CuSuite *suite){
+    assert (NULL != suite);
+    CuSuiteRun(suite);
+    CuSuiteDetails(suite, stdout/*output*/);
+    return CuSuiteGetFailcount(suite);
+}
+
 void RunAllTests(void)
 {
 	CuString *output = NULL;
-	CuSuite* suite = NULL;//CuSuiteNew();
+	//obtain tests of independent functions
+	CuSuite* suite = GetSuite(CuStringGetSuite1);//CuSuiteNew();
 
 	//*********************************
 	//*** Test CuTestString			***
 	//*********************************
-	suite = CuStringGetSuite();
-	//output = CuStringNew();
+		 //assert initialization of suite
 
-	assert (NULL != suite); //assert initialization of suite
-	CuSuiteRun(suite);//This function does not return!
-	//CuSuiteSummary(suite, output);
-	CuSuiteDetails(suite, stdout/*output*/);
-	//printf("%s\n", output->buffer);
+    //run tests of independent functions
+	if (testRunner(suite)){
+        exit(-1);
+	};
+
 	CuSuiteDelete(suite);
-	//CuStringDelete(output);//*/
 
-	//*********************************
-	//*** Test CuTestString	helpers	***
-	//*********************************
-	//output = CuStringNew();
-	suite = CuGetSuite();
+	//obtain tests of dependent functions
+	suite = GetSuite(CuStringGetSuite2);
+    if (testRunner(suite)){
+        exit(-1);
+	};
 
-	assert (NULL != suite); //assert initialization of suite
-	CuSuiteRun(suite);//This function does not return!
-	//CuSuiteSummary(suite, output);
-	CuSuiteDetails(suite, stdout/*output*/);
-	//printf("%s\n", output->buffer);
-	CuSuiteDelete(suite);
-	//CuStringDelete(output);
+    CuSuiteDelete(suite);
+
 }
 
 

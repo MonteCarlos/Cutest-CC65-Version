@@ -47,7 +47,7 @@ void TestCuStringNew(CuTest* tc)
 {
 	CuString* str = CuStringNew();
 	CuAssertTrue(tc, 0 == str->length);
-	CuAssertTrue(tc, STRING_MAX == str->size);
+	CuAssertTrue(tc, CUSTRING_LEN_NEW == str->size);
 	CuAssertStrEquals(tc, "", str->buffer);
 	CuStringDelete(str);
 }
@@ -112,12 +112,12 @@ void TestCuStringResizes(CuTest* tc)
 {
 	CuString* str = CuStringNew();
 	int i;
-	for(i = 0 ; i < STRING_MAX ; ++i)
+	for(i = 0 ; i < CUSTRING_LEN_NEW ; ++i)
 	{
 		CuStringAppend(str, "aa");
 	}
-	CuAssertTrue(tc, STRING_MAX * 2 == str->length);
-	CuAssertTrue(tc, STRING_MAX * 2 <= str->size);
+	CuAssertTrue(tc, CUSTRING_LEN_NEW * 2 == str->length);
+	CuAssertTrue(tc, CUSTRING_LEN_NEW * 2 <= str->size);
 	CuStringDelete(str);
 }
 
@@ -133,6 +133,15 @@ void TestCuStrCopy(CuTest* tc)
 	CuFree(newStr);
 }
 
+
+CUTEST(CuStrAlloc)
+{
+    CuStringSize_t size = 10;
+	char* ptr = CuStrAlloc(size);
+	CuAssertTrue(tc, CuAlloc_getBufferValidity(ptr));
+	CuAssertIntEquals(tc, CuAlloc_getDataSize(ptr), size+1);
+    CuFree(ptr);
+}
 
 void TestCuStringAppendFormat(CuTest* tc)
 {
@@ -277,7 +286,7 @@ void TestCuStringCStr(CuTest *tc){
 					(const char*)desiredStr);
 					//check string content
 	CuAssert( tc, "Strlen err", 0 == strlen(desiredStr) - str->length );//check length of string up to \0
-	CuAssert( tc, "Strsize err", 0 == STRING_MAX - str->size );//check occupied memory
+	CuAssert( tc, "Strsize err", 0 == CUSTRING_LEN_NEW - str->size );//check occupied memory
 	CuStringDelete(str);
 }
 
@@ -400,43 +409,44 @@ void TestCuStringAppendVariadicFormat(CuTest *tc){
  * main
  *-------------------------------------------------------------------------*/
 
-CuSuite* CuGetSuite(void)
+CuSuite* CuStringGetSuite1(void)
 {
 	CuSuite* suite = CuSuiteNew();
 
-	SUITE_ADD_TEST(suite, TestCuStrCopy);
-	//SUITE_ADD_TEST(suite, TestAssertStrEquals);
+    CUTEST_ADD(suite, CuStrAlloc);
+    SUITE_ADD_TEST(suite, TestCuStrCopy);
+    SUITE_ADD_TEST(suite, TestCuStringNew);
+    //SUITE_ADD_TEST(suite, TestCuStringInit);
+    SUITE_ADD_TEST(suite, TestCuStringCStr);
+	SUITE_ADD_TEST(suite, TestCuStringConvertCStr);
+	SUITE_ADD_TEST(suite, TestCuStringLen);
+	SUITE_ADD_TEST(suite, TestCuStringSize);
+	SUITE_ADD_TEST(suite, TestCuStringClear);
 
-	//SUITE_ADD_TEST(suite, TestAssertStrEquals_NULL);
-	//SUITE_ADD_TEST(suite, TestAssertStrEquals_FailStrNULL);
-	//SUITE_ADD_TEST(suite, TestAssertStrEquals_FailNULLStr);
+
 
 	return suite;
 }
 
-CuSuite* CuStringGetSuite(void)
+CuSuite* CuStringGetSuite2(void)
 {
-	CuSuite* suite = CuSuiteNew();
+    CuSuite* suite = CuSuiteNew();
 
-	SUITE_ADD_TEST(suite, TestCuStringNew);
-	SUITE_ADD_TEST(suite, TestCuStringAppend);
+    SUITE_ADD_TEST(suite, TestCuStringAppend);
 	SUITE_ADD_TEST(suite, TestCuStringAppendNULL);
 	SUITE_ADD_TEST(suite, TestCuStringAppendChar);
 	SUITE_ADD_TEST(suite, TestCuStringInserts);
 	SUITE_ADD_TEST(suite, TestCuStringResizes);
 	SUITE_ADD_TEST(suite, TestCuStringAppendFormat);
-	SUITE_ADD_TEST(suite, TestCuStringCStr);
+
 	SUITE_ADD_TEST(suite, TestCuStringAppendLineFile);
 //	SUITE_ADD_TEST(suite, TestCuStringComposeMessage);
 	SUITE_ADD_TEST(suite, TestCuStringAppendULong);
-	SUITE_ADD_TEST(suite, TestCuStringConvertCStr);
-	SUITE_ADD_TEST(suite, TestCuStringLen);
-	SUITE_ADD_TEST(suite, TestCuStringSize);
-	SUITE_ADD_TEST(suite, TestCuStringClear);
+
+
+
     SUITE_ADD_TEST(suite, TestCuStringAppendISvsNOT);
     SUITE_ADD_TEST(suite, TestCuStringAppendVariadicFormat);
 	//alle OK
-
-	return suite;
+    return suite;
 }
-

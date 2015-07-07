@@ -29,10 +29,8 @@ char* CuStrCopy(const char* old);
 char *CuStrVaFormat(const char* format, va_list va);
 char *CuStrFormat(const char* format, ...);
 
-
-#define HUGE_STRING_LEN	512
-#define STRING_MAX		256
-#define STRING_INC		256
+#define CUSTRING_LEN_INC		64
+#define CUSTRING_LEN_NEW      64
 
 void CuStringInit(CuString* str);
 CuString* CuStringNew(void);

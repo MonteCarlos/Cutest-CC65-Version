@@ -9,7 +9,8 @@
 
 char* CuStrAlloc(CuStringSize_t size)
 {
-	char* newStr = (char*) CuAlloc ( sizeof(char) * (size) );
+    //allocate room for terminating \0 character, too
+	char* newStr = (char*) CuAlloc ( sizeof(char) * (size+1) );
 	assert (NULL != newStr);
 	return newStr;
 }

@@ -15,6 +15,8 @@
 typedef struct CuSuite_tag CuSuite;
 typedef struct CuTest_tag CuTest;
 typedef struct CuReport_tag CuReport_t;
+typedef CuSuite* CuSuitePtr;
+typedef CuTest* CuTestPtr;
 
 typedef void (*TestFunction)(CuTest *);
 
