@@ -8,7 +8,10 @@
 
 char* CuStrCopy(const char* old)
 {
-	char* newStr = CuAlloc(strlen(old)+1);//CuStrAlloc(len + 1);
+	char* newStr; //= CuAlloc(strlen(old)+1);//CuStrAlloc(len + 1);
+
+	assert(NULL != old);
+	newStr = CuStrAlloc(strlen(old));
 	strcpy(newStr, old);
 	return newStr;
 }

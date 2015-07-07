@@ -46,12 +46,28 @@ static void X_CompareAsserts(CuTest* tc, const char *file, int line, const char*
 void TestCuStringNew(CuTest* tc)
 {
 	CuString* str = CuStringNew();
+	CuAssertTrue(tc, CuAlloc_getBufferValidity(str));
+	CuAssertTrue(tc, CUSTRING_LEN_NEW == CuAlloc_getDataSize(str));
 	CuAssertTrue(tc, 0 == str->length);
 	CuAssertTrue(tc, CUSTRING_LEN_NEW == str->size);
 	CuAssertStrEquals(tc, "", str->buffer);
 	CuStringDelete(str);
 }
 
+void TestCuStringInit(CuTest* tc)
+{
+	CuString* str = CuStringNew();
+	CuStringAppend("this string is more than sixtifour letters long, which is now true!");
+    CuFree(str->buffer);
+    CuStringInit(str);
+
+	CuAssertTrue(tc, CuAlloc_getBufferValidity(str));
+	CuAssertTrue(tc, CUSTRING_LEN_NEW == CuAlloc_getDataSize(str));
+	CuAssertTrue(tc, 0 == str->length);
+	CuAssertTrue(tc, CUSTRING_LEN_NEW == str->size);
+	CuAssertStrEquals(tc, "", str->buffer);
+	CuStringDelete(str);
+}
 
 void TestCuStringAppend(CuTest* tc)
 {
@@ -129,12 +145,12 @@ void TestCuStrCopy(CuTest* tc)
 {
 	const char* old = "hello world";
 	char* newStr = CuStrCopy(old);
-	CuAssert(tc, "old is new", strcmp(old, newStr) == 0);
+	CuAssertTrue(tc, strcmp(old, newStr) == 0);
 	CuFree(newStr);
 }
 
 
-CUTEST(CuStrAlloc)
+void TestCuStrAlloc(CuTest* tc)
 {
     CuStringSize_t size = 10;
 	char* ptr = CuStrAlloc(size);
@@ -259,7 +275,7 @@ void TestCuStringLen(CuTest *tc){
 	char *teststr = "My test string";
 	CuString *str = CuStringConvertCStr(teststr);
 
-	CuAssert( tc, "Strlen err", 0 == CuStringLen(str) - strlen(teststr) );
+	CuAssertIntEquals( tc, CuStringLen(str), strlen(teststr) );
 	CuStringDelete(str);
 }
 
@@ -272,7 +288,7 @@ void TestCuStringSize(CuTest *tc){
 	char *teststr = "Another test string";
 	CuString *str = CuStringConvertCStr(teststr);
 	CuStringResize(str, strlen(teststr));
-	CuAssert( tc, "Strsize err", 0 == CuStringSize(str) - strlen(teststr) );
+	CuAssertIntEquals( tc, CuStringSize(str), strlen(teststr) );
 	CuStringDelete(str);
 }
 
@@ -285,8 +301,8 @@ void TestCuStringCStr(CuTest *tc){
 					(const char*)CuStringCStr(str),
 					(const char*)desiredStr);
 					//check string content
-	CuAssert( tc, "Strlen err", 0 == strlen(desiredStr) - str->length );//check length of string up to \0
-	CuAssert( tc, "Strsize err", 0 == CUSTRING_LEN_NEW - str->size );//check occupied memory
+	CuAssertIntEquals( tc, strlen(desiredStr), str->length );//check length of string up to \0
+	CuAssertIntEquals( tc, CUSTRING_LEN_NEW, str->size );//check occupied memory
 	CuStringDelete(str);
 }
 
@@ -368,7 +384,8 @@ void TestCuStringConvertCStr(CuTest *tc){
 	char* testtext = "This is my testtext.";
 	CuString *str = CuStringConvertCStr(testtext);
 	CuAssertStrEquals(tc, testtext, CuStringCStr(str));
-
+	CuAssertIntEquals(tc, CuStringLen(str), strlen(testtext));
+	CuAssertIntEquals(tc, CuStringSize(str), CUSTRING_LEN_NEW);
 	testtext = NULL;
 	CuStringDelete(str);
 
@@ -413,10 +430,10 @@ CuSuite* CuStringGetSuite1(void)
 {
 	CuSuite* suite = CuSuiteNew();
 
-    CUTEST_ADD(suite, CuStrAlloc);
+    SUITE_ADD_TEST(suite, TestCuStrAlloc);
     SUITE_ADD_TEST(suite, TestCuStrCopy);
     SUITE_ADD_TEST(suite, TestCuStringNew);
-    //SUITE_ADD_TEST(suite, TestCuStringInit);
+    SUITE_ADD_TEST(suite, TestCuStringInit);
     SUITE_ADD_TEST(suite, TestCuStringCStr);
 	SUITE_ADD_TEST(suite, TestCuStringConvertCStr);
 	SUITE_ADD_TEST(suite, TestCuStringLen);
