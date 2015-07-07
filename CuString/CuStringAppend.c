@@ -14,8 +14,10 @@ void CuStringAppend(register CuString* str, const char* text)
 		text = "NULL";
 	}
 
-	if (CuStringLen(str) + (length=strlen(text) + 1) >= str->size)
-		CuStringResize(str, CuStringLen(str) + length /*+ STRING_INC*/);
-	str->length += length;
+	if ( (length = CuStringLen(str) + strlen(text) + 1) >= CuStringSize(str)){
+		CuStringResize(str, length);
+	}
+
 	strcat(CuStringCStr(str), text);
+	str->length = strlen(CuStringCStr(str));
 }
