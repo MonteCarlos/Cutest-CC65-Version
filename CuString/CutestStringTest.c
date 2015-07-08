@@ -57,7 +57,7 @@ void TestCuStringNew(CuTest* tc)
 void TestCuStringInit(CuTest* tc)
 {
 	CuString* str = CuStringNew();
-	CuStringAppend("this string is more than sixtifour letters long, which is now true!");
+	CuStringAppend(str, "this string is more than sixtifour letters long, which is now true!");
     CuFree(str->buffer);
     CuStringInit(str);
 
@@ -287,12 +287,12 @@ void TestCuStringClear(CuTest* tc){
 void TestCuStrNULL(CuTest* tc){
 	char *nullstr = NULL;
 	char *teststr = "a test";
-	CuStrNULL(nullstr);
-	CuAssertStrEquals(tc, "NULL", nullstr);
-	nullstr = teststr;
-	CuStrNULL(nullstr);
 
-	CuAssertStrEquals(tc, "NULL", teststr);
+	nullstr = CuStrNULL(nullstr);
+	CuAssertIntEquals(tc, 0, strcmp(nullstr,"NULL"));
+
+	nullstr = CuStrNULL(teststr);
+	CuAssertStrEquals(tc, nullstr, teststr);
 
 }
 
@@ -444,6 +444,7 @@ CuSuite* CuStringGetSuite1(void)
 
     SUITE_ADD_TEST(suite, TestCuStrAlloc);
     SUITE_ADD_TEST(suite, TestCuStrCopy);
+    SUITE_ADD_TEST(suite, TestCuStrNULL);
     SUITE_ADD_TEST(suite, TestCuStringNew);
     SUITE_ADD_TEST(suite, TestCuStringInit);
     SUITE_ADD_TEST(suite, TestCuStringCStr);

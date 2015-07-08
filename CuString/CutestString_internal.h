@@ -18,4 +18,7 @@ struct CuString_tag
 	CuStringChar_t* buffer;
 } ;
 
+
+char* CuStrNULL(char* str);
+
 #endif // CUTESTSTRING_INTERNAL_H_INCLUDED
