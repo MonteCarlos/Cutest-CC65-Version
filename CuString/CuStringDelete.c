@@ -10,10 +10,10 @@ void CuStringDelete(CuString *str)
 {
     bool freeresult;
 	if (!str) return;
+	assert(NULL != str);
 	assert(NULL != str->buffer);
 	freeresult = CuFree(str->buffer);
 	assert(true == freeresult);
-	assert(NULL != str);
 	freeresult = CuFree(str);
 	assert(true == freeresult);
 }

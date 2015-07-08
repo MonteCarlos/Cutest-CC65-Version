@@ -19,6 +19,7 @@ struct CuString_tag
 } ;
 
 
-char* CuStrNULL(char* str);
+char* CuStrNULL(const char* const str);
+size_t CuStrLenFormat(char* format, ...);
 
 #endif // CUTESTSTRING_INTERNAL_H_INCLUDED

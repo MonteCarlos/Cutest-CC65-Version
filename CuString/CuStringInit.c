@@ -9,8 +9,8 @@
 void CuStringInit(register CuString* str)
 {
 	str->length = 0;
-	str->size = CUSTRING_LEN_NEW;
+	str->size = CUSTRING_LEN_NEW+1;
 	//initializes string to zero, too!
-	str->buffer = CuStrAlloc(CUSTRING_LEN_NEW-1);
+	str->buffer = CuStrAlloc(CUSTRING_LEN_NEW);
 	assert(str->buffer != NULL);
 }
