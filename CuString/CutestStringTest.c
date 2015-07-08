@@ -284,6 +284,18 @@ void TestCuStringClear(CuTest* tc){
 
 }
 
+void TestCuStrNULL(CuTest* tc){
+	char *nullstr = NULL;
+	char *teststr = "a test";
+	CuStrNULL(nullstr);
+	CuAssertStrEquals(tc, "NULL", nullstr);
+	nullstr = teststr;
+	CuStrNULL(nullstr);
+
+	CuAssertStrEquals(tc, "NULL", teststr);
+
+}
+
 void TestCuStringSize(CuTest *tc){
 	char *teststr = "Another test string";
 	CuString *str = CuStringConvertCStr(teststr);

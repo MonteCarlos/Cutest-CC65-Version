@@ -124,6 +124,9 @@
 		<Unit filename="CuStrFormat.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="CuStrNULL.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="CuStrVaFormat.c">
 			<Option compilerVar="CC" />
 		</Unit>
