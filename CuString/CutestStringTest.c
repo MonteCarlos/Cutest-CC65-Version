@@ -162,9 +162,9 @@ void TestCuStrAlloc(CuTest* tc)
 void TestCuStrLenFormat(CuTest* tc){
 	int num = 10;
 	char* subStr = "subStr";
-	size_t len = CuStrLenFormat("abc %s %d", subStr, num);
-
-	CuAssertTrue(tc, len == 12);
+	int len = CuStrLenFormat("abc %s %d", subStr, num);
+	printf("len: %d\n", len);
+	CuAssertTrue(tc, len == 13);
 }
 
 char* helper_TestCuStrVaFormat(char* format, ...){

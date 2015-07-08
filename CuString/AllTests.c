@@ -28,6 +28,7 @@ size_t testRunner(CuSuite *suite){
     assert (NULL != suite);
     CuSuiteRun(suite);
     CuSuiteDetails(suite, stdout/*output*/);
+    CuSuiteSummary(suite, stdout);
     return CuSuiteGetFailcount(suite);
 }
 
@@ -43,12 +44,14 @@ void RunAllTests(void)
 		 //assert initialization of suite
 
     //run tests of independent functions
+    printf("*** Running tests of independent functions...\n\n");
 	if (testRunner(suite)){
         exit(-1);
 	};
 
 	CuSuiteDelete(suite);
 
+	printf("*** Running tests of independent functions...\n\n");
 	//obtain tests of dependent functions
 	suite = GetSuite(CuStringGetSuite2);
     if (testRunner(suite)){
