@@ -3,7 +3,7 @@
 
 void CuFailInternal(CuTest* tc, const char* file, int line, CuString* string)
 {
-	char* buf = (char*)CuAlloc(HUGE_STRING_LEN*sizeof(char));
+	char* buf = (char*)CuAlloc(CUSTRING_LEN_NEW*sizeof(char));
 	assert (NULL != buf);
 	sprintf(buf, "%s:%d: ", file, line);
 	CuStringInsert(string, buf, 0);//buf is appended to string.

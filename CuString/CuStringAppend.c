@@ -6,16 +6,15 @@
 
 #include "CutestString_internal.h"
 
-void CuStringAppend(register CuString* str, const char* text)
+void CuStringAppend(CuString* str, const char* text)
 {
 	size_t length;
-
-	if (text == NULL) {
-		text = "NULL";
-	}
+	assert(NULL != str);
+	//assert(NULL != text);
+	text = CuStrNULL(text); //replace with NULL if necessary
 
 	if ( (length = CuStringLen(str) + strlen(text) + 1) >= CuStringSize(str)){
-		CuStringResize(str, length);
+		CuStringResize(str, CuStringSize(str)+CUSTRING_LEN_INC);
 	}
 
 	strcat(CuStringCStr(str), text);

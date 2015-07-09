@@ -25,10 +25,28 @@ CuSuite *GetSuite(getSuitefnc_t* getSuitefnc){
 }
 
 size_t testRunner(CuSuite *suite){
+	static size_t cnt = 0;
+	char filename_start[] = "testdetails";
+	char filename_end[] = ".txt";
+
+	char filename[sizeof(filename_start)+sizeof(filename_end)+2];
+	FILE *file;
+
     assert (NULL != suite);
+
+    printf("*** Testrun: %d ***\n", cnt);
     CuSuiteRun(suite);
     CuSuiteDetails(suite, stdout/*output*/);
-    CuSuiteSummary(suite, stdout);
+	printf("*** End of testrun: %d ***\n\n", cnt);
+
+    snprintf(filename, sizeof(filename), "%s%2d%d",filename_start,cnt,filename_end);
+    if (NULL == (file = fopen(filename, "w"))){
+		printf("fopen error\n");
+    }else{
+		CuSuiteDetails(suite, file);
+		fclose(file);
+    };
+	++cnt;
     return CuSuiteGetFailcount(suite);
 }
 

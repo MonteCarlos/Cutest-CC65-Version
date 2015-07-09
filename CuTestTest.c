@@ -124,7 +124,7 @@ void TestCuAssertPtrEquals_Failure(CuTest* tc)
 	CuTest *tc2 = CuTestNew("MyTest", TestPasses);
 	int x;
 	int* nullPtr = NULL;
-	char* expected_message = (char*)calloc(STRING_MAX, sizeof(char) );
+	char* expected_message = (char*)calloc(CUSTRING_LEN_NEW, sizeof(char) );
 	assert(NULL != expected_message);
 
 	//CuTestInit(&tc2, "MyTest", TestPasses);

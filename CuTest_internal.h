@@ -38,7 +38,7 @@ typedef struct CuTestPtr_tag{
 struct CuSuite_tag
 {
 	size_t testcount;
-
+	CuString *name;
 	CuTestPtr_t *testlist;
 	size_t failCount;
 	CuReport_t *report;
