@@ -132,11 +132,13 @@ CuSuite *CuAlloc_requestTests(void){
 	return suite;
 }
 
+#ifdef __CC65__
 size_t getCuAllocMemSize(void){
 	extern uint8_t _BEGIN_LOAD__;
 	extern uint8_t _END_LOAD__;
 	return &_END_LOAD__-&_BEGIN_LOAD__;
 }
+#endif
 /*
 	$4762 (02.07.2015)
 	$4747 (using getHeaderAddr and initHeader)
@@ -168,6 +170,8 @@ int main(void){
 
 	assert (0 == CuAlloc_getPendingFrees());
 
+#ifdef __CC65__
 	printf("CuAlloc total size: $%x", getCuAllocMemSize());
+	#endif // __CC65__
 	return Nofails;
 }

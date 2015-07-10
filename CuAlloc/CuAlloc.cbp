@@ -65,6 +65,7 @@
 				</Linker>
 				<ExtraCommands>
 					<Add after="CuAlloc_tests.exe" />
+					<Mode after="always" />
 				</ExtraCommands>
 			</Target>
 			<Target title="gccRelease">

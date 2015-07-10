@@ -6,7 +6,7 @@ char *CuStrVaFormat(const char* format, va_list va){
 	format = (const char*)CuStrNULL((char*)format);
 
 	//use (v)snprintf trick to determine number of characters to be printed, beforehand
-	buf = (char*)CuStrAlloc( vsnprintf(NULL,0,format,va) );
+	buf = (char*)CuStrAlloc( CuStrLenFormat(format, va) );
 
 	vsprintf(buf, format, va);
 	return buf;

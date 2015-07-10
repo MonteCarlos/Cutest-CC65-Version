@@ -27,7 +27,7 @@ void CuSuiteRun(CuSuite* testSuite)
                 puts("\b->OK");
             }
             if ( CuAssert(test, " Memory leak detected (", pendingfrees == CuAlloc_getPendingFrees()) ){
-                CuTestAppendMessage(test, "Pending frees before: %u, after: %u)\n",
+                CuTestAppendMessage(test, "Pending frees before: %u, after: %u)",
                     pendingfrees, CuAlloc_getPendingFrees()
                 );
                 test->memoryleak = true;

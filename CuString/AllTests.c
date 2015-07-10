@@ -6,6 +6,7 @@
 CuSuite* CuGetSuite();
 CuSuite* CuStringGetSuite1();
 CuSuite* CuStringGetSuite2();
+CuSuite* CuStringGetSuite3();
 
 //17,89kB (executable prg), 04.07.2015
 //17,74
@@ -39,7 +40,7 @@ size_t testRunner(CuSuite *suite){
     CuSuiteDetails(suite, stdout/*output*/);
 	printf("*** End of testrun: %d ***\n\n", cnt);
 
-    snprintf(filename, sizeof(filename), "%s%2d%d",filename_start,cnt,filename_end);
+    snprintf(filename, sizeof(filename), "%s%2d%s",filename_start,cnt,filename_end);
     if (NULL == (file = fopen(filename, "w"))){
 		printf("fopen error\n");
     }else{
@@ -69,7 +70,7 @@ void RunAllTests(void)
 
 	CuSuiteDelete(suite);
 
-	printf("*** Running tests of independent functions...\n\n");
+	printf("*** Running tests of single dependent functions...\n\n");
 	//obtain tests of dependent functions
 	suite = GetSuite(CuStringGetSuite2);
     if (testRunner(suite)){
@@ -78,6 +79,14 @@ void RunAllTests(void)
 
     CuSuiteDelete(suite);
 
+	printf("*** Running tests of multiple dependent functions...\n\n");
+	//obtain tests of dependent functions
+	suite = GetSuite(CuStringGetSuite3);
+    if (testRunner(suite)){
+        exit(-1);
+	};
+
+	CuSuiteDelete(suite);
 }
 
 

@@ -92,6 +92,7 @@
 				</Linker>
 				<ExtraCommands>
 					<Add after="CutestString-cc65_test.exe" />
+					<Mode after="always" />
 				</ExtraCommands>
 			</Target>
 		</Build>
@@ -125,6 +126,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="CuStrLenFormat.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="CuStrLenVaFormat.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="CuStrNULL.c">
