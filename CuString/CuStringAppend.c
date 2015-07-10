@@ -14,7 +14,8 @@ void CuStringAppend(CuString* str, const char* text)
 	text = CuStrNULL(text); //replace with NULL if necessary
 
 	if ( (length = CuStringLen(str) + strlen(text) + 1) >= CuStringSize(str)){
-		CuStringResize(str, CuStringSize(str)+CUSTRING_LEN_INC);
+		CuStringResize(str, length+CUSTRING_LEN_INC);
+		//always allocate a little more mem to reduce number of reallocs
 	}
 
 	strcat(CuStringCStr(str), text);
