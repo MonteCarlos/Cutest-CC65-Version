@@ -5,11 +5,12 @@
 
 #include "CutestString_internal.h"
 #include "CuTest_internal.h"
-static void X_CompareAsserts(CuTest* tc, const char *file, int line, const char* message, const char* expected, const char* actual);
+//static void X_CompareAsserts(CuTest* tc, const char *file, int line, const char* message, const char* expected, const char* actual);
 #define CompareAsserts(tc, message, expected, actual)  X_CompareAsserts((tc), __FILE__, __LINE__, (message), (expected), (actual))
 
 char thisfile[] = __FILE__;
 
+/*
 static void X_CompareAsserts(CuTest* tc, const char *file, int line, const char* message, const char* expected, const char* actual)
 {
 	int mismatch;
@@ -37,7 +38,7 @@ static void X_CompareAsserts(CuTest* tc, const char *file, int line, const char*
 	}
 
 	CuAssert_Line(tc, file, line, message, !mismatch);
-}
+}*/
 
 /*-------------------------------------------------------------------------*
  * CuString Test
@@ -205,24 +206,21 @@ void TestCuStrVaFormat(CuTest* tc){
 
 void TestCuStringAppendFormat(CuTest* tc)
 {
-	int i;
-	char* text = CuStrAlloc(301);		/* long string */
+	char* text = CuStrAlloc(300);		/* alloc and zero 300 chars plus \0 */
 	CuString* str = CuStringNew();
-	for (i = 0 ; i < 300 ; ++i)
-		text[i] = 'a';
-	text[300] = '\0';
+	memset(text, 'a', sizeof(text)-1);
 	CuStringAppendFormat(str, "%s", text);
 
 	/* buffer limit raised to HUGE_STRING_LEN so no overflow */
 
-	CuAssert(tc, "length of str->buffer is 300", 300 == strlen(str->buffer));
+	CuAssertIntEquals(tc, sizeof(text)-1, strlen(str->buffer));
 	CuStringDelete(str);
 	CuFree(text);
 
 }
 
 // TODO (MyAcer#1#): strEquals functions belong in CuTest not CuString
-void TestAssertStrEquals(CuTest* tc)
+/*void TestAssertStrEquals(CuTest* tc)
 {
 	jmp_buf buf;
 	CuTest *tc2 = CuTestNew("TestAssertStrEquals", zTestFails);
@@ -314,7 +312,7 @@ void TestAssertStrEquals_FailStrNULL(CuTest* tc)
 	//compareasserts(tc, "CuAssertStrEquals_FailStrNULL failed", expectedMsg, tc2->message);
 	CuTestDelete(tc2);
 }
-
+*/
 void TestCuStringLen(CuTest *tc){
 	char *teststr = "My test string";
 	CuString *str = CuStringConvertCStr(teststr);
@@ -546,11 +544,11 @@ CuSuite* CuStringGetSuite3(void)
     SUITE_ADD_TEST(suite, TestCuStringAppend);
 	SUITE_ADD_TEST(suite, TestCuStringAppendNULL);
 	SUITE_ADD_TEST(suite, TestCuStringAppendChar);
-	//SUITE_ADD_TEST(suite, TestCuStringAppendFormat);
-	//SUITE_ADD_TEST(suite, TestCuStringAppendLineFile);
-//	SUITE_ADD_TEST(suite, TestCuStringComposeMessage);
-	/*SUITE_ADD_TEST(suite, TestCuStringAppendULong);
-    SUITE_ADD_TEST(suite, TestCuStringAppendISvsNOT);*/
+	SUITE_ADD_TEST(suite, TestCuStringAppendFormat);
+	SUITE_ADD_TEST(suite, TestCuStringAppendLineFile);
+	//SUITE_ADD_TEST(suite, TestCuStringComposeMessage);
+	SUITE_ADD_TEST(suite, TestCuStringAppendULong);
+    /*SUITE_ADD_TEST(suite, TestCuStringAppendISvsNOT);*/
 
 	//alle OK
     return suite;

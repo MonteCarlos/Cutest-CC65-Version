@@ -1,13 +1,6 @@
 #ifndef CUALLOC_INTERNAL_H_INCLUDED
 #define CUALLOC_INTERNAL_H_INCLUDED
 
-#include <stdbool.h>
-#include <stdint.h>
-#include <stdlib.h>
-#include <assert.h>
-#include <stddef.h>
-#include <string.h>
-
 #include "CuAlloc.h"
 
 typedef struct CuAlloc_BufHeader_tag CuAlloc_BufHeader_t;
@@ -34,4 +27,6 @@ CuAlloc_t *CuAlloc_getHeaderAddr(void* ptr);
 void *CuAlloc_getDataAddr(CuAlloc_t*  ptr);
 size_t CuAlloc_calculateTotalSize(size_t n);
 
-#endif // CUALLOC_INTERNAL_H_INCLUDED
+// CUALLOC_INTERNAL_H_INCLUDED
+#endif
+

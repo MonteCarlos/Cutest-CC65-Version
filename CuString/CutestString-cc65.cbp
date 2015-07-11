@@ -4,6 +4,7 @@
 	<Project>
 		<Option title="CutestString-cc65" />
 		<Option pch_mode="2" />
+		<Option default_target="gccSelftest" />
 		<Option compiler="cc65" />
 		<Build>
 			<Target title="Debug">
@@ -81,7 +82,6 @@
 				<Option object_output="obj/gccDebug" />
 				<Option type="1" />
 				<Option compiler="gcc" />
-				<Option use_console_runner="0" />
 				<Compiler>
 					<Add option="-Wall" />
 					<Add option="-g" />
