@@ -7,29 +7,14 @@
 #include "CutestString_internal.h"
 
 int CuStringAppendISvsNOT(CuString *str, const char* format,...){
-    const uint16_t ISvsNOTBUFLEN = 512;
     va_list va;
-    char* tempstr = malloc(ISvsNOTBUFLEN);
+    char *tempstr = CuStrFormat("is \"%s\" not \"%s\"", format, format);
 
-    va_start(va,format);
-    snprintf(tempstr,ISvsNOTBUFLEN,"is \"%s\" not \"%s\"",format,format);
-
-    if (!strcmp(format, "%s")){
-        char *is = va_arg(va, char*), *isnot = va_arg(va, char*);
-        CuStringAppendFormat(str, tempstr, isnot, is);
-    }else if (!strcmp(format, "%d")){
-        int is = va_arg(va, int), isnot = va_arg(va, int);
-        CuStringAppendFormat(str, tempstr, isnot, is);
-    }else if (!strcmp(format, "%u")){
-        unsigned int is = va_arg(va, unsigned int), isnot = va_arg(va, unsigned int);
-        CuStringAppendFormat(str, tempstr, isnot, is);
-    }else if (!strcmp(format, "%p")){
-        uintptr_t is = va_arg(va, uintptr_t), isnot = va_arg(va, uintptr_t);
-        CuStringAppendFormat(str, tempstr, isnot, is);
-    }
+	va_start(va,format);
+  	CuStringAppendVariadicFormat(str, tempstr, va);
 
     va_end(va);
-    free (tempstr);
+    CuFree (tempstr);
 
     return EXIT_SUCCESS;
 }

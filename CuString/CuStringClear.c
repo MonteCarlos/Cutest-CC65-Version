@@ -8,8 +8,6 @@
 #include "CutestString_internal.h"
 int CuStringClear(CuString* str)
 {
-
-
 	return EXIT_SUCCESS;
 }
 

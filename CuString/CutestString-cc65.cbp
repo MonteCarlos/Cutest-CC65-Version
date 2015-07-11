@@ -179,11 +179,6 @@
 		</Unit>
 		<Unit filename="CuStringAppendULong.c">
 			<Option compilerVar="CC" />
-			<Option target="Debug" />
-			<Option target="Release" />
-			<Option target="gccSelftest" />
-			<Option target="gccRelease" />
-			<Option target="gccDebug" />
 		</Unit>
 		<Unit filename="CuStringAppendVariadicFormat.c">
 			<Option compilerVar="CC" />

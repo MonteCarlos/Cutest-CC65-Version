@@ -53,7 +53,6 @@ size_t testRunner(CuSuite *suite){
 
 void RunAllTests(void)
 {
-	CuString *output = NULL;
 	//obtain tests of independent functions
 	CuSuite* suite = GetSuite(CuStringGetSuite1);//CuSuiteNew();
 

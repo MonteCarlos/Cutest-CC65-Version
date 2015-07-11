@@ -61,6 +61,7 @@ void TestCuStringDelete(CuTest* tc)
 	CuString* str = CuStringNew();
 
 	CuStringDelete(str);
+	CuAssertFalse(tc, CuAlloc_getBufferValidity(str));
 }
 
 void TestCuStringInit(CuTest* tc)
@@ -350,9 +351,17 @@ void TestCuStringResize(CuTest *tc){
 	char *teststr1 = "a short string";
 	char *teststr2 = "a very much longer string";
 	CuString *str1 = CuStringConvertCStr(teststr1);
+	CuAssertIntEquals( tc, CuStringLen(str1), strlen(teststr1) );
 	CuStringResize(str1, sizeof(teststr2));
 	CuAssertIntEquals( tc, CuStringSize(str1), sizeof(teststr2) );
-	//CuAssertIntEquals( tc, CuStringLen(str1), strlen(teststr1) );
+	CuAssertIntEquals( tc, CuStringLen(str1), strlen(teststr1) );
+	memcpy(CuStringCStr(str1), teststr2, sizeof(teststr2));
+	CuAssertIntEquals( tc, CuStringSize(str1), sizeof(teststr2) );
+	CuAssertIntEquals( tc, CuStringLen(str1), strlen(teststr2) );
+
+	CuStringResize(str1, sizeof(teststr1)/2);
+	CuAssertIntEquals( tc, CuStringSize(str1), sizeof(teststr1)/2 );
+	CuAssertIntEquals( tc, CuStringLen(str1), sizeof(teststr1)/2-1 );
 	CuStringDelete(str1);
 }
 
@@ -379,7 +388,7 @@ void TestCuStringAppendLineFile(CuTest *tc){
     CuString* thisline = CuStringNew();
     char *expected;
 	CuString *str = CuStringConvertCStr(frontStr);
-	CuStringAppendULong(thisline, line);
+	CuStringAppendFormat(thisline, "%lu", line);
 	expected = malloc(sizeof(frontStr)+sizeof(thisfile)+strlen(CuStringCStr(thisline))+2+1);
 	CuStringAppendLineFile(str, thisfile, line);
 	strcpy(expected, frontStr);
@@ -545,10 +554,10 @@ CuSuite* CuStringGetSuite3(void)
 	SUITE_ADD_TEST(suite, TestCuStringAppendNULL);
 	SUITE_ADD_TEST(suite, TestCuStringAppendChar);
 	SUITE_ADD_TEST(suite, TestCuStringAppendFormat);
-	SUITE_ADD_TEST(suite, TestCuStringAppendLineFile);
+	//SUITE_ADD_TEST(suite, TestCuStringAppendLineFile);
 	//SUITE_ADD_TEST(suite, TestCuStringComposeMessage);
 	SUITE_ADD_TEST(suite, TestCuStringAppendULong);
-    /*SUITE_ADD_TEST(suite, TestCuStringAppendISvsNOT);*/
+    SUITE_ADD_TEST(suite, TestCuStringAppendISvsNOT);
 
 	//alle OK
     return suite;
