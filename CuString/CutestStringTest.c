@@ -355,13 +355,17 @@ void TestCuStringResize(CuTest *tc){
 	CuStringResize(str1, sizeof(teststr2));
 	CuAssertIntEquals( tc, CuStringSize(str1), sizeof(teststr2) );
 	CuAssertIntEquals( tc, CuStringLen(str1), strlen(teststr1) );
-	memcpy(CuStringCStr(str1), teststr2, sizeof(teststr2));
-	CuAssertIntEquals( tc, CuStringSize(str1), sizeof(teststr2) );
-	CuAssertIntEquals( tc, CuStringLen(str1), strlen(teststr2) );
 
-	CuStringResize(str1, sizeof(teststr1)/2);
+	CuStringDelete(str1);
+
+	str1 = CuStringConvertCStr(teststr2);
+	CuStringResize(str1, sizeof(teststr1));
+	CuAssertIntEquals( tc, CuStringSize(str1), sizeof(teststr1) );
+	CuAssertIntEquals( tc, CuStringLen(str1), strlen(teststr1) );
+
+	/*CuStringResize(str1, sizeof(teststr1)/2);
 	CuAssertIntEquals( tc, CuStringSize(str1), sizeof(teststr1)/2 );
-	CuAssertIntEquals( tc, CuStringLen(str1), sizeof(teststr1)/2-1 );
+	CuAssertIntEquals( tc, CuStringLen(str1), sizeof(teststr1)/2-1 );*/
 	CuStringDelete(str1);
 }
 
