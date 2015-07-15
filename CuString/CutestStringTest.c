@@ -352,15 +352,15 @@ void TestCuStringResize(CuTest *tc){
 	char *teststr2 = "a very much longer string";
 	CuString *str1 = CuStringConvertCStr(teststr1);
 	CuAssertIntEquals( tc, CuStringLen(str1), strlen(teststr1) );
-	CuStringResize(str1, sizeof(teststr2));
-	CuAssertIntEquals( tc, CuStringSize(str1), sizeof(teststr2) );
+	CuStringResize(str1, sizeof(*teststr2));
+	CuAssertIntEquals( tc, CuStringSize(str1), sizeof(*teststr2) );
 	CuAssertIntEquals( tc, CuStringLen(str1), strlen(teststr1) );
 
 	CuStringDelete(str1);
 
 	str1 = CuStringConvertCStr(teststr2);
-	CuStringResize(str1, sizeof(teststr1));
-	CuAssertIntEquals( tc, CuStringSize(str1), sizeof(teststr1) );
+	CuStringResize(str1, sizeof(*teststr1));
+	CuAssertIntEquals( tc, CuStringSize(str1), sizeof(*teststr1) );
 	CuAssertIntEquals( tc, CuStringLen(str1), strlen(teststr1) );
 
 	/*CuStringResize(str1, sizeof(teststr1)/2);
