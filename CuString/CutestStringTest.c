@@ -342,25 +342,25 @@ void TestCuStrNULL(CuTest* tc){
 void TestCuStringSize(CuTest *tc){
 	char *teststr = "Another test string";
 	CuString *str = CuStringConvertCStr(teststr);
-	CuStringResize(str, strlen(teststr));
-	CuAssertIntEquals( tc, CuStringSize(str), strlen(teststr) );
+	CuStringResize(str, sizeof(*teststr));
+	CuAssertIntEquals( tc, CuStringSize(str), sizeof(*teststr) );
 	CuStringDelete(str);
 }
 
 void TestCuStringResize(CuTest *tc){
-	char *teststr1 = "a short string";
-	char *teststr2 = "a very much longer string";
+	char teststr1[] = "a short string";
+	char teststr2[] = "a very much longer string";
 	CuString *str1 = CuStringConvertCStr(teststr1);
 	CuAssertIntEquals( tc, CuStringLen(str1), strlen(teststr1) );
-	CuStringResize(str1, sizeof(*teststr2));
-	CuAssertIntEquals( tc, CuStringSize(str1), sizeof(*teststr2) );
+	CuStringResize(str1, sizeof(teststr2));
+	CuAssertIntEquals( tc, CuStringSize(str1), sizeof(teststr2) );
 	CuAssertIntEquals( tc, CuStringLen(str1), strlen(teststr1) );
 
 	CuStringDelete(str1);
 
 	str1 = CuStringConvertCStr(teststr2);
-	CuStringResize(str1, sizeof(*teststr1));
-	CuAssertIntEquals( tc, CuStringSize(str1), sizeof(*teststr1) );
+	CuStringResize(str1, sizeof(teststr1));
+	CuAssertIntEquals( tc, CuStringSize(str1), sizeof(teststr1) );
 	CuAssertIntEquals( tc, CuStringLen(str1), strlen(teststr1) );
 
 	/*CuStringResize(str1, sizeof(teststr1)/2);
