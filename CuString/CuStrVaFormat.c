@@ -1,14 +1,12 @@
 #include "CutestString_internal.h"
 
 char *CuStrVaFormat(const char* format, va_list va){
-    char *buf;
+    size_t n = CuStrLenFormat((const char*)CuStrNULL((char*)format), va);//determine number of chars to be printed.
+        //Still use snprintf afterwards because only way to detect errors in CuStrLenFormat with debugger
 
-	format = (const char*)CuStrNULL((char*)format);
+    char *buf = (char*)CuStrAlloc( n );
 
-	//use (v)snprintf trick to determine number of characters to be printed, beforehand
-	buf = (char*)CuStrAlloc( CuStrLenFormat(format, va) );
-
-	vsprintf(buf, format, va);
+	vsnprintf(buf, n, format, va);
 	return buf;
 }
 

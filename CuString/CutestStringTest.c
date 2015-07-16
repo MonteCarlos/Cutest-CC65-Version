@@ -207,14 +207,15 @@ void TestCuStrVaFormat(CuTest* tc){
 
 void TestCuStringAppendFormat(CuTest* tc)
 {
-	char* text = CuStrAlloc(300);		/* alloc and zero 300 chars plus \0 */
+	size_t n = 300;
+	char* text = CuStrAlloc(n);		/* alloc and zero 300 chars plus \0 */
 	CuString* str = CuStringNew();
-	memset(text, 'a', sizeof(text)-1);
+	memset(text, 'a', n-1);
 	CuStringAppendFormat(str, "%s", text);
 
 	/* buffer limit raised to HUGE_STRING_LEN so no overflow */
 
-	CuAssertIntEquals(tc, sizeof(text)-1, strlen(str->buffer));
+	CuAssertIntEquals(tc, n-1, strlen(str->buffer));
 	CuStringDelete(str);
 	CuFree(text);
 
@@ -561,8 +562,8 @@ CuSuite* CuStringGetSuite3(void)
 	//SUITE_ADD_TEST(suite, TestCuStringAppendLineFile);
 	//SUITE_ADD_TEST(suite, TestCuStringComposeMessage);
 	SUITE_ADD_TEST(suite, TestCuStringAppendULong);
-    SUITE_ADD_TEST(suite, TestCuStringAppendISvsNOT);
-
+/*    SUITE_ADD_TEST(suite, TestCuStringAppendISvsNOT);
+*/
 	//alle OK
     return suite;
 }

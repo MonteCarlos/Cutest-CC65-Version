@@ -15,7 +15,7 @@ struct CuAlloc_BufHeader_tag{
 
 struct CuAlloc_tag {
     CuAlloc_BufHeader_t;//Anonymous Struct
-    uint8_t array[];
+    uint8_t array[];//Variable length array
 };
 
 extern unsigned long int alloccount;

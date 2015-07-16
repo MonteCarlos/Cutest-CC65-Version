@@ -7,7 +7,7 @@ bool CuFree(void *ptr){
     if ( !CuAlloc_getBufferValidity(ptr) )  return false;
 //    if ( ptr2 -> this != ptr2) return false;
     ptr2 -> isvalid = false;
-    free(ptr2);
+    free(ptr2);//only free on ptr2 because data is stored in var len arr, which is allocated together with the struct
     ++freecount;
     return true;
 }
