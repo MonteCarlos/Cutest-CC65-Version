@@ -6,7 +6,7 @@ char *CuStrVaFormat(const char* format, va_list va){
 
     char *buf = (char*)CuStrAlloc( n );
 
-	vsnprintf(buf, n, format, va);
+	vsnprintf(buf, n+1, format, va);
 	return buf;
 }
 
