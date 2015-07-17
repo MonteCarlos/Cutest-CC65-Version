@@ -1,7 +1,7 @@
 #include "CuAlloc_internal.h"
 
 void *CuCalloc(size_t n){
-    register CuAlloc_t* ptr = (CuAlloc_t*)calloc(CuAlloc_calculateTotalSize(n),1);
+    CuAlloc_t* ptr = (CuAlloc_t*)calloc(CuAlloc_calculateTotalSize(n),1);
     assert(NULL!=ptr);
     CuAlloc_initHeader(ptr, n);
 
