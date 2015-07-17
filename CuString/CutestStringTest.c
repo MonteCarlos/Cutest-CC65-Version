@@ -207,18 +207,14 @@ void TestCuStrVaFormat(CuTest* tc){
 
 void TestCuStringAppendFormat(CuTest* tc)
 {
-	size_t n = 300;
-	char* text = CuStrAlloc(n);		/* alloc and zero 300 chars plus \0 */
 	CuString* str = CuStringNew();
-	memset(text, 'a', n-1);
-	CuStringAppendFormat(str, "%s", text);
+	CuStringAppendFormat(str, "%s,%d,%c", "abc",10,'y');
 
 	/* buffer limit raised to HUGE_STRING_LEN so no overflow */
 
-	CuAssertIntEquals(tc, n-1, strlen(str->buffer));
+	CuAssertIntEquals(tc, 8, CuStringLen(str));
+	CuAssertStrEquals(tc, "abc,10,y", CuStringCStr(str));
 	CuStringDelete(str);
-	CuFree(text);
-
 }
 
 // TODO (MyAcer#1#): strEquals functions belong in CuTest not CuString
@@ -407,6 +403,7 @@ void TestCuStringAppendLineFile(CuTest *tc){
 	CuStringDelete(str);
 	CuStringDelete(thisline);
 }
+
 void TestCuStringAppendISvsNOT(CuTest *tc){
     enum {TestISvsNOT_MAXSTRLEN = 100};
 
@@ -452,8 +449,8 @@ void TestCuStringAppendISvsNOT(CuTest *tc){
 }
 */
 void TestCuStringAppendULong(CuTest *tc){
-	unsigned long int num = 1234567890;
-	char* numStr = "1234567890";
+	unsigned long int num = 123456;
+	char* numStr = "123456";
 
 	CuString *str = CuStringNew();
 	CuStringAppendULong(str, num);
@@ -559,11 +556,11 @@ CuSuite* CuStringGetSuite3(void)
 	SUITE_ADD_TEST(suite, TestCuStringAppendNULL);
 	SUITE_ADD_TEST(suite, TestCuStringAppendChar);
 	SUITE_ADD_TEST(suite, TestCuStringAppendFormat);
-	//SUITE_ADD_TEST(suite, TestCuStringAppendLineFile);
+	SUITE_ADD_TEST(suite, TestCuStringAppendLineFile);
 	//SUITE_ADD_TEST(suite, TestCuStringComposeMessage);
 	SUITE_ADD_TEST(suite, TestCuStringAppendULong);
-/*    SUITE_ADD_TEST(suite, TestCuStringAppendISvsNOT);
-*/
+   SUITE_ADD_TEST(suite, TestCuStringAppendISvsNOT);
+
 	//alle OK
     return suite;
 }
