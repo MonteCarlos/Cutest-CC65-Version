@@ -341,10 +341,10 @@ void TestCuStrNULL(CuTest* tc){
 }
 
 void TestCuStringSize(CuTest *tc){
-	char *teststr = "Another test string";
+	char teststr[] = "Another test string";
 	CuString *str = CuStringConvertCStr(teststr);
-	CuStringResize(str, sizeof(*teststr));
-	CuAssertIntEquals( tc, CuStringSize(str), sizeof(*teststr) );
+	CuStringResize(str, sizeof(teststr));
+	CuAssertIntEquals( tc, CuStringSize(str), sizeof(teststr) );
 	CuStringDelete(str);
 }
 
