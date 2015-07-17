@@ -403,6 +403,7 @@ void TestCuStringAppendLineFile(CuTest *tc){
 	CuStringDelete(str);
 	CuStringDelete(thisline);
 }
+
 void TestCuStringAppendISvsNOT(CuTest *tc){
     enum {TestISvsNOT_MAXSTRLEN = 100};
 
@@ -555,11 +556,11 @@ CuSuite* CuStringGetSuite3(void)
 	SUITE_ADD_TEST(suite, TestCuStringAppendNULL);
 	SUITE_ADD_TEST(suite, TestCuStringAppendChar);
 	SUITE_ADD_TEST(suite, TestCuStringAppendFormat);
-	//SUITE_ADD_TEST(suite, TestCuStringAppendLineFile);
+	SUITE_ADD_TEST(suite, TestCuStringAppendLineFile);
 	//SUITE_ADD_TEST(suite, TestCuStringComposeMessage);
 	SUITE_ADD_TEST(suite, TestCuStringAppendULong);
-/*    SUITE_ADD_TEST(suite, TestCuStringAppendISvsNOT);
-*/
+   SUITE_ADD_TEST(suite, TestCuStringAppendISvsNOT);
+
 	//alle OK
     return suite;
 }
