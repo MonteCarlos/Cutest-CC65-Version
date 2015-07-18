@@ -6,14 +6,15 @@
 
 #include "CutestString_internal.h"
 
-void CuStringDelete(CuString *str)
+bool CuStringDelete(CuString *str)
 {
     bool freeresult;
-	if (!str) return;
+	freeresult = (str!=NULL);
 	assert(NULL != str);
 	assert(NULL != str->buffer);
-	freeresult = CuFree(str->buffer);
+	freeresult &= CuFree(str->buffer);
 	assert(true == freeresult);
-	freeresult = CuFree(str);
+	freeresult &= CuFree(str);
 	assert(true == freeresult);
+	return freeresult;
 }

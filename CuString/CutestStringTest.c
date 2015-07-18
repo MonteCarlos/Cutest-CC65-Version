@@ -60,8 +60,7 @@ void TestCuStringDelete(CuTest* tc)
 {
 	CuString* str = CuStringNew();
 
-	CuStringDelete(str);
-	CuAssertFalse(tc, CuAlloc_getBufferValidity(str));
+	CuAssertTrue(tc, CuStringDelete(str));
 }
 
 void TestCuStringInit(CuTest* tc)
@@ -394,7 +393,7 @@ void TestCuStringAppendLineFile(CuTest *tc){
 	CuStringAppendLineFile(str, thisfile, line);
 	strcpy(expected, frontStr);
 	strcat(expected, thisfile);
-	strcat(expected, "(");
+	strcat(expected, " (");
 	strcat(expected, CuStringCStr(thisline));
 	strcat(expected, ")");
 

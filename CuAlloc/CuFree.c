@@ -9,5 +9,7 @@ bool CuFree(void *ptr){
     ptr2 -> isvalid = false;
     free(ptr2);//only free on ptr2 because data is stored in var len arr, which is allocated together with the struct
     ++freecount;
+    lastFreed[0] = ptr2;
+
     return true;
 }

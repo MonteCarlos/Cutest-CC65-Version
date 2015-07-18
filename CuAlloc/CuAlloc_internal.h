@@ -21,6 +21,8 @@ struct CuAlloc_tag {
 extern unsigned long int alloccount;
 extern unsigned long int freecount;
 extern unsigned long int realloccount;
+extern void *lastFreed[5];
+extern void *lastAllocated[5];
 
 void CuAlloc_initHeader(CuAlloc_t* ptr, size_t n);
 CuAlloc_t *CuAlloc_getHeaderAddr(void* ptr);
