@@ -92,7 +92,6 @@
 				</Linker>
 				<ExtraCommands>
 					<Add after="CutestString-cc65_test.exe" />
-					<Mode after="always" />
 				</ExtraCommands>
 			</Target>
 		</Build>

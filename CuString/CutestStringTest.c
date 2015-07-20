@@ -191,6 +191,15 @@ void TestCuStrLenFormat(CuTest* tc){
 	CuAssertTrue(tc, len == 13);
 }
 
+void TestCuStrFormat(CuTest* tc){
+    static char subStr[] = "subStr";
+    int num = 10;
+	char *str = CuStrFormat("abc %s %d", subStr, num);
+	CuAssertTrue(CuAlloc_getBufferValidity(str));
+    CuAssertStrEquals(tc, "abc subStr 10", str);
+    CuFree(str);
+}
+
 char* helper_TestCuStrVaFormat(char* format, ...){
 	va_list va;
 	va_start(va, format);
@@ -394,7 +403,7 @@ void TestCuStringAppendLineFile(CuTest *tc){
 	CuStringAppendLineFile(str, thisfile, line);
 	strcpy(expected, frontStr);
 	strcat(expected, thisfile);
-	strcat(expected, "(");
+	strcat(expected, " (");
 	strcat(expected, CuStringCStr(thisline));
 	strcat(expected, ")");
 
@@ -539,7 +548,7 @@ CuSuite* CuStringGetSuite2(void)
 
 
 	SUITE_ADD_TEST(suite, TestCuStrLenFormat);
-//	SUITE_ADD_TEST(suite, TestCuStrFormat);
+	SUITE_ADD_TEST(suite, TestCuStrFormat);
 	SUITE_ADD_TEST(suite, TestCuStringInserts);
 	SUITE_ADD_TEST(suite, TestCuStringResizes);
 	SUITE_ADD_TEST(suite, TestCuStringAppendVariadicFormat);
