@@ -71,7 +71,7 @@ void testCuFree(CuTest* tc){
 
    // CuAssertTrue(tc, !CuAlloc_getBufferValidity(iVar));
     CuAssertIntEquals(tc, true, freeResult);
-    CuAssertIntEquals(tc, alloccount-1, CuAlloc_getAllocCount());
+    CuAssertIntEquals(tc, alloccount, CuAlloc_getAllocCount());
     CuAssertIntEquals(tc, freecount+1, CuAlloc_getFreeCount());
 
     freeResult = CuFree(iVar);
@@ -190,6 +190,7 @@ CuSuite *CuAlloc_requestEarlyTests(void){
     SUITE_ADD_TEST(suite, testCuAllocGetTotalSize);
     SUITE_ADD_TEST(suite, testCuAllocGetHeaderAddr);
     SUITE_ADD_TEST(suite, testCuAllocGetDataAddr);
+
     return suite;
 
 }
