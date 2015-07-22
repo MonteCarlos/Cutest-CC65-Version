@@ -20,6 +20,7 @@ unsigned long int CuAlloc_getPendingFrees(void);
 unsigned long int CuAlloc_getAllocCount(void);
 unsigned long int CuAlloc_getFreeCount(void);
 unsigned long int CuAlloc_getReallocCount(void);
+void *CuAllocGetLastFreedMem(uint8_t idx);
 
 // CUALLOC_H_INCLUDED
 #endif

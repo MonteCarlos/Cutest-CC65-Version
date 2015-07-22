@@ -60,8 +60,7 @@ void TestCuStringDelete(CuTest* tc)
 {
 	CuString* str = CuStringNew();
 
-	CuStringDelete(str);
-	CuAssertFalse(tc, CuAlloc_getBufferValidity(str));
+	CuAssertTrue(tc, CuStringDelete(str));
 }
 
 void TestCuStringInit(CuTest* tc)

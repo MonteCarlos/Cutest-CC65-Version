@@ -122,6 +122,9 @@
 		<Unit filename="CuAlloc_getHeaderAddr.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="CuAlloc_getLastFreedMem.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="CuAlloc_getMalloccount.c">
 			<Option compilerVar="CC" />
 		</Unit>

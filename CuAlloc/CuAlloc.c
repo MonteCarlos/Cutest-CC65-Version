@@ -4,6 +4,8 @@
 unsigned long int alloccount=0;
 unsigned long int freecount=0;
 unsigned long int realloccount=0;
+void *lastFreed[5] = {0};
+void *lastAllocated[5] = {0};
 
 void *CuAlloc(size_t n){
     register CuAlloc_t* ptr = (CuAlloc_t*)malloc(CuAlloc_calculateTotalSize(n));

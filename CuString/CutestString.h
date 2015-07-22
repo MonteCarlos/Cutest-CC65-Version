@@ -40,7 +40,7 @@ void CuStringAppendChar(CuString* str, char ch);
 void CuStringAppendFormat(CuString* str, const char* format, ...);
 void CuStringInsert(CuString* str, const char* text, int pos);
 void CuStringResize(CuString* str, int newSize);
-void CuStringDelete(CuString* str);
+bool CuStringDelete(CuString* str);
 CuStringLen_t CuStringLen(CuString *str);
 CuStringSize_t CuStringSize(CuString *str);
 int CuStringClear(CuString *str);
