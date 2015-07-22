@@ -7,7 +7,8 @@ typedef struct CuAlloc_BufHeader_tag CuAlloc_BufHeader_t;
 typedef struct CuAlloc_tag CuAlloc_t;
 
 struct CuAlloc_BufHeader_tag{
-    bool isvalid;
+    uint8_t dataOffset;
+    uint8_t (*data)[];
     size_t datasize;
     size_t totalsize;
     CuAlloc_t *this;

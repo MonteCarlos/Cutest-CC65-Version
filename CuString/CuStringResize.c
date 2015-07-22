@@ -7,7 +7,7 @@
 void CuStringResize(CuString* str, int newSize)
 {
 	assert(CuAlloc_getBufferValidity(str));
-	assert(CuAlloc_getBufferValidity(CuStringCStr(str));
+	assert(CuAlloc_getBufferValidity(CuStringCStr(str)));
 	//if newsize is smaller than old size, cut and terminate string so it matches into new buffer
 	//important to use CuStringLen, because size is allocated in chunks of CUSTRING_LEN_NEW
 	if (CuStringLen(str)+1 > newSize){

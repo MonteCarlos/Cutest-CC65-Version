@@ -195,7 +195,7 @@ void TestCuStrFormat(CuTest* tc){
     static char subStr[] = "subStr";
     int num = 10;
 	char *str = CuStrFormat("abc %s %d", subStr, num);
-	CuAssertTrue(CuAlloc_getBufferValidity(str));
+	CuAssertTrue(tc, CuAlloc_getBufferValidity(str));
     CuAssertStrEquals(tc, "abc subStr 10", str);
     CuFree(str);
 }
