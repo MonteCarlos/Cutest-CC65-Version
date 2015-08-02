@@ -1,9 +1,9 @@
 #include "CuTest_internal.h"
 
 // TODO (MyAcer#1#): find solution for messed output with sub tests
-void CuSuiteRun(CuSuite* testSuite)
+size_t CuSuiteRun(CuSuite* testSuite)
 {
-	size_t i;
+	size_t i, failCnt;
 	unsigned long int pendingfrees;
 	//CuTest* testCase = NULL;
 	for (i = 0 ; i < testSuite->testcount ; ++i)
@@ -12,7 +12,7 @@ void CuSuiteRun(CuSuite* testSuite)
 
 		printf("%d:",i);
 		if (testCase->isSuite){
-            CuSuiteRun(testCase->suite);
+            if (failCnt = CuSuiteRun(testCase->suite)) return failCnt;
 		}else{
             register CuTest *test = testCase->test;
 
@@ -34,4 +34,5 @@ void CuSuiteRun(CuSuite* testSuite)
             }
 		}
 	}
+	return CuSuiteGetFailcount(testSuite);
 }

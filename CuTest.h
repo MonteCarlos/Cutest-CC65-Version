@@ -96,7 +96,7 @@ CuSuite* CuSuiteNew(void);
 void CuSuiteDelete(CuSuite *testSuite);
 void CuSuiteAdd(CuSuite* testSuite, CuTest *testCase);
 void CuSuiteAddSuite(CuSuite* testSuite, CuSuite* testSuite2);
-void CuSuiteRun(CuSuite* testSuite);
+size_t  CuSuiteRun(CuSuite* testSuite);
 void CuSuiteSummary(CuSuite* testSuite, FILE* file);
 //void CuSuiteDetails(CuSuite* testSuite, CuString* details);
 void CuSuiteDetails(CuSuite* testSuite, FILE* file);
