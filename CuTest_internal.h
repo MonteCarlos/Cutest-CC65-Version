@@ -1,12 +1,7 @@
 #ifndef CUTEST_INTERNAL_H_INCLUDED
 #define CUTEST_INTERNAL_H_INCLUDED
 
-#include <assert.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <stdint.h>
-#include <stdbool.h>
+#include <MCLib.h>
 
 #include "CuString\CutestString_internal.h"
 #include "CuTest.h"
@@ -38,9 +33,13 @@ typedef struct CuTestPtr_tag{
 struct CuSuite_tag
 {
 	size_t testcount;
+	size_t suitecount;
+    size_t failCount;
+    size_t totalcount;
+    bool ran;
 	CuString *name;
 	CuTestPtr_t *testlist;
-	size_t failCount;
+	bool isSubSuite;
 	CuReport_t *report;
 };
 

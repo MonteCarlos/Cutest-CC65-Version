@@ -241,7 +241,8 @@ void TestCuSuiteAddSuite(CuTest* tc)
 	CuSuiteAddSuite(ts1, ts2);
 
 	//Check correct amount of tests and sub suites
-	CuAssertIntEquals(tc, 3, ts1->testcount);
+	CuAssertIntEquals(tc, 2, ts1->testcount);
+    CuAssertIntEquals(tc, 1, ts1->suitecount);
 
     //Check correct type of pointers to tests or suites
     CuAssertFalse(tc, ts1->testlist[0].isSuite);

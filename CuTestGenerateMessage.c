@@ -8,14 +8,16 @@
 
 void CuTestGenerateMessage(CuString* str, const char* msg1, const char* msg2, const char* file, unsigned long int line){
 	//CuStringClear(str);
-	CuStringAppend(str, file);
+	CuStringAppendFormat(str, "%s(%lu)", file, line);
+
+	/*CuStringAppend(str, file);
 	CuStringAppendChar(str, '(');
 	CuStringAppendULong(str, line);
 	CuStringAppendChar(str, ')');
-
+    */
     if (NULL != msg1){
-        CuStringAppend(str, ", ");
-    	CuStringAppend(str, msg1);
+        CuStringAppendFormat(str, ", %s", msg1);
+    	//CuStringAppend(str, msg1);
     }
 
 	if (NULL != msg2){

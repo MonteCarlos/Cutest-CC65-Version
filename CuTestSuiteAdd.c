@@ -12,6 +12,7 @@ void CuSuiteAdd(CuSuite* testSuite, CuTest *newtest)
 	testlist[testcount].test = newtest;
 	testlist[testcount].isSuite = false;
 	testSuite->testcount+=1;
+	testSuite->totalcount+=1;
 	testSuite->testlist = testlist;
 	//++testSuite->count;
 }

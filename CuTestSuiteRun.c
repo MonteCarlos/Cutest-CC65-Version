@@ -10,7 +10,7 @@ size_t CuSuiteRun(CuSuite* testSuite)
 	{
 		CuTestPtr_t *testCase = &(testSuite->testlist[i]);
 
-		printf("%d:",i);
+		printf("%d: ",i);
 		if (testCase->isSuite){
             if (failCnt = CuSuiteRun(testCase->suite)) return failCnt;
 		}else{
@@ -34,5 +34,7 @@ size_t CuSuiteRun(CuSuite* testSuite)
             }
 		}
 	}
+	testSuite->ran = true;
+
 	return CuSuiteGetFailcount(testSuite);
 }

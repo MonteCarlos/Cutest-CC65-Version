@@ -55,5 +55,5 @@ void CuSuiteDetails(CuSuite* testSuite, FILE* file)
 	report -> reportedPasses = reportedPasses;
 	report -> performedTests = testcount;
 
-	CuSuiteSummary(testSuite, file);
+	if (testSuite->ran) CuSuiteSummary(testSuite, file);
 }

@@ -62,6 +62,7 @@
 				</Compiler>
 				<Linker>
 					<Add library="CuAlloc\libCuAlloc.lib.a" />
+					<Add library="..\MyCLib\libMCLib.a" />
 				</Linker>
 			</Target>
 			<Target title="Selftest">
@@ -78,6 +79,7 @@
 				<Linker>
 					<Add library="CuString\libCutestString-cc65_dbg.a" />
 					<Add library="CuAlloc\libCuAllocDbg.a" />
+					<Add library="..\MyCLib\libMCLib.a" />
 				</Linker>
 				<ExtraCommands>
 					<Add after="cutest.exe" />
@@ -97,6 +99,7 @@
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
+					<Add library="..\MyCLib\libMCLib.a" />
 				</Linker>
 			</Target>
 		</Build>
@@ -104,6 +107,9 @@
 			<Add alias="All, selftest contained" targets="CC65Debug;CC65Release;CC65Selftest;" />
 			<Add alias="gccall" targets="Debug;Selftest;Release;" />
 		</VirtualTargets>
+		<Compiler>
+			<Add directory="../MyCLib" />
+		</Compiler>
 		<ExtraCommands>
 			<Add before="cmd /c echo %CC65_HOME%" />
 		</ExtraCommands>
