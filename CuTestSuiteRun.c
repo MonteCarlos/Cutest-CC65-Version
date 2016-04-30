@@ -21,10 +21,10 @@ size_t CuSuiteRun(CuSuite* testSuite)
             pendingfrees = CuAlloc_getPendingFrees();
             CuTestRun(test);
             if (test->failed) {
-                puts("\b->FAILED");
+                puts("->FAILED");
                 testSuite->failCount += 1;
             }else{
-                puts("\b->OK");
+                puts("->OK");
             }
             if ( CuAssert(test, " Memory leak detected (", pendingfrees == CuAlloc_getPendingFrees()) ){
                 CuTestAppendMessage(test, "Pending frees before: %u, after: %u)",

@@ -1,6 +1,6 @@
 #include "CuTest_internal.h"
 
-bool CuAssertPtrEquals_LineMsg(CuTest* tc, const char* file, int line, const char* message,
+bool CuAssertPtrEquals_LineMsg(CuTest* tc, const char* file, unsigned int line, const char* message,
 	const void* expected, const void* actual)
 {
 	//char* buf = CuAlloc(STRING_MAX*sizeof(char));

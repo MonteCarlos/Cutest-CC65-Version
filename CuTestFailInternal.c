@@ -1,11 +1,11 @@
 #include "CuTest_internal.h"
 
 
-void CuFailInternal(CuTest* tc, const char* file, int line, CuString* string)
+void CuFailInternal(CuTest* tc, const char* file, unsigned int line, CuString* string)
 {
-	char* buf = (char*)CuAlloc(CUSTRING_LEN_NEW*sizeof(char));
+	char* buf = CuStrFormat("%s:%lu:", file, line);//(char*)CuAlloc(CUSTRING_LEN_NEW*sizeof(char));
 	assert (NULL != buf);
-	sprintf(buf, "%s:%d: ", file, line);
+	//sprintf(buf, "%s:%d: ", file, line);
 	CuStringInsert(string, buf, 0);//buf is appended to string.
 
 	//buf is not needed anymore

@@ -1,6 +1,6 @@
 #include "CuTest_internal.h"
 
-bool CuAssertStrEquals_LineMsg(CuTest* tc, const char* file, int line, const char* message,
+bool CuAssertStrEquals_LineMsg(CuTest* tc, const char* file, unsigned int line, const char* message,
 	const char* expected, const char* actual)
 {
 	//CuString *string = CuStringNew();

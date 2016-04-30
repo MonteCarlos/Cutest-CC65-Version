@@ -1,7 +1,7 @@
 
 #include "CuTest_internal.h"
 
-bool CuAssertArrayElementsConstant_LineMsg(CuTest* tc, const char* file, int line, const char* message,
+bool CuAssertArrayElementsConstant_LineMsg(CuTest* tc, const char* file, unsigned int line, const char* message,
 	const void* expected, const void* actual, size_t elementsize, size_t len)
 {
     size_t i=0,j=0;

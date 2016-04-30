@@ -101,6 +101,7 @@
 		</VirtualTargets>
 		<Compiler>
 			<Add directory=".." />
+			<Add directory="../../MyCLib" />
 		</Compiler>
 		<ExtraCommands>
 			<Add before="cmd /c echo %CC65_HOME%" />

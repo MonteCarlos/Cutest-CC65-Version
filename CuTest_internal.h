@@ -18,6 +18,7 @@ struct CuTest_tag
 	bool ran;
 	bool reported;
 	bool memoryleak;
+	unsigned int assertCnt;//counter for assertions used in that test
 	CuString *message;
 	jmp_buf *jumpBuf;
 };
@@ -52,7 +53,7 @@ struct CuReport_tag{
 };
 
 
-void CuFailInternal(CuTest* tc, const char* file, int line, CuString* string);
+void CuFailInternal(CuTest* tc, const char* file, unsigned int line, CuString* string);
 void *CuTestAlloc(size_t n);
 unsigned long int CuTestGetProgressStart(void);
 unsigned long int CuTestGetProgressEnd(void);
