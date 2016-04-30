@@ -126,6 +126,9 @@
 		<Unit filename="CuAssertLine.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="CuAssertLongEqualsLineMsg.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="CuTest.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -143,6 +146,12 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="CuTestAssertArrayEqualsStepFunc.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="CuTestAssertGeneralEqualsLineMsg.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="CuTestAssertIntEqualsLineMsg.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="CuTestAssertPtrEqualsLineMsg.c">
@@ -170,9 +179,6 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="CuTestInit.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="CuTestIntEqualsLineMsg.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="CuTestNew.c">
