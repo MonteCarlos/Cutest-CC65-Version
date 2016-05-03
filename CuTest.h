@@ -46,7 +46,8 @@ bool CuAssertArrayEqualsStepFunc_LineMsg(CuTest* tc, const char* file, unsigned 
 	bool (*stepfunc)(size_t index, void* expected), const void* actual, size_t elementsize, size_t len);
 bool CuAssertArrayElementsConstant_LineMsg(CuTest* tc, const char* file, unsigned int line, const char* message,
 	const void* expected, const void* actual, size_t elementsize, size_t len);
-
+bool CuAssertGeneralEquals_LineMsg(CuTest* tc, const char* file, unsigned int line, const char* message,
+	void *expected, void *actual, bool (*cmpFnc)(void* a, void *b, char **expected, char **actual, CuString *msg));
 /* public assert functions */
 
 

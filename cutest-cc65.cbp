@@ -145,6 +145,12 @@
 		<Unit filename="CuTestAssertArrayEqualsStepFunc.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="CuTestAssertGeneralEqualsLineMsg.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="CuTestAssertIntEqualsLineMsg.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="CuTestAssertPtrEqualsLineMsg.c">
 			<Option compilerVar="CC" />
 		</Unit>
