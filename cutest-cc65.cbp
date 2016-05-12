@@ -178,9 +178,6 @@
 		<Unit filename="CuTestInit.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="CuTestIntEqualsLineMsg.c">
-			<Option compilerVar="CC" />
-		</Unit>
 		<Unit filename="CuTestNew.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -225,6 +222,16 @@
 		</Unit>
 		<Unit filename="CuTestSuiteSummary.c">
 			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="CuTestTest-cc65.map">
+			<Option target="CC65Debug" />
+			<Option target="CC65Release" />
+			<Option target="CC65Selftest" />
+		</Unit>
+		<Unit filename="CuTestTest-cc65.prg.map">
+			<Option target="CC65Debug" />
+			<Option target="CC65Release" />
+			<Option target="CC65Selftest" />
 		</Unit>
 		<Unit filename="CuTestTest.c">
 			<Option compilerVar="CC" />

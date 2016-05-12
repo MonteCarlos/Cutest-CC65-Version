@@ -2,16 +2,16 @@
 #include "CuTest_internal.h"
 
 bool CuAssertGeneralEquals_LineMsg(CuTest* tc, const char* file, unsigned int line, const char* message,
-	void *expected, void *actual, bool (*cmpFnc)(void* a, void *b,char **expected, char **actual, CuString *message))
+	const void *expected, const void *actual, char *expectedStr, char *actualStr, size_t maxStrLen, CuTestCmpFncPtr_t cmpFnc)
 {
 	bool result;
-	char *expectedStr=NULL, *actualStr=NULL; //init to NULL to enable tracking of missing ptr assignment
+	//char *expectedStr=NULL, *actualStr=NULL; //init to NULL to enable tracking of missing ptr assignment
     CuString *cmpmsg = CuStringNew();
 	//char* buf = (char*)calloc(STRING_MAX, sizeof(char));
 	//assert (NULL != buf);
 	//String functions will create new instance if NULL Ptr is passed
     //CuString *compResult = CuStringNew();
-	if ( !(result=cmpFnc(expected,actual,&expectedStr, &actualStr, cmpmsg)) ){
+	if ( !(result=cmpFnc(expected,actual,expectedStr, actualStr, maxStrLen, cmpmsg)) ){
         assert(NULL != expectedStr);
         assert(NULL != actualStr);
 

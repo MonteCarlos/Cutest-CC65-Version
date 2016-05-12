@@ -19,6 +19,8 @@ typedef CuSuite* CuSuitePtr;
 typedef CuTest* CuTestPtr;
 
 typedef void (*TestFunction)(CuTest *);
+typedef bool CuTestCmpFnc_t(const void* a, const void *b, char *exp, char *act, size_t maxStrLen, CuString *message);
+typedef CuTestCmpFnc_t *CuTestCmpFncPtr_t;
 
 void CuTestInit(CuTest* t, const char* name, TestFunction function);
 CuTest* CuTestNew(const char* name, TestFunction function);
@@ -47,7 +49,7 @@ bool CuAssertArrayEqualsStepFunc_LineMsg(CuTest* tc, const char* file, unsigned 
 bool CuAssertArrayElementsConstant_LineMsg(CuTest* tc, const char* file, unsigned int line, const char* message,
 	const void* expected, const void* actual, size_t elementsize, size_t len);
 bool CuAssertGeneralEquals_LineMsg(CuTest* tc, const char* file, unsigned int line, const char* message,
-	void *expected, void *actual, bool (*cmpFnc)(void* a, void *b, char **expected, char **actual, CuString *msg));
+	const void *expected, const void *actual, char *expStr, char *actStr, size_t maxStrLen, CuTestCmpFncPtr_t cmpFnc);
 /* public assert functions */
 
 

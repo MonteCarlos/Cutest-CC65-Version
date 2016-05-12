@@ -133,7 +133,7 @@ void TestCuAssertPtrEquals_Failure(CuTest* tc)
 	sprintf(expected_message, "expected pointer <0x%p> but was <0x%p>", nullPtr, &x);
 	CuAssertPtrEquals(tc2, NULL, &x);
 	CuAssertTrue(tc, tc2->failed);
-
+    //CuAssertPtrEquals(tc, (void*)0x400, (void*)0x123);
 	//CompareAsserts(tc, "CuAssertPtrEquals failed", expected_message, tc2.message);
 	free(expected_message);
 
