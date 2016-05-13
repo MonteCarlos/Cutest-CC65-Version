@@ -15,8 +15,8 @@
 				<Option compiler="cc65" />
 				<Linker>
 					<Add option="-C CutestString-cc65.cfg" />
-					<Add library="..\libcutest-cc65_Dbg.lib" />
-					<Add library="..\CuAlloc\CuAllocDbg.lib" />
+					<Add library="../libcutest-cc65_Dbg.lib" />
+					<Add library="../CuAlloc/CuAllocDbg.lib" />
 				</Linker>
 			</Target>
 			<Target title="Release">
@@ -30,8 +30,8 @@
 				</Compiler>
 				<Linker>
 					<Add option="-C CutestString-cc65.cfg" />
-					<Add library="..\libcutest-cc65.lib" />
-					<Add library="..\CuAlloc\CuAlloc.lib" />
+					<Add library="../libcutest-cc65.lib" />
+					<Add library="../CuAlloc/CuAlloc.lib" />
 				</Linker>
 			</Target>
 			<Target title="Selftest">
@@ -42,9 +42,9 @@
 				<Option use_console_runner="0" />
 				<Linker>
 					<Add option="-C CutestString-cc65.cfg" />
-					<Add library="..\cutest-cc65_Dbg.lib" />
-					<Add library="..\CuAlloc\CuAllocDbg.lib" />
-					<Add library=".\CutestString-cc65Dbg.lib" />
+					<Add library="../cutest-cc65_Dbg.lib" />
+					<Add library="../CuAlloc/CuAllocDbg.lib" />
+					<Add library="./CutestString-cc65Dbg.lib" />
 				</Linker>
 			</Target>
 			<Target title="gccDebug">
@@ -59,7 +59,8 @@
 					<Add option="-g" />
 				</Compiler>
 				<Linker>
-					<Add library="..\libcutest_Dbg.a" />
+					<Add library="../libcutest_Dbg.a" />
+					<Add library="../../MyCLib/libMCLib.a" />
 				</Linker>
 			</Target>
 			<Target title="gccRelease">
@@ -74,7 +75,8 @@
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
-					<Add library="..\libcutest.a" />
+					<Add library="../libcutest.a" />
+					<Add library="../../MyCLib/libMCLib.a" />
 				</Linker>
 			</Target>
 			<Target title="gccSelftest">
@@ -87,8 +89,9 @@
 					<Add option="-g" />
 				</Compiler>
 				<Linker>
-					<Add library="..\libcutest_Dbg.a" />
-					<Add library="..\CuAlloc\libCuAllocDbg.a" />
+					<Add library="../libcutest_Dbg.a" />
+					<Add library="../CuAlloc/libCuAllocDbg.a" />
+					<Add library="../../MyCLib/libMCLib.a" />
 				</Linker>
 				<ExtraCommands>
 					<Add after="CutestString-cc65_test.exe" />

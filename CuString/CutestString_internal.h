@@ -3,6 +3,7 @@
 
 #include "CutestString.h"
 #include "..\CuAlloc\CuAlloc.h"
+#include <MCLib.h>
 #include <stdarg.h>
 #include <stdint.h>
 #include <assert.h>
