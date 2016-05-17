@@ -9,18 +9,24 @@
 #include <stddef.h>
 #include <string.h>
 
-void *CuAlloc(size_t n);
-void *CuCalloc(size_t n);
-void *CuRealloc(void* old, size_t n);
-size_t CuAlloc_getDataSize(void *ptr);
-size_t CuAlloc_getTotalSize(void *ptr);
-bool CuAlloc_getBufferValidity(void *ptr);
-bool CuFree(void *ptr);
+//#ifdef __CC65__
+    typedef void *CuAllocPtr_t;
+//#else
+ //   typedef uint8_t *CuAllocPtr_t;
+//#endif // __CC65__
+
+CuAllocPtr_t CuAlloc(size_t n);
+CuAllocPtr_t CuCalloc(size_t n);
+CuAllocPtr_t CuRealloc(void* old, size_t n);
+size_t CuAlloc_getDataSize( CuAllocPtr_t ptr);
+size_t CuAlloc_getTotalSize( CuAllocPtr_t ptr);
+bool CuAlloc_getBufferValidity( CuAllocPtr_t ptr);
+bool CuFree( CuAllocPtr_t ptr);
 unsigned long int CuAlloc_getPendingFrees(void);
 unsigned long int CuAlloc_getAllocCount(void);
 unsigned long int CuAlloc_getFreeCount(void);
 unsigned long int CuAlloc_getReallocCount(void);
-void *CuAllocGetLastFreedMem(uint8_t idx);
+CuAllocPtr_t CuAllocGetLastFreedMem(uint8_t idx);
 
 // CUALLOC_H_INCLUDED
 #endif

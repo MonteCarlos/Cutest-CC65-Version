@@ -26,8 +26,8 @@ extern void *lastFreed[5];
 extern void *lastAllocated[5];
 
 void CuAlloc_initHeader(CuAlloc_t* ptr, size_t n);
-CuAlloc_t *CuAlloc_getHeaderAddr(void* ptr);
-void *CuAlloc_getDataAddr(CuAlloc_t*  ptr);
+CuAlloc_t *CuAlloc_getHeaderAddr(CuAllocPtr_t ptr);
+CuAllocPtr_t CuAlloc_getDataAddr(CuAlloc_t*  ptr);
 size_t CuAlloc_calculateTotalSize(size_t n);
 
 // CUALLOC_INTERNAL_H_INCLUDED

@@ -333,12 +333,12 @@ void TestCuStringClear(CuTest* tc){
 }
 
 void TestCuStrNULL(CuTest* tc){
-	char *nullstr = NULL;
-	char *teststr = "a test";
+	const char *nullstr = NULL;
+	const char *teststr = "a test";
 
 	nullstr = CuStrNULL(nullstr);
 	CuAssertIntEquals(tc, 0, strcmp(nullstr,"NULL"));
-
+    CuFree((void*)nullstr);
 	nullstr = CuStrNULL(teststr);
 	CuAssertStrEquals(tc, nullstr, teststr);
 
