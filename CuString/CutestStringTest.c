@@ -167,13 +167,16 @@ void TestCuStrAlloc(CuTest* tc)
     CuFree(ptr);
 }
 
+/*
 size_t helper_TestCuStrLenVaFormat(char* format, ...){
 	va_list va;
 	va_start(va, format);
 
 	return CuStrLenVaFormat(format, va);
 }
+*/
 
+/*
 void TestCuStrLenVaFormat(CuTest* tc){
 	int num = 10;
 	char* subStr = "subStr";
@@ -189,6 +192,7 @@ void TestCuStrLenFormat(CuTest* tc){
 	printf("len: %d\n", len);
 	CuAssertTrue(tc, len == 13);
 }
+*/
 
 void TestCuStrFormat(CuTest* tc){
     static char subStr[] = "subStr";
@@ -534,7 +538,7 @@ CuSuite* CuStringGetSuite1(void)
 	SUITE_ADD_TEST(suite, TestCuStringLen);
 	SUITE_ADD_TEST(suite, TestCuStringSize);
 	SUITE_ADD_TEST(suite, TestCuStringClear);
-	SUITE_ADD_TEST(suite, TestCuStrLenVaFormat);
+//	SUITE_ADD_TEST(suite, TestCuStrLenVaFormat);
 	SUITE_ADD_TEST(suite, TestCuStrVaFormat);
 
 
@@ -546,7 +550,7 @@ CuSuite* CuStringGetSuite2(void)
     CuSuite* suite = CuSuiteNew();
 
 
-	SUITE_ADD_TEST(suite, TestCuStrLenFormat);
+//	SUITE_ADD_TEST(suite, TestCuStrLenFormat);
 	SUITE_ADD_TEST(suite, TestCuStrFormat);
 	SUITE_ADD_TEST(suite, TestCuStringInserts);
 	SUITE_ADD_TEST(suite, TestCuStringResizes);

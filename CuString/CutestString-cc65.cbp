@@ -138,12 +138,6 @@
 		<Unit filename="CuStrFormat.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="CuStrLenFormat.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="CuStrLenVaFormat.c">
-			<Option compilerVar="CC" />
-		</Unit>
 		<Unit filename="CuStrNULL.c">
 			<Option compilerVar="CC" />
 		</Unit>
