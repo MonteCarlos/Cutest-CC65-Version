@@ -32,8 +32,8 @@
 				<Option use_console_runner="0" />
 				<Linker>
 					<Add option="-C CuAllocTest.cfg" />
-					<Add library="..\cutest-cc65_Dbg.lib" />
-					<Add library="..\CuString\CutestString-cc65Dbg.lib" />
+					<Add library="../cutest-cc65_Dbg.lib" />
+					<Add library="../CuString/CutestString-cc65Dbg.lib" />
 				</Linker>
 			</Target>
 			<Target title="gccDebug">
@@ -60,8 +60,9 @@
 					<Add option="-fplan9-extensions -std=c11" />
 				</Compiler>
 				<Linker>
-					<Add library="..\libcutest_Dbg.a" />
-					<Add library="..\CuString\libCutestString-cc65_dbg.a" />
+					<Add library="../libcutest_Dbg.a" />
+					<Add library="../CuString/libCutestString-cc65_dbg.a" />
+					<Add library="../../MyCLib/libMCLib.a" />
 				</Linker>
 				<ExtraCommands>
 					<Add after="CuAlloc_tests.exe" />
