@@ -78,6 +78,8 @@ bool CuAssertGeneralEquals_LineMsg(CuTest* tc, const char* file, unsigned int li
 
 #define CuAssertPtrNotNull(tc,p)        CuAssert_Line((tc),__FILE__,__LINE__,"null pointer unexpected",((p) != NULL))
 #define CuAssertPtrNotNullMsg(tc,msg,p) CuAssert_Line((tc),__FILE__,__LINE__,(msg),((p) != NULL))
+#define CuAssertPtrNull(tc,p)        CuAssert_Line((tc),__FILE__,__LINE__,"null pointer expected",((p) == NULL))
+#define CuAssertPtrNullMsg(tc,msg,p) CuAssert_Line((tc),__FILE__,__LINE__,(msg),((p) == NULL))
 
 #define CUSUITE_OPEN(suite) CuSuite* suite = CuSuiteNew()
 #define CUSUITE_CLOSE(suite) CuSuiteDelete(suite)
