@@ -1,6 +1,6 @@
 #include "CuTest_internal.h"
 
-void CuFail_Line(CuTest* tc, const char* file, int line, const char* message, const char* message2)
+void CuFail_Line(CuTest* tc, const char* file, unsigned int line, const char* message, const char* message2)
 {
 	//CuString *string = CuStringNew();
 

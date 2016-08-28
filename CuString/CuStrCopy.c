@@ -6,6 +6,12 @@
 
 #include "CutestString_internal.h"
 
+/** \brief allocates memory for duplication of c-string and then copies the content of the original c-string to the new address
+ *
+ * \param CuStringSize_t size
+ * \return char* strPtr
+ *
+ */
 char* CuStrCopy(const char* old)
 {
 	char* newStr; //= CuAlloc(strlen(old)+1);//CuStrAlloc(len + 1);

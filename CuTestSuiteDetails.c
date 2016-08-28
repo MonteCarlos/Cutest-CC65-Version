@@ -23,7 +23,7 @@ void CuSuiteDetails(CuSuite* testSuite, FILE* file)
             register CuTest *test = testCase->test;
             if (test->failed)
             {
-                CuTestFprintf(file, "%s in %s\n", CuStringCStr(test->message), CuStringCStr(test->name));
+                CuTestFprintf(file, "Test failed: %s in %s\n", CuStringCStr(test->message), CuStringCStr(test->name));
                 ++reportedFails;
             }else{
                 ++reportedPasses;
@@ -55,5 +55,5 @@ void CuSuiteDetails(CuSuite* testSuite, FILE* file)
 	report -> reportedPasses = reportedPasses;
 	report -> performedTests = testcount;
 
-	CuSuiteSummary(testSuite, file);
+	if (testSuite->ran) CuSuiteSummary(testSuite, file);
 }

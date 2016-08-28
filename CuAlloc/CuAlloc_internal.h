@@ -7,7 +7,8 @@ typedef struct CuAlloc_BufHeader_tag CuAlloc_BufHeader_t;
 typedef struct CuAlloc_tag CuAlloc_t;
 
 struct CuAlloc_BufHeader_tag{
-    bool isvalid;
+    uint8_t dataOffset;
+    uint8_t (*data)[];
     size_t datasize;
     size_t totalsize;
     CuAlloc_t *this;
@@ -25,8 +26,8 @@ extern void *lastFreed[5];
 extern void *lastAllocated[5];
 
 void CuAlloc_initHeader(CuAlloc_t* ptr, size_t n);
-CuAlloc_t *CuAlloc_getHeaderAddr(void* ptr);
-void *CuAlloc_getDataAddr(CuAlloc_t*  ptr);
+CuAlloc_t *CuAlloc_getHeaderAddr(CuAllocPtr_t ptr);
+CuAllocPtr_t CuAlloc_getDataAddr(CuAlloc_t*  ptr);
 size_t CuAlloc_calculateTotalSize(size_t n);
 
 // CUALLOC_INTERNAL_H_INCLUDED

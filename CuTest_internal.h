@@ -1,12 +1,7 @@
 #ifndef CUTEST_INTERNAL_H_INCLUDED
 #define CUTEST_INTERNAL_H_INCLUDED
 
-#include <assert.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <stdint.h>
-#include <stdbool.h>
+#include <MCLib.h>
 
 #include "CuString\CutestString_internal.h"
 #include "CuTest.h"
@@ -23,6 +18,7 @@ struct CuTest_tag
 	bool ran;
 	bool reported;
 	bool memoryleak;
+	unsigned int assertCnt;//counter for assertions used in that test
 	CuString *message;
 	jmp_buf *jumpBuf;
 };
@@ -38,9 +34,13 @@ typedef struct CuTestPtr_tag{
 struct CuSuite_tag
 {
 	size_t testcount;
+	size_t suitecount;
+    size_t failCount;
+    size_t totalcount;
+    bool ran;
 	CuString *name;
 	CuTestPtr_t *testlist;
-	size_t failCount;
+	bool isSubSuite;
 	CuReport_t *report;
 };
 
@@ -53,7 +53,7 @@ struct CuReport_tag{
 };
 
 
-void CuFailInternal(CuTest* tc, const char* file, int line, CuString* string);
+void CuFailInternal(CuTest* tc, const char* file, unsigned int line, CuString* string);
 void *CuTestAlloc(size_t n);
 unsigned long int CuTestGetProgressStart(void);
 unsigned long int CuTestGetProgressEnd(void);

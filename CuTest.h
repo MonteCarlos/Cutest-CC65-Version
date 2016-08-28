@@ -19,6 +19,8 @@ typedef CuSuite* CuSuitePtr;
 typedef CuTest* CuTestPtr;
 
 typedef void (*TestFunction)(CuTest *);
+typedef bool CuTestCmpFnc_t(const void* a, const void *b, char *exp, char *act, size_t maxStrLen, CuString *message);
+typedef CuTestCmpFnc_t *CuTestCmpFncPtr_t;
 
 void CuTestInit(CuTest* t, const char* name, TestFunction function);
 CuTest* CuTestNew(const char* name, TestFunction function);
@@ -26,27 +28,28 @@ void CuTestRun(CuTest* tc);
 void CuTestDelete(CuTest *t);
 
 /* Internal versions of assert functions -- use the public versions */
-void CuFail_Line(CuTest* tc, const char* file, int line, const char* message2, const char* message);
-bool CuAssert_Line(CuTest* tc, const char* file, int line, const char* message, int condition);
+void CuFail_Line(CuTest* tc, const char* file, unsigned int line, const char* message2, const char* message);
+bool CuAssert_Line(CuTest* tc, const char* file, unsigned int line, const char* message, int condition);
 bool CuAssertStrEquals_LineMsg(CuTest* tc,
-	const char* file, int line, const char* message,
+	const char* file, unsigned int line, const char* message,
 	const char* expected, const char* actual);
 bool CuAssertIntEquals_LineMsg(CuTest* tc,
-	const char* file, int line, const char* message,
+	const char* file, unsigned int line, const char* message,
 	int expected, int actual);
 /*void CuAssertDblEquals_LineMsg(CuTest* tc,
 	const char* file, int line, const char* message,
 	double expected, double actual, double delta);*/
 bool CuAssertPtrEquals_LineMsg(CuTest* tc,
-	const char* file, int line, const char* message,
+	const char* file, unsigned int line, const char* message,
 	const void* expected, const void* actual);
-bool CuAssertArrayEquals_LineMsg(CuTest* tc, const char* file, int line, const char* message,
+bool CuAssertArrayEquals_LineMsg(CuTest* tc, const char* file, unsigned int line, const char* message,
 	const void* expected, const void* actual, size_t elementsize, size_t len);
-bool CuAssertArrayEqualsStepFunc_LineMsg(CuTest* tc, const char* file, int line, const char* message,
+bool CuAssertArrayEqualsStepFunc_LineMsg(CuTest* tc, const char* file, unsigned int line, const char* message,
 	bool (*stepfunc)(size_t index, void* expected), const void* actual, size_t elementsize, size_t len);
-bool CuAssertArrayElementsConstant_LineMsg(CuTest* tc, const char* file, int line, const char* message,
+bool CuAssertArrayElementsConstant_LineMsg(CuTest* tc, const char* file, unsigned int line, const char* message,
 	const void* expected, const void* actual, size_t elementsize, size_t len);
-
+bool CuAssertGeneralEquals_LineMsg(CuTest* tc, const char* file, unsigned int line, const char* message,
+	const void *expected, const void *actual, char *expStr, char *actStr, size_t maxStrLen, CuTestCmpFncPtr_t cmpFnc);
 /* public assert functions */
 
 
@@ -55,6 +58,8 @@ bool CuAssertArrayElementsConstant_LineMsg(CuTest* tc, const char* file, int lin
 #define CuAssert(tc, ms, cond)                CuAssert_Line((tc), __FILE__, __LINE__, (ms), (cond))
 #define CuAssertTrue(tc, cond)                CuAssert_Line((tc), __FILE__, __LINE__, "assert failed", (cond))
 #define CuAssertFalse(tc, cond)               CuAssert_Line((tc), __FILE__, __LINE__, "assert failed", !(cond))
+#define CuAssertTrue_Msg(tc, ms, cond)            CuAssert_Line((tc), __FILE__, __LINE__, (ms), (cond))
+#define CuAssertFalse_Msg(tc, ms, cond)           CuAssert_Line((tc), __FILE__, __LINE__, (ms), !(cond))
 
 #define CuAssertStrEquals(tc,ex,ac)           CuAssertStrEquals_LineMsg((tc),__FILE__,__LINE__,#ac,(ex),(ac))
 #define CuAssertStrEquals_Msg(tc,ms,ex,ac)    CuAssertStrEquals_LineMsg((tc),__FILE__,__LINE__,(ms),(ex),(ac))
@@ -73,6 +78,8 @@ bool CuAssertArrayElementsConstant_LineMsg(CuTest* tc, const char* file, int lin
 
 #define CuAssertPtrNotNull(tc,p)        CuAssert_Line((tc),__FILE__,__LINE__,"null pointer unexpected",((p) != NULL))
 #define CuAssertPtrNotNullMsg(tc,msg,p) CuAssert_Line((tc),__FILE__,__LINE__,(msg),((p) != NULL))
+#define CuAssertPtrNull(tc,p)        CuAssert_Line((tc),__FILE__,__LINE__,"null pointer expected",((p) == NULL))
+#define CuAssertPtrNullMsg(tc,msg,p) CuAssert_Line((tc),__FILE__,__LINE__,(msg),((p) == NULL))
 
 #define CUSUITE_OPEN(suite) CuSuite* suite = CuSuiteNew()
 #define CUSUITE_CLOSE(suite) CuSuiteDelete(suite)
@@ -96,7 +103,7 @@ CuSuite* CuSuiteNew(void);
 void CuSuiteDelete(CuSuite *testSuite);
 void CuSuiteAdd(CuSuite* testSuite, CuTest *testCase);
 void CuSuiteAddSuite(CuSuite* testSuite, CuSuite* testSuite2);
-void CuSuiteRun(CuSuite* testSuite);
+size_t  CuSuiteRun(CuSuite* testSuite);
 void CuSuiteSummary(CuSuite* testSuite, FILE* file);
 //void CuSuiteDetails(CuSuite* testSuite, CuString* details);
 void CuSuiteDetails(CuSuite* testSuite, FILE* file);

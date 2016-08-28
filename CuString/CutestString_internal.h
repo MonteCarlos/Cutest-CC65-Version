@@ -3,6 +3,7 @@
 
 #include "CutestString.h"
 #include "..\CuAlloc\CuAlloc.h"
+#include <MCLib.h>
 #include <stdarg.h>
 #include <stdint.h>
 #include <assert.h>
@@ -19,7 +20,7 @@ struct CuString_tag
 } ;
 
 
-char* CuStrNULL(const char* const str);
+const char* CuStrNULL(const char* str);
 size_t CuStrLenFormat(const char* const format, ...);
 size_t CuStrLenVaFormat(const char* const format, va_list va);
 

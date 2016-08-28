@@ -8,7 +8,7 @@ void *CuRealloc(void* old, size_t n){
     {
         register CuAlloc_t* ptr = CuAlloc_getHeaderAddr(old);
 
-        switch (ptr -> isvalid){
+        switch (CuAlloc_getBufferValidity(old)){
          case true:
             ptr = realloc(ptr, CuAlloc_calculateTotalSize(n));
             ++realloccount;

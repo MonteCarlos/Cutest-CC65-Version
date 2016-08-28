@@ -1,17 +1,24 @@
 #include "CuTest_internal.h"
 
-bool CuAssertPtrEquals_LineMsg(CuTest* tc, const char* file, int line, const char* message,
+bool ptrCmpFnc(const void* exp, const void* act, char *expectedStr, char *actualStr, size_t maxStrLen, CuString *msg){
+    msg; //just to omit unused param warning
+
+    //write ptrs into passed string buffers
+    snprintf((char*)expectedStr, maxStrLen, "%#p", exp);
+    snprintf((char*)actualStr, maxStrLen, "%#p", act);
+
+    return (void*)exp == (void*)act;
+}
+
+bool CuAssertPtrEquals_LineMsg(CuTest* tc, const char* file, unsigned int line, const char* message,
 	const void* expected, const void* actual)
 {
-	//char* buf = CuAlloc(STRING_MAX*sizeof(char));
-//	assert (NULL != buf);
-	if (expected == actual) return false;
-	CuFail_Line(tc, file, line, message, " ");
-	//CuStringAppend(tc->message, ": ");
-	CuStringAppendISvsNOT(tc->message, "%p", expected, actual);
-	//sprintf(buf, "expected pointer <0x%p> but was <0x%p>", expected, actual);
-	//CuFail_Line(tc, file, line, message, buf);
-	//assert (NULL != buf);
-	//CuFree(buf);
+    char expectedStr[sizeof(uintptr_t)*2+2+1]; //reserve minimum field width capable of holding smallest int. each byte needs
+                                     //two hex digits with additional 0x and \0
+    char actualStr[sizeof(uintptr_t)*2+2+1];
+
+    return CuAssertGeneralEquals_LineMsg(tc, file, line, message, expected, actual, expectedStr, actualStr,
+                                            sizeof(expectedStr),ptrCmpFnc);
+
 	return true;
 }

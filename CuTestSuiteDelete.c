@@ -2,7 +2,7 @@
 
 void CuSuiteDelete(CuSuite *testSuite)
 {
-        long int n = testSuite->testcount-1;
+        long int n = testSuite->totalcount-1;
         bool freereturn;
         CuTestPtr_t *testlist = testSuite->testlist;
 

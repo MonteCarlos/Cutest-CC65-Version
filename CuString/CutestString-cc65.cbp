@@ -13,10 +13,13 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="2" />
 				<Option compiler="cc65" />
+				<Compiler>
+					<Add directory="../../../C64/include" />
+				</Compiler>
 				<Linker>
 					<Add option="-C CutestString-cc65.cfg" />
-					<Add library="..\libcutest-cc65_Dbg.lib" />
-					<Add library="..\CuAlloc\CuAllocDbg.lib" />
+					<Add library="../libcutest-cc65_Dbg.lib" />
+					<Add library="../CuAlloc/CuAllocDbg.lib" />
 				</Linker>
 			</Target>
 			<Target title="Release">
@@ -27,11 +30,12 @@
 				<Option compiler="cc65" />
 				<Compiler>
 					<Add option="-DNDEBUG" />
+					<Add directory="../../../C64/include" />
 				</Compiler>
 				<Linker>
 					<Add option="-C CutestString-cc65.cfg" />
-					<Add library="..\libcutest-cc65.lib" />
-					<Add library="..\CuAlloc\CuAlloc.lib" />
+					<Add library="../libcutest-cc65.lib" />
+					<Add library="../CuAlloc/CuAlloc.lib" />
 				</Linker>
 			</Target>
 			<Target title="Selftest">
@@ -40,17 +44,21 @@
 				<Option type="1" />
 				<Option compiler="cc65" />
 				<Option use_console_runner="0" />
+				<Compiler>
+					<Add directory="../../../C64/include" />
+				</Compiler>
 				<Linker>
 					<Add option="-C CutestString-cc65.cfg" />
-					<Add library="..\cutest-cc65_Dbg.lib" />
-					<Add library="..\CuAlloc\CuAllocDbg.lib" />
-					<Add library=".\CutestString-cc65Dbg.lib" />
+					<Add library="../cutest-cc65_Dbg.lib" />
+					<Add library="../CuAlloc/CuAllocDbg.lib" />
+					<Add library="./CutestString-cc65Dbg.lib" />
 				</Linker>
 			</Target>
 			<Target title="gccDebug">
 				<Option output="CutestString-cc65_dbg" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="" />
 				<Option object_output="obj/gccDebug" />
+				<Option external_deps="../../MyCLib/libMCLib.a;" />
 				<Option type="2" />
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
@@ -59,13 +67,15 @@
 					<Add option="-g" />
 				</Compiler>
 				<Linker>
-					<Add library="..\libcutest_Dbg.a" />
+					<Add library="../libcutest_Dbg.a" />
+					<Add library="../../MyCLib/libMCLib.a" />
 				</Linker>
 			</Target>
 			<Target title="gccRelease">
 				<Option output="CutestString-cc65" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="" />
 				<Option object_output="obj/gccRelease" />
+				<Option external_deps="../../MyCLib/libMCLib.a;" />
 				<Option type="2" />
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
@@ -74,12 +84,14 @@
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
-					<Add library="..\libcutest.a" />
+					<Add library="../libcutest.a" />
+					<Add library="../../MyCLib/libMCLib.a" />
 				</Linker>
 			</Target>
 			<Target title="gccSelftest">
 				<Option output="CutestString-cc65_test" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/gccDebug" />
+				<Option external_deps="../../MyCLib/libMCLib.a;" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
@@ -87,12 +99,12 @@
 					<Add option="-g" />
 				</Compiler>
 				<Linker>
-					<Add library="..\libcutest_Dbg.a" />
-					<Add library="..\CuAlloc\libCuAllocDbg.a" />
+					<Add library="../libcutest_Dbg.a" />
+					<Add library="../CuAlloc/libCuAllocDbg.a" />
+					<Add library="../../MyCLib/libMCLib.a" />
 				</Linker>
 				<ExtraCommands>
 					<Add after="CutestString-cc65_test.exe" />
-					<Mode after="always" />
 				</ExtraCommands>
 			</Target>
 		</Build>
@@ -102,6 +114,7 @@
 		</VirtualTargets>
 		<Compiler>
 			<Add directory=".." />
+			<Add directory="../../MyCLib" />
 		</Compiler>
 		<ExtraCommands>
 			<Add before="cmd /c echo %CC65_HOME%" />
@@ -123,12 +136,6 @@
 			<Option target="gccDebug" />
 		</Unit>
 		<Unit filename="CuStrFormat.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="CuStrLenFormat.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="CuStrLenVaFormat.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="CuStrNULL.c">

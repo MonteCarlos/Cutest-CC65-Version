@@ -1,8 +1,7 @@
-
 #include "CuTest_internal.h"
 
-bool CuAssertIntEquals_LineMsg(CuTest* tc, const char* file, int line, const char* message,
-	int expected, int actual)
+bool CuAssertLongEquals_LineMsg(CuTest* tc, const char* file, unsigned int line, const char* message,
+	long expected, long actual)
 {
 	//char* buf = (char*)calloc(STRING_MAX, sizeof(char));
 	//assert (NULL != buf);
@@ -10,9 +9,12 @@ bool CuAssertIntEquals_LineMsg(CuTest* tc, const char* file, int line, const cha
 		//sprintf(buf, "expected <%d> but was <%d>", expected, actual);
 		CuFail_Line(tc, file, line, message, " ");
 		//CuStringAppend(tc->message, ": ");
-        CuStringAppendISvsNOT(tc->message, "%d", expected, actual);
+
+		//here axctual and expected are exchanged which is reasoned in the va macros used in more deeply nested function
+        CuStringAppendISvsNOT(tc->message, "%d", actual, expected);
 		return true;
 	}
 	//free(buf);
 	return false;
 }
+

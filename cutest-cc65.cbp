@@ -17,8 +17,8 @@
 				</Compiler>
 				<Linker>
 					<Add option="-C cutest-cc65.cfg" />
-					<Add library="CutestString\libCutestString-cc65Dbg.lib" />
-					<Add library="CuAlloc\CuAllocDbg.lib" />
+					<Add library="CutestString/libCutestString-cc65Dbg.lib" />
+					<Add library="CuAlloc/CuAllocDbg.lib" />
 				</Linker>
 			</Target>
 			<Target title="CC65Release">
@@ -32,8 +32,8 @@
 				</Compiler>
 				<Linker>
 					<Add option="-C cutest-cc65.cfg" />
-					<Add library="CuString\CutestString_cc65.lib" />
-					<Add library="CuAlloc\CuAlloc.lib" />
+					<Add library="CuString/CutestString_cc65.lib" />
+					<Add library="CuAlloc/CuAlloc.lib" />
 				</Linker>
 			</Target>
 			<Target title="CC65Selftest">
@@ -44,8 +44,8 @@
 				<Option use_console_runner="0" />
 				<Linker>
 					<Add option="-C cutest-cc65.cfg" />
-					<Add library="CuString\CutestString-cc65Dbg.lib" />
-					<Add library="CuAlloc\CuAllocDbg.lib" />
+					<Add library="CuString/CutestString-cc65Dbg.lib" />
+					<Add library="CuAlloc/CuAllocDbg.lib" />
 				</Linker>
 			</Target>
 			<Target title="Debug">
@@ -61,7 +61,8 @@
 					<Add option="-std=c99 -fplan9-extensions" />
 				</Compiler>
 				<Linker>
-					<Add library="CuAlloc\libCuAlloc.lib.a" />
+					<Add library="CuAlloc/libCuAlloc.lib.a" />
+					<Add library="../MyCLib/libMCLib.a" />
 				</Linker>
 			</Target>
 			<Target title="Selftest">
@@ -76,8 +77,9 @@
 					<Add option="-std=c99 -fplan9-extensions" />
 				</Compiler>
 				<Linker>
-					<Add library="CuString\libCutestString-cc65_dbg.a" />
-					<Add library="CuAlloc\libCuAllocDbg.a" />
+					<Add library="CuString/libCutestString-cc65_dbg.a" />
+					<Add library="CuAlloc/libCuAllocDbg.a" />
+					<Add library="../MyCLib/libMCLib.a" />
 				</Linker>
 				<ExtraCommands>
 					<Add after="cutest.exe" />
@@ -97,6 +99,7 @@
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
+					<Add library="../MyCLib/libMCLib.a" />
 				</Linker>
 			</Target>
 		</Build>
@@ -104,6 +107,9 @@
 			<Add alias="All, selftest contained" targets="CC65Debug;CC65Release;CC65Selftest;" />
 			<Add alias="gccall" targets="Debug;Selftest;Release;" />
 		</VirtualTargets>
+		<Compiler>
+			<Add directory="../MyCLib" />
+		</Compiler>
 		<ExtraCommands>
 			<Add before="cmd /c echo %CC65_HOME%" />
 		</ExtraCommands>
@@ -139,6 +145,12 @@
 		<Unit filename="CuTestAssertArrayEqualsStepFunc.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="CuTestAssertGeneralEqualsLineMsg.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="CuTestAssertIntEqualsLineMsg.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="CuTestAssertPtrEqualsLineMsg.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -164,9 +176,6 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="CuTestInit.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="CuTestIntEqualsLineMsg.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="CuTestNew.c">
@@ -213,6 +222,16 @@
 		</Unit>
 		<Unit filename="CuTestSuiteSummary.c">
 			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="CuTestTest-cc65.map">
+			<Option target="CC65Debug" />
+			<Option target="CC65Release" />
+			<Option target="CC65Selftest" />
+		</Unit>
+		<Unit filename="CuTestTest-cc65.prg.map">
+			<Option target="CC65Debug" />
+			<Option target="CC65Release" />
+			<Option target="CC65Selftest" />
 		</Unit>
 		<Unit filename="CuTestTest.c">
 			<Option compilerVar="CC" />

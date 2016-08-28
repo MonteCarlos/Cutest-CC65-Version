@@ -9,7 +9,11 @@
 void CuStringAppend(CuString* str, const char* text)
 {
 	size_t length;
-	assert(NULL != str);
+	//assert(NULL != str);
+	//if invalid pointer given, create new CuString
+	if (NULL == str){
+        str = CuStringNew();
+	}
 	//assert(NULL != text);
 	text = CuStrNULL(text); //replace with NULL if necessary
 

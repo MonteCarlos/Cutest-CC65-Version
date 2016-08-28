@@ -133,7 +133,7 @@ void TestCuAssertPtrEquals_Failure(CuTest* tc)
 	sprintf(expected_message, "expected pointer <0x%p> but was <0x%p>", nullPtr, &x);
 	CuAssertPtrEquals(tc2, NULL, &x);
 	CuAssertTrue(tc, tc2->failed);
-
+    //CuAssertPtrEquals(tc, (void*)0x400, (void*)0x123);
 	//CompareAsserts(tc, "CuAssertPtrEquals failed", expected_message, tc2.message);
 	free(expected_message);
 
@@ -241,7 +241,8 @@ void TestCuSuiteAddSuite(CuTest* tc)
 	CuSuiteAddSuite(ts1, ts2);
 
 	//Check correct amount of tests and sub suites
-	CuAssertIntEquals(tc, 3, ts1->testcount);
+	CuAssertIntEquals(tc, 2, ts1->testcount);
+    CuAssertIntEquals(tc, 1, ts1->suitecount);
 
     //Check correct type of pointers to tests or suites
     CuAssertFalse(tc, ts1->testlist[0].isSuite);

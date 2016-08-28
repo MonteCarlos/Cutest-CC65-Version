@@ -14,7 +14,7 @@ int CuStringAppendISvsNOT(CuString *str, const char* format,...){
   	CuStringAppendVariadicFormat(str, tempstr, va);
 
     va_end(va);
-    CuFree (tempstr);
+    CuFree ((uint8_t*)tempstr);
 
     return EXIT_SUCCESS;
 }
