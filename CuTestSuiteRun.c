@@ -3,10 +3,10 @@
 // TODO (MyAcer#1#): find solution for messed output with sub tests
 size_t CuSuiteRun(CuSuite* testSuite)
 {
-	size_t i, failCnt;
+	size_t i,j, failCnt;
 	unsigned long int pendingfrees;
 	//CuTest* testCase = NULL;
-	for (i = 0 ; i < testSuite->testcount ; ++i)
+	for (j = testSuite->testcount,i=0; j!=0; ++i,--j)
 	{
 		CuTestPtr_t *testCase = &(testSuite->testlist[i]);
 
@@ -34,6 +34,7 @@ size_t CuSuiteRun(CuSuite* testSuite)
             }
 		}
 	}
+	if(!i){fputs("Suite contains no tests", stdout);}
 	testSuite->ran = true;
 
 	return CuSuiteGetFailcount(testSuite);

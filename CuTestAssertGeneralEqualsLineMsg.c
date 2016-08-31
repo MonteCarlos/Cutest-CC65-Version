@@ -5,6 +5,10 @@ bool CuAssertGeneralEquals_LineMsg(CuTest* tc, const char* file, unsigned int li
 	const void *expected, const void *actual, char *expectedStr, char *actualStr, size_t maxStrLen, CuTestCmpFncPtr_t cmpFnc)
 {
 	bool result;
+
+	//increase counter for assertions within that test
+	++tc->assertCnt;
+
 	//char *expectedStr=NULL, *actualStr=NULL; //init to NULL to enable tracking of missing ptr assignment
    // CuString *cmpmsg = CuStringNew();
 	//char* buf = (char*)calloc(STRING_MAX, sizeof(char));
@@ -21,7 +25,7 @@ bool CuAssertGeneralEquals_LineMsg(CuTest* tc, const char* file, unsigned int li
 
 		//here axctual and expected are exchanged which is reasoned in the va macros used in more deeply nested function
         //CuStringAppendISvsNOT(tc->message, "%d", actual, expected);
-		CuStringAppendISvsNOT(tc->message, "%s", expectedStr, actualStr);
+		CuStringAppendISvsNOT(tc->message, "%s", actualStr, expectedStr);
        // CuTestAppendMessage(tc, CuStringCStr(cmpmsg));
 		//return true;
 	}
