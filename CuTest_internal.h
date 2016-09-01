@@ -10,6 +10,13 @@
 
 #define CUTEST_STR_SUMMARY(runs, passes, fails, leaks) "Runs:%u, Passes:%u, Fails:%u, Leaks:%u\n", runs, passes, fails, leaks
 
+typedef union CuTest_flags_tag{
+	int failed:1;
+	int ran:1;
+	int reported:1;
+	int memoryleak:1;
+}CuTest_flags_t;
+
 struct CuTest_tag
 {
 	CuString *name;
