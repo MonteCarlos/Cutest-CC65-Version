@@ -16,6 +16,9 @@ size_t CuSuiteRun(CuSuite* testSuite)
 		}else{
             register CuTest *test = testCase->test;
 
+            /*if (test->setup) {
+                test->setup(test->vaargs1);
+            }*/
             fputs(CuStringCStr(test->name), stdout);
             fputc(' ',stdout);
             pendingfrees = CuAlloc_getPendingFrees();
@@ -32,6 +35,10 @@ size_t CuSuiteRun(CuSuite* testSuite)
                 );
                 test->memoryleak = true;
             }
+            /*
+            if (test->teardown){
+                test->teardown(test->vaargs2);
+            }*/
 		}
 	}
 	if(!i){fputs("Suite contains no tests", stdout);}

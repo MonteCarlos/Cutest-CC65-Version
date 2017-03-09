@@ -6,7 +6,7 @@ bool CuAssertArrayEquals_LineMsg(CuTest* tc, const char* file, unsigned int line
 {
     size_t i=0,j=0;
     size_t arrayIndex = 0;
-
+    ++tc->assertCnt;
     if (0 == elementsize) {
         CuFail_Line(tc, file, line, "0==elementsize", NULL);
         return true;

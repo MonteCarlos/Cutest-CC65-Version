@@ -5,6 +5,7 @@
 
 #define malloc(n) CuAlloc(n)
 #define calloc(n,m) CuCalloc((n)*(m))
+#define realloc(p,n) CuRealloc(p,n)
 #define free(p) CuFree(p)
 
 #endif // CUMALLOCWRAPPER_H_INCLUDED

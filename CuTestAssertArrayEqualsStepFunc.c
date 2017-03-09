@@ -10,6 +10,8 @@ bool CuAssertArrayEqualsStepFunc_LineMsg(CuTest* tc, const char* file, unsigned 
     bool error = false;
     uint8_t expectedelement, actualelement;
 
+    ++tc->assertCnt;
+
     if (0 == elementsize) {
         CuFail_Line(tc, file, line, "0==elementsize", NULL);
         return true;

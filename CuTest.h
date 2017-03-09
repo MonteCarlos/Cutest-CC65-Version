@@ -12,6 +12,9 @@
 #include "CuAlloc\CuAlloc.h"
 /* CuTest */
 
+typedef int CuTest_SetupFnc_t (va_list va);
+typedef int CuTest_TeardownFnc_t (va_list va);
+
 typedef struct CuSuite_tag CuSuite;
 typedef struct CuTest_tag CuTest;
 typedef struct CuReport_tag CuReport_t;

@@ -2,6 +2,7 @@
 #define CUTEST_INTERNAL_H_INCLUDED
 
 #include <MCLib.h>
+#include <stdheaders.h>
 
 #include "CuString\CutestString_internal.h"
 #include "CuTest.h"
@@ -10,7 +11,7 @@
 
 #define CUTEST_STR_SUMMARY(runs, passes, fails, leaks) "Runs:%u, Passes:%u, Fails:%u, Leaks:%u\n", runs, passes, fails, leaks
 
-typedef union CuTest_flags_tag{
+typedef struct CuTest_flags_tag{
 	int failed:1;
 	int ran:1;
 	int reported:1;
@@ -21,13 +22,20 @@ struct CuTest_tag
 {
 	CuString *name;
 	TestFunction function;
-	bool failed;
+	CuTest_flags_t; //anonymous struct inside so that failed, ran, reported flags are still valid
+	/*bool failed;
 	bool ran;
 	bool reported;
 	bool memoryleak;
+    */
+
 	unsigned int assertCnt;//counter for assertions used in that test
 	CuString *message;
 	jmp_buf *jumpBuf;
+    CuTest_SetupFnc_t *setup;
+    CuTest_TeardownFnc_t *teardown;
+    va_list vaargs1;
+    va_list vaargs2;
 };
 
 typedef struct CuTestPtr_tag{
