@@ -22,12 +22,12 @@ struct CuTest_tag
 {
 	CuString *name;
 	TestFunction function;
-	CuTest_flags_t; //anonymous struct inside so that failed, ran, reported flags are still valid
-	/*bool failed;
+	//CuTest_flags_t; //anonymous struct inside so that failed, ran, reported flags are still valid
+	bool failed;
 	bool ran;
 	bool reported;
 	bool memoryleak;
-    */
+
 
 	unsigned int assertCnt;//counter for assertions used in that test
 	CuString *message;

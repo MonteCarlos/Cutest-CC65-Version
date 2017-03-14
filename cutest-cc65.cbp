@@ -249,6 +249,9 @@
 			<Option target="Debug" />
 			<Option target="Selftest" />
 		</Unit>
+		<Unit filename="CuTest_SuiteInitRunReport.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="CuTest_internal.h" />
 		<Unit filename="CuTest_setup.c">
 			<Option compilerVar="CC" />
