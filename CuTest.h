@@ -12,6 +12,7 @@
 #include "CuAlloc\CuAlloc.h"
 /* CuTest */
 
+typedef int CuError_t;
 typedef int CuTest_SetupFnc_t (va_list va);
 typedef int CuTest_TeardownFnc_t (va_list va);
 
@@ -120,5 +121,7 @@ size_t CuSuiteGetTestcount(CuSuite* testSuite);
 CuReport_t *CuReportNew(void);
 bool CuReportDestroy(CuReport_t *rep);
 int CuTestFormatReportString(CuString *str, size_t runs, size_t passes, size_t fails, size_t leaks);
+CuError_t
+CuTest_SuiteInitRunReport(CuError_t (*initSuite)(CuSuite *suite), FILE *file);
 
 #endif /* CU_TEST_H */
