@@ -99,7 +99,7 @@ bool CuAssertGeneralEquals_LineMsg(CuTest* tc, const char* file, unsigned int li
 #define CUSUITE_LIST_STORAGERESERVE	10
 
 #define SUITE_ADD_TEST(SUITE,TEST)	CuSuiteAdd(SUITE, CuTestNew(SAVECUSTRINGIFY(TEST), TEST))
-#define SUITE_ADD_SUITE(SUITE1, SUITE2) CuSuite* SUITE2 = CuSuiteNew();CuSuiteAddSuite(SUITE1, SUITE2)
+#define SUITE_ADD_SUITE(SUITE1, SUITE2) do{CuSuite* SUITE2 = CuSuiteNew();CuSuiteAddSuite(SUITE1, SUITE2);}while(false)
 #define CUTEST_ADD(SUITE,TEST) CuSuiteAdd(SUITE, CuTestNew(SAVECUSTRINGIFY(TESTNAME(TEST)), TESTNAME(TEST)))
 
 void CuSuiteInit(CuSuite* testSuite);
