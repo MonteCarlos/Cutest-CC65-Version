@@ -2,7 +2,7 @@
 #define CUTESTSTRING_INTERNAL_H_INCLUDED
 
 #include "CutestString.h"
-#include "..\CuAlloc\CuAlloc.h"
+#include "../CuAlloc/CuAlloc.h"
 #include <MCLib.h>
 #include <stdarg.h>
 #include <stdint.h>

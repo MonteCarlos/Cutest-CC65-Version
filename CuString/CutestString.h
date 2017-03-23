@@ -20,7 +20,7 @@ typedef char CuStringChar_t;
 
 typedef struct CuString_tag CuString;
 
-#include "..\CuTest.h"
+#include "../CuTest.h"
 
 /* CuString */
 

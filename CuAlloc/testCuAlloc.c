@@ -1,5 +1,5 @@
 #include "CuAlloc_internal.h"
-#include "..\CuTest.h"
+#include "../CuTest.h"
 
 #include <stdio.h>
 
