@@ -576,7 +576,7 @@ void TestAssertIntEquals(CuTest* tc)
 
     //Test with start value higher than end value
     CuTestSetProgressStartEnd(en, st);
-
+    CuAssert(tc, "", true);
  }
 
  void TestAppendMessage(CuTest *tc){

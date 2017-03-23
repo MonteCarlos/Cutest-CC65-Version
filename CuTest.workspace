@@ -4,5 +4,6 @@
 		<Project filename="cutest-cc65.cbp" />
 		<Project filename="CuString/CutestString-cc65.cbp" />
 		<Project filename="CuAlloc/CuAlloc.cbp" />
+		<Project filename="../MyCLib/MyCLib.cbp" />
 	</Workspace>
 </CodeBlocks_workspace_file>

@@ -16,7 +16,6 @@
 					<Add option="-g" />
 				</Compiler>
 				<Linker>
-					<Add option="-C cutest-cc65.cfg" />
 					<Add library="CutestString/libCutestString-cc65Dbg.lib" />
 					<Add library="CuAlloc/CuAllocDbg.lib" />
 				</Linker>
@@ -31,7 +30,6 @@
 					<Add option="-DNDEBUG" />
 				</Compiler>
 				<Linker>
-					<Add option="-C cutest-cc65.cfg" />
 					<Add library="CuString/CutestString_cc65.lib" />
 					<Add library="CuAlloc/CuAlloc.lib" />
 				</Linker>
@@ -43,7 +41,6 @@
 				<Option compiler="cc65" />
 				<Option use_console_runner="0" />
 				<Linker>
-					<Add option="-C cutest-cc65.cfg" />
 					<Add library="CuString/CutestString-cc65Dbg.lib" />
 					<Add library="CuAlloc/CuAllocDbg.lib" />
 				</Linker>
@@ -126,6 +123,7 @@
 		<Unit filename="CuAssertLine.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="CuMallocWrapper.h" />
 		<Unit filename="CuTest.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -251,7 +249,13 @@
 			<Option target="Debug" />
 			<Option target="Selftest" />
 		</Unit>
+		<Unit filename="CuTest_SuiteInitRunReport.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="CuTest_internal.h" />
+		<Unit filename="CuTest_setup.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="README.txt">
 			<Option target="CC65Debug" />
 			<Option target="CC65Release" />

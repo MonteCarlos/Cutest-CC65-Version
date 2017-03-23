@@ -30,6 +30,8 @@ void CuSuiteDelete(CuSuite *testSuite)
         assert(freereturn);
         freereturn = CuReportDestroy(testSuite->report);
         assert(freereturn);
+        freereturn = CuStringDelete(testSuite->name);
+        assert(freereturn);
         freereturn = CuFree(testSuite);
         assert(freereturn);
 }

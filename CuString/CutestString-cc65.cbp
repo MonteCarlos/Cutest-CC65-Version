@@ -65,6 +65,7 @@
 				<Compiler>
 					<Add option="-Wall" />
 					<Add option="-g" />
+					<Add option="-fplan9-extensions -std=gnu11" />
 				</Compiler>
 				<Linker>
 					<Add library="../libcutest_Dbg.a" />
@@ -81,6 +82,7 @@
 				<Option createDefFile="1" />
 				<Compiler>
 					<Add option="-Wall" />
+					<Add option="-fplan9-extensions -std=gnu11" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -97,6 +99,7 @@
 				<Compiler>
 					<Add option="-Wall" />
 					<Add option="-g" />
+					<Add option="-fplan9-extensions -std=gnu11" />
 				</Compiler>
 				<Linker>
 					<Add library="../libcutest_Dbg.a" />

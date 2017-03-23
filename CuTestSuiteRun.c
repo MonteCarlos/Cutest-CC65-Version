@@ -6,16 +6,19 @@ size_t CuSuiteRun(CuSuite* testSuite)
 	size_t i,j, failCnt;
 	unsigned long int pendingfrees;
 	//CuTest* testCase = NULL;
-	for (j = testSuite->testcount,i=0; j!=0; ++i,--j)
+	for (j = testSuite->totalcount,i=0; j!=0; ++i,--j)
 	{
 		CuTestPtr_t *testCase = &(testSuite->testlist[i]);
 
 		printf("%d: ",i);
 		if (testCase->isSuite){
-            if (failCnt = CuSuiteRun(testCase->suite)) return failCnt;
+            if (failCnt = CuSuiteRun(testCase->suite)) testSuite->failCount+=failCnt;
 		}else{
             register CuTest *test = testCase->test;
 
+            /*if (test->setup) {
+                test->setup(test->vaargs1);
+            }*/
             fputs(CuStringCStr(test->name), stdout);
             fputc(' ',stdout);
             pendingfrees = CuAlloc_getPendingFrees();
@@ -32,6 +35,10 @@ size_t CuSuiteRun(CuSuite* testSuite)
                 );
                 test->memoryleak = true;
             }
+            /*
+            if (test->teardown){
+                test->teardown(test->vaargs2);
+            }*/
 		}
 	}
 	if(!i){fputs("Suite contains no tests", stdout);}

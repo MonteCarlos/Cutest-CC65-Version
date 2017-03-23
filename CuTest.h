@@ -12,6 +12,10 @@
 #include "CuAlloc/CuAlloc.h"
 /* CuTest */
 
+typedef int CuError_t;
+typedef int CuTest_SetupFnc_t (va_list va);
+typedef int CuTest_TeardownFnc_t (va_list va);
+
 typedef struct CuSuite_tag CuSuite;
 typedef struct CuTest_tag CuTest;
 typedef struct CuReport_tag CuReport_t;
@@ -95,7 +99,7 @@ bool CuAssertGeneralEquals_LineMsg(CuTest* tc, const char* file, unsigned int li
 #define CUSUITE_LIST_STORAGERESERVE	10
 
 #define SUITE_ADD_TEST(SUITE,TEST)	CuSuiteAdd(SUITE, CuTestNew(SAVECUSTRINGIFY(TEST), TEST))
-#define SUITE_ADD_SUITE(SUITE1, SUITE2) CuSuite* SUITE2 = CuSuiteNew();CuSuiteAddSuite(SUITE1, SUITE2)
+#define SUITE_ADD_SUITE(SUITE1, SUITE2) do{CuSuite* SUITE2 = CuSuiteNew();CuSuiteAddSuite(SUITE1, SUITE2);}while(false)
 #define CUTEST_ADD(SUITE,TEST) CuSuiteAdd(SUITE, CuTestNew(SAVECUSTRINGIFY(TESTNAME(TEST)), TESTNAME(TEST)))
 
 void CuSuiteInit(CuSuite* testSuite);
@@ -117,5 +121,7 @@ size_t CuSuiteGetTestcount(CuSuite* testSuite);
 CuReport_t *CuReportNew(void);
 bool CuReportDestroy(CuReport_t *rep);
 int CuTestFormatReportString(CuString *str, size_t runs, size_t passes, size_t fails, size_t leaks);
+CuError_t
+CuTest_SuiteInitRunReport(CuError_t (*initSuite)(CuSuite *suite), FILE *file);
 
 #endif /* CU_TEST_H */
