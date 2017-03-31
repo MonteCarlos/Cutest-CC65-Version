@@ -8,8 +8,8 @@
 
 #define CUTEST_VERSION  "CuTest 1.5"
 
-#include "CuString\CutestString.h"
-#include "CuAlloc\CuAlloc.h"
+#include "CuString/CutestString.h"
+#include "CuAlloc/CuAlloc.h"
 /* CuTest */
 
 typedef int CuError_t;

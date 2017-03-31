@@ -4,10 +4,10 @@
 #include <MCLib.h>
 #include <stdheaders.h>
 
-#include "CuString\CutestString_internal.h"
+#include "CuString/CutestString_internal.h"
 #include "CuTest.h"
 #include "CuTestTest.h"
-#include "CuAlloc\CuAlloc.h"
+#include "CuAlloc/CuAlloc.h"
 
 #define CUTEST_STR_SUMMARY(runs, passes, fails, leaks) "Runs:%u, Passes:%u, Fails:%u, Leaks:%u\n", runs, passes, fails, leaks
 
