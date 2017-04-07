@@ -120,7 +120,7 @@
 			<Add directory="../../MyCLib" />
 		</Compiler>
 		<ExtraCommands>
-			<Add before="cmd /c echo %CC65_HOME%" />
+			<Add before="echo %CC65_HOME%" />
 		</ExtraCommands>
 		<Unit filename="AllTests.c">
 			<Option compilerVar="CC" />
