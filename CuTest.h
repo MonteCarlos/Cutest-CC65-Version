@@ -57,6 +57,7 @@ bool CuAssertGeneralEquals_LineMsg(CuTest* tc, const char* file, unsigned int li
 /* public assert functions */
 
 
+#define CuPass(tc)                            CuAssertTrue(tc, true);
 #define CuFail(tc)                            CuFail_Line(  (tc), __FILE__, __LINE__, NULL, NULL)
 #define CuFail_Msg(tc, ms)                    CuFail_Line(  (tc), __FILE__, __LINE__, (ms), NULL)
 #define CuAssert(tc, ms, cond)                CuAssert_Line((tc), __FILE__, __LINE__, (ms), (cond))
