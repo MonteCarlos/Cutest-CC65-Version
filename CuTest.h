@@ -12,9 +12,6 @@
 #include "CuAlloc/CuAlloc.h"
 /* CuTest */
 
-typedef int CuError_t;
-typedef int CuTest_SetupFnc_t (va_list va);
-typedef int CuTest_TeardownFnc_t (va_list va);
 
 typedef struct CuSuite_tag CuSuite;
 typedef struct CuTest_tag CuTest;
@@ -22,7 +19,17 @@ typedef struct CuReport_tag CuReport_t;
 typedef CuSuite* CuSuitePtr;
 typedef CuTest* CuTestPtr;
 
+typedef int CuError_t;
+typedef int CuTest_SetupFnc_t (void *args);
+typedef int CuTest_TeardownFnc_t (void *args);
+
 typedef void (*TestFunction)(CuTest *);
+//typedef of a pair of a testname string and a pointer to a test function
+typedef struct TestfunctionNamePair_tag{
+	char *testname;
+	TestFunction fnc;
+}TestfunctionNamePair_t;
+
 typedef bool CuTestCmpFnc_t(const void* a, const void *b, char *exp, char *act, size_t maxStrLen, CuString *message);
 typedef CuTestCmpFnc_t *CuTestCmpFncPtr_t;
 
@@ -30,6 +37,8 @@ void CuTestInit(CuTest* t, const char* name, TestFunction function);
 CuTest* CuTestNew(const char* name, TestFunction function);
 void CuTestRun(CuTest* tc);
 void CuTestDelete(CuTest *t);
+
+int CuRegisterTests(CuSuite *suite, TestfunctionNamePair_t (*testlist)[], size_t n);
 
 /* Internal versions of assert functions -- use the public versions */
 void CuFail_Line(CuTest* tc, const char* file, unsigned int line, const char* message2, const char* message);

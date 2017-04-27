@@ -107,7 +107,6 @@
 		<Compiler>
 			<Add directory="../MyCLib" />
 		</Compiler>
-
 		<Unit filename="AllTests.c">
 			<Option compilerVar="CC" />
 			<Option target="CC65Selftest" />
@@ -122,6 +121,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="CuMallocWrapper.h" />
+		<Unit filename="CuRegisterTests.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="CuTest.c">
 			<Option compilerVar="CC" />
 		</Unit>
