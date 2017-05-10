@@ -3,10 +3,10 @@
 
 #include "CutestString_internal.h"
 
-CuSuite* CuGetSuite();
-CuSuite* CuStringGetSuite1();
-CuSuite* CuStringGetSuite2();
-CuSuite* CuStringGetSuite3();
+CuSuite* CuGetSuite(void);
+CuSuite* CuStringGetSuite1(void);
+CuSuite* CuStringGetSuite2(void);
+CuSuite* CuStringGetSuite3(void);
 
 //17,89kB (executable prg), 04.07.2015
 //17,74
@@ -24,9 +24,8 @@ CuSuite *GetSuite(getSuitefnc_t* getSuitefnc){
     assert (NULL != suite);
     return suite;
 }
-
-size_t testRunner(CuSuite *suite){
-	static size_t cnt = 0;
+ CuSize_t testRunner(CuSuite *suite){
+	static CuSize_t cnt = 0;
 	char filename_start[] = "testdetails";
 	char filename_end[] = ".txt";
 
@@ -35,12 +34,12 @@ size_t testRunner(CuSuite *suite){
 
     assert (NULL != suite);
 
-    printf("*** Testrun: %d ***\n", cnt);
+    printf("*** Testrun: %zu ***\n", cnt);
     CuSuiteRun(suite);
     CuSuiteDetails(suite, stdout/*output*/);
-	printf("*** End of testrun: %d ***\n\n", cnt);
+	printf("*** End of testrun: %zd ***\n\n", cnt);
 
-    snprintf(filename, sizeof(filename), "%s%2d%s",filename_start,cnt,filename_end);
+    snprintf(filename, sizeof(filename), "%s%2zu%s",filename_start,cnt,filename_end);
     if (NULL == (file = fopen(filename, "w"))){
 		printf("fopen error\n");
     }else{

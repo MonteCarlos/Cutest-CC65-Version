@@ -1,7 +1,7 @@
 #include "CuAlloc_internal.h"
 
 
-void *CuRealloc(void* old, size_t n){
+void *CuRealloc(void* old, CuSize_t n){
     if (old==NULL){
         return CuAlloc(n);
     }

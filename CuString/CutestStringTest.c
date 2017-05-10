@@ -8,6 +8,8 @@
 //static void X_CompareAsserts(CuTest* tc, const char *file, int line, const char* message, const char* expected, const char* actual);
 #define CompareAsserts(tc, message, expected, actual)  X_CompareAsserts((tc), __FILE__, __LINE__, (message), (expected), (actual))
 
+#define VALUEANDSTRING(type, name, val) type name = (val); char* name##Str = SAVECUSTRINGIFY(val)
+
 char thisfile[] = __FILE__;
 
 /*
@@ -19,8 +21,8 @@ static void X_CompareAsserts(CuTest* tc, const char *file, int line, const char*
 	} else {
 		char front[sizeof(__FILE__)+1] = __FILE__;//seems to work now
 
-		const size_t frontLen = sizeof(__FILE__);//strlen(front);
-		const size_t expectedLen = strlen(expected);
+		const CuSize_t frontLen = sizeof(__FILE__);//strlen(front);
+		const CuSize_t expectedLen = strlen(expected);
 
 		const char *matchStr = actual;
 		front[sizeof(__FILE__)] = ':';
@@ -167,8 +169,7 @@ void TestCuStrAlloc(CuTest* tc)
     CuFree(ptr);
 }
 
-/*
-size_t helper_TestCuStrLenVaFormat(char* format, ...){
+/* CuSize_t helper_TestCuStrLenVaFormat(char* format, ...){
 	va_list va;
 	va_start(va, format);
 
@@ -211,9 +212,12 @@ char* helper_TestCuStrVaFormat(char* format, ...){
 }
 
 void TestCuStrVaFormat(CuTest* tc){
-	char* buf = helper_TestCuStrVaFormat("g = %d", 10);
-	CuAssertTrue(tc, 6 == strlen(buf));
-	CuAssertTrue(tc, 0 == strcmp(buf, "g = 10"));
+	VALUEANDSTRING(int, val, 10);
+	char* buf = helper_TestCuStrVaFormat("g = %d", val);
+	if (CuAssertIntEquals(tc, 0, buf[sizeof(valStr)-1])){
+		CuAssertTrue(tc, 6 == strlen(buf));
+		CuAssertTrue(tc, 0 == strcmp(buf, "g = 10"));
+	}
 	CuFree(buf);
 }
 

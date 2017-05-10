@@ -10,7 +10,7 @@ CuSuite* CuGetSuiteTests(void);
 
 int main(void)
 {
-    size_t NoFails = 1;
+   CuSize_tNoFails = 1;
 	printf("CuTest V1.5 running...\n");
     assert(0 == CuAlloc_getPendingFrees());
 	NoFails = RunAllTests(CuGetSuiteTests(), stdout);

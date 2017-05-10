@@ -2,14 +2,14 @@
 
 void CuSuiteDetails(CuSuite* testSuite, FILE* file)
 {
-	size_t i;
-	size_t reported = 0;
-    size_t reportedFails = 0;
-    size_t reportedPasses = 0;
-    size_t testcount = CuSuiteGetTestcount(testSuite);
-    size_t failCount = CuSuiteGetFailcount(testSuite);
-    size_t passCount = testcount - failCount;
-    size_t memoryleaks = 0;
+ CuSize_t i;
+ CuSize_t reported = 0;
+    CuSize_t reportedFails = 0;
+    CuSize_t reportedPasses = 0;
+    CuSize_t testcount = CuSuiteGetTestcount(testSuite);
+    CuSize_t failCount = CuSuiteGetFailcount(testSuite);
+    CuSize_t passCount = testcount - failCount;
+    CuSize_t memoryleaks = 0;
 
 	register CuReport_t *report = testSuite->report;
     register CuTestPtr_t *testlist = testSuite->testlist;
@@ -40,7 +40,7 @@ void CuSuiteDetails(CuSuite* testSuite, FILE* file)
 	}else{
 	    CuTestFprintf(file, "\n!!!FAILURES!!!\n");
 	}
-	CuTestFormatReportString(report->reportStr, testcount, testcount-failCount, failCount, memoryleaks);
+	CuTestFormatReportString(report->reportStr, testcount, (size_t)(testcount-failCount), failCount, memoryleaks);
 
 	if (testcount - failCount != passCount){
 		CuTestFprintf(file, "Missed tests! #Registered(%u) > #Performed(%u)!\n", testcount, passCount);

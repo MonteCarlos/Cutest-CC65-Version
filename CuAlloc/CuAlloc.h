@@ -9,6 +9,7 @@
 #include <stddef.h>
 #include <string.h>
 
+#include "../CuTest.h"
 //#ifdef __CC65__
     typedef void *CuAllocPtr_t;
 //#else
@@ -17,9 +18,8 @@
 
 CuAllocPtr_t CuAlloc(size_t n);
 CuAllocPtr_t CuCalloc(size_t n);
-CuAllocPtr_t CuRealloc(void* old, size_t n);
-size_t CuAlloc_getDataSize( CuAllocPtr_t ptr);
-size_t CuAlloc_getTotalSize( CuAllocPtr_t ptr);
+CuAllocPtr_t CuRealloc(void* old, CuSize_t n);
+CuSize_t CuAlloc_getDataSize( CuAllocPtr_t ptr); CuSize_t CuAlloc_getTotalSize( CuAllocPtr_t ptr);
 bool CuAlloc_getBufferValidity( CuAllocPtr_t ptr);
 bool CuFree( CuAllocPtr_t ptr);
 unsigned long int CuAlloc_getPendingFrees(void);

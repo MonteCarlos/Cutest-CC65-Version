@@ -8,10 +8,12 @@
 
 #define CUTEST_VERSION  "CuTest 1.5"
 
+typedef unsigned int CuSize_t;
+
 #include "CuString/CutestString.h"
+
 #include "CuAlloc/CuAlloc.h"
 /* CuTest */
-
 
 typedef struct CuSuite_tag CuSuite;
 typedef struct CuTest_tag CuTest;
@@ -30,7 +32,7 @@ typedef struct TestfunctionNamePair_tag{
 	TestFunction fnc;
 }TestfunctionNamePair_t;
 
-typedef bool CuTestCmpFnc_t(const void* a, const void *b, char *exp, char *act, size_t maxStrLen, CuString *message);
+typedef bool CuTestCmpFnc_t(const void* a, const void *b, char *exp, char *act, CuSize_t maxStrLen, CuString *message);
 typedef CuTestCmpFnc_t *CuTestCmpFncPtr_t;
 
 void CuTestInit(CuTest* t, const char* name, TestFunction function);
@@ -38,7 +40,7 @@ CuTest* CuTestNew(const char* name, TestFunction function);
 void CuTestRun(CuTest* tc);
 void CuTestDelete(CuTest *t);
 
-int CuRegisterTests(CuSuite *suite, TestfunctionNamePair_t (*testlist)[], size_t n);
+int CuRegisterTests(CuSuite *suite, TestfunctionNamePair_t (*testlist)[], CuSize_t n);
 
 /* Internal versions of assert functions -- use the public versions */
 void CuFail_Line(CuTest* tc, const char* file, unsigned int line, const char* message2, const char* message);
@@ -56,13 +58,13 @@ bool CuAssertPtrEquals_LineMsg(CuTest* tc,
 	const char* file, unsigned int line, const char* message,
 	const void* expected, const void* actual);
 bool CuAssertArrayEquals_LineMsg(CuTest* tc, const char* file, unsigned int line, const char* message,
-	const void* expected, const void* actual, size_t elementsize, size_t len);
+	const void* expected, const void* actual, CuSize_t elementsize, CuSize_t len);
 bool CuAssertArrayEqualsStepFunc_LineMsg(CuTest* tc, const char* file, unsigned int line, const char* message,
-	bool (*stepfunc)(size_t index, void* expected), const void* actual, size_t elementsize, size_t len);
+	bool (*stepfunc)(size_t index, void* expected), const void* actual, CuSize_t elementsize, CuSize_t len);
 bool CuAssertArrayElementsConstant_LineMsg(CuTest* tc, const char* file, unsigned int line, const char* message,
-	const void* expected, const void* actual, size_t elementsize, size_t len);
+	const void* expected, const void* actual, CuSize_t elementsize, CuSize_t len);
 bool CuAssertGeneralEquals_LineMsg(CuTest* tc, const char* file, unsigned int line, const char* message,
-	const void *expected, const void *actual, char *expStr, char *actStr, size_t maxStrLen, CuTestCmpFncPtr_t cmpFnc);
+	const void *expected, const void *actual, char *expStr, char *actStr, CuSize_t maxStrLen, CuTestCmpFncPtr_t cmpFnc);
 /* public assert functions */
 
 
@@ -98,6 +100,7 @@ bool CuAssertGeneralEquals_LineMsg(CuTest* tc, const char* file, unsigned int li
 #define CUSUITE_OPEN(suite) CuSuite* suite = CuSuiteNew()
 #define CUSUITE_CLOSE(suite) CuSuiteDelete(suite)
 
+#define ID(x) x
 #define CUEVAL(x) (x)
 #define CUCONCAT(a,b) a##b
 #define CUTEST(func) void CUCONCAT(test_,func)(CuTest *tc)
@@ -116,8 +119,7 @@ void CuSuiteInit(CuSuite* testSuite);
 CuSuite* CuSuiteNew(void);
 void CuSuiteDelete(CuSuite *testSuite);
 void CuSuiteAdd(CuSuite* testSuite, CuTest *testCase);
-void CuSuiteAddSuite(CuSuite* testSuite, CuSuite* testSuite2);
-size_t  CuSuiteRun(CuSuite* testSuite);
+void CuSuiteAddSuite(CuSuite* testSuite, CuSuite* testSuite2); CuSize_t  CuSuiteRun(CuSuite* testSuite);
 void CuSuiteSummary(CuSuite* testSuite, FILE* file);
 //void CuSuiteDetails(CuSuite* testSuite, CuString* details);
 void CuSuiteDetails(CuSuite* testSuite, FILE* file);
@@ -125,12 +127,10 @@ void CuSuiteDetails(CuSuite* testSuite, FILE* file);
 int CuTestSetProgressStartEnd(unsigned long int st, unsigned long int en);
 int CuTestPrintProgressState(unsigned long int current, unsigned long int interleave);
 void CuTestReservePrintPositions(void);
-int CuTestAppendMessage(CuTest *tc, const char* format, ...);
-size_t CuSuiteGetFailcount(CuSuite* testSuite);
-size_t CuSuiteGetTestcount(CuSuite* testSuite);
+int CuTestAppendMessage(CuTest *tc, const char* format, ...); CuSize_t CuSuiteGetFailcount(CuSuite* testSuite); CuSize_t CuSuiteGetTestcount(CuSuite* testSuite);
 CuReport_t *CuReportNew(void);
 bool CuReportDestroy(CuReport_t *rep);
-int CuTestFormatReportString(CuString *str, size_t runs, size_t passes, size_t fails, size_t leaks);
+int CuTestFormatReportString(CuString *str, CuSize_t runs, CuSize_t passes, CuSize_t fails, CuSize_t leaks);
 CuError_t
 CuTest_SuiteInitRunReport(CuError_t (*initSuite)(CuSuite *suite), FILE *file);
 

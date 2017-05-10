@@ -2,10 +2,10 @@
 #include "CuTest_internal.h"
 
 bool CuAssertArrayEquals_LineMsg(CuTest* tc, const char* file, unsigned int line, const char* message,
-	const void* expected, const void* actual, size_t elementsize, size_t len)
+	const void* expected, const void* actual, CuSize_t elementsize, CuSize_t len)
 {
-    size_t i=0,j=0;
-    size_t arrayIndex = 0;
+    CuSize_t i=0,j=0;
+    CuSize_t arrayIndex = 0;
     ++tc->assertCnt;
     if (0 == elementsize) {
         CuFail_Line(tc, file, line, "0==elementsize", NULL);

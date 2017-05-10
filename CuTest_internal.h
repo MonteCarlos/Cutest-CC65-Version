@@ -9,7 +9,7 @@
 #include "CuTestTest.h"
 #include "CuAlloc/CuAlloc.h"
 
-#define CUTEST_STR_SUMMARY(runs, passes, fails, leaks) "Runs:%u, Passes:%u, Fails:%u, Leaks:%u\n", runs, passes, fails, leaks
+#define CUTEST_STR_SUMMARY(runs, passes, fails, leaks) "Runs:%zu, Passes:%zu, Fails:%zu, Leaks:%zu\n", runs, passes, fails, leaks
 
 typedef struct CuTest_flags_tag{
 	int failed:1;
@@ -29,7 +29,7 @@ struct CuTest_tag
 	bool memoryleak;
 
 
-	unsigned int assertCnt;//counter for assertions used in that test
+	CuSize_t assertCnt;//counter for assertions used in that test
 	CuString *message;
 	jmp_buf *jumpBuf;
     CuTest_SetupFnc_t *setup;
@@ -48,10 +48,10 @@ typedef struct CuTestPtr_tag{
 
 struct CuSuite_tag
 {
-	size_t testcount;
-	size_t suitecount;
-    size_t failCount;
-    size_t totalcount;
+	CuSize_t testcount;
+	CuSize_t suitecount;
+    CuSize_t failCount;
+    CuSize_t totalcount;
     bool ran;
 	CuString *name;
 	CuTestPtr_t *testlist;
@@ -60,10 +60,10 @@ struct CuSuite_tag
 };
 
 struct CuReport_tag{
-    size_t reportedTests;
-    size_t performedTests;
-    size_t reportedFails;
-    size_t reportedPasses;
+    CuSize_t reportedTests;
+    CuSize_t performedTests;
+    CuSize_t reportedFails;
+    CuSize_t reportedPasses;
     CuString *reportStr;
 };
 

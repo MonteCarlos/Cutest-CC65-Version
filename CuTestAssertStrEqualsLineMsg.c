@@ -1,6 +1,6 @@
 #include "CuTest_internal.h"
 
-bool strCmpFnc(const void* exp, const void* act, char *expectedStr, char *actualStr, size_t maxChars, CuString *str){
+bool strCmpFnc(const void* exp, const void* act, char *expectedStr, char *actualStr, CuSize_t maxChars, CuString *str){
     str; //just to omit unused param warning
 
     if (exp){ //check, if exp is valid ptr

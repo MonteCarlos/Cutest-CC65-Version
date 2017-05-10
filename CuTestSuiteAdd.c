@@ -2,8 +2,8 @@
 
 void CuSuiteAdd(CuSuite* testSuite, CuTest *newtest)
 {
-    size_t testcount = testSuite->testcount;
-    size_t residualBytesToNextAlloc = CUTEST_LIST_STORAGERESERVE-testcount % CUTEST_LIST_STORAGERESERVE;
+    CuSize_t testcount = testSuite->testcount;
+    CuSize_t residualBytesToNextAlloc = CUTEST_LIST_STORAGERESERVE-testcount % CUTEST_LIST_STORAGERESERVE;
     register CuTestPtr_t *testlist = testSuite->testlist;
 
 	if ( residualBytesToNextAlloc  == 1 ){

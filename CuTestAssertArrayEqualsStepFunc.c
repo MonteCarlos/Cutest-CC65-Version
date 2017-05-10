@@ -2,10 +2,10 @@
 #include "CuTest_internal.h"
 
 bool CuAssertArrayEqualsStepFunc_LineMsg(CuTest* tc, const char* file, unsigned int line, const char* message,
-	bool (*stepfunc)(size_t index, void* expected), const void* actual, size_t elementsize, size_t len)
+	bool (*stepfunc)(size_t index, void* expected), const void* actual, CuSize_t elementsize, CuSize_t len)
 {
-    size_t i=0,j=0;
-    size_t arrayIndex = 0;
+    CuSize_t i=0,j=0;
+    CuSize_t arrayIndex = 0;
 	void* expected = CuAlloc(elementsize);
     bool error = false;
     uint8_t expectedelement, actualelement;

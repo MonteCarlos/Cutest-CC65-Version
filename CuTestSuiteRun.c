@@ -1,16 +1,15 @@
 #include "CuTest_internal.h"
 
-// TODO (MyAcer#1#): find solution for messed output with sub tests
-size_t CuSuiteRun(CuSuite* testSuite)
+// TODO (MyAcer#1#): find solution for messed output with sub tests CuSize_t CuSuiteRun(CuSuite* testSuite)
 {
-	size_t i,j, failCnt;
+ CuSize_t i,j, failCnt;
 	unsigned long int pendingfrees;
 	//CuTest* testCase = NULL;
 	for (j = testSuite->totalcount,i=0; j!=0; ++i,--j)
 	{
 		CuTestPtr_t *testCase = &(testSuite->testlist[i]);
 
-		printf("%d: ",i);
+		printf("%zu: ",i);
 		if (testCase->isSuite){
             if (failCnt = CuSuiteRun(testCase->suite)) testSuite->failCount+=failCnt;
 		}else{

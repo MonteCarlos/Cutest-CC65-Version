@@ -20,8 +20,6 @@ struct CuString_tag
 } ;
 
 
-const char* CuStrNULL(const char* str);
-size_t CuStrLenFormat(const char* const format, ...);
-size_t CuStrLenVaFormat(const char* const format, va_list va);
+const char* CuStrNULL(const char* str); CuSize_t CuStrLenFormat(const char* const format, ...); CuSize_t CuStrLenVaFormat(const char* const format, va_list va);
 
 #endif // CUTESTSTRING_INTERNAL_H_INCLUDED

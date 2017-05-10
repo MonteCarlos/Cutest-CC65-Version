@@ -4,8 +4,8 @@
 void CuSuiteAddSuite(CuSuite* testSuite, CuSuite* testSuite2)
 {
 	//int i;
-	size_t testcount = testSuite->totalcount;
-    size_t residualBytesToNextAlloc = CUTEST_LIST_STORAGERESERVE-testcount % CUTEST_LIST_STORAGERESERVE;
+CuSize_ttestcount = testSuite->totalcount;
+   CuSize_tresidualBytesToNextAlloc = CUTEST_LIST_STORAGERESERVE-testcount % CUTEST_LIST_STORAGERESERVE;
     register CuTestPtr_t* testlist = testSuite->testlist;
 
 	if ( residualBytesToNextAlloc  == 1 ){

@@ -4,16 +4,16 @@
 #include <stdio.h>
 
 void testCuAllocCalculateTotalSize(CuTest* tc){
-    size_t datasize = 20;
-    size_t totalsize = CuAlloc_calculateTotalSize(datasize);
+    CuSize_t datasize = 20;
+    CuSize_t totalsize = CuAlloc_calculateTotalSize(datasize);
     CuAssertIntEquals(tc, datasize+sizeof(CuAlloc_BufHeader_t), totalsize);
 }
 
 void testCuAllocInitHeader(CuTest* tc){
     CuAlloc_t allocObj;
 
-    size_t datasize = 20;
-    size_t totalsize = datasize+sizeof(CuAlloc_BufHeader_t);
+    CuSize_t datasize = 20;
+    CuSize_t totalsize = datasize+sizeof(CuAlloc_BufHeader_t);
     CuAlloc_initHeader(&allocObj, datasize);
 
     CuAssertIntEquals(tc, datasize, allocObj.datasize);
@@ -24,7 +24,7 @@ void testCuAllocInitHeader(CuTest* tc){
 void testCuAllocGetDataSize(CuTest* tc){
     CuAlloc_t allocObj;
 
-    size_t datasize = 20;
+    CuSize_t datasize = 20;
 
     CuAlloc_initHeader(&allocObj, datasize);
 
@@ -34,8 +34,8 @@ void testCuAllocGetDataSize(CuTest* tc){
 void testCuAllocGetTotalSize(CuTest* tc){
     CuAlloc_t allocObj;
 
-    size_t datasize = 20;
-    size_t totalsize = datasize+sizeof(CuAlloc_BufHeader_t);
+    CuSize_t datasize = 20;
+    CuSize_t totalsize = datasize+sizeof(CuAlloc_BufHeader_t);
     CuAlloc_initHeader(&allocObj, datasize);
 
     CuAssertIntEquals(tc, totalsize, CuAlloc_getTotalSize(&allocObj.array));
@@ -52,7 +52,7 @@ void testCuAllocGetDataAddr(CuTest* tc){
 }
 
 void testCuAllocGetBufferValidity(CuTest* tc){
-    size_t datasize = 20;
+    CuSize_t datasize = 20;
     CuAlloc_t allocObj;
     CuAlloc_initHeader(&allocObj, datasize);
 
@@ -64,8 +64,8 @@ void testCuAllocGetBufferValidity(CuTest* tc){
 
 void testCuFree(CuTest* tc){
     int *iVar = CuAlloc(sizeof(int));
-    size_t freecount = CuAlloc_getFreeCount();
-    size_t alloccount = CuAlloc_getAllocCount();
+    CuSize_t freecount = CuAlloc_getFreeCount();
+    CuSize_t alloccount = CuAlloc_getAllocCount();
     bool freeResult = CuFree(iVar);
 
 
@@ -211,8 +211,7 @@ CuSuite *CuAlloc_requestTests(void){
 	return suite;
 }
 
-#ifdef __CC65__
-size_t getCuAllocMemSize(void){
+#ifdef __CC65__ CuSize_t getCuAllocMemSize(void){
 	extern uint8_t _BEGIN_LOAD__;
 	extern uint8_t _END_LOAD__;
 	return &_END_LOAD__-&_BEGIN_LOAD__;

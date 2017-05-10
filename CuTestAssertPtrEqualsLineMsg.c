@@ -1,6 +1,6 @@
 #include "CuTest_internal.h"
 
-bool ptrCmpFnc(const void* exp, const void* act, char *expectedStr, char *actualStr, size_t maxStrLen, CuString *msg){
+bool ptrCmpFnc(const void* exp, const void* act, char *expectedStr, char *actualStr, CuSize_t maxStrLen, CuString *msg){
     msg; //just to omit unused param warning
 
     //write ptrs into passed string buffers

@@ -67,10 +67,6 @@
 					<Add option="-g" />
 					<Add option="-fplan9-extensions -std=gnu11" />
 				</Compiler>
-				<Linker>
-					<Add library="../libcutest_Dbg.a" />
-					<Add library="../../MyCLib/libMCLib.a" />
-				</Linker>
 			</Target>
 			<Target title="gccRelease">
 				<Option output="CutestString-cc65" prefix_auto="1" extension_auto="1" />
@@ -86,14 +82,12 @@
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
-					<Add library="../libcutest.a" />
-					<Add library="../../MyCLib/libMCLib.a" />
 				</Linker>
 			</Target>
 			<Target title="gccSelftest">
-				<Option output="CutestString-cc65_test" prefix_auto="1" extension_auto="1" />
+				<Option output="CutestString-test.exe" prefix_auto="0" extension_auto="0" />
 				<Option object_output="obj/gccDebug" />
-				<Option external_deps="../../MyCLib/libMCLib.a;" />
+				<Option external_deps="../../MyCLib/libMCLib.a;../CuAlloc/libCuAlloc.a;libCutestString-cc65.a;" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
@@ -101,13 +95,8 @@
 					<Add option="-g" />
 					<Add option="-fplan9-extensions -std=gnu11" />
 				</Compiler>
-				<Linker>
-					<Add library="../libcutest_Dbg.a" />
-					<Add library="../CuAlloc/libCuAllocDbg.a" />
-					<Add library="../../MyCLib/libMCLib.a" />
-				</Linker>
 				<ExtraCommands>
-					<Add after="CutestString-cc65_test.exe" />
+					<Add after="./CutestString-test.exe" />
 				</ExtraCommands>
 			</Target>
 		</Build>
@@ -129,29 +118,47 @@
 		</Unit>
 		<Unit filename="CuStrAlloc.c">
 			<Option compilerVar="CC" />
+			<Option target="Debug" />
+			<Option target="Release" />
+			<Option target="Selftest" />
+			<Option target="gccDebug" />
+			<Option target="gccRelease" />
 		</Unit>
 		<Unit filename="CuStrCopy.c">
 			<Option compilerVar="CC" />
 			<Option target="Debug" />
 			<Option target="Release" />
-			<Option target="gccSelftest" />
 			<Option target="gccRelease" />
 			<Option target="gccDebug" />
 		</Unit>
 		<Unit filename="CuStrFormat.c">
 			<Option compilerVar="CC" />
+			<Option target="Debug" />
+			<Option target="Release" />
+			<Option target="Selftest" />
+			<Option target="gccDebug" />
+			<Option target="gccRelease" />
 		</Unit>
 		<Unit filename="CuStrNULL.c">
 			<Option compilerVar="CC" />
+			<Option target="Debug" />
+			<Option target="Release" />
+			<Option target="Selftest" />
+			<Option target="gccDebug" />
+			<Option target="gccRelease" />
 		</Unit>
 		<Unit filename="CuStrVaFormat.c">
 			<Option compilerVar="CC" />
+			<Option target="Debug" />
+			<Option target="Release" />
+			<Option target="Selftest" />
+			<Option target="gccDebug" />
+			<Option target="gccRelease" />
 		</Unit>
 		<Unit filename="CuStringAppend.c">
 			<Option compilerVar="CC" />
 			<Option target="Debug" />
 			<Option target="Release" />
-			<Option target="gccSelftest" />
 			<Option target="gccRelease" />
 			<Option target="gccDebug" />
 		</Unit>
@@ -159,7 +166,6 @@
 			<Option compilerVar="CC" />
 			<Option target="Debug" />
 			<Option target="Release" />
-			<Option target="gccSelftest" />
 			<Option target="gccRelease" />
 			<Option target="gccDebug" />
 		</Unit>
@@ -167,7 +173,6 @@
 			<Option compilerVar="CC" />
 			<Option target="Debug" />
 			<Option target="Release" />
-			<Option target="gccSelftest" />
 			<Option target="gccRelease" />
 			<Option target="gccDebug" />
 		</Unit>
@@ -175,7 +180,6 @@
 			<Option compilerVar="CC" />
 			<Option target="Debug" />
 			<Option target="Release" />
-			<Option target="gccSelftest" />
 			<Option target="gccRelease" />
 			<Option target="gccDebug" />
 		</Unit>
@@ -183,32 +187,44 @@
 			<Option compilerVar="CC" />
 			<Option target="Debug" />
 			<Option target="Release" />
-			<Option target="gccSelftest" />
 			<Option target="gccRelease" />
 			<Option target="gccDebug" />
 		</Unit>
 		<Unit filename="CuStringAppendULong.c">
 			<Option compilerVar="CC" />
+			<Option target="Debug" />
+			<Option target="Release" />
+			<Option target="Selftest" />
+			<Option target="gccDebug" />
+			<Option target="gccRelease" />
 		</Unit>
 		<Unit filename="CuStringAppendVariadicFormat.c">
 			<Option compilerVar="CC" />
+			<Option target="Debug" />
+			<Option target="Release" />
+			<Option target="Selftest" />
+			<Option target="gccDebug" />
+			<Option target="gccRelease" />
 		</Unit>
 		<Unit filename="CuStringCStr.c">
 			<Option compilerVar="CC" />
 			<Option target="Debug" />
 			<Option target="Release" />
-			<Option target="gccSelftest" />
 			<Option target="gccRelease" />
 			<Option target="gccDebug" />
 		</Unit>
 		<Unit filename="CuStringClear.c">
 			<Option compilerVar="CC" />
+			<Option target="Debug" />
+			<Option target="Release" />
+			<Option target="Selftest" />
+			<Option target="gccDebug" />
+			<Option target="gccRelease" />
 		</Unit>
 		<Unit filename="CuStringConvertCStr.c">
 			<Option compilerVar="CC" />
 			<Option target="Debug" />
 			<Option target="Release" />
-			<Option target="gccSelftest" />
 			<Option target="gccRelease" />
 			<Option target="gccDebug" />
 		</Unit>
@@ -216,7 +232,6 @@
 			<Option compilerVar="CC" />
 			<Option target="Debug" />
 			<Option target="Release" />
-			<Option target="gccSelftest" />
 			<Option target="gccRelease" />
 			<Option target="gccDebug" />
 		</Unit>
@@ -224,7 +239,6 @@
 			<Option compilerVar="CC" />
 			<Option target="Debug" />
 			<Option target="Release" />
-			<Option target="gccSelftest" />
 			<Option target="gccRelease" />
 			<Option target="gccDebug" />
 		</Unit>
@@ -232,18 +246,21 @@
 			<Option compilerVar="CC" />
 			<Option target="Debug" />
 			<Option target="Release" />
-			<Option target="gccSelftest" />
 			<Option target="gccRelease" />
 			<Option target="gccDebug" />
 		</Unit>
 		<Unit filename="CuStringNew.c">
 			<Option compilerVar="CC" />
+			<Option target="Debug" />
+			<Option target="Release" />
+			<Option target="Selftest" />
+			<Option target="gccDebug" />
+			<Option target="gccRelease" />
 		</Unit>
 		<Unit filename="CuStringResize.c">
 			<Option compilerVar="CC" />
 			<Option target="Debug" />
 			<Option target="Release" />
-			<Option target="gccSelftest" />
 			<Option target="gccRelease" />
 			<Option target="gccDebug" />
 		</Unit>
@@ -251,7 +268,6 @@
 			<Option compilerVar="CC" />
 			<Option target="Debug" />
 			<Option target="Release" />
-			<Option target="gccSelftest" />
 			<Option target="gccRelease" />
 			<Option target="gccDebug" />
 		</Unit>
@@ -259,9 +275,15 @@
 			<Option target="Debug" />
 			<Option target="Release" />
 			<Option target="Selftest" />
+			<Option target="gccSelftest" />
 		</Unit>
 		<Unit filename="CutestString.c">
 			<Option compilerVar="CC" />
+			<Option target="Debug" />
+			<Option target="Release" />
+			<Option target="Selftest" />
+			<Option target="gccDebug" />
+			<Option target="gccRelease" />
 		</Unit>
 		<Unit filename="CutestString.h" />
 		<Unit filename="CutestStringTest.c">
@@ -273,14 +295,12 @@
 		<Unit filename="README.txt">
 			<Option target="Debug" />
 			<Option target="Release" />
-			<Option target="gccSelftest" />
 			<Option target="gccRelease" />
 			<Option target="gccDebug" />
 		</Unit>
 		<Unit filename="license.txt">
 			<Option target="Debug" />
 			<Option target="Release" />
-			<Option target="gccSelftest" />
 			<Option target="gccRelease" />
 			<Option target="gccDebug" />
 		</Unit>

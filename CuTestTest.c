@@ -15,8 +15,8 @@ static void X_CompareAsserts(CuTest* tc, const char *file, int line, const char*
 	} else {
 		char front[sizeof(__FILE__)+1] = __FILE__;//seems to work now
 
-		const size_t frontLen = sizeof(__FILE__);//strlen(front);
-		const size_t expectedLen = strlen(expected);
+		const CuSize_t frontLen = sizeof(__FILE__);//strlen(front);
+		const CuSize_t expectedLen = strlen(expected);
 
 		const char *matchStr = actual;
 		front[sizeof(__FILE__)] = ':';
@@ -293,7 +293,7 @@ void TestCuSuiteRun(CuTest* tc)
 void TestCuSuiteSummary(CuTest* tc)
 {
 	CuSuite *ts = CuSuiteNew();
-	size_t runs = 10, passes = 7, fails = 3, leaks = 5;
+ CuSize_t runs = 10, passes = 7, fails = 3, leaks = 5;
 	char buf[100];
 	char buf2[100];
     FILE *file = fopen("summarytest.txt", "w");
@@ -328,7 +328,7 @@ void TestCuSuiteSummary(CuTest* tc)
 void TestCuTestFormatReportString(CuTest* tc)
 {
 	CuSuite *ts = CuSuiteNew();
-	size_t runs = 10, passes = 7, fails = 3, leaks = 5;
+ CuSize_t runs = 10, passes = 7, fails = 3, leaks = 5;
 	char buf[100];
 
     CuTestFormatReportString(ts->report->reportStr, runs, passes, fails, leaks);
@@ -641,6 +641,6 @@ CuSuite* CuGetSuiteTests(void)
 	SUITE_ADD_TEST(suite, TestCuSuiteDetails_PassesAndFails);
 
 
-	printf("Registered #%d testcases\n", suite->testcount);
+	printf("Registered #%zu testcases\n", suite->testcount);
 	return suite;
 }

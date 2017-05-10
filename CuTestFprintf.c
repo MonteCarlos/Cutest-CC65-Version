@@ -1,8 +1,7 @@
 #include "CuTest_internal.h"
-
-size_t CuTestFprintf(FILE* file, char* format, ...){
+ CuSize_t CuTestFprintf(FILE* file, char* format, ...){
 	va_list va;
-	size_t outputLength = 0;
+ CuSize_t outputLength = 0;
 
 	va_start(va, format);
 

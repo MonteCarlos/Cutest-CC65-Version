@@ -13,14 +13,14 @@
 #endif // __CC65__
 
 #include <stddef.h>
+#include "../CuTest.h"
 
-typedef size_t CuStringLen_t;
-typedef size_t CuStringSize_t;
+typedef CuSize_t CuStringLen_t;
+typedef CuSize_t CuStringSize_t;
 typedef char CuStringChar_t;
 
 typedef struct CuString_tag CuString;
 
-#include "../CuTest.h"
 
 /* CuString */
 
