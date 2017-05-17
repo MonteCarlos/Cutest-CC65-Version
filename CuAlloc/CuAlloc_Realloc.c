@@ -4,8 +4,7 @@
 void *CuRealloc(void* old, CuSize_t n){
     if (old==NULL){
         return CuAlloc(n);
-    }
-    {
+    }else{
         register CuAlloc_t* ptr = CuAlloc_getHeaderAddr(old);
 
         switch (CuAlloc_getBufferValidity(old)){

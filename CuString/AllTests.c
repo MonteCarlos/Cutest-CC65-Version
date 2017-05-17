@@ -24,22 +24,27 @@ CuSuite *GetSuite(getSuitefnc_t* getSuitefnc){
     assert (NULL != suite);
     return suite;
 }
- CuSize_t testRunner(CuSuite *suite){
+CuSize_t testRunner(CuSuite *suite){
+	//remember no of total testsuite runs
 	static CuSize_t cnt = 0;
-	char filename_start[] = "testdetails";
-	char filename_end[] = ".txt";
-
+	//pre and postfixes of filename of test results
+	static char filename_start[] = "testdetails";
+	static char filename_end[] = ".txt";
+	//allocate array to hold concatenated filename
 	char filename[sizeof(filename_start)+sizeof(filename_end)+2];
 	FILE *file;
 
     assert (NULL != suite);
 
-    printf("*** Testrun: %zu ***\n", cnt);
+	//Run suite and output results
+    printf("*** Testrun: %u ***\n", cnt);
     CuSuiteRun(suite);
     CuSuiteDetails(suite, stdout/*output*/);
-	printf("*** End of testrun: %zd ***\n\n", cnt);
+	printf("*** End of testrun: %u ***\n\n", cnt);
 
-    snprintf(filename, sizeof(filename), "%s%2zu%s",filename_start,cnt,filename_end);
+	//setup filename
+    snprintf(filename, sizeof(filename), "%s%2u%s",filename_start,cnt,filename_end);
+    //check file io errors
     if (NULL == (file = fopen(filename, "w"))){
 		printf("fopen error\n");
     }else{

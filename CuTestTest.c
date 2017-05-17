@@ -7,7 +7,7 @@
 
 #define CompareAsserts(tc, message, expected, actual)  X_CompareAsserts((tc), __FILE__, __LINE__, (message), (expected), (actual))
 
-static void X_CompareAsserts(CuTest* tc, const char *file, int line, const char* message, const char* expected, const char* actual)
+static void X_CompareAsserts(CuTest* tc, const char *file, unsigned long int line, const char* message, const char* expected, const char* actual)
 {
 	int mismatch;
 	if (expected == NULL || actual == NULL) {
@@ -293,7 +293,7 @@ void TestCuSuiteRun(CuTest* tc)
 void TestCuSuiteSummary(CuTest* tc)
 {
 	CuSuite *ts = CuSuiteNew();
- CuSize_t runs = 10, passes = 7, fails = 3, leaks = 5;
+	CuSize_t runs = 10, passes = 7, fails = 3, leaks = 5;
 	char buf[100];
 	char buf2[100];
     FILE *file = fopen("summarytest.txt", "w");
@@ -317,7 +317,7 @@ void TestCuSuiteSummary(CuTest* tc)
         goto cleanup;
     }
 	snprintf(buf, sizeof(buf)-1, CUTEST_STR_SUMMARY(runs, passes, fails, leaks));
-	fgets(buf2,strlen(buf)+1,file);
+	CuAssertPtrEquals(tc, buf2, fgets(buf2,strlen(buf)+1,file));
 	CuAssertStrEquals(tc, buf, buf2);
 
 	cleanup:
@@ -587,6 +587,21 @@ void TestAssertIntEquals(CuTest* tc)
     CuTestDelete(t);
  }
 
+void TestFailLine(CuTest *tc){
+	CuFail_Line(tc, "thisfile.c", 100000, "msg1", "msg2");
+	CuAssertStrEquals(tc, "blabl", tc->message->buffer);
+}
+
+void TestGenerateMessage(CuTest *tc){
+	CuString *str = CuStringNew();
+	CuError_t err = CuTestGenerateMessage(str, "msg1", "msg2", "thisfile.c", 100000);
+	/*CuAssertIntEquals(tc,
+		EXIT_SUCCESS,
+		CuTestGenerateMessage(str, "msg1", "msg2", "thisfile.c", 100000)
+	);*/
+	CuAssertStrEquals(tc, "msg1, msg2, thisfile.c (10000)", tc->message->buffer);
+}
+
 /*-------------------------------------------------------------------------*
  * main
  *-------------------------------------------------------------------------*/
@@ -619,9 +634,14 @@ CuSuite* CuGetOtherTests(void){
 CuSuite* CuGetSuiteTests(void)
 {
 	CuSuite* suite = CuSuiteNew();
-    printf("Alloc Count after SuiteNew:%lu %lu\n", CuAlloc_getAllocCount(), CuAlloc_getFreeCount());
+    printf("Alloc Count after SuiteNew:%u %u\n", CuAlloc_getAllocCount(), CuAlloc_getFreeCount());
+	SUITE_ADD_TEST(suite, TestGenerateMessage);
+
+	SUITE_ADD_TEST(suite, TestFailLine);
+
+
 	SUITE_ADD_TEST(suite, TestFail);
-    printf("Alloc Count after ADD_TEST:%lu %lu\n", CuAlloc_getAllocCount(), CuAlloc_getFreeCount());
+    printf("Alloc Count after ADD_TEST:%u %u\n", CuAlloc_getAllocCount(), CuAlloc_getFreeCount());
 
 	SUITE_ADD_TEST(suite, TestCuTestNew);
 	SUITE_ADD_TEST(suite, TestCuTestInit);
@@ -641,6 +661,6 @@ CuSuite* CuGetSuiteTests(void)
 	SUITE_ADD_TEST(suite, TestCuSuiteDetails_PassesAndFails);
 
 
-	printf("Registered #%zu testcases\n", suite->testcount);
+	printf("Registered #%u testcases\n", suite->testcount);
 	return suite;
 }

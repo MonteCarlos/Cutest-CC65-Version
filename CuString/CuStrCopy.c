@@ -14,10 +14,13 @@
  */
 char* CuStrCopy(const char* old)
 {
-	char* newStr; //= CuAlloc(strlen(old)+1);//CuStrAlloc(len + 1);
+	if (old){
+		char* newStr; //= CuAlloc(strlen(old)+1);//CuStrAlloc(len + 1);
 
-	assert(NULL != old);
-	newStr = CuStrAlloc(strlen(old));
-	strcpy(newStr, old);
-	return newStr;
+		assert(NULL != old);
+		newStr = CuStrAlloc(strlen(old));
+		strcpy(newStr, old);
+		return newStr;
+	}
+	return NULL;
 }

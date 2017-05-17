@@ -1,9 +1,10 @@
 #include "CuAlloc_internal.h"
 
 
-unsigned long int alloccount=0;
-unsigned long int freecount=0;
-unsigned long int realloccount=0;
+CuSize_t alloccount=0;
+CuSize_t freecount=0;
+CuSize_t realloccount=0;
+
 void *lastFreed[5] = {0};
 void *lastAllocated[5] = {0};
 

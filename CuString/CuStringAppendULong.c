@@ -6,7 +6,10 @@
 
 #include "CutestString_internal.h"
 
-void CuStringAppendULong(CuString *str, unsigned long int num){
-	CuStringAppendFormat(str, "%lu", num);
+/* Appends unsiged long to a CuString after the number itself is also converted to a string*/
+
+CuError_t CuStringAppendULong(CuString *str, unsigned long int num){
+	//CuStringAppendFormat already checks str
+		return CuStringAppendFormat(str, "%lu", num);
 }
 

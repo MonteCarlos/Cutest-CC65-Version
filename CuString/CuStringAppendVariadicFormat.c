@@ -6,12 +6,17 @@
 
 #include "CutestString_internal.h"
 
-void CuStringAppendVariadicFormat(CuString* str, const char* format, va_list va)
+/* appends string to CuString using format specifier and va args
+	If str == NULL, a new CuString is created with the appropriate content and returned to the caller
+*/
+CuString *CuStringAppendVariadicFormat(CuString* str, const char* format, va_list va)
 {
 	char *buf = CuStrVaFormat(format, va);
+	CuString *str2 = NULL;
 	assert (NULL != buf);
 
-	CuStringAppend(str, buf);
+	str2 = CuStringAppend(str, buf);
 
 	CuFree(buf);
+	return str2;
 }

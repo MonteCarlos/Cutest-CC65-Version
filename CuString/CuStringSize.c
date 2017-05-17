@@ -6,6 +6,15 @@
 
 #include "CutestString_internal.h"
 
+/** \brief Returns CuString buffer size
+ *
+ * \param CuString* str
+ * \return CuStringSize_t buffer size or ~0 on error
+ *
+ */
 CuStringSize_t CuStringSize(CuString *str){
-	return str -> size;
+	if (str){
+		return str -> size;
+	}
+	return ~0;
 }

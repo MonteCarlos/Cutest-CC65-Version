@@ -22,10 +22,10 @@ CuAllocPtr_t CuRealloc(void* old, CuSize_t n);
 CuSize_t CuAlloc_getDataSize( CuAllocPtr_t ptr); CuSize_t CuAlloc_getTotalSize( CuAllocPtr_t ptr);
 bool CuAlloc_getBufferValidity( CuAllocPtr_t ptr);
 bool CuFree( CuAllocPtr_t ptr);
-unsigned long int CuAlloc_getPendingFrees(void);
-unsigned long int CuAlloc_getAllocCount(void);
-unsigned long int CuAlloc_getFreeCount(void);
-unsigned long int CuAlloc_getReallocCount(void);
+CuSize_t CuAlloc_getPendingFrees(void);
+CuSize_t CuAlloc_getAllocCount(void);
+CuSize_t CuAlloc_getFreeCount(void);
+CuSize_t CuAlloc_getReallocCount(void);
 CuAllocPtr_t CuAllocGetLastFreedMem(uint8_t idx);
 
 // CUALLOC_H_INCLUDED

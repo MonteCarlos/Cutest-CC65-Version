@@ -1,6 +1,6 @@
 #include "CuAlloc_internal.h"
 
-unsigned long int CuAlloc_getFreeCount(void){
+CuSize_t CuAlloc_getFreeCount(void){
     return freecount;
 }
 

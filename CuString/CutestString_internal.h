@@ -11,7 +11,7 @@
 #include <string.h>
 //#include <setjmp.h>
 
-
+#include "CutestString.h"
 struct CuString_tag
 {
 	CuStringLen_t length;

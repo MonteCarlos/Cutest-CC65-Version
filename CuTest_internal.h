@@ -9,7 +9,7 @@
 #include "CuTestTest.h"
 #include "CuAlloc/CuAlloc.h"
 
-#define CUTEST_STR_SUMMARY(runs, passes, fails, leaks) "Runs:%zu, Passes:%zu, Fails:%zu, Leaks:%zu\n", runs, passes, fails, leaks
+#define CUTEST_STR_SUMMARY(runs, passes, fails, leaks) "Runs:%u, Passes:%u, Fails:%u, Leaks:%u\n", runs, passes, fails, leaks
 
 typedef struct CuTest_flags_tag{
 	int failed:1;
@@ -68,12 +68,12 @@ struct CuReport_tag{
 };
 
 
-void CuFailInternal(CuTest* tc, const char* file, unsigned int line, CuString* string);
+void CuFailInternal(CuTest* tc, const char* file, unsigned long int line, CuString* string);
 void *CuTestAlloc(size_t n);
 unsigned long int CuTestGetProgressStart(void);
 unsigned long int CuTestGetProgressEnd(void);
 unsigned long int CuTestGetProgressRange(void);
-void CuTestGenerateMessage(CuString* str, const char* msg1, const char* msg2, const char* file, unsigned long int line);
+CuError_t CuTestGenerateMessage(CuString* str, const char* msg1, const char* msg2, const char* file, unsigned long int line);
 size_t CuTestFprintf(FILE* file, char* format, ...);
 
 

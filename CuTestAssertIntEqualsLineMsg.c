@@ -20,7 +20,7 @@ bool intCmpFnc(const void* exp, const void* act, char *expectedStr, char *actual
     return (*(int*)exp == *(int*)act);
 }
 
-bool CuAssertIntEquals_LineMsg(CuTest* tc, const char* file, unsigned int line, const char* message,
+bool CuAssertIntEquals_LineMsg(CuTest* tc, const char* file, unsigned long int line, const char* message,
 	int expected, int actual)
 {
 	minWidthIntCharArray_t expectedStr; //reserve minimum field width capable of holding smallest int

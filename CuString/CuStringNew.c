@@ -6,6 +6,13 @@
 //#include <math.h>
 
 #include "CutestString_internal.h"
+
+/** \brief Allocates new CuString struct
+ *
+ * \param
+ * \return CuString* empty CuString
+ *
+ */
 CuString* CuStringNew(void)
 {
 	CuString* str = (CuString*) CuAlloc(sizeof(CuString));

@@ -1,21 +1,23 @@
 #include "CuTest_internal.h"
 
-void CuFail_Line(CuTest* tc, const char* file, unsigned int line, const char* message, const char* message2)
+void CuFail_Line(CuTest* tc, const char* file, unsigned long int line, const char* message, const char* message2)
 {
-	//CuString *string = CuStringNew();
+	if (tc){
+		//CuString *string = CuStringNew();
 
-	//CuStringInit(&string);
-	if ( 0 != CuStringLen(tc->message) ) {
-        CuStringAppendChar(tc->message,'\n');
+		//CuStringInit(&string);
+		if ( 0 != CuStringLen(tc->message) ) {
+			CuStringAppendChar(tc->message,'\n');
+		}
+		CuTestGenerateMessage(tc->message, message, message2, file, line);
+		tc->failed = 1;
+		//tc->message = string;
+		/*if (message2 != NULL)
+		{
+			CuStringAppend(&string, message2);
+			CuStringAppend(&string, ": ");
+		}
+		CuStringAppend(&string, message);*/
+		//CuFailInternal(tc, file, line, &string);
 	}
-	CuTestGenerateMessage(tc->message, message, message2, file, line);
-	tc->failed = 1;
-	//tc->message = string;
-	/*if (message2 != NULL)
-	{
-		CuStringAppend(&string, message2);
-		CuStringAppend(&string, ": ");
-	}
-	CuStringAppend(&string, message);*/
-	//CuFailInternal(tc, file, line, &string);
 }

@@ -13,10 +13,13 @@
  * \return EXIT_SUCCESS on success, EXIT_FAILURE otherwise
  *
  */
-int CuStringClear(CuString* str)
+CuError_t CuStringClear(CuString* str)
 {
-    CuFree(str->buffer);
-    CuStringInit(str);
-	return EXIT_SUCCESS;
+    if (str){
+		CuFree(str->buffer);
+		CuStringInit(str);
+		return EXIT_SUCCESS;
+	}
+	return EXIT_FAILURE;
 }
 

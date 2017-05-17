@@ -19,15 +19,15 @@ struct CuAlloc_tag {
     uint8_t array[];//Variable length array
 };
 
-extern unsigned long int alloccount;
-extern unsigned long int freecount;
-extern unsigned long int realloccount;
+extern CuSize_t alloccount;
+extern CuSize_t freecount;
+extern CuSize_t realloccount;
 extern void *lastFreed[5];
 extern void *lastAllocated[5];
 
-void CuAlloc_initHeader(CuAlloc_t* ptr, CuSize_t n);
+CuError_t CuAlloc_initHeader(CuAlloc_t* ptr, CuSize_t n);
 CuAlloc_t *CuAlloc_getHeaderAddr(CuAllocPtr_t ptr);
-CuAllocPtr_t CuAlloc_getDataAddr(CuAlloc_t*  ptr); CuSize_t CuAlloc_calculateTotalSize(size_t n);
+CuAllocPtr_t CuAlloc_getDataAddr(CuAlloc_t*  ptr);CuSize_t CuAlloc_calculateTotalSize(size_t n);
 
 // CUALLOC_INTERNAL_H_INCLUDED
 #endif

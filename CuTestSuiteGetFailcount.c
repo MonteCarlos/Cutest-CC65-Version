@@ -1,6 +1,7 @@
 #include "CuTest_internal.h"
-CuSize_tCuSuiteGetFailcount(CuSuite* testSuite)
+CuSize_t CuSuiteGetFailcount(CuSuite* testSuite)
 {
-	return testSuite->failCount;
+	if (testSuite) return testSuite->failCount;
+	return ~0;
 }
 

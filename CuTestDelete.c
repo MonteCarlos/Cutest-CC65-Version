@@ -1,20 +1,24 @@
 #include "CuTest_internal.h"
 
-void CuTestDelete(register CuTest *t)
+bool CuTestDelete(register CuTest *t)
 {
-    bool freeresult;
-	//if (NULL == t) return;
-	assert (NULL != t);
+    if (t){
+		bool freeresult;
+		//if (NULL == t) return;
+		assert (NULL != t);
 
-	if (NULL != t->message){
-        CuStringDelete(t->message);
+		if (NULL != t->message){
+			CuStringDelete(t->message);
+		}
+		assert (NULL != t->name);
+		CuStringDelete(t->name);
+		//assert(freeresult);
+		//CuStringDelete(t->name);
+		//CuStringDelete(t->name);
+		//assert (NULL != t);
+		freeresult = CuFree(t);
+		assert(freeresult);
+		return EXIT_SUCCESS;
 	}
-	assert (NULL != t->name);
-	CuStringDelete(t->name);
-	//assert(freeresult);
-	//CuStringDelete(t->name);
-	//CuStringDelete(t->name);
-	//assert (NULL != t);
-	freeresult = CuFree(t);
-	assert(freeresult);
+	return EXIT_FAILURE;
 }

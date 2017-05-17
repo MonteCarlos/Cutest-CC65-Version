@@ -554,12 +554,12 @@ CuSuite* CuStringGetSuite2(void)
     CuSuite* suite = CuSuiteNew();
 
 
-//	SUITE_ADD_TEST(suite, TestCuStrLenFormat);
-	SUITE_ADD_TEST(suite, TestCuStrFormat);
+	//SUITE_ADD_TEST(suite, TestCuStrLenFormat);
+	/*SUITE_ADD_TEST(suite, TestCuStrFormat);
 	SUITE_ADD_TEST(suite, TestCuStringInserts);
 	SUITE_ADD_TEST(suite, TestCuStringResizes);
 	SUITE_ADD_TEST(suite, TestCuStringAppendVariadicFormat);
-
+*/
  	//alle OK
     return suite;
 }

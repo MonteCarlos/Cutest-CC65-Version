@@ -2,5 +2,7 @@
 
 void CuSuiteSummary(CuSuite* testSuite, FILE* file)
 {
-	CuTestFprintf(file, CuStringCStr(testSuite->report->reportStr));
+	if (testSuite){
+		CuTestFprintf(file, CuStringCStr(testSuite->report->reportStr));
+	}
 }

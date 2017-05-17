@@ -1,12 +1,13 @@
 #include "CuTest_internal.h"
 
-void CuSuiteDelete(CuSuite *testSuite)
+bool CuSuiteDelete(CuSuite *testSuite)
 {
+	if (testSuite){
         long int n = testSuite->totalcount-1;
         bool freereturn;
         CuTestPtr_t *testlist = testSuite->testlist;
 
-        assert (NULL != testSuite);
+        //assert (NULL != testSuite);
         printf("Removing testcases:\n");
         for (; n >=0; --n)
         {
@@ -34,4 +35,7 @@ void CuSuiteDelete(CuSuite *testSuite)
         assert(freereturn);
         freereturn = CuFree(testSuite);
         assert(freereturn);
+		return EXIT_SUCCESS;
+	}
+	return EXIT_FAILURE;
 }

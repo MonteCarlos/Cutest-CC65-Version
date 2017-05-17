@@ -109,8 +109,8 @@ void testCuRealloc(CuTest* tc){
     int intArray1[] = {100,200,300,400,500,23};
     int intArray2[] = {1024,512,256,128,64,32,16,8,4,2,1,0};
     int *ptr2IntArray = NULL;
-    unsigned long int alloccount = CuAlloc_getAllocCount();
-    unsigned long int realloccount = CuAlloc_getReallocCount();
+    CuSize_t alloccount = CuAlloc_getAllocCount();
+    CuSize_t realloccount = CuAlloc_getReallocCount();
 	int8_t i;
 
     ptr2IntArray = CuRealloc(NULL, sizeof(intArray1));
@@ -210,13 +210,14 @@ CuSuite *CuAlloc_requestTests(void){
 
 	return suite;
 }
-
+/*
 #ifdef __CC65__ CuSize_t getCuAllocMemSize(void){
 	extern uint8_t _BEGIN_LOAD__;
 	extern uint8_t _END_LOAD__;
 	return &_END_LOAD__-&_BEGIN_LOAD__;
 }
 #endif
+*/
 /*
 	$4762 (02.07.2015)
 	$4747 (using getHeaderAddr and initHeader)
@@ -238,25 +239,26 @@ int main(void){
     if (Nofails) return Nofails;
 
     printf("Registering tests...\n");
-    printf("Alloc Count before SuiteNew:%lu %lu %lu\n", CuAlloc_getAllocCount(), CuAlloc_getFreeCount(), CuAlloc_getReallocCount());
+    printf("Alloc Count before SuiteNew:%u %u %u\n", CuAlloc_getAllocCount(), CuAlloc_getFreeCount(), CuAlloc_getReallocCount());
     suite = CuAlloc_requestTests();
-    printf("Alloc Count after request tests:%lu %lu %lu\n", CuAlloc_getAllocCount(), CuAlloc_getFreeCount(), CuAlloc_getReallocCount());assert(NULL != suite);
+    printf("Alloc Count after request tests:%u %u %u\n", CuAlloc_getAllocCount(), CuAlloc_getFreeCount(), CuAlloc_getReallocCount());assert(NULL != suite);
     printf("Running tests...\n");
     CuSuiteRun(suite);//This function does not return!
     CuSuiteDetails(suite, stdout);
-    printf("Alloc Count after SuiteRun:%lu %lu %lu\n", CuAlloc_getAllocCount(), CuAlloc_getFreeCount(), CuAlloc_getReallocCount());
+    printf("Alloc Count after SuiteRun:%u %u %u\n", CuAlloc_getAllocCount(), CuAlloc_getFreeCount(), CuAlloc_getReallocCount());
  	printf("End testing\n");
  	Nofails = CuSuiteGetFailcount(suite);
 
 	CuSuiteDelete(suite);
-	printf("Alloc Count after SuiteDelete:%lu %lu %lu\n", CuAlloc_getAllocCount(), CuAlloc_getFreeCount(), CuAlloc_getReallocCount());
+	printf("Alloc Count after SuiteDelete:%u %u %u\n", CuAlloc_getAllocCount(), CuAlloc_getFreeCount(), CuAlloc_getReallocCount());
 
 	assert (0 == CuAlloc_getPendingFrees());
 
 	assert (0 == CuAlloc_getPendingFrees());
-
+/*
 #ifdef __CC65__
 	printf("CuAlloc total size: $%x", getCuAllocMemSize());
 	#endif // __CC65__
+*/
 	return Nofails;
 }

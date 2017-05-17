@@ -1,7 +1,9 @@
 #include "CuTest_internal.h"
- CuSize_t CuSuiteGetTestcount(CuSuite* testSuite)
+
+CuSize_t CuSuiteGetTestcount(CuSuite* testSuite)
 {
-	return testSuite->testcount;
+	if (testSuite) return testSuite->testcount;
+	return ~0;
 }
 
 
