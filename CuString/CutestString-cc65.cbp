@@ -17,7 +17,6 @@
 					<Add directory="../../../C64/include" />
 				</Compiler>
 				<Linker>
-					<Add option="-C CutestString-cc65.cfg" />
 					<Add library="../libcutest-cc65_Dbg.lib" />
 					<Add library="../CuAlloc/CuAllocDbg.lib" />
 				</Linker>
@@ -33,7 +32,6 @@
 					<Add directory="../../../C64/include" />
 				</Compiler>
 				<Linker>
-					<Add option="-C CutestString-cc65.cfg" />
 					<Add library="../libcutest-cc65.lib" />
 					<Add library="../CuAlloc/CuAlloc.lib" />
 				</Linker>
@@ -48,7 +46,6 @@
 					<Add directory="../../../C64/include" />
 				</Compiler>
 				<Linker>
-					<Add option="-C CutestString-cc65.cfg" />
 					<Add library="../cutest-cc65_Dbg.lib" />
 					<Add library="../CuAlloc/CuAllocDbg.lib" />
 					<Add library="./CutestString-cc65Dbg.lib" />

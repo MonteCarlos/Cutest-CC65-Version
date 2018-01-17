@@ -9,7 +9,7 @@
 
 #define CUTEST_VERSION  "CuTest 1.5"
 
-typedef unsigned int CuSize_t;
+typedef int CuSize_t;
 typedef uint8_t CuError_t;
 
 #include "CuString/CutestString.h"

@@ -1,3 +1,4 @@
 
 ---OK---
-Runs:841960576, Passes:841969635, Runs:552, Passes:841969635, Fails:
+Runs:0, Passes:0, Fails:0, Leaks:0
+Runs:0, Passes:0, Fails:0, Leaks:0

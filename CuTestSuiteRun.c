@@ -1,10 +1,10 @@
 #include "CuTest_internal.h"
 #include <signal.h>
 
-static void illSignalHandler(int sig){
+/*static void illSignalHandler(int sig){
 	printf("!!! Exception occured in CuSuiteRun. Signal %d !!!\n\n", sig);
 	signal(SIGSEGV, SIG_IGN);
-}
+}*/
 
 // TODO (MyAcer#1#): find solution for messed output with sub tests CuSize_t CuSuiteRun(CuSuite* testSuite)
 CuSize_t CuSuiteRun(CuSuite* testSuite)
@@ -21,7 +21,7 @@ CuSize_t CuSuiteRun(CuSuite* testSuite)
 			//signal(SIGSEGV, illSignalHandler);
 			printf("%u: ",i);
 			if (testCase->isSuite){
-				if (failCnt = CuSuiteRun(testCase->suite)) testSuite->failCount+=failCnt;
+				if ( failCnt = CuSuiteRun(testCase->suite) ) testSuite->failCount+=failCnt;
 			}else{
 				register CuTest *test = testCase->test;
 

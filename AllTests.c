@@ -7,11 +7,11 @@
 CuSuite* CuGetSuite();
 CuSuite* CuStringGetSuite();
 
-static void illSignalHandler(int sig){
+/*static void illSignalHandler(int sig){
 	printf("!!! Exception occured in RunAllTests. Signal %d !!!\n\n", sig);
 	signal(SIGSEGV, SIG_IGN);
 }
-
+*/
 
 // TODO (Stefan#1#): cutest-cc65 is still broken: ...
 //

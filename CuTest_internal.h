@@ -11,12 +11,14 @@
 
 #define CUTEST_STR_SUMMARY(runs, passes, fails, leaks) "Runs:%u, Passes:%u, Fails:%u, Leaks:%u\n", runs, passes, fails, leaks
 
-typedef struct CuTest_flags_tag{
+
+//Don't use bitfields with cc65!!
+/*typedef struct CuTest_flags_tag{
 	int failed:1;
 	int ran:1;
 	int reported:1;
 	int memoryleak:1;
-}CuTest_flags_t;
+}CuTest_flags_t;*/
 
 struct CuTest_tag
 {
@@ -28,14 +30,10 @@ struct CuTest_tag
 	bool reported;
 	bool memoryleak;
 
-
 	CuSize_t assertCnt;//counter for assertions used in that test
 	CuString *message;
-	jmp_buf *jumpBuf;
     CuTest_SetupFnc_t *setup;
     CuTest_TeardownFnc_t *teardown;
-    va_list vaargs1;
-    va_list vaargs2;
 };
 
 typedef struct CuTestPtr_tag{

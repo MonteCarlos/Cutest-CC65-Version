@@ -20,12 +20,12 @@ typedef struct CuString_tag CuString;
 
 #include "../CuTest.h"
 
-typedef size_t CuStringLen_t;
-typedef size_t CuStringSize_t;
+typedef int CuStringLen_t;
+typedef int CuStringSize_t;
 
 /* CuString */
 
-char* CuStrAlloc(size_t size);
+char* CuStrAlloc(CuStringSize_t size);
 char* CuStrCopy(const char* old);
 char *CuStrVaFormat(const char* format, va_list va);
 char *CuStrFormat(const char* format, ...);
@@ -40,10 +40,10 @@ CuString *CuStringAppend(CuString* str, const char* text);
 CuError_t CuStringAppendChar(CuString* str, char ch);
 CuError_t CuStringAppendFormat(CuString* str, const char* format, ...);
 CuError_t CuStringInsert(CuString* str, const char* text, int pos);
-CuError_t CuStringResize(CuString* str, size_t newSize);
+CuError_t CuStringResize(CuString* str, CuStringSize_t newSize);
 bool CuStringDelete(CuString* str);
 CuStringLen_t CuStringLen(CuString *str);
-size_t CuStringSize(CuString *str);
+CuStringSize_t CuStringSize(CuString *str);
 CuError_t CuStringClear(CuString *str);
 
 char* CuStringCStr(CuString* str);
