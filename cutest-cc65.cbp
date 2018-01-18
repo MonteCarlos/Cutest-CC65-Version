@@ -64,6 +64,7 @@
 				<Option type="2" />
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
+				<Option projectCompilerOptionsRelation="1" />
 				<Compiler>
 					<Add option="-Os" />
 					<Add option="-Wextra" />
@@ -74,7 +75,7 @@
 				</Linker>
 			</Target>
 			<Target title="Selftest">
-				<Option output="cutest" prefix_auto="1" extension_auto="1" />
+				<Option output="cutest.exe" prefix_auto="1" extension_auto="0" />
 				<Option object_output="obj/Debug" />
 				<Option type="1" />
 				<Option compiler="gcc" />

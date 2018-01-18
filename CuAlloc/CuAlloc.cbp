@@ -43,9 +43,7 @@
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
 				<Compiler>
-					<Add option="-g" />
-					<Add option="-fplan9-extensions" />
-					<Add option="-fplan9-extensions -std=c11" />
+					<Add option="-g -fplan9-extensions -std=c11" />
 				</Compiler>
 			</Target>
 			<Target title="gccRelease">
@@ -56,11 +54,7 @@
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
 				<Compiler>
-					<Add option="-fomit-frame-pointer" />
-					<Add option="-Os" />
-					<Add option="-Wall" />
-					<Add option="-fplan9-extensions" />
-					<Add option="-fplan9-extensions -std=c11" />
+					<Add option="-O -Wall -fplan9-extensions -std=c11" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -73,13 +67,11 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
-					<Add option="-fplan9-extensions" />
 					<Add option="-fplan9-extensions -std=c11" />
 				</Compiler>
 				<Linker>
 					<Add library="../libcutest_Dbg.a" />
 					<Add library="../CuString/libCutestString-cc65_dbg.a" />
-					<Add library="../../MyCLib/libMCLib.a" />
 				</Linker>
 				<ExtraCommands>
 					<Add after="./CuAlloc_tests.exe" />

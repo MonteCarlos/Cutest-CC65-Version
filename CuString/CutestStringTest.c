@@ -337,7 +337,7 @@ void TestCuStringLen(CuTest *tc){
 
 // TODO (Stefan#1#): Implement test case!
 void TestCuStringClear(CuTest* tc){
-
+    CuFail_Msg(tc, "not implemented");
 }
 
 void TestCuStrNULL(CuTest* tc){

@@ -7,6 +7,7 @@
 
 #define CompareAsserts(tc, message, expected, actual)  X_CompareAsserts((tc), __FILE__, __LINE__, (message), (expected), (actual))
 
+/*
 static void X_CompareAsserts(CuTest* tc, const char *file, unsigned long int line, const char* message, const char* expected, const char* actual)
 {
 	int mismatch;
@@ -35,6 +36,7 @@ static void X_CompareAsserts(CuTest* tc, const char *file, unsigned long int lin
 
 	CuAssert_Line(tc, file, line, message, !mismatch);
 }
+*/
 /*-------------------------------------------------------------------------*
  * CuString Test
  *-------------------------------------------------------------------------*/
