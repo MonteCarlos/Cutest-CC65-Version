@@ -9,10 +9,10 @@
 #include "CuTestTest.h"
 #include "CuAlloc/CuAlloc.h"
 
-#define CUTEST_STR_SUMMARY(runs, passes, fails, leaks) "Runs:%u, Passes:%u, Fails:%u, Leaks:%u\n", runs, passes, fails, leaks
+#define CUTEST_STR_SUMMARY(runs, passes, fails, leaks) "Runs:%u, Passes:%u, Fails:%u, Leaks:%u", runs, passes, fails, leaks
 
 
-//Don't use bitfields with cc65!!
+//Don't use bitfields with cc65!! They are stub and buggy
 /*typedef struct CuTest_flags_tag{
 	int failed:1;
 	int ran:1;

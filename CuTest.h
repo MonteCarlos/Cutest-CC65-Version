@@ -9,7 +9,7 @@
 
 #define CUTEST_VERSION  "CuTest 1.5"
 
-typedef int CuSize_t;
+typedef unsigned int CuSize_t;
 typedef uint8_t CuError_t;
 
 #include "CuString/CutestString.h"
@@ -70,8 +70,8 @@ bool CuAssertGeneralEquals_LineMsg(CuTest* tc, const char* file, unsigned long i
 
 
 #define CuPass(tc)                            CuAssertTrue(tc, true);
-#define CuFail(tc)                            CuFail_Line(  (tc), __FILE__, __LINE__, NULL, NULL)
-#define CuFail_Msg(tc, ms)                    CuFail_Line(  (tc), __FILE__, __LINE__, (ms), NULL)
+#define CuFail(tc)                            CuAssertTrue(tc, false)
+#define CuFail_Msg(tc, ms)                    CuAssertTrue_Msg(tc, ms, false)
 #define CuAssert(tc, ms, cond)                CuAssert_Line((tc), __FILE__, __LINE__, (ms), (cond))
 #define CuAssertTrue(tc, cond)                CuAssert_Line((tc), __FILE__, __LINE__, "assert failed", (cond))
 #define CuAssertFalse(tc, cond)               CuAssert_Line((tc), __FILE__, __LINE__, "assert failed", !(cond))

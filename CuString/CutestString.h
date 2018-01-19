@@ -20,8 +20,8 @@ typedef struct CuString_tag CuString;
 
 #include "../CuTest.h"
 
-typedef int CuStringLen_t;
-typedef int CuStringSize_t;
+typedef unsigned int CuStringLen_t;
+typedef CuSize_t CuStringSize_t;
 
 /* CuString */
 

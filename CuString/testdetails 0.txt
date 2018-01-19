@@ -1,4 +1,5 @@
+Test failed: /home/mc78/Dokumente/Programmieren/C/CuTest/develop_worktree/CuString/CutestStringTest.c(0), (null) in TestCuStringClear
 
----OK---
-Runs:13, Passes:13, Fails:0, Leaks:0
-Runs:13, Passes:13, Fails:0, Leaks:0
+!!!FAILURES!!!
+Runs:0, Passes:0, Fails:12, Leaks:1
+Runs:795601536, Passes:0, Fails:12,

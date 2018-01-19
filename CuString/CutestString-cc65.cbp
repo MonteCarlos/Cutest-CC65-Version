@@ -16,10 +16,6 @@
 				<Compiler>
 					<Add directory="../../../C64/include" />
 				</Compiler>
-				<Linker>
-					<Add library="../libcutest-cc65_Dbg.lib" />
-					<Add library="../CuAlloc/CuAllocDbg.lib" />
-				</Linker>
 			</Target>
 			<Target title="Release">
 				<Option output="CutestString_cc65.lib" prefix_auto="0" extension_auto="0" />
@@ -28,54 +24,48 @@
 				<Option type="2" />
 				<Option compiler="cc65" />
 				<Compiler>
+					<Add option="-Ors" />
 					<Add option="-DNDEBUG" />
 					<Add directory="../../../C64/include" />
 				</Compiler>
-				<Linker>
-					<Add library="../libcutest-cc65.lib" />
-					<Add library="../CuAlloc/CuAlloc.lib" />
-				</Linker>
 			</Target>
 			<Target title="Selftest">
 				<Option output="TestCutestString-cc65.prg" prefix_auto="1" extension_auto="0" />
-				<Option object_output="obj/Debug/" />
+				<Option object_output="obj/UTests" />
+				<Option external_deps="libCutestString-cc65_dbg.a;../CuAlloc/libCuAllocDbg.a;../libcutest_Dbg.a;" />
 				<Option type="1" />
 				<Option compiler="cc65" />
 				<Option use_console_runner="0" />
+				<Option projectCompilerOptionsRelation="1" />
 				<Compiler>
 					<Add directory="../../../C64/include" />
 				</Compiler>
 				<Linker>
 					<Add library="../cutest-cc65_Dbg.lib" />
 					<Add library="../CuAlloc/CuAllocDbg.lib" />
-					<Add library="./CutestString-cc65Dbg.lib" />
+					<Add library="CutestString-cc65Dbg.lib" />
 				</Linker>
 			</Target>
 			<Target title="gccDebug">
 				<Option output="CutestString-cc65_dbg" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="" />
 				<Option object_output="obj/gccDebug" />
-				<Option external_deps="../../MyCLib/libMCLib.a;" />
 				<Option type="2" />
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
 				<Compiler>
-					<Add option="-Wall" />
-					<Add option="-g" />
-					<Add option="-fplan9-extensions -std=gnu11" />
+					<Add option="-Wall -g -fplan9-extensions -std=gnu11" />
 				</Compiler>
 			</Target>
 			<Target title="gccRelease">
 				<Option output="CutestString-cc65" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="" />
 				<Option object_output="obj/gccRelease" />
-				<Option external_deps="../../MyCLib/libMCLib.a;" />
 				<Option type="2" />
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
 				<Compiler>
-					<Add option="-Wall" />
-					<Add option="-fplan9-extensions -std=gnu11" />
+					<Add option="-Wall -O -fplan9-extensions -std=gnu11" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -83,15 +73,19 @@
 			</Target>
 			<Target title="gccSelftest">
 				<Option output="CutestString-test.exe" prefix_auto="0" extension_auto="0" />
-				<Option object_output="obj/gccDebug" />
-				<Option external_deps="../../MyCLib/libMCLib.a;../CuAlloc/libCuAlloc.a;libCutestString-cc65.a;" />
+				<Option object_output="obj/gccUTests" />
+				<Option external_deps="libCutestString-cc65_dbg.a;../CuAlloc/libCuAllocDbg.a;../libcutest_Dbg.a;" />
 				<Option type="1" />
 				<Option compiler="gcc" />
+				<Option projectCompilerOptionsRelation="1" />
 				<Compiler>
-					<Add option="-Wall" />
-					<Add option="-g" />
-					<Add option="-fplan9-extensions -std=gnu11" />
+					<Add option="-Wall -g -fplan9-extensions -std=gnu11" />
 				</Compiler>
+				<Linker>
+					<Add library="./libCutestString-cc65_dbg.a" />
+					<Add library="../CuAlloc/libCuAllocDbg.a" />
+					<Add library="../libcutest_Dbg.a" />
+				</Linker>
 				<ExtraCommands>
 					<Add after="./CutestString-test.exe" />
 				</ExtraCommands>
@@ -101,13 +95,6 @@
 			<Add alias="CuTestString, selftest contained" targets="Debug;Release;Selftest;" />
 			<Add alias="gcc all" targets="gccDebug;gccRelease;gccSelftest;" />
 		</VirtualTargets>
-		<Compiler>
-			<Add directory=".." />
-			<Add directory="../../MyCLib" />
-		</Compiler>
-		<ExtraCommands>
-			<Add before="echo %CC65_HOME%" />
-		</ExtraCommands>
 		<Unit filename="AllTests.c">
 			<Option compilerVar="CC" />
 			<Option target="Selftest" />
@@ -117,7 +104,6 @@
 			<Option compilerVar="CC" />
 			<Option target="Debug" />
 			<Option target="Release" />
-			<Option target="Selftest" />
 			<Option target="gccDebug" />
 			<Option target="gccRelease" />
 		</Unit>
@@ -132,7 +118,6 @@
 			<Option compilerVar="CC" />
 			<Option target="Debug" />
 			<Option target="Release" />
-			<Option target="Selftest" />
 			<Option target="gccDebug" />
 			<Option target="gccRelease" />
 		</Unit>
@@ -140,7 +125,6 @@
 			<Option compilerVar="CC" />
 			<Option target="Debug" />
 			<Option target="Release" />
-			<Option target="Selftest" />
 			<Option target="gccDebug" />
 			<Option target="gccRelease" />
 		</Unit>
@@ -148,7 +132,6 @@
 			<Option compilerVar="CC" />
 			<Option target="Debug" />
 			<Option target="Release" />
-			<Option target="Selftest" />
 			<Option target="gccDebug" />
 			<Option target="gccRelease" />
 		</Unit>
@@ -191,7 +174,6 @@
 			<Option compilerVar="CC" />
 			<Option target="Debug" />
 			<Option target="Release" />
-			<Option target="Selftest" />
 			<Option target="gccDebug" />
 			<Option target="gccRelease" />
 		</Unit>
@@ -199,7 +181,6 @@
 			<Option compilerVar="CC" />
 			<Option target="Debug" />
 			<Option target="Release" />
-			<Option target="Selftest" />
 			<Option target="gccDebug" />
 			<Option target="gccRelease" />
 		</Unit>
@@ -214,7 +195,6 @@
 			<Option compilerVar="CC" />
 			<Option target="Debug" />
 			<Option target="Release" />
-			<Option target="Selftest" />
 			<Option target="gccDebug" />
 			<Option target="gccRelease" />
 		</Unit>
@@ -250,7 +230,6 @@
 			<Option compilerVar="CC" />
 			<Option target="Debug" />
 			<Option target="Release" />
-			<Option target="Selftest" />
 			<Option target="gccDebug" />
 			<Option target="gccRelease" />
 		</Unit>
@@ -271,14 +250,11 @@
 		<Unit filename="CutestString-cc65.cfg">
 			<Option target="Debug" />
 			<Option target="Release" />
-			<Option target="Selftest" />
-			<Option target="gccSelftest" />
 		</Unit>
 		<Unit filename="CutestString.c">
 			<Option compilerVar="CC" />
 			<Option target="Debug" />
 			<Option target="Release" />
-			<Option target="Selftest" />
 			<Option target="gccDebug" />
 			<Option target="gccRelease" />
 		</Unit>
