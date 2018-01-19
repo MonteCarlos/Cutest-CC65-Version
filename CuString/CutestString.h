@@ -21,7 +21,7 @@ typedef struct CuString_tag CuString;
 #include "../CuTest.h"
 
 typedef unsigned int CuStringLen_t;
-typedef unsigned int CuStringSize_t;
+typedef CuSize_t CuStringSize_t;
 
 /* CuString */
 

@@ -27,6 +27,7 @@
 			</Target>
 			<Target title="UTest">
 				<Option output="CuAllocTests.prg" prefix_auto="0" extension_auto="0" />
+				<Option object_output="obj/UTests" />
 				<Option type="1" />
 				<Option compiler="cc65" />
 				<Option use_console_runner="0" />
@@ -39,6 +40,7 @@
 			<Target title="gccDebug">
 				<Option output="CuAllocDbg" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="" />
+				<Option object_output="obj/gccDebug" />
 				<Option type="2" />
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
@@ -62,7 +64,7 @@
 			</Target>
 			<Target title="gccUTest">
 				<Option output="CuAlloc_tests.exe" prefix_auto="0" extension_auto="0" />
-				<Option object_output="obj/gccDebug" />
+				<Option object_output="obj/gccUTests" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>

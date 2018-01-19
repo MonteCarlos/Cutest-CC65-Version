@@ -48,11 +48,21 @@ static void X_CompareAsserts(CuTest* tc, const char *file, int line, const char*
 
 void TestCuStringNew(CuTest* tc)
 {
+    // @todo (mc78#1#01/19/18): str->buffer is messed up, after CuString new. Something wents wrong with allocation.
 	CuString* str = CuStringNew();
-	CuAssertTrue(tc, CuAlloc_getBufferValidity(str));
-	CuAssertTrue(tc, sizeof(CuString) == CuAlloc_getDataSize(str));
+	bool result;
+    CuSize_t bufferSize;
+
+	result = CuAlloc_getBufferValidity(str);
+	CuAssertTrue(tc, result);
+	bufferSize = CuAlloc_getDataSize(str);
+	CuAssertTrue(tc, sizeof(CuString) == bufferSize);
 	CuAssertTrue(tc, 0 == str->length);
-	CuAssertTrue(tc, CUSTRING_LEN_NEW+1 == CuAlloc_getDataSize(str->buffer));
+
+	// @todo (mc78#1#01/19/18): This line crashes when compiled with gcc. Find origin and fix.
+	//Cannot determine size of allocated space for str->buffer, because str->buffer is char*
+	bufferSize = CuAlloc_getDataSize(str->buffer);
+	CuAssertTrue(tc, CUSTRING_LEN_NEW+1 == bufferSize);
 	CuAssertTrue(tc, CUSTRING_LEN_NEW+1 == str->size);
 	CuAssertStrEquals(tc, "", str->buffer);
 	CuStringDelete(str);
