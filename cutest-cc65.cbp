@@ -78,6 +78,7 @@
 			<Target title="Selftest">
 				<Option output="cutest.exe" prefix_auto="1" extension_auto="0" />
 				<Option object_output="obj/UTests" />
+				<Option external_deps="CuAlloc/libCuAllocDbg.a;CuString/libCutestString-cc65_dbg.a;libcutest_Dbg.a;" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Option projectCompilerOptionsRelation="1" />
@@ -117,8 +118,8 @@
 		</Compiler>
 		<Unit filename="AllTests.c">
 			<Option compilerVar="CC" />
-			<Option target="CC65Selftest" />
 			<Option target="Debug" />
+			<Option target="CC65Selftest" />
 			<Option target="Selftest" />
 		</Unit>
 		<Unit filename="AllTests.c.lst">
@@ -133,339 +134,268 @@
 			<Option compilerVar="CC" />
 			<Option target="CC65Debug" />
 			<Option target="CC65Release" />
-			<Option target="CC65Selftest" />
 			<Option target="Debug" />
 			<Option target="Release" />
-			<Option target="Selftest" />
 		</Unit>
 		<Unit filename="CuMallocWrapper.h">
 			<Option target="CC65Debug" />
 			<Option target="CC65Release" />
-			<Option target="CC65Selftest" />
 			<Option target="Debug" />
 			<Option target="Release" />
+			<Option target="CC65Selftest" />
 			<Option target="Selftest" />
 		</Unit>
 		<Unit filename="CuRegisterTests.c">
 			<Option compilerVar="CC" />
 			<Option target="CC65Debug" />
 			<Option target="CC65Release" />
-			<Option target="CC65Selftest" />
 			<Option target="Debug" />
 			<Option target="Release" />
-			<Option target="Selftest" />
 		</Unit>
 		<Unit filename="CuTest.c">
 			<Option compilerVar="CC" />
 			<Option target="CC65Debug" />
 			<Option target="CC65Release" />
-			<Option target="CC65Selftest" />
 			<Option target="Debug" />
 			<Option target="Release" />
-			<Option target="Selftest" />
 		</Unit>
 		<Unit filename="CuTest.h">
 			<Option target="CC65Debug" />
 			<Option target="CC65Release" />
-			<Option target="CC65Selftest" />
 			<Option target="Debug" />
 			<Option target="Release" />
-			<Option target="Selftest" />
+			<Option target="CC65Selftest" />
 		</Unit>
 		<Unit filename="CuTestAddSuite.c">
 			<Option compilerVar="CC" />
 			<Option target="CC65Debug" />
 			<Option target="CC65Release" />
-			<Option target="CC65Selftest" />
 			<Option target="Debug" />
 			<Option target="Release" />
-			<Option target="Selftest" />
 		</Unit>
 		<Unit filename="CuTestAppendMessage.c">
 			<Option compilerVar="CC" />
 			<Option target="CC65Debug" />
 			<Option target="CC65Release" />
-			<Option target="CC65Selftest" />
 			<Option target="Debug" />
 			<Option target="Release" />
-			<Option target="Selftest" />
 		</Unit>
 		<Unit filename="CuTestAssertArrayElementsConstant.c">
 			<Option compilerVar="CC" />
 			<Option target="CC65Debug" />
 			<Option target="CC65Release" />
-			<Option target="CC65Selftest" />
 			<Option target="Debug" />
 			<Option target="Release" />
-			<Option target="Selftest" />
 		</Unit>
 		<Unit filename="CuTestAssertArrayEqualsLineMsg.c">
 			<Option compilerVar="CC" />
 			<Option target="CC65Debug" />
 			<Option target="CC65Release" />
-			<Option target="CC65Selftest" />
 			<Option target="Debug" />
 			<Option target="Release" />
-			<Option target="Selftest" />
 		</Unit>
 		<Unit filename="CuTestAssertArrayEqualsStepFunc.c">
 			<Option compilerVar="CC" />
 			<Option target="CC65Debug" />
 			<Option target="CC65Release" />
-			<Option target="CC65Selftest" />
 			<Option target="Debug" />
 			<Option target="Release" />
-			<Option target="Selftest" />
 		</Unit>
 		<Unit filename="CuTestAssertGeneralEqualsLineMsg.c">
 			<Option compilerVar="CC" />
 			<Option target="CC65Debug" />
 			<Option target="CC65Release" />
-			<Option target="CC65Selftest" />
 			<Option target="Debug" />
 			<Option target="Release" />
-			<Option target="Selftest" />
 		</Unit>
 		<Unit filename="CuTestAssertIntEqualsLineMsg.c">
 			<Option compilerVar="CC" />
 			<Option target="CC65Debug" />
 			<Option target="CC65Release" />
-			<Option target="CC65Selftest" />
 			<Option target="Debug" />
 			<Option target="Release" />
-			<Option target="Selftest" />
 		</Unit>
 		<Unit filename="CuTestAssertPtrEqualsLineMsg.c">
 			<Option compilerVar="CC" />
 			<Option target="CC65Debug" />
 			<Option target="CC65Release" />
-			<Option target="CC65Selftest" />
 			<Option target="Debug" />
 			<Option target="Release" />
-			<Option target="Selftest" />
 		</Unit>
 		<Unit filename="CuTestAssertStrEqualsLineMsg.c">
 			<Option compilerVar="CC" />
 			<Option target="CC65Debug" />
 			<Option target="CC65Release" />
-			<Option target="CC65Selftest" />
 			<Option target="Debug" />
 			<Option target="Release" />
-			<Option target="Selftest" />
 		</Unit>
 		<Unit filename="CuTestDelete.c">
 			<Option compilerVar="CC" />
 			<Option target="CC65Debug" />
 			<Option target="CC65Release" />
-			<Option target="CC65Selftest" />
 			<Option target="Debug" />
 			<Option target="Release" />
-			<Option target="Selftest" />
 		</Unit>
 		<Unit filename="CuTestFailInternal.c">
 			<Option compilerVar="CC" />
 			<Option target="CC65Debug" />
 			<Option target="CC65Release" />
-			<Option target="CC65Selftest" />
 			<Option target="Debug" />
 			<Option target="Release" />
-			<Option target="Selftest" />
 		</Unit>
 		<Unit filename="CuTestFailLine.c">
 			<Option compilerVar="CC" />
 			<Option target="CC65Debug" />
 			<Option target="CC65Release" />
-			<Option target="CC65Selftest" />
 			<Option target="Debug" />
 			<Option target="Release" />
-			<Option target="Selftest" />
 		</Unit>
 		<Unit filename="CuTestFprintf.c">
 			<Option compilerVar="CC" />
 			<Option target="CC65Debug" />
 			<Option target="CC65Release" />
-			<Option target="CC65Selftest" />
 			<Option target="Debug" />
 			<Option target="Release" />
-			<Option target="Selftest" />
 		</Unit>
 		<Unit filename="CuTestGenerateMessage.c">
 			<Option compilerVar="CC" />
 			<Option target="CC65Debug" />
 			<Option target="CC65Release" />
-			<Option target="CC65Selftest" />
 			<Option target="Debug" />
 			<Option target="Release" />
-			<Option target="Selftest" />
 		</Unit>
 		<Unit filename="CuTestGenerateReportString.c">
 			<Option compilerVar="CC" />
 			<Option target="CC65Debug" />
 			<Option target="CC65Release" />
-			<Option target="CC65Selftest" />
 			<Option target="Debug" />
 			<Option target="Release" />
-			<Option target="Selftest" />
 		</Unit>
 		<Unit filename="CuTestInit.c">
 			<Option compilerVar="CC" />
 			<Option target="CC65Debug" />
 			<Option target="CC65Release" />
-			<Option target="CC65Selftest" />
 			<Option target="Debug" />
 			<Option target="Release" />
-			<Option target="Selftest" />
 		</Unit>
 		<Unit filename="CuTestNew.c">
 			<Option compilerVar="CC" />
 			<Option target="CC65Debug" />
 			<Option target="CC65Release" />
-			<Option target="CC65Selftest" />
 			<Option target="Debug" />
 			<Option target="Release" />
-			<Option target="Selftest" />
 		</Unit>
 		<Unit filename="CuTestOutputResult.c">
 			<Option compilerVar="CC" />
 			<Option target="CC65Debug" />
 			<Option target="CC65Release" />
-			<Option target="CC65Selftest" />
 			<Option target="Debug" />
 			<Option target="Release" />
-			<Option target="Selftest" />
 		</Unit>
 		<Unit filename="CuTestReportDestroy.c">
 			<Option compilerVar="CC" />
 			<Option target="CC65Debug" />
 			<Option target="CC65Release" />
-			<Option target="CC65Selftest" />
 			<Option target="Debug" />
 			<Option target="Release" />
-			<Option target="Selftest" />
 		</Unit>
 		<Unit filename="CuTestReportNew.c">
 			<Option compilerVar="CC" />
 			<Option target="CC65Debug" />
 			<Option target="CC65Release" />
-			<Option target="CC65Selftest" />
 			<Option target="Debug" />
 			<Option target="Release" />
-			<Option target="Selftest" />
 		</Unit>
 		<Unit filename="CuTestRun.c">
 			<Option compilerVar="CC" />
 			<Option target="CC65Debug" />
 			<Option target="CC65Release" />
-			<Option target="CC65Selftest" />
 			<Option target="Debug" />
 			<Option target="Release" />
-			<Option target="Selftest" />
 		</Unit>
 		<Unit filename="CuTestSetProgressStartEnd.c">
 			<Option compilerVar="CC" />
 			<Option target="CC65Debug" />
 			<Option target="CC65Release" />
-			<Option target="CC65Selftest" />
 			<Option target="Debug" />
 			<Option target="Release" />
-			<Option target="Selftest" />
 		</Unit>
 		<Unit filename="CuTestSuiteAdd.c">
 			<Option compilerVar="CC" />
 			<Option target="CC65Debug" />
 			<Option target="CC65Release" />
-			<Option target="CC65Selftest" />
 			<Option target="Debug" />
 			<Option target="Release" />
-			<Option target="Selftest" />
 		</Unit>
 		<Unit filename="CuTestSuiteDelete.c">
 			<Option compilerVar="CC" />
 			<Option target="CC65Debug" />
 			<Option target="CC65Release" />
-			<Option target="CC65Selftest" />
 			<Option target="Debug" />
 			<Option target="Release" />
-			<Option target="Selftest" />
 		</Unit>
 		<Unit filename="CuTestSuiteDetails.c">
 			<Option compilerVar="CC" />
 			<Option target="CC65Debug" />
 			<Option target="CC65Release" />
-			<Option target="CC65Selftest" />
 			<Option target="Debug" />
 			<Option target="Release" />
-			<Option target="Selftest" />
 		</Unit>
 		<Unit filename="CuTestSuiteGetFailcount.c">
 			<Option compilerVar="CC" />
 			<Option target="CC65Debug" />
 			<Option target="CC65Release" />
-			<Option target="CC65Selftest" />
 			<Option target="Debug" />
 			<Option target="Release" />
-			<Option target="Selftest" />
 		</Unit>
 		<Unit filename="CuTestSuiteGetTestcount.c">
 			<Option compilerVar="CC" />
 			<Option target="CC65Debug" />
 			<Option target="CC65Release" />
-			<Option target="CC65Selftest" />
 			<Option target="Debug" />
 			<Option target="Release" />
-			<Option target="Selftest" />
 		</Unit>
 		<Unit filename="CuTestSuiteInit.c">
 			<Option compilerVar="CC" />
 			<Option target="CC65Debug" />
 			<Option target="CC65Release" />
-			<Option target="CC65Selftest" />
 			<Option target="Debug" />
 			<Option target="Release" />
-			<Option target="Selftest" />
 		</Unit>
 		<Unit filename="CuTestSuiteNew.c">
 			<Option compilerVar="CC" />
 			<Option target="CC65Debug" />
 			<Option target="CC65Release" />
-			<Option target="CC65Selftest" />
 			<Option target="Debug" />
 			<Option target="Release" />
-			<Option target="Selftest" />
 		</Unit>
 		<Unit filename="CuTestSuiteRun.c">
 			<Option compilerVar="CC" />
 			<Option target="CC65Debug" />
 			<Option target="CC65Release" />
-			<Option target="CC65Selftest" />
 			<Option target="Debug" />
 			<Option target="Release" />
-			<Option target="Selftest" />
 		</Unit>
 		<Unit filename="CuTestSuiteSummary.c">
 			<Option compilerVar="CC" />
 			<Option target="CC65Debug" />
 			<Option target="CC65Release" />
-			<Option target="CC65Selftest" />
 			<Option target="Debug" />
 			<Option target="Release" />
-			<Option target="Selftest" />
 		</Unit>
 		<Unit filename="CuTestTest-cc65.map">
 			<Option target="CC65Debug" />
 			<Option target="CC65Release" />
-			<Option target="CC65Selftest" />
 		</Unit>
 		<Unit filename="CuTestTest-cc65.prg.map">
 			<Option target="CC65Debug" />
 			<Option target="CC65Release" />
-			<Option target="CC65Selftest" />
 		</Unit>
 		<Unit filename="CuTestTest.c">
 			<Option compilerVar="CC" />
+			<Option target="Release" />
 			<Option target="CC65Selftest" />
 			<Option target="Selftest" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="CuTestTest.h">
 			<Option target="CC65Selftest" />
@@ -475,61 +405,54 @@
 			<Option compilerVar="CC" />
 			<Option target="CC65Debug" />
 			<Option target="CC65Release" />
-			<Option target="CC65Selftest" />
 			<Option target="Debug" />
+			<Option target="CC65Selftest" />
 			<Option target="Selftest" />
 		</Unit>
 		<Unit filename="CuTest_SuiteInitRunReport.c">
 			<Option compilerVar="CC" />
 			<Option target="CC65Debug" />
 			<Option target="CC65Release" />
-			<Option target="CC65Selftest" />
 			<Option target="Debug" />
 			<Option target="Release" />
-			<Option target="Selftest" />
 		</Unit>
 		<Unit filename="CuTest_internal.h">
 			<Option target="CC65Debug" />
 			<Option target="CC65Release" />
-			<Option target="CC65Selftest" />
 			<Option target="Debug" />
 			<Option target="Release" />
+			<Option target="CC65Selftest" />
 			<Option target="Selftest" />
 		</Unit>
 		<Unit filename="CuTest_setup.c">
 			<Option compilerVar="CC" />
 			<Option target="CC65Debug" />
 			<Option target="CC65Release" />
-			<Option target="CC65Selftest" />
 			<Option target="Debug" />
 			<Option target="Release" />
+			<Option target="CC65Selftest" />
 			<Option target="Selftest" />
 		</Unit>
 		<Unit filename="README.txt">
 			<Option target="CC65Debug" />
 			<Option target="CC65Release" />
-			<Option target="CC65Selftest" />
-			<Option target="Selftest" />
 			<Option target="Release" />
 		</Unit>
 		<Unit filename="cutest-cc65.cfg">
 			<Option target="CC65Debug" />
 			<Option target="CC65Release" />
-			<Option target="CC65Selftest" />
 			<Option target="Release" />
 		</Unit>
 		<Unit filename="license.txt">
 			<Option target="CC65Debug" />
 			<Option target="CC65Release" />
-			<Option target="CC65Selftest" />
-			<Option target="Selftest" />
 			<Option target="Release" />
 		</Unit>
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
+			<Option target="Release" />
 			<Option target="CC65Selftest" />
 			<Option target="Selftest" />
-			<Option target="Release" />
 		</Unit>
 		<Extensions>
 			<code_completion />
