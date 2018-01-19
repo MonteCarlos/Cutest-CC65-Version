@@ -24,6 +24,7 @@
 				<Option type="2" />
 				<Option compiler="cc65" />
 				<Compiler>
+					<Add option="-Ors" />
 					<Add option="-DNDEBUG" />
 					<Add directory="../../../C64/include" />
 				</Compiler>
@@ -35,6 +36,7 @@
 				<Option type="1" />
 				<Option compiler="cc65" />
 				<Option use_console_runner="0" />
+				<Option projectCompilerOptionsRelation="1" />
 				<Compiler>
 					<Add directory="../../../C64/include" />
 				</Compiler>
@@ -51,7 +53,6 @@
 				<Option type="2" />
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
-				<Option projectLinkerOptionsRelation="0" />
 				<Compiler>
 					<Add option="-Wall -g -fplan9-extensions -std=gnu11" />
 				</Compiler>
@@ -63,7 +64,6 @@
 				<Option type="2" />
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
-				<Option projectLinkerOptionsRelation="0" />
 				<Compiler>
 					<Add option="-Wall -O -fplan9-extensions -std=gnu11" />
 				</Compiler>
@@ -77,13 +77,13 @@
 				<Option external_deps="libCutestString-cc65_dbg.a;../CuAlloc/libCuAllocDbg.a;../libcutest_Dbg.a;" />
 				<Option type="1" />
 				<Option compiler="gcc" />
-				<Option projectLinkerOptionsRelation="0" />
+				<Option projectCompilerOptionsRelation="1" />
 				<Compiler>
 					<Add option="-Wall -g -fplan9-extensions -std=gnu11" />
 				</Compiler>
 				<Linker>
-					<Add library="../../CuAlloc/libCuAllocDbg.a" />
-					<Add library="libCutestString-cc65_dbg.a" />
+					<Add library="./libCutestString-cc65_dbg.a" />
+					<Add library="../CuAlloc/libCuAllocDbg.a" />
 					<Add library="../libcutest_Dbg.a" />
 				</Linker>
 				<ExtraCommands>
@@ -95,13 +95,6 @@
 			<Add alias="CuTestString, selftest contained" targets="Debug;Release;Selftest;" />
 			<Add alias="gcc all" targets="gccDebug;gccRelease;gccSelftest;" />
 		</VirtualTargets>
-		<Compiler>
-			<Add directory=".." />
-			<Add directory="../../MyCLib" />
-		</Compiler>
-		<ExtraCommands>
-			<Add before="echo %CC65_HOME%" />
-		</ExtraCommands>
 		<Unit filename="AllTests.c">
 			<Option compilerVar="CC" />
 			<Option target="Selftest" />

@@ -11,6 +11,7 @@ int CuTestFormatReportString(CuString *str, CuSize_t runs, CuSize_t passes, CuSi
     */
 
 	CuStringAppendFormat(str,CUTEST_STR_SUMMARY(runs, passes, fails, memLeaks));
+	CuStringAppendChar(str, '\n');
 	return EXIT_SUCCESS;
 }
 
