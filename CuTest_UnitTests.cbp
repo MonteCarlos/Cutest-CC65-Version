@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="CuTest_UnitTests" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="cutest.exe" prefix_auto="1" extension_auto="0" />
+				<Option object_output="obj/UTests" />
+				<Option external_deps="CuAlloc/libCuAllocDbg.a;CuString/libCutestString-cc65_dbg.a;libcutest_Dbg.a;" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Option projectIncludeDirsRelation="-1" />
+				<Option projectLibDirsRelation="-1" />
+				<Compiler>
+					<Add option="-Wextra -g" />
+					<Add option="-std=c99 -fplan9-extensions" />
+				</Compiler>
+				<Linker>
+					<Add library="./libcutest_Dbg.a" />
+					<Add library="CuString/libCutestString-cc65_dbg.a" />
+					<Add library="CuAlloc/libCuAllocDbg.a" />
+				</Linker>
+				<ExtraCommands>
+					<Add after="./cutest.exe" />
+				</ExtraCommands>
+				<MakeCommands>
+					<Build command="" />
+					<CompileFile command="" />
+					<Clean command="" />
+					<DistClean command="" />
+					<AskRebuildNeeded command="" />
+					<SilentBuild command=" &gt; $(CMD_NULL)" />
+				</MakeCommands>
+			</Target>
+			<Target title="CC65Debug">
+				<Option output="cutest.exe" prefix_auto="1" extension_auto="0" />
+				<Option object_output="obj/UTests" />
+				<Option external_deps="CuAlloc/libCuAllocDbg.a;CuString/libCutestString-cc65_dbg.a;libcutest_Dbg.a;" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Option projectLinkerOptionsRelation="2" />
+				<Option projectIncludeDirsRelation="-1" />
+				<Option projectLibDirsRelation="-1" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+				<ExtraCommands>
+					<Add after="./cutest.exe" />
+				</ExtraCommands>
+				<MakeCommands>
+					<Build command="" />
+					<CompileFile command="" />
+					<Clean command="" />
+					<DistClean command="" />
+					<AskRebuildNeeded command="" />
+					<SilentBuild command=" &gt; $(CMD_NULL)" />
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add directory="../MyCLib" />
+		</Compiler>
+		<Unit filename="AllTests.c">
+			<Option compilerVar="CC" />
+			<Option target="Debug" />
+			<Option target="CC65Selftest" />
+			<Option target="CC65Debug" />
+		</Unit>
+		<Unit filename="AllTests.c.lst">
+			<Option target="CC65Selftest" />
+			<Option target="Debug" />
+			<Option target="CC65Debug" />
+		</Unit>
+		<Unit filename="CuMallocWrapper.h">
+			<Option target="CC65Debug" />
+			<Option target="CC65Release" />
+			<Option target="Debug" />
+			<Option target="Release" />
+			<Option target="CC65Selftest" />
+		</Unit>
+		<Unit filename="CuTestTest.c">
+			<Option compilerVar="CC" />
+			<Option target="Release" />
+			<Option target="CC65Selftest" />
+			<Option target="Debug" />
+			<Option target="CC65Debug" />
+		</Unit>
+		<Unit filename="CuTestTest.h">
+			<Option target="CC65Selftest" />
+			<Option target="Debug" />
+			<Option target="CC65Debug" />
+		</Unit>
+		<Unit filename="CuTestTest_shared.c">
+			<Option compilerVar="CC" />
+			<Option target="CC65Debug" />
+			<Option target="CC65Release" />
+			<Option target="Debug" />
+			<Option target="CC65Selftest" />
+		</Unit>
+		<Unit filename="CuTest_internal.h">
+			<Option target="CC65Debug" />
+			<Option target="CC65Release" />
+			<Option target="Debug" />
+			<Option target="Release" />
+			<Option target="CC65Selftest" />
+		</Unit>
+		<Unit filename="CuTest_setup.c">
+			<Option compilerVar="CC" />
+			<Option target="CC65Debug" />
+			<Option target="CC65Release" />
+			<Option target="Debug" />
+			<Option target="Release" />
+			<Option target="CC65Selftest" />
+		</Unit>
+		<Unit filename="main.c">
+			<Option compilerVar="CC" />
+			<Option target="Release" />
+			<Option target="CC65Selftest" />
+			<Option target="Debug" />
+			<Option target="CC65Debug" />
+		</Unit>
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
