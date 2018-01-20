@@ -150,6 +150,7 @@ void TestCuAssertPtrNotNull_Success(CuTest* tc)
 	//CuTestInit(&tc2, "MyTest", TestPasses);
 
 	/* test success case */
+	// @todo (mc78#1#01/19/18): Test does not belong here. Think about putting it in a separated test.
 	CuAssertPtrNotNull(tc2, &x);
 	CuAssertTrue(tc, ! tc2->failed);
 	CuAssertIntEquals(tc, 0, CuStringLen(tc2->message));
@@ -597,10 +598,12 @@ void TestFailLine(CuTest *tc){
 void TestGenerateMessage(CuTest *tc){
 	CuString *str = CuStringNew();
 	CuError_t err = CuTestGenerateMessage(str, "msg1", ", msg2", "thisfile.c", 100000);
-	/*CuAssertIntEquals(tc,
+	CuAssertIntEquals(tc,
 		EXIT_SUCCESS,
-		CuTestGenerateMessage(str, "msg1", "msg2", "thisfile.c", 100000)
-	);*/
+		err
+	);
+
+	// @todo (mc78#1#01/20/18): This test crashes! Fix
 	CuAssertStrEquals(tc, "thisfile.c(100000), msg1, msg2", str->buffer);
 }
 
