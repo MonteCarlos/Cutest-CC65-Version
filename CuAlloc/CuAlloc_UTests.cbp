@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="CuAlloc_UnitTests" />
+		<Option pch_mode="2" />
+		<Option compiler="cc65" />
+		<Build>
+			<Target title="Debug">
+				<Option output="CuAlloc_tests.exe" prefix_auto="0" extension_auto="0" />
+				<Option object_output="obj/gccUTests" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+					<Add option="-fplan9-extensions -std=c11" />
+				</Compiler>
+				<Linker>
+					<Add library="../libcutest_Dbg.a" />
+					<Add library="../CuString/libCutestString-cc65_dbg.a" />
+					<Add library="libCuAllocDbg.a" />
+				</Linker>
+				<ExtraCommands>
+					<Add after="./CuAlloc_tests.exe" />
+					<Mode after="always" />
+				</ExtraCommands>
+			</Target>
+		</Build>
+		<Unit filename="CuAlloc.h" />
+		<Unit filename="CuAlloc_internal.h" />
+		<Unit filename="testCuAlloc.c">
+			<Option compilerVar="CC" />
+			<Option target="gccRelease" />
+			<Option target="Debug" />
+			<Option target="UTest" />
+		</Unit>
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
