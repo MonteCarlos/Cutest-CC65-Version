@@ -7,7 +7,7 @@
 		<Option default_target="gccSelftest" />
 		<Option compiler="cc65" />
 		<Build>
-			<Target title="Debug">
+			<Target title="gccDebug">
 				<Option output="CutestString-test.exe" prefix_auto="0" extension_auto="0" />
 				<Option object_output="obj/gccUTests" />
 				<Option external_deps="libCutestString-cc65_dbg.a;../CuAlloc/libCuAllocDbg.a;../libcutest_Dbg.a;" />
@@ -30,19 +30,19 @@
 		<Unit filename="AllTests.c">
 			<Option compilerVar="CC" />
 			<Option target="Selftest" />
-			<Option target="Debug" />
+			<Option target="gccDebug" />
 		</Unit>
 		<Unit filename="CutestString.h" />
 		<Unit filename="CutestStringTest.c">
 			<Option compilerVar="CC" />
 			<Option target="Selftest" />
-			<Option target="Debug" />
+			<Option target="gccDebug" />
 		</Unit>
 		<Unit filename="CutestString_internal.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 			<Option target="Selftest" />
-			<Option target="Debug" />
+			<Option target="gccDebug" />
 		</Unit>
 		<Extensions>
 			<code_completion />

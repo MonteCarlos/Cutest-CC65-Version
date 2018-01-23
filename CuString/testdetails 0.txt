@@ -1,5 +1,6 @@
-Test failed: /home/mc78/Dokumente/Programmieren/C/CuTest/develop_worktree/CuString/CutestStringTest.c(0), (null) in TestCuStringClear
+Test failed: /home/mc78/Dokumente/Programmieren/C/CuTest/develop_worktree/CuTestSuiteRun.c(60),  Memory leak detected (Pending frees before: 72, after: 73) in TestCuStringConvertCStr
+Test failed: /home/mc78/Dokumente/Programmieren/C/CuTest/develop_worktree/CuString/CutestStringTest.c(351), not implemented in TestCuStringClear
 
 !!!FAILURES!!!
-Runs:0, Passes:0, Fails:12, Leaks:3
-Runs:4247968384, Passes:0, Fails:12
+Runs:13, Passes:12, Fails:1, Leaks:1
+Runs:13, Passes:12, Fails:1, Leaks:1

@@ -19,5 +19,10 @@
 			<Depends filename="CuString/CutestString-cc65.cbp" />
 			<Depends filename="CuAlloc/CuAlloc.cbp" />
 		</Project>
+		<Project filename="CUnit_CuTest_UnitTests/CUnit_CuTest_UnitTests.cbp">
+			<Depends filename="cutest-cc65.cbp" />
+			<Depends filename="CuString/CutestString-cc65.cbp" />
+			<Depends filename="CuAlloc/CuAlloc.cbp" />
+		</Project>
 	</Workspace>
 </CodeBlocks_workspace_file>
