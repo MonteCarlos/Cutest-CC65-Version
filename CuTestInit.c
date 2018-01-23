@@ -8,5 +8,6 @@ void CuTestInit(register CuTest* t, const char* name, TestFunction function)
 		t->message = CuStringNew();
 		t->function = function;
 		t->setup = t->teardown = NULL;
+		t->assertCnt = 0;
 	}
 }

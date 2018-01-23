@@ -16,7 +16,7 @@ bool CuAssertGeneralEquals_LineMsg(CuTest* tc, const char* file, unsigned long i
 		//assert (NULL != buf);
 		//String functions will create new instance if NULL Ptr is passed
 		//CuString *compResult = CuStringNew();
-		if ( !(result=cmpFnc(expected,actual,expectedStr, actualStr, maxStrLen, tc->message/*cmpmsg*/)) ){
+		if ( false == (result=cmpFnc(expected,actual,expectedStr, actualStr, maxStrLen, tc->message/*cmpmsg*/)) ){
 			assert(NULL != expectedStr);
 			assert(NULL != actualStr);
 

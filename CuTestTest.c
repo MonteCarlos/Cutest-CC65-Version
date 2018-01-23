@@ -7,6 +7,7 @@
 
 #define CompareAsserts(tc, message, expected, actual)  X_CompareAsserts((tc), __FILE__, __LINE__, (message), (expected), (actual))
 
+/*
 static void X_CompareAsserts(CuTest* tc, const char *file, unsigned long int line, const char* message, const char* expected, const char* actual)
 {
 	int mismatch;
@@ -35,6 +36,7 @@ static void X_CompareAsserts(CuTest* tc, const char *file, unsigned long int lin
 
 	CuAssert_Line(tc, file, line, message, !mismatch);
 }
+*/
 /*-------------------------------------------------------------------------*
  * CuString Test
  *-------------------------------------------------------------------------*/
@@ -58,7 +60,7 @@ void TestCuTestNew(CuTest* tc)
 	CuAssertIntEquals(tc, 0, CuStringLen(tc->message));
 	CuAssertTrue(tc, tc2->function == &TestPasses);
 	CuAssertTrue(tc, tc2->ran == 0);
-	CuAssertTrue(tc, tc2->jumpBuf == NULL);
+//	CuAssertTrue(tc, tc2->jumpBuf == NULL);
 
 	CuTestDelete(tc2);
 }
@@ -73,7 +75,7 @@ void TestCuTestInit(CuTest *tc)
 	CuAssertIntEquals(tc, 0, CuStringLen(tc->message));
 	CuAssertTrue(tc, tc2->function == &TestPasses);
 	CuAssertTrue(tc, tc2->ran == 0);
-	CuAssertTrue(tc, tc2->jumpBuf == NULL);
+//	CuAssertTrue(tc, tc2->jumpBuf == NULL);
 
 	CuTestDelete(tc2);
 }
@@ -588,18 +590,18 @@ void TestAssertIntEquals(CuTest* tc)
  }
 
 void TestFailLine(CuTest *tc){
-	CuFail_Line(tc, "thisfile.c", 100000, "msg1", "msg2");
-	CuAssertStrEquals(tc, "blabl", tc->message->buffer);
+	CuFail_Line(tc, "thisfile.c", 100000, "msg1", ", msg2");
+	CuAssertStrEquals(tc, "thisfile.c(100000), msg1, msg2", tc->message->buffer);
 }
 
 void TestGenerateMessage(CuTest *tc){
 	CuString *str = CuStringNew();
-	CuError_t err = CuTestGenerateMessage(str, "msg1", "msg2", "thisfile.c", 100000);
+	CuError_t err = CuTestGenerateMessage(str, "msg1", ", msg2", "thisfile.c", 100000);
 	/*CuAssertIntEquals(tc,
 		EXIT_SUCCESS,
 		CuTestGenerateMessage(str, "msg1", "msg2", "thisfile.c", 100000)
 	);*/
-	CuAssertStrEquals(tc, "msg1, msg2, thisfile.c (10000)", tc->message->buffer);
+	CuAssertStrEquals(tc, "thisfile.c(100000), msg1, msg2", str->buffer);
 }
 
 /*-------------------------------------------------------------------------*
