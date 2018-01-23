@@ -22,6 +22,8 @@ CuError_t CuStringAppendISvsNOT(CuString *str, const char* format,...){
 	CuError_t returnVal = EXIT_FAILURE; //assume failure for security
     if (str){
 		//setup temporary string with is %format not %format content
+
+		// @todo (mc78#1#01/20/18): This line causes crash in some tests.
 		char *tempstr = CuStrFormat("is \"%s\" not \"%s\"", format, format);
 		if (tempstr){
 			va_list va;
