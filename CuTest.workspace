@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_workspace_file>
 	<Workspace title="Workspace">
-		<Project filename="cutest-cc65.cbp" />
-		<Project filename="CuString/CutestString-cc65.cbp" />
-		<Project filename="CuAlloc/CuAlloc.cbp" />
-		<Project filename="../MyCLib/MyCLib.cbp" />
+		<Project filename="../../ownCPrograms/CuTest/cutest-cc65.cbp" />
+		<Project filename="../../ownCPrograms/CuTest/CuString/CutestString-cc65.cbp">
+			<Depends filename="../../ownCPrograms/MCLib/MyCLib.cbp" />
+		</Project>
+		<Project filename="../../ownCPrograms/CuTest/CuString/CuString_UnitTests.cbp">
+			<Depends filename="../../ownCPrograms/CuTest/CuString/CutestString-cc65.cbp" />
+		</Project>
+		<Project filename="../../ownCPrograms/CuTest/CuAlloc/CuAlloc.cbp" />
+		<Project filename="../../ownCPrograms/MCLib/MyCLib.cbp" />
 	</Workspace>
 </CodeBlocks_workspace_file>

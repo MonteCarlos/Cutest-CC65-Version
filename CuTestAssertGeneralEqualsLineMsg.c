@@ -26,7 +26,7 @@ bool CuAssertGeneralEquals_LineMsg(CuTest* tc, const char* file, unsigned long i
 
 			//here axctual and expected are exchanged which is reasoned in the va macros used in more deeply nested function
 			//CuStringAppendISvsNOT(tc->message, "%d", actual, expected);
-			CuStringAppendISvsNOT(tc->message, "%s", actualStr, expectedStr);
+			CuStringAppendISvsNOTStr(tc->message, expectedStr, actualStr);
 		   // CuTestAppendMessage(tc, CuStringCStr(cmpmsg));
 			//return true;
 		}

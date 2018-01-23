@@ -3,7 +3,7 @@
 bool CuSuiteDelete(CuSuite *testSuite)
 {
 	if (testSuite){
-        long int n = testSuite->totalcount-1;
+        CuSize_t n = testSuite->totalcount-1;
         bool freereturn;
         CuTestPtr_t *testlist = testSuite->testlist;
 

@@ -20,6 +20,8 @@ struct CuString_tag
 } ;
 
 
-const char* CuStrNULL(const char* str); CuSize_t CuStrLenFormat(const char* const format, ...); CuSize_t CuStrLenVaFormat(const char* const format, va_list va);
+const char* CuStrNULL(const char* str);CuSize_t CuStrLenFormat(const char* const format, ...);char *CuStrVaFormat(const char* const format, va_list va);
+int CuStrGetVAExpandedFormatStringLength(const char *format, va_list va);
+CuError_t CuStringAppendISvsNOTStr(CuString *str, const char *expected, const char *actual);
 
 #endif // CUTESTSTRING_INTERNAL_H_INCLUDED

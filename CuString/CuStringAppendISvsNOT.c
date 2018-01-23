@@ -38,3 +38,12 @@ CuError_t CuStringAppendISvsNOT(CuString *str, const char* format,...){
 	}
 	return returnVal;
 }
+
+CuError_t CuStringAppendISvsNOTStr(CuString *str, const char *expected, const char *actual){
+	//CuError_t returnVal = EXIT_FAILURE; //assume failure for security
+    if (str){
+		CuStringAppendFormat(str, "is \"%s\" not \"%s\"", actual, expected);
+		return EXIT_SUCCESS;
+	}
+	return EXIT_FAILURE;
+}
