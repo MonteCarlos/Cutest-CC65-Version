@@ -25,6 +25,7 @@
 				</Linker>
 				<ExtraCommands>
 					<Add after="./cutest.exe" />
+					<Mode after="always" />
 				</ExtraCommands>
 				<MakeCommands>
 					<Build command="" />

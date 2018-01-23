@@ -14,7 +14,7 @@ CuString *CuStringAppendVariadicFormat(CuString* str, const char* format, va_lis
 	char *buf = CuStrVaFormat(format, va);
 	CuString *str2 = NULL;
 	assert (NULL != buf);
-
+    //Using str2 here is OK, as CuStringAppend eventually creates new CuString if str is NULL
 	str2 = CuStringAppend(str, buf);
 
 	CuFree(buf);
