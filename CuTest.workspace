@@ -4,5 +4,20 @@
 		<Project filename="cutest-cc65.cbp" />
 		<Project filename="CuString/CutestString-cc65.cbp" />
 		<Project filename="CuAlloc/CuAlloc.cbp" />
+		<Project filename="CuTest_UnitTests.cbp">
+			<Depends filename="cutest-cc65.cbp" />
+			<Depends filename="CuString/CutestString-cc65.cbp" />
+			<Depends filename="CuAlloc/CuAlloc.cbp" />
+		</Project>
+		<Project filename="CuAlloc/CuAlloc_UTests.cbp">
+			<Depends filename="cutest-cc65.cbp" />
+			<Depends filename="CuString/CutestString-cc65.cbp" />
+			<Depends filename="CuAlloc/CuAlloc.cbp" />
+		</Project>
+		<Project filename="CuString/CuString_UTests.cbp">
+			<Depends filename="cutest-cc65.cbp" />
+			<Depends filename="CuString/CutestString-cc65.cbp" />
+			<Depends filename="CuAlloc/CuAlloc.cbp" />
+		</Project>
 	</Workspace>
 </CodeBlocks_workspace_file>
