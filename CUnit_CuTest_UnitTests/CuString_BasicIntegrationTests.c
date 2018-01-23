@@ -1,13 +1,14 @@
 #include <stdheaders.h>
 #include "CUnit_CuTest.h"
 
-#define ALLTESTS ATEST(CuStrVAFormat_GivenNULLPtrAsFormat_ReturnsNULLPtr)\
+#define ALLTESTS ATEST(CuStrVAFormat_GivenNULLPtrAsFormat_ReturnsStringNULL)\
                  ATEST(CuStrVAFormat_GivenPlainFormatString_ReturnsCopyOfFormatString)\
                  ATEST(CuStrVAFormat_GivenEmptyString_ReturnsNewEmptyString)\
                  ATEST(CuStrVAFormat_GivenIntegerFormatWithPosInteger_ReturnsDecimalStringRepresentation)\
                  ATEST(CuStrVAFormat_GivenIntegerFormatWithNegInteger_ReturnsDecimalStringRepresentationWithMinus)\
                  ATEST(CuStrVAFormat_GivenDblFormatWithPosValue_ReturnsDecimalStringRepresentation)\
-                 ATEST(CuStrVAFormat_GivenDblFormatWithNegValue_ReturnsNegDecimalStringRepresentation)
+                 ATEST(CuStrVAFormat_GivenDblFormatWithNegValue_ReturnsNegDecimalStringRepresentation)\
+                 ATEST(CuStrVAFormat_GivenFormatStrWithDifferentSpecifiers_ReturnsProperlyFormattedStr)
 
 
 #define ATEST(t) void t(void);
@@ -25,13 +26,15 @@ namedTest_t SuiteCuStrVAFormatITests_testlist[] = {
 
 //CuString *teststr;
 char *cstring;
-const char *format;
+char *format;
 char strNum[10];
+char testString[100];
 
 int setup_SuiteCuStrVAFormatITests (void) {
     cstring = NULL;
     format = NULL;
     memset(strNum, 0, sizeof(strNum));
+    memset(testString, 0, sizeof(testString));
     return 0;
 }
 
@@ -53,11 +56,10 @@ char *helper_TestCuStrVaFormat (const char *format, ...) {
 // * CuStrVAFormat should just do nothing if NULL ptr for format was given but indicate error by
 // * returning NULL itself
 // ***************************************************************
-void CuStrVAFormat_GivenNULLPtrAsFormat_ReturnsNULLPtr (void) {
+void CuStrVAFormat_GivenNULLPtrAsFormat_ReturnsStringNULL (void) {
     cstring = helper_TestCuStrVaFormat (NULL);
 
-    CU_ASSERT_PTR_NULL(cstring);
-    printf("%p", cstring);
+    CU_ASSERT_STRING_EQUAL("NULL", cstring);
 }
 
 // ***************************************************************
@@ -81,8 +83,12 @@ void CuStrVAFormat_GivenEmptyString_ReturnsNewEmptyString (void) {
     cstring = helper_TestCuStrVaFormat (format);
 
     //Assert that the string is really copied but not just referenced a second time
-    CU_ASSERT_NOT_EQUAL(format, cstring);
-    CU_ASSERT_STRING_EQUAL(format, cstring);
+    CU_ASSERT_PTR_NOT_NULL(cstring);
+    //If..then is necessary to prevent core dump on NULL ptr
+    if (cstring){
+        CU_ASSERT_NOT_EQUAL(format, cstring);
+        CU_ASSERT_STRING_EQUAL(format, cstring);
+    }
 }
 
 // ***************************************************************
@@ -142,4 +148,22 @@ void CuStrVAFormat_GivenDblFormatWithNegValue_ReturnsNegDecimalStringRepresentat
     //Assert that the string is really copied but not just referenced a second time
     CU_ASSERT_NOT_EQUAL(format, cstring);
     CU_ASSERT_STRING_EQUAL(stringNumPair.asString, cstring);
+}
+
+// ***************************************************************
+// * CuStrVAFormat should format numbers as string also for negative numbers
+// ***************************************************************
+void CuStrVAFormat_GivenFormatStrWithDifferentSpecifiers_ReturnsProperlyFormattedStr (void) {
+    char myStr[] = "A word";
+    int num1 = 10;
+    double num2 = 123.456;
+    format = "String: %s, Num1: %d, Num2: %2f";
+
+    snprintf(testString, sizeof(testString)/sizeof(testString[0]), format, myStr, num1, num2);
+
+    cstring = helper_TestCuStrVaFormat (format, myStr, num1, num2);
+
+    //Assert that the string is really copied but not just referenced a second time
+    CU_ASSERT_NOT_EQUAL(format, cstring);
+    CU_ASSERT_STRING_EQUAL(testString, cstring);
 }
