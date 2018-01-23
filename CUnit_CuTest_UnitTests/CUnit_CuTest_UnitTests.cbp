@@ -6,7 +6,7 @@
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
-			<Target title="Debug">
+			<Target title="gccDebug">
 				<Option output="./CUnit_CuTest_UnitTests.exe" prefix_auto="0" extension_auto="0" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
@@ -39,6 +39,9 @@
 			<Option link="0" />
 		</Unit>
 		<Unit filename="CUnit_tests.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="CuString_BasicIntegrationTests.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Extensions>

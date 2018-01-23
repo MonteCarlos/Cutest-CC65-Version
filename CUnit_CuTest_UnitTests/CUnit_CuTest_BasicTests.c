@@ -1,7 +1,7 @@
 #include <stdheaders.h>
 #include "CUnit_CuTest.h"
 
-#define ALLTESTS ATEST(foo) ATEST(bar)
+#define ALLTESTS
 
 #define ATEST(t) void t(void);
     ALLTESTS
@@ -16,11 +16,3 @@ namedTest_t suite1_testlist[] = {
 int setup_suite1( void ) {return 0;}
 int teardown_suite1( void ) {return 0;}
 
-
-void foo( void ) {
-    CU_FAIL( "foo failed!" );
-}
-
-void bar( void ) {
-    CU_FAIL( "bar failed!" );
-}
