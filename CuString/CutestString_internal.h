@@ -12,13 +12,17 @@
 //#include <setjmp.h>
 
 #include "CutestString.h"
-struct CuString_tag
-{
-	CuStringLen_t length;
-	CuStringSize_t size;
-	CuStringChar_t* buffer;
+
+/// The struct holding metadata for CuStrings
+struct CuString_tag {
+    CuStringLen_t length;
+    CuStringSize_t size;
+    CuStringChar_t *buffer;
 } ;
 
-char* CuStrNULL(const char* str); CuSize_t CuStrLenFormat(const char* const format, ...); CuSize_t CuStrLenVaFormat(const char* const format, va_list va);
+/// If str param is not NULL is is simply passed through, if it is NULL the string "NULL" is assigned
+char *CuStrNULL (const char *str);
 
+/// Generates a format string for IS versus NOT comparisons by appending text1, format, text2, format
+char *CuStringFormatGenerator(char *text1, char *text2, char *format);
 #endif // CUTESTSTRING_INTERNAL_H_INCLUDED

@@ -25,10 +25,10 @@ namedTest_t SuiteCuStrVAFormatITests_testlist[] = {
 #define STRINGANDNUM(name, T, num) struct{char *asString; T asNum;} name = {#num, num};
 
 //CuString *teststr;
-char *cstring;
-char *format;
-char strNum[10];
-char testString[100];
+static char *cstring;
+static char *format;
+static char strNum[10];
+static char testString[100];
 
 int setup_SuiteCuStrVAFormatITests (void) {
     cstring = NULL;
