@@ -12,7 +12,7 @@
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
-					<Add option="-g -fplan9-extensions" />
+					<Add option="-g -fplan9-extensions -Wall -std=gnu11" />
 				</Compiler>
 				<Linker>
 					<Add library="/usr/local/lib/libcunit.a" />
@@ -30,9 +30,6 @@
 			<Add option="-Wall" />
 		</Compiler>
 		<Unit filename="CUnit_CuTest.h" />
-		<Unit filename="CUnit_CuTest_BasicTests.c">
-			<Option compilerVar="CC" />
-		</Unit>
 		<Unit filename="CUnit_example.c">
 			<Option compilerVar="CC" />
 			<Option compile="0" />
@@ -41,7 +38,13 @@
 		<Unit filename="CUnit_tests.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="CuString_AppendISvsNOT_tests.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="CuString_BasicIntegrationTests.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="CuString_FormatGenerator.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Extensions>

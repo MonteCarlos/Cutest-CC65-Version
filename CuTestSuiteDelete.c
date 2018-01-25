@@ -3,15 +3,19 @@
 bool CuSuiteDelete(CuSuite *testSuite)
 {
 	if (testSuite){
-        long int n = testSuite->totalcount-1;
+        CuSize_t n = testSuite->totalcount;
         bool freereturn;
         CuTestPtr_t *testlist = testSuite->testlist;
 
         //assert (NULL != testSuite);
         printf("Removing testcases:\n");
-        for (; n >=0; --n)
+
+        //n may be 0 but then the loop is not executed
+        for (; n >0; --n)
         {
-			register CuTestPtr_t *test = &testlist[n];
+            //We start with n=n_max and proceed to n=1. therefore index with n-1
+            //We can assume here that n>0
+			register CuTestPtr_t *test = &testlist[n-1];
 
             if (NULL!=test->test)
             {

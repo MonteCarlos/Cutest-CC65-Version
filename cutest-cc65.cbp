@@ -72,10 +72,6 @@
 		<Compiler>
 			<Add directory="../MyCLib" />
 		</Compiler>
-		<Unit filename="AllTests.c">
-			<Option compilerVar="CC" />
-			<Option target="gccDebug" />
-		</Unit>
 		<Unit filename="AllTests.c.lst">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
@@ -83,9 +79,6 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="CuMallocWrapper.h" />
-		<Unit filename="CuRegisterTests.c">
-			<Option compilerVar="CC" />
-		</Unit>
 		<Unit filename="CuTest.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -191,18 +184,8 @@
 			<Option target="CC65Debug" />
 			<Option target="CC65Release" />
 		</Unit>
-		<Unit filename="CuTestTest.c">
-			<Option compilerVar="CC" />
-			<Option target="gccRelease" />
-		</Unit>
 		<Unit filename="CuTestTest.h">
 			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="CuTestTest_shared.c">
-			<Option compilerVar="CC" />
-			<Option target="CC65Debug" />
-			<Option target="CC65Release" />
-			<Option target="gccDebug" />
 		</Unit>
 		<Unit filename="CuTest_SuiteInitRunReport.c">
 			<Option compilerVar="CC" />
@@ -224,10 +207,6 @@
 		<Unit filename="license.txt">
 			<Option target="CC65Debug" />
 			<Option target="CC65Release" />
-			<Option target="gccRelease" />
-		</Unit>
-		<Unit filename="main.c">
-			<Option compilerVar="CC" />
 			<Option target="gccRelease" />
 		</Unit>
 		<Extensions>

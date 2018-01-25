@@ -111,6 +111,12 @@
 		<Unit filename="CuStringDelete.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="CuStringFormatGenerator.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="CuStringFormatISvsNOT_Template.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="CuStringInit.c">
 			<Option compilerVar="CC" />
 		</Unit>
