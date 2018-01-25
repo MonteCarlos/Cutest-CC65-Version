@@ -24,5 +24,8 @@ struct CuString_tag {
 char *CuStrNULL (const char *str);
 
 /// Generates a format string for IS versus NOT comparisons by appending text1, format, text2, format
-char *CuStringFormatGenerator(char *text1, char *text2, char *format);
+char *CuStringFormatGenerator(char *text1, char *text2, const char *format);
+
+/// Generates a template format string for formatting of IS vs NOT comparison
+char* CuStrFormatISvsNOTTemplate(const char *format);
 #endif // CUTESTSTRING_INTERNAL_H_INCLUDED

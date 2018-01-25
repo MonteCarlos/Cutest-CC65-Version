@@ -82,6 +82,9 @@
 			<Option target="Release" />
 			<Option target="CC65Selftest" />
 		</Unit>
+		<Unit filename="CuRegisterTests.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="CuTestTest.c">
 			<Option compilerVar="CC" />
 			<Option target="Release" />

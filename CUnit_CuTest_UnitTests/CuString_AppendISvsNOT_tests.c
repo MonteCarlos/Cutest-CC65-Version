@@ -1,7 +1,7 @@
 #include <stdheaders.h>
 #include "CUnit_CuTest.h"
 
-#define ALLTESTS ATEST(TestCuStringAppendISvsNOT)
+#define ALLTESTS ATEST(CuStringAppendISvsNOT_PassedEmptyCuStrAndTwoInts_ReturnsIsActualNotDesired)
 
 #define ATEST(t) void t(void);
 ALLTESTS
@@ -15,9 +15,11 @@ namedTest_t SuiteCuStringAppendISvsNOT_testlist[] = {
 #undef ATEST
 
 static CuString *string;
+char tempstr[100];
 
 int setup_SuiteCuStringAppendISvsNOT (void) {
     string = CuStringNew();
+    memset(tempstr, 0, sizeof(tempstr));
     return 0;
 }
 
@@ -26,7 +28,18 @@ int teardown_SuiteCuStringAppendISvsNOT (void) {
     return 0;
 }
 
-void TestCuStringAppendISvsNOT(void){
+void CuStringAppendISvsNOT_PassedEmptyCuStrAndTwoInts_ReturnsIsActualNotDesired(void){
+    int desired = 100, actual = 103;
+    char *strTemplate;
+
+    CuStringAppendISvsNOT(string, "%d", desired, actual);
+    strTemplate = CuStrFormatISvsNOTTemplate("%d");
+    snprintf(tempstr, sizeof(tempstr), strTemplate, desired, actual);
+    CU_ASSERT_STRING_EQUAL(tempstr, CuStringCStr(string));
+    CuFree(strTemplate);
+}
+
+void TestCuStringAppendISvsNOT2(void){
     enum {TestISvsNOT_MAXSTRLEN = 100};
 
     int desired = 100, actual = 103;
