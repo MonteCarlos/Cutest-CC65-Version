@@ -6,7 +6,7 @@
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
-			<Target title="Debug">
+			<Target title="gccDebug">
 				<Option output="cutest.exe" prefix_auto="1" extension_auto="0" />
 				<Option object_output="obj/UTests" />
 				<Option external_deps="CuAlloc/libCuAllocDbg.a;CuString/libCutestString-cc65_dbg.a;libcutest_Dbg.a;" />
@@ -25,6 +25,7 @@
 				</Linker>
 				<ExtraCommands>
 					<Add after="./cutest.exe" />
+					<Mode after="always" />
 				</ExtraCommands>
 				<MakeCommands>
 					<Build command="" />
@@ -65,19 +66,19 @@
 		</Compiler>
 		<Unit filename="AllTests.c">
 			<Option compilerVar="CC" />
-			<Option target="Debug" />
+			<Option target="gccDebug" />
 			<Option target="CC65Selftest" />
 			<Option target="CC65Debug" />
 		</Unit>
 		<Unit filename="AllTests.c.lst">
 			<Option target="CC65Selftest" />
-			<Option target="Debug" />
+			<Option target="gccDebug" />
 			<Option target="CC65Debug" />
 		</Unit>
 		<Unit filename="CuMallocWrapper.h">
 			<Option target="CC65Debug" />
 			<Option target="CC65Release" />
-			<Option target="Debug" />
+			<Option target="gccDebug" />
 			<Option target="Release" />
 			<Option target="CC65Selftest" />
 		</Unit>
@@ -85,25 +86,25 @@
 			<Option compilerVar="CC" />
 			<Option target="Release" />
 			<Option target="CC65Selftest" />
-			<Option target="Debug" />
+			<Option target="gccDebug" />
 			<Option target="CC65Debug" />
 		</Unit>
 		<Unit filename="CuTestTest.h">
 			<Option target="CC65Selftest" />
-			<Option target="Debug" />
+			<Option target="gccDebug" />
 			<Option target="CC65Debug" />
 		</Unit>
 		<Unit filename="CuTestTest_shared.c">
 			<Option compilerVar="CC" />
 			<Option target="CC65Debug" />
 			<Option target="CC65Release" />
-			<Option target="Debug" />
+			<Option target="gccDebug" />
 			<Option target="CC65Selftest" />
 		</Unit>
 		<Unit filename="CuTest_internal.h">
 			<Option target="CC65Debug" />
 			<Option target="CC65Release" />
-			<Option target="Debug" />
+			<Option target="gccDebug" />
 			<Option target="Release" />
 			<Option target="CC65Selftest" />
 		</Unit>
@@ -111,7 +112,7 @@
 			<Option compilerVar="CC" />
 			<Option target="CC65Debug" />
 			<Option target="CC65Release" />
-			<Option target="Debug" />
+			<Option target="gccDebug" />
 			<Option target="Release" />
 			<Option target="CC65Selftest" />
 		</Unit>
@@ -119,7 +120,7 @@
 			<Option compilerVar="CC" />
 			<Option target="Release" />
 			<Option target="CC65Selftest" />
-			<Option target="Debug" />
+			<Option target="gccDebug" />
 			<Option target="CC65Debug" />
 		</Unit>
 		<Extensions>

@@ -6,7 +6,7 @@
 		<Option pch_mode="2" />
 		<Option compiler="cc65" />
 		<Build>
-			<Target title="Debug">
+			<Target title="CC65Debug">
 				<Option output="CuAllocDbg.lib" prefix_auto="0" extension_auto="0" />
 				<Option working_dir="" />
 				<Option object_output="obj/Debug/" />
@@ -17,7 +17,7 @@
 					<Add option="-g" />
 				</Compiler>
 			</Target>
-			<Target title="Release">
+			<Target title="CC65Release">
 				<Option output="CuAlloc.lib" prefix_auto="0" extension_auto="0" />
 				<Option working_dir="" />
 				<Option object_output="obj/Release/" />
@@ -62,137 +62,113 @@
 					<Add option="-s" />
 				</Linker>
 			</Target>
-			<Target title="gccUTest">
-				<Option output="CuAlloc_tests.exe" prefix_auto="0" extension_auto="0" />
-				<Option object_output="obj/gccUTests" />
-				<Option type="1" />
-				<Option compiler="gcc" />
-				<Compiler>
-					<Add option="-g" />
-					<Add option="-fplan9-extensions -std=c11" />
-				</Compiler>
-				<Linker>
-					<Add library="../libcutest_Dbg.a" />
-					<Add library="../CuString/libCutestString-cc65_dbg.a" />
-				</Linker>
-				<ExtraCommands>
-					<Add after="./CuAlloc_tests.exe" />
-					<Mode after="always" />
-				</ExtraCommands>
-			</Target>
 		</Build>
 		<VirtualTargets>
-			<Add alias="All" targets="Debug;UTest;Release;" />
-			<Add alias="gccall" targets="gccRelease;gccUTest;gccDebug;" />
+			<Add alias="All" targets="CC65Debug;UTest;CC65Release;" />
+			<Add alias="gccall" targets="gccRelease;gccDebug;" />
 		</VirtualTargets>
 		<Unit filename="CuAlloc.c">
 			<Option compilerVar="CC" />
-			<Option target="Debug" />
-			<Option target="Release" />
+			<Option target="CC65Debug" />
+			<Option target="CC65Release" />
 			<Option target="gccDebug" />
 			<Option target="gccRelease" />
 		</Unit>
 		<Unit filename="CuAlloc.h" />
 		<Unit filename="CuAllocTest.cfg">
-			<Option target="Debug" />
-			<Option target="Release" />
+			<Option target="CC65Debug" />
+			<Option target="CC65Release" />
 			<Option target="UTest" />
 		</Unit>
-		<Unit filename="CuAllocTests.prg.map">
-			<Option target="Debug" />
-			<Option target="Release" />
-			<Option target="gccDebug" />
-			<Option target="gccRelease" />
-			<Option target="UTest" />
-		</Unit>
+		<Unit filename="CuAllocTests.prg.map" />
 		<Unit filename="CuAlloc_Realloc.c">
 			<Option compilerVar="CC" />
-			<Option target="Debug" />
-			<Option target="Release" />
+			<Option target="CC65Debug" />
+			<Option target="CC65Release" />
 			<Option target="gccDebug" />
 			<Option target="gccRelease" />
 		</Unit>
 		<Unit filename="CuAlloc_calculateTotalSize.c">
 			<Option compilerVar="CC" />
-			<Option target="Debug" />
-			<Option target="Release" />
+			<Option target="CC65Debug" />
+			<Option target="CC65Release" />
 			<Option target="gccDebug" />
 			<Option target="gccRelease" />
 		</Unit>
 		<Unit filename="CuAlloc_getBufferValidity.c">
 			<Option compilerVar="CC" />
-			<Option target="Debug" />
-			<Option target="Release" />
+			<Option target="CC65Debug" />
+			<Option target="CC65Release" />
 			<Option target="gccDebug" />
 			<Option target="gccRelease" />
 		</Unit>
 		<Unit filename="CuAlloc_getDataAddr.c">
 			<Option compilerVar="CC" />
-			<Option target="Debug" />
-			<Option target="Release" />
+			<Option target="CC65Debug" />
+			<Option target="CC65Release" />
 			<Option target="gccDebug" />
 			<Option target="gccRelease" />
 		</Unit>
 		<Unit filename="CuAlloc_getDataSize.c">
 			<Option compilerVar="CC" />
-			<Option target="Debug" />
-			<Option target="Release" />
+			<Option target="CC65Debug" />
+			<Option target="CC65Release" />
 			<Option target="gccDebug" />
 			<Option target="gccRelease" />
 		</Unit>
 		<Unit filename="CuAlloc_getFreeCount.c">
 			<Option compilerVar="CC" />
-			<Option target="Debug" />
-			<Option target="Release" />
+			<Option target="CC65Debug" />
+			<Option target="CC65Release" />
 			<Option target="gccDebug" />
 			<Option target="gccRelease" />
 		</Unit>
 		<Unit filename="CuAlloc_getHeaderAddr.c">
 			<Option compilerVar="CC" />
-			<Option target="Debug" />
-			<Option target="Release" />
+			<Option target="CC65Debug" />
+			<Option target="CC65Release" />
 			<Option target="gccDebug" />
 			<Option target="gccRelease" />
 		</Unit>
 		<Unit filename="CuAlloc_getLastFreedMem.c">
 			<Option compilerVar="CC" />
-			<Option target="Debug" />
-			<Option target="Release" />
+			<Option target="CC65Debug" />
+			<Option target="CC65Release" />
 			<Option target="gccDebug" />
 			<Option target="gccRelease" />
 		</Unit>
 		<Unit filename="CuAlloc_getMalloccount.c">
 			<Option compilerVar="CC" />
-			<Option target="Debug" />
-			<Option target="Release" />
+			<Option target="CC65Debug" />
+			<Option target="CC65Release" />
 			<Option target="gccDebug" />
 			<Option target="gccRelease" />
 		</Unit>
 		<Unit filename="CuAlloc_getPendingFrees.c">
 			<Option compilerVar="CC" />
-			<Option target="Debug" />
-			<Option target="Release" />
+			<Option target="CC65Debug" />
+			<Option target="CC65Release" />
 			<Option target="gccDebug" />
 			<Option target="gccRelease" />
 		</Unit>
 		<Unit filename="CuAlloc_getRealloccount.c">
 			<Option compilerVar="CC" />
-			<Option target="Debug" />
-			<Option target="Release" />
+			<Option target="CC65Debug" />
+			<Option target="CC65Release" />
 			<Option target="gccDebug" />
 			<Option target="gccRelease" />
 		</Unit>
 		<Unit filename="CuAlloc_getTotalSize.c">
 			<Option compilerVar="CC" />
-			<Option target="Debug" />
-			<Option target="Release" />
+			<Option target="CC65Debug" />
+			<Option target="CC65Release" />
 			<Option target="gccDebug" />
 			<Option target="gccRelease" />
 		</Unit>
 		<Unit filename="CuAlloc_initHeader.c">
 			<Option compilerVar="CC" />
-			<Option target="Debug" />
-			<Option target="Release" />
+			<Option target="CC65Debug" />
+			<Option target="CC65Release" />
 			<Option target="gccDebug" />
 			<Option target="gccRelease" />
 		</Unit>
@@ -202,22 +178,21 @@
 		</Unit>
 		<Unit filename="CuCalloc.c">
 			<Option compilerVar="CC" />
-			<Option target="Debug" />
-			<Option target="Release" />
+			<Option target="CC65Debug" />
+			<Option target="CC65Release" />
 			<Option target="gccDebug" />
 			<Option target="gccRelease" />
 		</Unit>
 		<Unit filename="CuFree.c">
 			<Option compilerVar="CC" />
-			<Option target="Debug" />
-			<Option target="Release" />
+			<Option target="CC65Debug" />
+			<Option target="CC65Release" />
 			<Option target="gccDebug" />
 			<Option target="gccRelease" />
 		</Unit>
 		<Unit filename="testCuAlloc.c">
 			<Option compilerVar="CC" />
 			<Option target="gccRelease" />
-			<Option target="gccUTest" />
 			<Option target="UTest" />
 		</Unit>
 		<Extensions>

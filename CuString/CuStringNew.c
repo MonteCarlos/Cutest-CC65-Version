@@ -19,5 +19,5 @@ CuString* CuStringNew(void)
 	assert(NULL!=str);
 	CuStringInit(str);
 
-	return str;
+    return str;
 }
