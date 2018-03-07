@@ -79,6 +79,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="CuMallocWrapper.h" />
+		<Unit filename="CuRegisterTests.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="CuTest.c">
 			<Option compilerVar="CC" />
 		</Unit>

@@ -11,7 +11,7 @@
 //2,5 = 5/2 -> 1/2,5 = 2/5
 #include "CuTest_internal.h"
 bool intCmpFnc(const void* exp, const void* act, char *expectedStr, char *actualStr, size_t maxChars, CuString *str){
-    str; //just to omit unused param warning
+    (void)str; //just to omit unused param warning
 
     //write ints into passed string buffers
     snprintf(expectedStr, maxChars, "%d", *((int*)exp));
