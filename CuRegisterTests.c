@@ -1,7 +1,7 @@
 
 #include "CuTest_internal.h"
 
-int CuRegisterTests(CuSuite *suite, TestfunctionNamePair_t (*testlist)[], CuSize_t n){
+int CuRegisterTests(CuSuite_t *suite, TestfunctionNamePair_t (*testlist)[], CuSize_t n){
 	if (suite){
 		CuSize_t i;
 		TestfunctionNamePair_t *thistest = (TestfunctionNamePair_t*)testlist;

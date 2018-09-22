@@ -1,15 +1,15 @@
 #include "CuAlloc_internal.h"
-#include "../CuTest.h"
+#include "../CuTest_t.h"
 
 #include <stdio.h>
 
-void testCuAllocCalculateTotalSize(CuTest* tc){
+void testCuAllocCalculateTotalSize(CuTest_t* tc){
     CuSize_t datasize = 20;
     CuSize_t totalsize = CuAlloc_calculateTotalSize(datasize);
     CuAssertIntEquals(tc, datasize+sizeof(CuAlloc_BufHeader_t), totalsize);
 }
 
-void testCuAllocInitHeader(CuTest* tc){
+void testCuAllocInitHeader(CuTest_t* tc){
     CuAlloc_t allocObj;
 
     CuSize_t datasize = 20;
@@ -21,7 +21,7 @@ void testCuAllocInitHeader(CuTest* tc){
     CuAssertPtrEquals(tc, &allocObj, allocObj.this);
 }
 
-void testCuAllocGetDataSize(CuTest* tc){
+void testCuAllocGetDataSize(CuTest_t* tc){
     CuAlloc_t allocObj;
 
     CuSize_t datasize = 20;
@@ -31,7 +31,7 @@ void testCuAllocGetDataSize(CuTest* tc){
     CuAssertIntEquals(tc, datasize, CuAlloc_getDataSize(&allocObj.array));
 }
 
-void testCuAllocGetTotalSize(CuTest* tc){
+void testCuAllocGetTotalSize(CuTest_t* tc){
     CuAlloc_t allocObj;
 
     CuSize_t datasize = 20;
@@ -41,17 +41,17 @@ void testCuAllocGetTotalSize(CuTest* tc){
     CuAssertIntEquals(tc, totalsize, CuAlloc_getTotalSize(&allocObj.array));
 }
 
-void testCuAllocGetHeaderAddr(CuTest* tc){
+void testCuAllocGetHeaderAddr(CuTest_t* tc){
     CuAlloc_t allocObj;
     CuAssertPtrEquals(tc, &allocObj, CuAlloc_getHeaderAddr(&allocObj.array));
 }
 
-void testCuAllocGetDataAddr(CuTest* tc){
+void testCuAllocGetDataAddr(CuTest_t* tc){
     CuAlloc_t allocObj;
     CuAssertPtrEquals(tc, &allocObj.array, CuAlloc_getDataAddr(&allocObj));
 }
 
-void testCuAllocGetBufferValidity(CuTest* tc){
+void testCuAllocGetBufferValidity(CuTest_t* tc){
     CuSize_t datasize = 20;
     CuAlloc_t allocObj;
     CuAlloc_initHeader(&allocObj, datasize);
@@ -62,7 +62,7 @@ void testCuAllocGetBufferValidity(CuTest* tc){
 
 }
 
-void testCuFree(CuTest* tc){
+void testCuFree(CuTest_t* tc){
     int *iVar = CuAlloc(sizeof(int));
     CuSize_t freecount = CuAlloc_getFreeCount();
     CuSize_t alloccount = CuAlloc_getAllocCount();
@@ -80,7 +80,7 @@ void testCuFree(CuTest* tc){
 
 }
 
-void testCuCalloc(CuTest* tc){
+void testCuCalloc(CuTest_t* tc){
     int intArray[] = {100,200,300,400,500,23};
     unsigned int alloccount = CuAlloc_getAllocCount();
     int *ptr2IntArray = CuCalloc(sizeof(intArray));
@@ -105,7 +105,7 @@ void testCuCalloc(CuTest* tc){
     CuFree(ptr2IntArray);
 }
 
-void testCuRealloc(CuTest* tc){
+void testCuRealloc(CuTest_t* tc){
     int intArray1[] = {100,200,300,400,500,23};
     int intArray2[] = {1024,512,256,128,64,32,16,8,4,2,1,0};
     int *ptr2IntArray = NULL;
@@ -156,7 +156,7 @@ void testCuRealloc(CuTest* tc){
     CuAssertTrue(tc, CuFree(ptr2IntArray));
 }
 
-void testCuAlloc(CuTest* tc){
+void testCuAlloc(CuTest_t* tc){
     enum {constTestValInt = 10054};
     unsigned int alloccount = CuAlloc_getAllocCount();
 
@@ -171,18 +171,18 @@ void testCuAlloc(CuTest* tc){
     CuFree(iVar);
 }
 
-void testAllocCount1(CuTest *tc){
+void testAllocCount1(CuTest_t *tc){
     CuAssertIntEquals(tc, 0, CuAlloc_getAllocCount());
     CuAssertIntEquals(tc, 0, CuAlloc_getFreeCount());
     CuAssertIntEquals(tc, 0, CuAlloc_getReallocCount());
 }
 
-void testAllocCount2(CuTest *tc){
+void testAllocCount2(CuTest_t *tc){
     CuAssertIntEquals(tc, 1, CuAlloc_getPendingFrees());
 }
 
-CuSuite *CuAlloc_requestEarlyTests(void){
-    CuSuite* suite = CuSuiteNew();
+CuSuite_t *CuAlloc_requestEarlyTests(void){
+    CuSuite_t* suite = CuSuiteNew();
     assert(NULL != suite);
     SUITE_ADD_TEST(suite, testCuAllocCalculateTotalSize);
     SUITE_ADD_TEST(suite, testCuAllocInitHeader);
@@ -195,8 +195,8 @@ CuSuite *CuAlloc_requestEarlyTests(void){
 
 }
 
-CuSuite *CuAlloc_requestTests(void){
-    CuSuite* suite = CuSuiteNew();
+CuSuite_t *CuAlloc_requestTests(void){
+    CuSuite_t* suite = CuSuiteNew();
 
     assert(NULL != suite);
     //Assert valid memory assignment to suite
@@ -230,7 +230,7 @@ CuSuite *CuAlloc_requestTests(void){
 int main(void){
     int Nofails;
 
-    CuSuite* suite = NULL; //
+    CuSuite_t* suite = NULL; //
     suite = CuAlloc_requestEarlyTests();
     CuSuiteRun(suite);
     CuSuiteDetails(suite, stdout);

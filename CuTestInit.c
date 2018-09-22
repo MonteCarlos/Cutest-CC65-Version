@@ -1,6 +1,6 @@
 #include "CuTest_internal.h"
 
-void CuTestInit(register CuTest* t, const char* name, TestFunction function)
+void CuTestInit(register CuTest_t* t, const char* name, TestFunction function)
 {
 	if (t){
 		t->name = CuStringConvertCStr(name);//CuStrCopy(name);

@@ -1,6 +1,6 @@
 #include "CuTest_internal.h"
 
-bool CuSuiteDetails(CuSuite* testSuite, FILE* file)
+bool CuSuiteDetails(CuSuite_t* testSuite, FILE* file)
 {
 	if (testSuite){
 		CuSize_t i;
@@ -13,15 +13,15 @@ bool CuSuiteDetails(CuSuite* testSuite, FILE* file)
 		CuSize_t memoryleaks = 0;
 
 		register CuReport_t *report = testSuite->report;
-		register CuTestPtr_t *testlist = testSuite->testlist;
+		register CuTestOrSuitePtr_t *testlist = testSuite->testlist;
 
 		for (i = 0 ; i < testSuite->testcount ; ++i)
 		{
-			register CuTestPtr_t *testCase = &testlist[i];
+			register CuTestOrSuitePtr_t *testCase = &testlist[i];
 			if (testCase->isSuite){
 				CuSuiteDetails(testCase->suite, file);
 			}else{
-				register CuTest *test = testCase->test;
+				register CuTest_t *test = testCase->test;
 				if (test->failed)
 				{
 					CuTestFprintf(file, "Test failed: %s in %s\n", CuStringCStr(test->message), CuStringCStr(test->name));

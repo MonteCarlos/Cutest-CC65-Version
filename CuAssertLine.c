@@ -1,6 +1,6 @@
 #include "CuTest_internal.h"
 
-bool CuAssert_Line(CuTest* tc, const char* file, unsigned long int line, const char* message, int condition)
+bool CuAssert_Line(CuTest_t* tc, const char* file, unsigned long int line, const char* message, int condition)
 {
 	if (tc){
 		++tc->assertCnt;

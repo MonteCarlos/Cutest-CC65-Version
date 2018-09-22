@@ -1,6 +1,6 @@
 #include "CuTest_internal.h"
 
-int CuTestAppendMessage(CuTest *tc, const char* format, ...){
+int CuTestAppendMessage(CuTest_t *tc, const char* format, ...){
     //CuString *str = CuStringConvertCStr((const char*)tc->message);
     if (tc){
 		va_list va;

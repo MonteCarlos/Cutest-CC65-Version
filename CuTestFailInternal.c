@@ -1,7 +1,7 @@
 #include "CuTest_internal.h"
 
 
-void CuFailInternal(CuTest* tc, const char* file, unsigned long int line, CuString* string)
+void CuFailInternal(CuTest_t* tc, const char* file, unsigned long int line, CuString* string)
 {
 	if (tc){
 		char* buf = CuStrFormat("%s:%lu:", file, line);//(char*)CuAlloc(CUSTRING_LEN_NEW*sizeof(char));

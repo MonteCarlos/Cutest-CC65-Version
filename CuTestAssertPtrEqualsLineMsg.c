@@ -11,7 +11,7 @@ bool ptrCmpFnc(const void* exp, const void* act, char *expectedStr, char *actual
     return (void*)exp == (void*)act;
 }
 
-bool CuAssertPtrEquals_LineMsg(CuTest* tc, const char* file, unsigned long int line, const char* message,
+bool CuAssertPtrEquals_LineMsg(CuTest_t* tc, const char* file, unsigned long int line, const char* message,
 	const void* expected, const void* actual)
 {
     char expectedStr[sizeof(uintptr_t)*2+2+1]; //reserve minimum field width capable of holding smallest int. each byte needs

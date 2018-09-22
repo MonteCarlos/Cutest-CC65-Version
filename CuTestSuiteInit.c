@@ -1,6 +1,6 @@
 #include "CuTest_internal.h"
 
-void CuSuiteInit(register CuSuite* testSuite)
+void CuSuiteInit(register CuSuite_t* testSuite)
 {
 	if (testSuite){
 		testSuite->testcount =
@@ -9,7 +9,7 @@ void CuSuiteInit(register CuSuite* testSuite)
 		testSuite->suitecount =
 		testSuite->isSubSuite =
 		testSuite->ran = 0;
-		testSuite->testlist = (CuTestPtr_t*)CuAlloc(CUTEST_LIST_STORAGERESERVE*sizeof(CuTestPtr_t));//alloc and zero fill
+		testSuite->testlist = (CuTestOrSuitePtr_t*)CuAlloc(CUTEST_LIST_STORAGERESERVE*sizeof(CuTestOrSuitePtr_t));//alloc and zero fill
 		testSuite->name = CuStringNew();
 		CuStringAppendFormat(testSuite->name, "%s%d", "Suite", testSuite->suitecount);
 		assert (NULL != testSuite->testlist);

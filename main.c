@@ -3,10 +3,10 @@
 #include <assert.h>
 #include "CuTest_internal.h"
 
-int RunAllTests(CuSuite* suite, FILE* file);
-CuSuite* CuGetAssertTests(void);
-CuSuite* CuGetOtherTests(void);
-CuSuite* CuGetSuiteTests(void);
+int RunAllTests(CuSuite_t* suite, FILE* file);
+CuSuite_t* CuGetAssertTests(void);
+CuSuite_t* CuGetOtherTests(void);
+CuSuite_t* CuGetSuiteTests(void);
 
 int main(void)
 {

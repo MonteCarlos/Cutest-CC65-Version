@@ -1,8 +1,8 @@
 #include "CuTest_internal.h"
 
-CuTest* CuTestSetup(const char* name, TestFunction function, CuTest_SetupFnc_t *setup, CuTest_TeardownFnc_t *teardown, ...)
+CuTest_t* CuTestSetup(const char* name, TestFunction function, CuTest_SetupFnc_t *setup, CuTest_TeardownFnc_t *teardown, ...)
 {
-    CuTest* tc = CU_ALLOC(CuTest);
+    CuTest_t* tc = CU_ALLOC(CuTest_t);
 	va_list va;
     va_start(va, teardown);
 

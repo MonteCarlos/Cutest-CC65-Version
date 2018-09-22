@@ -14,7 +14,7 @@ bool strCmpFnc(const void* exp, const void* act, char *expectedStr, char *actual
     return NULL == act;
 }
 
-bool CuAssertStrEquals_LineMsg(CuTest* tc, const char* file, unsigned long int line, const char* message,
+bool CuAssertStrEquals_LineMsg(CuTest_t* tc, const char* file, unsigned long int line, const char* message,
 	const char* expected, const char* actual)
 {
     //for string comparison we need no string conversion as expected and actual are strings already

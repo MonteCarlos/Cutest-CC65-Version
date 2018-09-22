@@ -4,8 +4,8 @@
 #include "CuTest_internal.h"
 #include <signal.h>
 
-CuSuite* CuGetSuite();
-CuSuite* CuStringGetSuite();
+CuSuite_t* CuGetSuite();
+CuSuite_t* CuStringGetSuite();
 
 /*static void illSignalHandler(int sig){
 	printf("!!! Exception occured in RunAllTests. Signal %d !!!\n\n", sig);
@@ -17,7 +17,7 @@ CuSuite* CuStringGetSuite();
 //
 //- solve CuStringDelete and CuSuiteDelete problem
 //- solve memory allocation problems (sometimes (m)(c)alloc returns NULL)
-int RunAllTests(CuSuite* suite, FILE* file)
+int RunAllTests(CuSuite_t* suite, FILE* file)
 {
     int NoFails = 1;
 	//__sighandler_t prevHandler = signal(SIGSEGV, illSignalHandler);

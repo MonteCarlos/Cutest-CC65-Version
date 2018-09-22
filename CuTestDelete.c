@@ -1,6 +1,6 @@
 #include "CuTest_internal.h"
 
-bool CuTestDelete(register CuTest *t)
+bool CuTestDelete(register CuTest_t *t)
 {
     if (t){
 		bool freeresult;

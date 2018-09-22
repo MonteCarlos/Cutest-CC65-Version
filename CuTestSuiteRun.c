@@ -2,8 +2,8 @@
 #include <signal.h>
 
 
-CuTest *test = NULL;
-CuSuite *suite = NULL;
+CuTest_t *test = NULL;
+CuSuite_t *suite = NULL;
 
 static void abrtSignalHandler(int sig){
     puts("\n!!! Exception occured in CuSuiteRun. Aborted.");
@@ -22,7 +22,7 @@ static void illSignalHandler(int sig){
 }
 
 // TODO (MyAcer#1#): find solution for messed output with sub tests CuSize_t CuSuiteRun(CuSuite* testSuite)
-CuSize_t CuSuiteRun(CuSuite* testSuite)
+CuSize_t CuSuiteRun(CuSuite_t* testSuite)
 {
 	__sighandler_t prevHandler = signal(SIGSEGV, illSignalHandler);
     __sighandler_t prevHandler2 = signal(SIGABRT, abrtSignalHandler);
@@ -35,7 +35,7 @@ CuSize_t CuSuiteRun(CuSuite* testSuite)
 		//CuTest* testCase = NULL;
 		for (j = testSuite->totalcount,i=0; j!=0; ++i,--j)
 		{
-			CuTestPtr_t *testCase = &(testSuite->testlist[i]);
+			CuTestOrSuitePtr_t *testCase = &(testSuite->testlist[i]);
 			//signal(SIGSEGV, illSignalHandler);
 			printf("%u: ",i);
 			if (testCase->isSuite){

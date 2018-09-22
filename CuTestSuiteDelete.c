@@ -1,11 +1,11 @@
 #include "CuTest_internal.h"
 
-bool CuSuiteDelete(CuSuite *testSuite)
+bool CuSuiteDelete(CuSuite_t *testSuite)
 {
 	if (testSuite){
         CuSize_t n = testSuite->totalcount;
         bool freereturn;
-        CuTestPtr_t *testlist = testSuite->testlist;
+        CuTestOrSuitePtr_t *testlist = testSuite->testlist;
 
         //assert (NULL != testSuite);
         printf("Removing testcases:\n");
@@ -15,7 +15,7 @@ bool CuSuiteDelete(CuSuite *testSuite)
         {
             //We start with n=n_max and proceed to n=1. therefore index with n-1
             //We can assume here that n>0
-			register CuTestPtr_t *test = &testlist[n-1];
+			register CuTestOrSuitePtr_t *test = &testlist[n-1];
 
             if (NULL!=test->test)
             {

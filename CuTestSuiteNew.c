@@ -1,8 +1,8 @@
 #include "CuTest_internal.h"
 
-CuSuite* CuSuiteNew(void)
+CuSuite_t* CuSuiteNew(void)
 {
-	CuSuite* testSuite = CU_ALLOC(CuSuite);
+	CuSuite_t* testSuite = CU_ALLOC(CuSuite_t);
 	CuSuiteInit(testSuite);
 	return testSuite;
 }

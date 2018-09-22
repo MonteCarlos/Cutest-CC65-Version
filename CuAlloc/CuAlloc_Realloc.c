@@ -9,6 +9,7 @@ void *CuRealloc(void* old, CuSize_t n){
 
         switch (CuAlloc_getBufferValidity(old)){
          case true:
+            // @todo (mc78#1#09/22/18): May cause dangling pointer if realloc fails!!!
             ptr = realloc(ptr, CuAlloc_calculateTotalSize(n));
             ++realloccount;
             assert(NULL!=ptr);

@@ -1,6 +1,6 @@
 #include "CuTest_internal.h"
 
-bool CuTestRun(CuTest* tc)
+bool CuTestRun(CuTest_t* tc)
 {
 	if (tc){
 		//jmp_buf buf;

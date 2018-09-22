@@ -29,6 +29,11 @@ CuError_t CuAlloc_initHeader(CuAlloc_t* ptr, CuSize_t n);
 CuAlloc_t *CuAlloc_getHeaderAddr(CuAllocPtr_t ptr);
 CuAllocPtr_t CuAlloc_getDataAddr(CuAlloc_t*  ptr);CuSize_t CuAlloc_calculateTotalSize(size_t n);
 
+/* Simple Alloc Functions separating error and return values for replacing thorough ones in release version*/
+CuError_t _CuAlloc2(size_t n, CuAllocPtr_t **mem);
+CuError_t _CuCalloc2(size_t n, CuAllocPtr_t **mem);
+CuError_t _CuRealloc2(CuAllocPtr_t* old, CuAllocPtr_t **new, CuSize_t n);
+
 // CUALLOC_INTERNAL_H_INCLUDED
 #endif
 
