@@ -2,11 +2,14 @@
 
 CuError_t CuTest_SuiteInitRunReport(CuError_t (*initSuite)(CuSuite *suite), FILE *file){
     CUSUITE_OPEN(suite);
-    initSuite(suite);
+    if (suite){
+        initSuite(suite);
 
-    CuSuiteRun(suite);
-    CuSuiteDetails(suite, file);
-    CUSUITE_CLOSE(suite);
-    return 0;
+        CuSuiteRun(suite);
+        CuSuiteDetails(suite, file);
+        CUSUITE_CLOSE(suite);
+        return 0;
+    }
+    return -1;
 }
 
