@@ -46,7 +46,7 @@ static void X_CompareAsserts(CuTest* tc, const char *file, int line, const char*
  * CuString Test
  *-------------------------------------------------------------------------*/
 
-void TestCuStringNew(CuTest* tc)
+void TestCuStringNew(CuTest_t* tc)
 {
     // @todo (mc78#1#01/19/18): str->buffer is messed up, after CuString new. Something wents wrong with allocation.
 	CuString* str = CuStringNew();
@@ -68,14 +68,14 @@ void TestCuStringNew(CuTest* tc)
 	CuStringDelete(str);
 }
 
-void TestCuStringDelete(CuTest* tc)
+void TestCuStringDelete(CuTest_t* tc)
 {
 	CuString* str = CuStringNew();
 
 	CuAssertTrue(tc, CuStringDelete(str));
 }
 
-void TestCuStringInit(CuTest* tc)
+void TestCuStringInit(CuTest_t* tc)
 {
 	CuString* str = CuStringNew();
 	CuStringAppend(str, "this string is more than sixtifour letters long, which is now true!");
@@ -89,7 +89,7 @@ void TestCuStringInit(CuTest* tc)
 	CuStringDelete(str);
 }
 
-void TestCuStringAppend(CuTest* tc)
+void TestCuStringAppend(CuTest_t* tc)
 {
 	CuString* str = CuStringNew();
 	CuStringAppend(str, "hello");
@@ -102,7 +102,7 @@ void TestCuStringAppend(CuTest* tc)
 }
 
 
-void TestCuStringAppendNULL(CuTest* tc)
+void TestCuStringAppendNULL(CuTest_t* tc)
 {
 	CuString* str = CuStringNew();
 	CuStringAppend(str, NULL);
@@ -112,7 +112,7 @@ void TestCuStringAppendNULL(CuTest* tc)
 }
 
 
-void TestCuStringAppendChar(CuTest* tc)
+void TestCuStringAppendChar(CuTest_t* tc)
 {
 	CuString* str = CuStringNew();
 	CuStringAppendChar(str, 'a');
@@ -125,7 +125,7 @@ void TestCuStringAppendChar(CuTest* tc)
 }
 
 
-void TestCuStringInserts(CuTest* tc)
+void TestCuStringInserts(CuTest_t* tc)
 {
 	CuString* str = CuStringNew();
 	CuStringAppend(str, "world");
@@ -144,7 +144,7 @@ void TestCuStringInserts(CuTest* tc)
 }
 
 
-void TestCuStringResizes(CuTest* tc)
+void TestCuStringResizes(CuTest_t* tc)
 {
 	CuString* str = CuStringNew();
 	int i;
@@ -161,7 +161,7 @@ void TestCuStringResizes(CuTest* tc)
  * Misc Test
  *-------------------------------------------------------------------------*/
 
-void TestCuStrCopy(CuTest* tc)
+void TestCuStrCopy(CuTest_t* tc)
 {
 	const char* old = "hello world";
 	char* newStr = CuStrCopy(old);
@@ -170,7 +170,7 @@ void TestCuStrCopy(CuTest* tc)
 }
 
 
-void TestCuStrAlloc(CuTest* tc)
+void TestCuStrAlloc(CuTest_t* tc)
 {
     CuStringSize_t size = 10;
 	char* ptr = CuStrAlloc(size);
@@ -205,7 +205,7 @@ void TestCuStrLenFormat(CuTest* tc){
 }
 */
 
-void TestCuStrFormat(CuTest* tc){
+void TestCuStrFormat(CuTest_t* tc){
     static char subStr[] = "subStr";
     int num = 10;
 	char *str = CuStrFormat("abc %s %d", subStr, num);
@@ -221,7 +221,7 @@ char* helper_TestCuStrVaFormat(char* format, ...){
 	return CuStrVaFormat(format, va);
 }
 
-void TestCuStrVaFormat(CuTest* tc){
+void TestCuStrVaFormat(CuTest_t* tc){
 	VALUEANDSTRING(int, val, 10);
 	char* buf = helper_TestCuStrVaFormat("g = %d", val);
 	if (CuAssertIntEquals(tc, 0, buf[sizeof(valStr)-1])){
@@ -231,7 +231,7 @@ void TestCuStrVaFormat(CuTest* tc){
 	CuFree(buf);
 }
 
-void TestCuStringAppendFormat(CuTest* tc)
+void TestCuStringAppendFormat(CuTest_t* tc)
 {
 	CuString* str = CuStringNew();
 	CuStringAppendFormat(str, "%s,%d,%c", "abc",10,'y');
@@ -337,7 +337,7 @@ void TestAssertStrEquals_FailStrNULL(CuTest* tc)
 	CuTestDelete(tc2);
 }
 */
-void TestCuStringLen(CuTest *tc){
+void TestCuStringLen(CuTest_t *tc){
 	char *teststr = "My test string";
 	CuString *str = CuStringConvertCStr(teststr);
 
@@ -346,11 +346,11 @@ void TestCuStringLen(CuTest *tc){
 }
 
 // TODO (Stefan#1#): Implement test case!
-void TestCuStringClear(CuTest* tc){
+void TestCuStringClear(CuTest_t* tc){
     CuFail_Msg(tc, "not implemented");
 }
 
-void TestCuStrNULL(CuTest* tc){
+void TestCuStrNULL(CuTest_t* tc){
 	const char *nullstr = NULL;
 	const char *teststr = "a test";
 
@@ -362,7 +362,7 @@ void TestCuStrNULL(CuTest* tc){
 
 }
 
-void TestCuStringSize(CuTest *tc){
+void TestCuStringSize(CuTest_t *tc){
 	char teststr[] = "Another test string";
 	CuString *str = CuStringConvertCStr(teststr);
 	CuStringResize(str, sizeof(teststr));
@@ -370,7 +370,7 @@ void TestCuStringSize(CuTest *tc){
 	CuStringDelete(str);
 }
 
-void TestCuStringResize(CuTest *tc){
+void TestCuStringResize(CuTest_t *tc){
 	char teststr1[] = "a short string";
 	char teststr2[] = "a very much longer string";
 	CuString *str1 = CuStringConvertCStr(teststr1);
@@ -392,7 +392,7 @@ void TestCuStringResize(CuTest *tc){
 	CuStringDelete(str1);
 }
 
-void TestCuStringCStr(CuTest *tc){
+void TestCuStringCStr(CuTest_t *tc){
 	CuString *str = CuStringNew();
 	const char *desiredStr = "This is a test.";
 	//CuStringInit(&str);
@@ -409,7 +409,7 @@ void TestCuStringCStr(CuTest *tc){
 	CuStringDelete(str);
 }
 
-void TestCuStringAppendLineFile(CuTest *tc){
+void TestCuStringAppendLineFile(CuTest_t *tc){
 	char frontStr[] = "This file is: ";
 	unsigned long line = __LINE__;
     CuString* thisline = CuStringNew();
@@ -430,7 +430,7 @@ void TestCuStringAppendLineFile(CuTest *tc){
 	CuStringDelete(thisline);
 }
 
-void TestCuStringAppendISvsNOT(CuTest *tc){
+void TestCuStringAppendISvsNOT(CuTest_t *tc){
     enum {TestISvsNOT_MAXSTRLEN = 100};
 
     int desired = 100, actual = 103;
@@ -474,7 +474,7 @@ void TestCuStringAppendISvsNOT(CuTest *tc){
 	free(expected);
 }
 */
-void TestCuStringAppendULong(CuTest *tc){
+void TestCuStringAppendULong(CuTest_t *tc){
 	unsigned long int num = 123456;
 	char* numStr = "123456";
 
@@ -484,7 +484,7 @@ void TestCuStringAppendULong(CuTest *tc){
 	CuStringDelete(str);
 }
 
-void TestCuStringConvertCStr(CuTest *tc){
+void TestCuStringConvertCStr(CuTest_t *tc){
 	char* testtext = "This is my testtext.";
 	CuString *str = CuStringConvertCStr(testtext);
 	/*CuAssertStrEquals(tc, testtext, CuStringCStr(str));
@@ -513,7 +513,7 @@ bool helper_TestCuStringAppendVariadicFormat(CuString *str, char* format, ...){
     return false;
 }
 
-void TestCuStringAppendVariadicFormat(CuTest *tc){
+void TestCuStringAppendVariadicFormat(CuTest_t *tc){
     int myInt = -543;
     char* myStr = "test!";
     char myChar = '#';
@@ -536,9 +536,9 @@ void TestCuStringAppendVariadicFormat(CuTest *tc){
  * main
  *-------------------------------------------------------------------------*/
 
-CuSuite* CuStringGetSuite1(void)
+CuSuite_t* CuStringGetSuite1(void)
 {
-	CuSuite* suite = CuSuiteNew();
+	CuSuite_t* suite = CuSuiteNew();
 
     SUITE_ADD_TEST(suite, TestCuStrAlloc);
     SUITE_ADD_TEST(suite, TestCuStrCopy);
@@ -559,9 +559,9 @@ CuSuite* CuStringGetSuite1(void)
 	return suite;
 }
 
-CuSuite* CuStringGetSuite2(void)
+CuSuite_t* CuStringGetSuite2(void)
 {
-    CuSuite* suite = CuSuiteNew();
+    CuSuite_t* suite = CuSuiteNew();
 
 
 	//SUITE_ADD_TEST(suite, TestCuStrLenFormat);
@@ -574,9 +574,9 @@ CuSuite* CuStringGetSuite2(void)
     return suite;
 }
 
-CuSuite* CuStringGetSuite3(void)
+CuSuite_t* CuStringGetSuite3(void)
 {
-    CuSuite* suite = CuSuiteNew();
+    CuSuite_t* suite = CuSuiteNew();
 
     SUITE_ADD_TEST(suite, TestCuStringAppend);
 	SUITE_ADD_TEST(suite, TestCuStringAppendNULL);

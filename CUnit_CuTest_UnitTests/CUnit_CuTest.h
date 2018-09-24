@@ -3,7 +3,7 @@
 
 #include <CUnit/CUnit.h>
 #include <CUnit/Basic.h>
-#include "../CuTest.h"
+#include "../CuTest_t.h"
 #include "../CuTest_internal.h"
 
 //typedef int AddTestsFunction_t(CU_pSuite suite);
