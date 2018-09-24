@@ -36,6 +36,22 @@ typedef int8_t CuError_t;
 
 /*
  * ---------------------------------
+ * Useful macros for quicker set-up of test projects
+ * ---------------------------------
+ */
+
+//macro to create list elements consisting of a testname string and a pointer to a test function
+#define CU_MKTESTNAMEPAIR(test) {SAVECUSTRINGIFY(TESTNAME(test)), TESTNAME(test)}
+#define CU_MKTESTPROTOTYPE(x) void TESTNAME(x)(CuTest *tc);
+
+#define CU_MKTESTPROTOTYPELIST(tests) tests(CU_MKTESTPROTOTYPE, )
+
+#define CU_TESTNAMEPAIRITEM(x) CU_MKTESTNAMEPAIR(x)
+#define CU_MKTESTNAMEPAIRLIST(xmacroname, arrayname) \
+    static TestfunctionNamePair_t arrayname[] = {xmacroname(CU_TESTNAMEPAIRITEM, COMMA), {NULL}};
+
+/*
+ * ---------------------------------
  * Prototypes for creation/deletion functions for tests
  * ---------------------------------
  */
