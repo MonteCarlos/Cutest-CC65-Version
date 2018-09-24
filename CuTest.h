@@ -34,11 +34,35 @@ typedef int8_t CuError_t;
 #define CUEVAL(x) (x)
 #define CUCONCAT(a,b) a##b
 
-typedef struct CuSuite_tag CuSuite;
-typedef struct CuTest_tag CuTest;
-typedef struct CuReport_tag CuReport_t;
-typedef CuSuite* CuSuitePtr;
-typedef CuTest* CuTestPtr;
+/*
+ * ---------------------------------
+ * Useful macros for quicker set-up of test projects
+ * ---------------------------------
+ */
+
+//macro to create list elements consisting of a testname string and a pointer to a test function
+#define CU_MKTESTNAMEPAIR(test) {SAVECUSTRINGIFY(TESTNAME(test)), TESTNAME(test)}
+#define CU_MKTESTPROTOTYPE(x) void TESTNAME(x)(CuTest *tc);
+
+#define CU_MKTESTPROTOTYPELIST(tests) tests(CU_MKTESTPROTOTYPE, )
+
+#define CU_TESTNAMEPAIRITEM(x) CU_MKTESTNAMEPAIR(x)
+#define CU_MKTESTNAMEPAIRLIST(xmacroname, arrayname) \
+    static TestfunctionNamePair_t arrayname[] = {xmacroname(CU_TESTNAMEPAIRITEM, COMMA), {NULL}};
+
+/*
+ * ---------------------------------
+ * Prototypes for creation/deletion functions for tests
+ * ---------------------------------
+ */
+/**< Initializes a CuTest_t structure with given params and defaults */
+void CuTestInit (CuTest_t *t, const char *name, TestFunction function);
+/**< Creates a CuTest_t structure initialized with given name and TestFunction. Calls CuTestInit*/
+CuTest_t *CuTestNew (const char *name, TestFunction function);
+/**< Deletes a test and deallocates mem */
+bool CuTestDelete (CuTest_t *t);
+/**< Runs the TestFunction stores in the given CuTest_t structure and logs if it fails */
+bool CuTestRun (CuTest_t *tc);
 
 /*
  * ---------------------------------
@@ -64,79 +88,14 @@ CuError_t CuRegisterTests (CuSuite_t *suite, TestfunctionNamePair_t (*testlist) 
 CuError_t CuSuiteRegisterTestlist(CuSuite_t *suite, CuTestlist_t *testlist);
 CuError_t CuSuiteInitRunReport(CuError_t (*initSuite)(CuSuite_t *suite, void *params), FILE *file, void *params);
 
-typedef void (*TestFunction)(CuTest *);
-//typedef of a pair of a testname string and a pointer to a test function
-typedef struct TestfunctionNamePair_tag{
-	char *testname;
-	TestFunction fnc;
-}TestfunctionNamePair_t;
-
-typedef bool CuTestCmpFnc_t(const void* a, const void *b, char *exp, char *act, size_t maxStrLen, CuString *message);
-typedef CuTestCmpFnc_t *CuTestCmpFncPtr_t;
-
-void CuTestInit(CuTest* t, const char* name, TestFunction function);
-CuTest* CuTestNew(const char* name, TestFunction function);
-bool CuTestRun(CuTest* tc);
-bool CuTestDelete(CuTest *t);
-
-int CuRegisterTests(CuSuite *suite, TestfunctionNamePair_t (*testlist)[], CuSize_t n);
-
-/* Internal versions of assert functions -- use the public versions */
-void CuFail_Line(CuTest* tc, const char* file, unsigned long int line, const char* message2, const char* message);
-bool CuAssert_Line(CuTest* tc, const char* file, unsigned long int line, const char* message, int condition);
-bool CuAssertStrEquals_LineMsg(CuTest* tc,
-	const char* file, unsigned long int line, const char* message,
-	const char* expected, const char* actual);
-bool CuAssertIntEquals_LineMsg(CuTest* tc,
-	const char* file, unsigned long int line, const char* message,
-	int expected, int actual);
-/*void CuAssertDblEquals_LineMsg(CuTest* tc,
-	const char* file, int line, const char* message,
-	double expected, double actual, double delta);*/
-bool CuAssertPtrEquals_LineMsg(CuTest* tc,
-	const char* file, unsigned long int line, const char* message,
-	const void* expected, const void* actual);
-bool CuAssertArrayEquals_LineMsg(CuTest* tc, const char* file, unsigned long int line, const char* message,
-	const void* expected, const void* actual, CuSize_t elementsize, CuSize_t len);
-bool CuAssertArrayEqualsStepFunc_LineMsg(CuTest* tc, const char* file, unsigned long int line, const char* message,
-	bool (*stepfunc)(size_t index, void* expected), const void* actual, CuSize_t elementsize, CuSize_t len);
-bool CuAssertArrayElementsConstant_LineMsg(CuTest* tc, const char* file, unsigned long int line, const char* message,
-	const void* expected, const void* actual, CuSize_t elementsize, CuSize_t len);
-bool CuAssertGeneralEquals_LineMsg(CuTest* tc, const char* file, unsigned long int line, const char* message,
-	const void *expected, const void *actual, char *expStr, char *actStr, size_t maxStrLen, CuTestCmpFncPtr_t cmpFnc);
-/* public assert functions */
-
-
-#define CuPass(tc)                            CuAssertTrue(tc, true);
-#define CuFail(tc)                            CuAssertTrue(tc, false)
-#define CuFail_Msg(tc, ms)                    CuAssertTrue_Msg(tc, ms, false)
-#define CuAssert(tc, ms, cond)                CuAssert_Line((tc), __FILE__, __LINE__, (ms), (cond))
-#define CuAssertTrue(tc, cond)                CuAssert_Line((tc), __FILE__, __LINE__, "assert failed", (cond))
-#define CuAssertFalse(tc, cond)               CuAssert_Line((tc), __FILE__, __LINE__, "assert failed", !(cond))
-#define CuAssertTrue_Msg(tc, ms, cond)            CuAssert_Line((tc), __FILE__, __LINE__, (ms), (cond))
-#define CuAssertFalse_Msg(tc, ms, cond)           CuAssert_Line((tc), __FILE__, __LINE__, (ms), !(cond))
-
-#define CuAssertStrEquals(tc,ex,ac)           CuAssertStrEquals_LineMsg((tc),__FILE__,__LINE__,#ac,(ex),(ac))
-#define CuAssertStrEquals_Msg(tc,ms,ex,ac)    CuAssertStrEquals_LineMsg((tc),__FILE__,__LINE__,(ms),(ex),(ac))
-#define CuAssertIntEquals(tc,ex,ac)           CuAssertIntEquals_LineMsg((tc),__FILE__,__LINE__,#ac,(ex),(ac))
-#define CuAssertIntEquals_Msg(tc,ms,ex,ac)    CuAssertIntEquals_LineMsg((tc),__FILE__,__LINE__,(ms),(ex),(ac))
-#define CuAssertDblEquals(tc,ex,ac,dl)        CuAssertDblEquals_LineMsg((tc),__FILE__,__LINE__,#ac,(ex),(ac),(dl))
-#define CuAssertDblEquals_Msg(tc,ms,ex,ac,dl) CuAssertDblEquals_LineMsg((tc),__FILE__,__LINE__,(ms),(ex),(ac),(dl))
-#define CuAssertPtrEquals(tc,ex,ac)           CuAssertPtrEquals_LineMsg((tc),__FILE__,__LINE__,#ac,(ex),(ac))
-#define CuAssertPtrEquals_Msg(tc,ms,ex,ac)    CuAssertPtrEquals_LineMsg((tc),__FILE__,__LINE__,(ms),(ex),(ac))
-#define CuAssertArrayEquals(tc,ex,ac,elemsize,len)           CuAssertArrayEquals_LineMsg((tc),__FILE__,__LINE__,#ac,(ex),(ac),elemsize,len)
-#define CuAssertArrayEquals_Msg(tc,ms,ex,ac,elemsize,len)    CuAssertArrayEquals_LineMsg((tc),__FILE__,__LINE__,(ms),(ex),(ac),elemsize,len)
-#define CuAssertArrayEqualsStepFunc(tc,func,ac,elemsize,len)           CuAssertArrayEqualsStepFunc_LineMsg((tc),__FILE__,__LINE__,#ac,(func),(ac),elemsize,len)
-#define CuAssertArrayEqualsStepFunc_Msg(tc,ms,func,ac,elemsize,len)    CuAssertArrayEqualsStepFunc_LineMsg((tc),__FILE__,__LINE__,(ms),(func),(ac),elemsize,len)
-#define CuAssertArrayElementsConstant(tc,ex,ac,elemsize,len)           CuAssertArrayElementsConstant_LineMsg((tc),__FILE__,__LINE__,#ac,(ex),(ac),elemsize,len)
-#define CuAssertArrayElementsConstant_Msg(tc,ms,ex,ac,elemsize,len)    CuAssertArrayElementsConstant_LineMsg((tc),__FILE__,__LINE__,(ms),(ex),(ac),elemsize,len)
-
-#define CuAssertPtrNotNull(tc,p)        CuAssert_Line((tc),__FILE__,__LINE__,"null pointer unexpected",((p) != NULL))
-#define CuAssertPtrNotNullMsg(tc,msg,p) CuAssert_Line((tc),__FILE__,__LINE__,(msg),((p) != NULL))
-#define CuAssertPtrNull(tc,p)        CuAssert_Line((tc),__FILE__,__LINE__,"null pointer expected",((p) == NULL))
-#define CuAssertPtrNullMsg(tc,msg,p) CuAssert_Line((tc),__FILE__,__LINE__,(msg),((p) == NULL))
-
-#define CUSUITE_OPEN(suite) CuSuite* suite = CuSuiteNew()
+/*
+ * ---------------------------------
+ * Convenience macros
+ * ---------------------------------
+ */
+/**< Convinience macro to create a suite and also a variable with the given name */
+#define CUSUITE_OPEN(suite) CuSuite_t* suite = CuSuiteNew()
+/**< Convinience macro to delete a suite with the given name */
 #define CUSUITE_CLOSE(suite) CuSuiteDelete(suite)
 
 /**< Convinience macro to generate prototype for a test function */
@@ -152,32 +111,24 @@ bool CuAssertGeneralEquals_LineMsg(CuTest* tc, const char* file, unsigned long i
 /**< Adds given suite2 to given suite1 */
 #define SUITE_ADD_SUITE(SUITE1, SUITE2) do{CuSuite_t* SUITE2 = CuSuiteNew();CuSuiteAddSuite(SUITE1, SUITE2);}while(false)
 
-#define CUTEST_LIST_STORAGERESERVE	20
-#define CUSUITE_LIST_STORAGERESERVE	10
 
-#define SUITE_ADD_TEST(SUITE,TEST)	CuSuiteAdd(SUITE, CuTestNew(SAVECUSTRINGIFY(TEST), TEST))
-#define SUITE_ADD_SUITE(SUITE1, SUITE2) do{CuSuite* SUITE2 = CuSuiteNew();CuSuiteAddSuite(SUITE1, SUITE2);}while(false)
-#define CUTEST_ADD(SUITE,TEST) CuSuiteAdd(SUITE, CuTestNew(SAVECUSTRINGIFY(TESTNAME(TEST)), TESTNAME(TEST)))
 
-void CuSuiteInit(CuSuite* testSuite);
-CuSuite* CuSuiteNew(void);
-bool CuSuiteDelete(CuSuite *testSuite);
-bool CuSuiteAdd(CuSuite* testSuite, CuTest *testCase);
-void CuSuiteAddSuite(CuSuite* testSuite, CuSuite* testSuite2); CuSize_t  CuSuiteRun(CuSuite* testSuite);
-void CuSuiteSummary(CuSuite* testSuite, FILE* file);
-//void CuSuiteDetails(CuSuite* testSuite, CuString* details);
-bool CuSuiteDetails(CuSuite* testSuite, FILE* file);
+bool CuSuiteAddTest (CuSuite_t *testSuite, CuTest_t *testCase);
+void CuSuiteAddSuite (CuSuite_t *testSuite, CuSuite_t *testSuite2);
+CuSize_t  CuSuiteRun (CuSuite_t *testSuite);
+void CuSuiteSummary (CuSuite_t *testSuite, FILE *file);
+bool CuSuiteDetails (CuSuite_t *testSuite, FILE *file);
+CuSize_t CuSuiteGetFailcount (CuSuite_t *testSuite);
+CuSize_t CuSuiteGetTestcount (CuSuite_t *testSuite);
 
-int CuTestSetProgressStartEnd(unsigned long int st, unsigned long int en);
-int CuTestPrintProgressState(unsigned long int current, unsigned long int interleave);
-void CuTestReservePrintPositions(void);
-int CuTestAppendMessage(CuTest *tc, const char* format, ...);
- CuSize_t CuSuiteGetFailcount(CuSuite* testSuite);
- CuSize_t CuSuiteGetTestcount(CuSuite* testSuite);
-CuReport_t *CuReportNew(void);
-bool CuReportDestroy(CuReport_t *rep);
-int CuTestFormatReportString(CuString *str, CuSize_t runs, CuSize_t passes, CuSize_t fails, CuSize_t leaks);
-CuError_t
-CuTest_SuiteInitRunReport(CuError_t (*initSuite)(CuSuite *suite), FILE *file);
+int CuTestAppendMessage (CuTest_t *tc, const char *format, ...);
+
+CuReport_t *CuReportNew (void);
+bool CuReportDestroy (CuReport_t *rep);
+int CuTestFormatReportString (CuString *str, CuSize_t runs, CuSize_t passes, CuSize_t fails, CuSize_t leaks);
+
+int CuTestSetProgressStartEnd (unsigned long int st, unsigned long int en);
+int CuTestPrintProgressState (unsigned long int current, unsigned long int interleave);
+void CuTestReservePrintPositions (void);
 
 #endif /* CU_TEST_H */
