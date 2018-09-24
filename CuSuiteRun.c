@@ -6,7 +6,7 @@ CuTest_t *test = NULL;
 CuSuite_t *suite = NULL;
 
 static void abrtSignalHandler (int sig) {
-    puts ("\n!!! Exception occured in CuSuiteRun. Aborted.");
+    printf ("\n!!! Exception occured in CuSuiteRun. Aborted. Signal %d.", sig);
 
     if (suite) {
         printf ("!!! Suite: \"%s\"\n", CuStringCStr (suite->name) );
@@ -19,6 +19,7 @@ static void abrtSignalHandler (int sig) {
 
 // Workaround default signal handler for SIGSEGV by calling abort and eventually call hooked abort handler
 static void illSignalHandler (int sig) {
+    (void)sig; // Work around unused param warning
     abort();
 }
 

@@ -1,9 +1,11 @@
 #include "CuTest_internal.h"
 
-bool CuAssertArrayEqualsStepFunc_LineMsg(CuTest* tc, const char* file, unsigned long int line, const char* message,
+bool CuAssertArrayEqualsStepFunc_LineMsg(CuTest_t* tc, const char* file, unsigned long int line, const char* message,
 	bool (*stepfunc)(size_t index, void* expected), const void* actual, CuSize_t elementsize, CuSize_t len)
 {
     if (tc){
+        (void)message; //Work around unused param
+
         CuSize_t i=0,j=0;
         CuSize_t arrayIndex = 0;
         void *expected = CuAlloc (elementsize);

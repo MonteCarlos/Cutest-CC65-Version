@@ -1,7 +1,10 @@
 #include "CuTest_internal.h"
 
 bool strCmpFnc(const void* exp, const void* act, char *expectedStr, char *actualStr, size_t maxChars, CuString *str){
-    str; //just to omit unused param warning
+    (void)str; //just to omit unused param warning
+    (void)expectedStr;
+    (void)actualStr;
+    (void)maxChars;
 
     if (exp) { //check, if exp is valid ptr
         if (act) { //check, if act is valid ptr

@@ -1,5 +1,5 @@
 #include <stdheaders.h>
-#include <CuTest_t.h>
+#include <CuTest.h>
 #include <CuTest_internal.h>
 
 // ***************************************************************

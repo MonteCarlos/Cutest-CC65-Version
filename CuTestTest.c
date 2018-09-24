@@ -221,7 +221,7 @@ void TestCuSuiteAddTest(CuTest_t* tc)
 	//CuSuiteInit(ts);
 	//CuTestInit(&tc2, "MyTest", zTestFails);
 
-	CuSuiteAdd(ts, tc2);
+	CuSuiteAddTest(ts, tc2);
 	CuAssertTrue(tc, ts->testcount == 1);
 
 	CuAssertStrEquals(tc, testname, CuStringCStr(ts->testlist[0].test->name));
@@ -235,11 +235,11 @@ void TestCuSuiteAddSuite(CuTest_t* tc)
 	CuSuite_t* ts1 = CuSuiteNew();
 	CuSuite_t* ts2 = CuSuiteNew();
 
-	CuSuiteAdd(ts1, CuTestNew("TestFails1", zTestFails));
-	CuSuiteAdd(ts1, CuTestNew("TestFails2", zTestFails));
+	CuSuiteAddTest(ts1, CuTestNew("TestFails1", zTestFails));
+	CuSuiteAddTest(ts1, CuTestNew("TestFails2", zTestFails));
 
-	CuSuiteAdd(ts2, CuTestNew("TestFails3", zTestFails));
-	CuSuiteAdd(ts2, CuTestNew("TestFails4", zTestFails));
+	CuSuiteAddTest(ts2, CuTestNew("TestFails3", zTestFails));
+	CuSuiteAddTest(ts2, CuTestNew("TestFails4", zTestFails));
 
 	CuSuiteAddSuite(ts1, ts2);
 
@@ -279,10 +279,10 @@ void TestCuSuiteRun(CuTest_t* tc)
 	CuTest_t *tc3 = CuTestNew("TestFails",  zTestFails);
 	CuTest_t *tc4 = CuTestNew("TestFails",  zTestFails);
 
-	CuSuiteAdd(ts, tc1);
-	CuSuiteAdd(ts, tc2);
-	CuSuiteAdd(ts, tc3);
-	CuSuiteAdd(ts, tc4);
+	CuSuiteAddTest(ts, tc1);
+	CuSuiteAddTest(ts, tc2);
+	CuSuiteAddTest(ts, tc3);
+	CuSuiteAddTest(ts, tc4);
 
 	CuAssertTrue(tc, ts->testcount == 4);
 
@@ -331,11 +331,14 @@ void TestCuSuiteSummary(CuTest_t* tc)
 void TestCuTestFormatReportString(CuTest_t* tc)
 {
 	CuSuite_t *ts = CuSuiteNew();
- CuSize_t runs = 10, passes = 7, fails = 3, leaks = 5;
+    CuSize_t runs = 10, passes = 7, fails = 3, leaks = 5;
 	char buf[100];
+    int len;
 
     CuTestFormatReportString(ts->report->reportStr, runs, passes, fails, leaks);
-	snprintf(buf, sizeof(buf)-1, CUTEST_STR_SUMMARY(runs, passes, fails, leaks));
+	len = snprintf(buf, sizeof(buf)-1, CUTEST_STR_SUMMARY(runs, passes, fails, leaks));
+	buf[len] = '\n';
+	buf[len+1] = '\0';
 	CuAssertStrEquals(tc, buf, CuStringCStr(ts->report->reportStr));
 	CuSuiteDelete(ts);
 }
@@ -591,8 +594,11 @@ void TestAssertIntEquals(CuTest_t* tc)
  }
 
 void TestFailLine(CuTest_t *tc){
-	CuFail_Line(tc, "thisfile.c", 100000, "msg1", ", msg2");
-	CuAssertStrEquals(tc, "thisfile.c(100000), msg1, msg2", tc->message->buffer);
+    CuTest_t *tc2 = CuTestNew("dummy", NULL); // Testfunction should not be called (NULL)
+
+	CuFail_Line(tc2, "thisfile.c", 100000, "msg1", ", msg2");
+	CuAssertStrEquals(tc2, "thisfile.c(100000), msg1, msg2", tc->message->buffer);
+    CuTestDelete(tc2);
 }
 
 void TestGenerateMessage(CuTest_t *tc){
@@ -605,6 +611,7 @@ void TestGenerateMessage(CuTest_t *tc){
 
 	// @todo (mc78#1#01/20/18): This test crashes! Fix
 	CuAssertStrEquals(tc, "thisfile.c(100000), msg1, msg2", str->buffer);
+	CuStringDelete(str);
 }
 
 /*-------------------------------------------------------------------------*

@@ -33,6 +33,8 @@ typedef int8_t CuError_t;
 #define ID(x) x
 #define CUEVAL(x) (x)
 #define CUCONCAT(a,b) a##b
+#define COMMA ,
+#define SEMICOLON ;
 
 /*
  * ---------------------------------
@@ -42,13 +44,15 @@ typedef int8_t CuError_t;
 
 //macro to create list elements consisting of a testname string and a pointer to a test function
 #define CU_MKTESTNAMEPAIR(test) {SAVECUSTRINGIFY(TESTNAME(test)), TESTNAME(test)}
-#define CU_MKTESTPROTOTYPE(x) void TESTNAME(x)(CuTest *tc);
+#define CU_MKTESTPROTOTYPE(x) void TESTNAME(x)(CuTest_t *tc);
 
 #define CU_MKTESTPROTOTYPELIST(tests) tests(CU_MKTESTPROTOTYPE, )
 
 #define CU_TESTNAMEPAIRITEM(x) CU_MKTESTNAMEPAIR(x)
 #define CU_MKTESTNAMEPAIRLIST(xmacroname, arrayname) \
-    static TestfunctionNamePair_t arrayname[] = {xmacroname(CU_TESTNAMEPAIRITEM, COMMA), {NULL}};
+    static TestfunctionNamePair_t arrayname[] = {xmacroname(CU_TESTNAMEPAIRITEM, COMMA), { NULL, 0 }};
+
+//#define CU_MKTESTLIST(xmacro, name) CuTestlist_t name = {{xmacroname(CU_TESTNAMEPAIRITEM, COMMA)}};
 
 /*
  * ---------------------------------
@@ -82,11 +86,12 @@ bool CuSuiteDelete (CuSuite_t *testSuite);
  * ---------------------------------
  */
 /**< Given a suite and a list of testnames and corresponding test functions, register all tests of the list */
-CuError_t CuRegisterTests (CuSuite_t *suite, TestfunctionNamePair_t (*testlist) [], CuSize_t n);
+CuError_t CuSuiteRegisterTests (CuSuite_t *suite, TestfunctionNamePair_t (*testlist) [], CuSize_t n);
 /**< Given a suite and a testlist structure consisting of count, testnames and
      corresponding test functions, register all tests of the list */
 CuError_t CuSuiteRegisterTestlist(CuSuite_t *suite, CuTestlist_t *testlist);
-CuError_t CuSuiteInitRunReport(CuError_t (*initSuite)(CuSuite_t *suite, void *params), FILE *file, void *params);
+CuError_t CuSuiteRegisterNULLTerminatedTestlist (CuSuite_t *suite, void *testlist);
+CuError_t CuSuiteInitRunReport (CuSuiteInitFnc_t *initSuite, FILE *file, void *params);
 
 /*
  * ---------------------------------
