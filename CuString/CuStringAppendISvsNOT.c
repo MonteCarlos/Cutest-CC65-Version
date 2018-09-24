@@ -21,22 +21,16 @@ out: Cu_Error_t
 CuError_t CuStringAppendISvsNOT(CuString *str, const char* format,...){
 	CuError_t returnVal = EXIT_FAILURE; //assume failure for security
     if (str){
-		//setup temporary string with is %format not %format content
+        va_list va;
+        va_start(va,format);
 
-		// @todo (mc78#1#01/20/18): This line causes crash in some tests.
-		char *tempstr = CuStrFormat("is \"%s\" not \"%s\"", format, format);
-		if (tempstr){
-			va_list va;
-			va_start(va,format);
+		CuStringAppend(str, "is: \"");
+        CuStringAppendVariadicFormat(str, format, va);
+        CuStringAppend(str, "\", not: \"");
+        CuStringAppendVariadicFormat(str, format, va);
+        CuStringAppend(str, "\"");
 
-			if ( CuStringAppendVariadicFormat(str, tempstr, va) ){
-				returnVal = EXIT_SUCCESS;
-			}
-			//pass generated string (with doubled format string) to append function
-
-			CuFree ((uint8_t*)tempstr);
-			va_end(va);
-		}
+		va_end(va);
 	}
 	return returnVal;
 }

@@ -2,6 +2,7 @@
 
 //#pragma warn(unused-param, push, off)
 bool ptrCmpFnc(const void* exp, const void* act, char *expectedStr, char *actualStr, size_t maxStrLen, CuString *msg){
+    (void)msg;
     //msg; //just to omit unused param warning
 
     //write ptrs into passed string buffers

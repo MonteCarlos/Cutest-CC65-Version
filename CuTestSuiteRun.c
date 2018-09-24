@@ -1,11 +1,14 @@
 #include "CuTest_internal.h"
 #include <signal.h>
-
+#ifdef __CC65__
+    #define __sighandler_t __sigfunc
+#endif
 
 CuTest *test = NULL;
 CuSuite *suite = NULL;
 
 static void abrtSignalHandler(int sig){
+    (void)sig;
     puts("\n!!! Exception occured in CuSuiteRun. Aborted.");
 
     if (suite){
@@ -18,6 +21,7 @@ static void abrtSignalHandler(int sig){
 
 // Workaround default signal handler for SIGSEGV by calling abort and eventually call hooked abort handler
 static void illSignalHandler(int sig){
+    (void)sig;
     abort();
 }
 

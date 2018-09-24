@@ -4,6 +4,7 @@
 bool CuAssertArrayEquals_LineMsg(CuTest* tc, const char* file, unsigned long int line, const char* message,
 	const void* expected, const void* actual, CuSize_t elementsize, CuSize_t len)
 {
+    (void)message;
     if (tc){
         CuSize_t i=0,j=0;
         CuSize_t arrayIndex = 0;

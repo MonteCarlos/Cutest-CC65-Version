@@ -7,7 +7,7 @@
 		<Option default_target="gccSelftest" />
 		<Option compiler="cc65" />
 		<Build>
-			<Target title="Debug">
+			<Target title="CC65Debug">
 				<Option output="CutestString-cc65Dbg.lib" prefix_auto="0" extension_auto="0" />
 				<Option working_dir="" />
 				<Option object_output="obj/Debug/" />
@@ -18,7 +18,7 @@
 					<Add directory="../../../C64/include" />
 				</Compiler>
 			</Target>
-			<Target title="Release">
+			<Target title="CC65Release">
 				<Option output="CutestString_cc65.lib" prefix_auto="0" extension_auto="0" />
 				<Option working_dir="" />
 				<Option object_output="obj/Release/" />
@@ -57,7 +57,7 @@
 			</Target>
 		</Build>
 		<VirtualTargets>
-			<Add alias="CuTestString, selftest contained" targets="Debug;Release;" />
+			<Add alias="CuTestString, selftest contained" targets="CC65Debug;CC65Release;" />
 			<Add alias="gcc all" targets="gccDebug;gccRelease;" />
 		</VirtualTargets>
 		<Unit filename="AllTests.c">
@@ -119,6 +119,12 @@
 		<Unit filename="CuStringDelete.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="CuStringFormatGenerator.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="CuStringFormatISvsNOT_Template.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="CuStringInit.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -135,8 +141,8 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="CutestString-cc65.cfg">
-			<Option target="Debug" />
-			<Option target="Release" />
+			<Option target="CC65Debug" />
+			<Option target="CC65Release" />
 		</Unit>
 		<Unit filename="CutestString.c">
 			<Option compilerVar="CC" />

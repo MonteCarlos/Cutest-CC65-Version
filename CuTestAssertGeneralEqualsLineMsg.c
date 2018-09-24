@@ -2,7 +2,7 @@
 #include "CuTest_internal.h"
 
 bool CuAssertGeneralEquals_LineMsg(CuTest* tc, const char* file, unsigned long int line, const char* message,
-	const void *expected, const void *actual, char *expectedStr, char *actualStr, size_t maxStrLen, CuTestCmpFncPtr_t cmpFnc)
+	const void *expected, const void *actual, char *expectedStr, char *actualStr, CuSize_t maxStrLen, CuTestCmpFncPtr_t cmpFnc)
 {
 	if (tc){
 		bool result;
