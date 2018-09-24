@@ -7,12 +7,12 @@
 static int equals_zero = 0;//prevents error message about condition beeing always true
 static int equals_one = 1;
 
-void TestPasses(CuTest* tc)
+void TestPasses(CuTest_t* tc)
 {
 	CuAssert(tc, "test should pass", equals_one == equals_zero + equals_one);
 }
 
-void zTestFails(CuTest* tc)
+void zTestFails(CuTest_t* tc)
 {
 	CuAssert(tc, "test should fail", equals_one == equals_one + equals_one);
 }

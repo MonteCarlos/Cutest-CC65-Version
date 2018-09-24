@@ -10,7 +10,7 @@ void *lastAllocated[5] = {0};
 
 void *CuAlloc(size_t n){
     register CuAlloc_t* ptr = (CuAlloc_t*)malloc(CuAlloc_calculateTotalSize(n));
-    assert(NULL!=ptr);
+    assert(NULL!=ptr);  // This assertion does not make sense, here use if instead
     CuAlloc_initHeader(ptr, n);
 
     ++alloccount;

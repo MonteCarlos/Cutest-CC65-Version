@@ -1,4 +1,3 @@
-
 //8Bit: 3 Dez Zeichen
 //16Bit: 5 Dez Zeichen
 //24Bit: 8 Dez Zeichen
@@ -11,21 +10,20 @@
 //2,5 = 5/2 -> 1/2,5 = 2/5
 #include "CuTest_internal.h"
 bool intCmpFnc(const void* exp, const void* act, char *expectedStr, char *actualStr, size_t maxChars, CuString *str){
-    (void)str; //just to omit unused param warning
+    str; //just to omit unused param warning
 
     //write ints into passed string buffers
-    snprintf(expectedStr, maxChars, "%d", *((int*)exp));
-    snprintf(actualStr, maxChars, "%d", *((int*)act));
+    snprintf (expectedStr, maxChars, "%d", * ( (int *) exp) );
+    snprintf (actualStr, maxChars, "%d", * ( (int *) act) );
 
-    return (*(int*)exp == *(int*)act);
+    return (* (int *) exp == * (int *) act);
 }
 
-bool CuAssertIntEquals_LineMsg(CuTest* tc, const char* file, unsigned long int line, const char* message,
-	int expected, int actual)
-{
-	minWidthIntCharArray_t expectedStr; //reserve minimum field width capable of holding smallest int
+bool CuAssertIntEquals_LineMsg (CuTest_t *tc, const char *file, unsigned long int line, const char *message,
+                                int expected, int actual) {
+    minWidthIntCharArray_t expectedStr; //reserve minimum field width capable of holding smallest int
     minWidthIntCharArray_t actualStr;
 
-	return CuAssertGeneralEquals_LineMsg(tc, file, line, message, &expected, &actual,
-                                      expectedStr, actualStr, sizeof(expectedStr), intCmpFnc);
+    return CuAssertGeneralEquals_LineMsg (tc, file, line, message, &expected, &actual,
+                                          expectedStr, actualStr, sizeof (expectedStr), intCmpFnc);
 }

@@ -11,6 +11,11 @@
 
 #define CUTEST_STR_SUMMARY(runs, passes, fails, leaks) "Runs:%u, Passes:%u, Fails:%u, Leaks:%u", runs, passes, fails, leaks
 
+#define CUTEST_LIST_STORAGERESERVE  20
+#define CUSUITE_LIST_STORAGERESERVE 10
+
+#define RET_OK return EXIT_SUCCESS
+#define RET_FAIL return EXIT_FAILURE
 
 //Don't use bitfields with cc65!! They are stub and buggy
 /*typedef struct CuTest_flags_tag{
@@ -38,11 +43,11 @@ struct CuTest_tag
 
 typedef struct CuTestPtr_tag{
     union{
-        CuTest* test;
-        CuSuite* suite;
+        CuTest_t* test;
+        CuSuite_t* suite;
     };
     bool isSuite;
-} CuTestPtr_t;
+} CuTestOrSuitePtr_t;
 
 struct CuSuite_tag
 {
@@ -52,7 +57,7 @@ struct CuSuite_tag
     CuSize_t totalcount;
     bool ran;
 	CuString *name;
-	CuTestPtr_t *testlist;
+	CuTestOrSuitePtr_t *testlist;
 	bool isSubSuite;
 	CuReport_t *report;
 };
@@ -66,13 +71,13 @@ struct CuReport_tag{
 };
 
 
-void CuFailInternal(CuTest* tc, const char* file, unsigned long int line, CuString* string);
+void CuFailInternal(CuTest_t* tc, const char* file, unsigned long int line, CuString* string);
 void *CuTestAlloc(size_t n);
 unsigned long int CuTestGetProgressStart(void);
 unsigned long int CuTestGetProgressEnd(void);
 unsigned long int CuTestGetProgressRange(void);
 CuError_t CuTestGenerateMessage(CuString* str, const char* msg1, const char* msg2, const char* file, unsigned long int line);
-size_t CuTestFprintf(FILE* file, char* format, ...);
+int CuTestFprintf(FILE* file, char* format, ...);
 
 
 #endif // CUTEST_INTERNAL_H_INCLUDED
