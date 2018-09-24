@@ -15,7 +15,7 @@
 typedef unsigned int CuSize_t;
 
 /**< Typedef error type for return values of CuTest functions */
-typedef uint8_t CuError_t;
+typedef int8_t CuError_t;
 
 /* Position these includes after typedefs for CuSize_t and CuError_t
  * as these types are also used in CuString and CuAlloc
@@ -65,40 +65,12 @@ bool CuSuiteDelete (CuSuite_t *testSuite);
  * Prototypes for convenience functions
  * ---------------------------------
  */
-int CuRegisterTests (CuSuite_t *suite, TestfunctionNamePair_t (*testlist) [], CuSize_t n);
-/**< Creates a new suite, adds all tests from testlist to suite, runs suite */
-CuSize_t CuRunAllTestsFromList ( TestfunctionNamePair_t (*testlist) [], CuSize_t elemCnt, const char *suitename );
-/**< Creates a new suite, adds all tests from testlist to suite, runs suite and reports result details*/
-CuSize_t CuRunAllTestsFromListAndReport ( TestfunctionNamePair_t (*testlist) [],
-                                          CuSize_t elemCnt, const char *suitename );
-
-/*
-int runAndCloseSuite(CuSuite *suite){
-	int fails;
-    assert (suite);
-
-	CuSuiteRun(suite);
-    CuSuiteDetails(suite, stdout);
-	fails = CuSuiteGetFailcount(suite);
-	CUSUITE_CLOSE(suite);
-	return fails;
-}
-
-CuSize_t CuRunAllTestsFromListAndReport ( TestfunctionNamePair_t (*testlist) [],
-                                          CuSize_t elemCnt, const char *suitename ){
-	CuSuite *suite = CuSuiteNew();
-	if (suite){
-        int fails;
-        CuRegisterTests(suite, tests, elemCnt);
-        fails = CuSuiteRun(suite);
-        CuSuiteDetails(suite, stdout);
-        return fails;
-	}else{
-        error
-        return 0;
-	}
-}
-*/
+/**< Given a suite and a list of testnames and corresponding test functions, register all tests of the list */
+CuError_t CuRegisterTests (CuSuite_t *suite, TestfunctionNamePair_t (*testlist) [], CuSize_t n);
+/**< Given a suite and a testlist structure consisting of count, testnames and
+     corresponding test functions, register all tests of the list */
+CuError_t CuSuiteRegisterTestlist(CuSuite_t *suite, CuTestlist_t *testlist);
+CuError_t CuSuiteInitRunReport(CuError_t (*initSuite)(CuSuite_t *suite, void *params), FILE *file, void *params);
 
 /*
  * ---------------------------------
@@ -117,29 +89,27 @@ CuSize_t CuRunAllTestsFromListAndReport ( TestfunctionNamePair_t (*testlist) [],
 
 /* CuSuite */
 /**< Adds a new test with given testfunction to given suite */
-#define SUITE_ADD_TEST(SUITE,TEST)  CuSuiteAdd(SUITE, CuTestNew(SAVECUSTRINGIFY(TEST), TEST))
+#define SUITE_ADD_TEST(SUITE,TEST)  CuSuiteAddTest(SUITE, CuTestNew(SAVECUSTRINGIFY(TEST), TEST))
 /**< Adds a new test with given testfunction to given suite and prepends "_test" to function names */
-#define CUTEST_ADD(SUITE,TEST) CuSuiteAdd(SUITE, CuTestNew(SAVECUSTRINGIFY(TESTNAME(TEST)), TESTNAME(TEST)))
+#define CUTEST_ADD(SUITE,TEST) CuSuiteAddTest(SUITE, CuTestNew(SAVECUSTRINGIFY(TESTNAME(TEST)), TESTNAME(TEST)))
 /**< Adds given suite2 to given suite1 */
 #define SUITE_ADD_SUITE(SUITE1, SUITE2) do{CuSuite_t* SUITE2 = CuSuiteNew();CuSuiteAddSuite(SUITE1, SUITE2);}while(false)
 
 
 
-bool CuSuiteAdd (CuSuite_t *testSuite, CuTest_t *testCase);
+bool CuSuiteAddTest (CuSuite_t *testSuite, CuTest_t *testCase);
 void CuSuiteAddSuite (CuSuite_t *testSuite, CuSuite_t *testSuite2);
 CuSize_t  CuSuiteRun (CuSuite_t *testSuite);
 void CuSuiteSummary (CuSuite_t *testSuite, FILE *file);
-//void CuSuiteDetails(CuSuite* testSuite, CuString* details);
 bool CuSuiteDetails (CuSuite_t *testSuite, FILE *file);
-
-
-int CuTestAppendMessage (CuTest_t *tc, const char *format, ...);
 CuSize_t CuSuiteGetFailcount (CuSuite_t *testSuite);
 CuSize_t CuSuiteGetTestcount (CuSuite_t *testSuite);
+
+int CuTestAppendMessage (CuTest_t *tc, const char *format, ...);
+
 CuReport_t *CuReportNew (void);
 bool CuReportDestroy (CuReport_t *rep);
 int CuTestFormatReportString (CuString *str, CuSize_t runs, CuSize_t passes, CuSize_t fails, CuSize_t leaks);
-CuError_t CuTest_SuiteInitRunReport (CuError_t (*initSuite) (CuSuite_t *suite), FILE *file);
 
 int CuTestSetProgressStartEnd (unsigned long int st, unsigned long int en);
 int CuTestPrintProgressState (unsigned long int current, unsigned long int interleave);

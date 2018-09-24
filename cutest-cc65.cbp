@@ -75,20 +75,50 @@
 		<Unit filename="AllTests.c.lst">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
-		<Unit filename="CuAssertLine.c">
+		<Unit filename="CuMallocWrapper.h" />
+		<Unit filename="CuRegisterTestlist.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="CuMallocWrapper.h" />
-		<Unit filename="CuRegisterTests.c">
+		<Unit filename="CuSuiteAddSuite.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="CuSuiteAddTest.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="CuSuiteDelete.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="CuSuiteDetails.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="CuSuiteGetFailcount.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="CuSuiteGetTestcount.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="CuSuiteInit.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="CuSuiteInitRunReport.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="CuSuiteNew.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="CuSuiteRegisterTests.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="CuSuiteRun.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="CuSuiteSummary.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="CuTest.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="CuTest.h" />
-		<Unit filename="CuTestAddSuite.c">
-			<Option compilerVar="CC" />
-		</Unit>
 		<Unit filename="CuTestAppendMessage.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -105,6 +135,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="CuTestAssertIntEqualsLineMsg.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="CuTestAssertLine.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="CuTestAssertPtrEqualsLineMsg.c">
@@ -152,33 +185,6 @@
 		<Unit filename="CuTestSetProgressStartEnd.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="CuTestSuiteAdd.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="CuTestSuiteDelete.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="CuTestSuiteDetails.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="CuTestSuiteGetFailcount.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="CuTestSuiteGetTestcount.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="CuTestSuiteInit.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="CuTestSuiteNew.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="CuTestSuiteRun.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="CuTestSuiteSummary.c">
-			<Option compilerVar="CC" />
-		</Unit>
 		<Unit filename="CuTestTest-cc65.map">
 			<Option target="CC65Debug" />
 			<Option target="CC65Release" />
@@ -190,9 +196,9 @@
 		<Unit filename="CuTestTest.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
-		<Unit filename="CuTest_SuiteInitRunReport.c">
-			<Option compilerVar="CC" />
-		</Unit>
+		<Unit filename="CuTest_AssertFunctions.h" />
+		<Unit filename="CuTest_AssertMacros.h" />
+		<Unit filename="CuTest_Typedefs.h" />
 		<Unit filename="CuTest_internal.h" />
 		<Unit filename="CuTest_setup.c">
 			<Option compilerVar="CC" />
