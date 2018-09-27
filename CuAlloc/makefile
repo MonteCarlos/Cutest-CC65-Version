@@ -2,10 +2,10 @@ cflags = -std=c11 -fplan9-extensions
 
 incdirs = ../ /home/mc78/Dokumente/Programmieren/EigeneCProgramme/MCLib/
 Iincdirs = $(addprefix -I, $(incdirs))
-libdirs = ../ ../CuString/ /home/mc78/Dokumente/Programmieren/EigeneCProgramme/MCLib/
+libdirs = ./ ../ ../CuString/ /home/mc78/Dokumente/Programmieren/EigeneCProgramme/MCLib/
 Llibdirs = $(addprefix -L, $(libdirs))
 
-libs = cutest_Dbg CutestString-cc65_dbg MCLib
+libs = cutest_Dbg CutestString-cc65_dbg CuAllocDbg MCLib
 
 sources = $(wildcard *.c)
 objects = $(patsubst %.c, %.o, $(sources))
@@ -16,21 +16,21 @@ targets = gccDebug gccRelease UTest
 # filter all %.c source-files whose filename begins with "test". These
 # files are considered sources containing tests
 # These files should not be linked into the libraries
-testsources = $(filter $(wildcard test*.c), $(sources)) main.c
+testsources = $(filter $(wildcard test*.c), $(sources))
 testobjects = $(patsubst %.c, %.o, $(testsources))
 
 $(gccDbgDir)/%.o: %.c
-	gcc $(cflags) $(Iincdirs) -c -g -o $(gccDbgDir)/$@ $<
-$(gcRelDir)/%.o: %.c
-	gcc $(cflags) $(Iincdirs) -c -O2 -o $(gccRelDir)/$@ $<
+	gcc $(cflags) $(Iincdirs) -c -g -o $@ $<
+$(gccRelDir)/%.o: %.c
+	gcc $(cflags) $(Iincdirs) -c -O2 -o $@ $<
 
-gccDebug: $(filter-out $(testsources), $(sources))
+gccDebug: $(addprefix $(gccDbgDir)/, $(filter-out $(testsources), $(objects)))
 	@echo
 	@echo "**** Compiling DEBUG ****"
 	@echo "****"
 	ar rcs libCuAllocDbg.a $(addprefix $(gccDbgDir)/, $(filter-out $(testsources), $(objects)))
 
-gccRelease: $(filter-out $(testsources), $(sources))
+gccRelease: $(addprefix $(gccRelDir)/, $(filter-out $(testsources), $(objects)))
 	@echo
 	@echo "**** Compiling RELEASE ****"
 	@echo "****"
