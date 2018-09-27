@@ -11,34 +11,45 @@ sources = $(wildcard *.c)
 objects = $(patsubst %.c, %.o, $(sources))
 gccDbgDir=obj/gccDebug
 gccRelDir=obj/gccRelease
-targets = gccDebug gccRelease UTest 
+targets = gccDebug gccRelease UTest
 
 # filter all %.c source-files whose filename begins with "test". These
 # files are considered sources containing tests
 # These files should not be linked into the libraries
 testsources = $(filter $(wildcard test*.c), $(sources)) main.c
-testobjects = $(patsubst %.c, %.o, $(testsources)) 
+testobjects = $(patsubst %.c, %.o, $(testsources))
 
-%.o: %.c
-	gcc $(cflags) $(Iincdirs) -c -g -o $(gccDbgDir)/$@ $< 
+$(gccDbgDir)/%.o: %.c
+	gcc $(cflags) $(Iincdirs) -c -g -o $(gccDbgDir)/$@ $<
+$(gcRelDir)/%.o: %.c
 	gcc $(cflags) $(Iincdirs) -c -O2 -o $(gccRelDir)/$@ $<
-	
-gccDebug: $(addprefix $(gccDbgDir)/, $(filter-out $(testobjects), $(objects)))
-	@echo 
+
+gccDebug: $(filter-out $(testsources), $(sources))
+	@echo
 	@echo "**** Compiling DEBUG ****"
 	@echo "****"
-	ar rcs libCuAllocDbg.a $? 
-	
-gccRelease: $(addprefix $(gccRelDir)/, $(objects))	
-	@echo 
+	ar rcs libCuAllocDbg.a $(addprefix $(gccDbgDir)/, $(filter-out $(testsources), $(objects)))
+
+gccRelease: $(filter-out $(testsources), $(sources))
+	@echo
 	@echo "**** Compiling RELEASE ****"
 	@echo "****"
-	ar rcs libCuAlloc.a $? 
-	
-UTest: $(addprefix $(gccDbgDir)/, $(objects))
-	@echo 
+	ar rcs libCuAlloc.a $(addprefix $(gccRelDir)/, $(filter-out $(testsources), $(objects)))
+
+UTest: $(addprefix $(gccDbgDir)/, $(testobjects))
+	@echo
 	@echo "**** Making TESTS ****"
 	@echo "****"
 	g++ $? $(Llibdirs) $(addprefix -l,$(libs))  -o CuAlloc_tests.exe
-	
+
+.PHONY: cleangccDebug
+.PHONY: cleangccRelease
+.PHONY: cleanUTest
+cleangccDebug:
+	/bin/rm -f $(addprefix $(gccDbgDir)/, $(filter-out $(testobjects), $(objects)))
+cleangccRelease:
+	/bin/rm -f $(addprefix $(gccRelDir)/, $(filter-out $(testobjects), $(objects)))
+cleanUTest:
+	/bin/rm -f $(addprefix $(gccDbgDir)/, $(testobjects))
+
 all: $(targets)

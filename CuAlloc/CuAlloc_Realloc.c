@@ -7,17 +7,21 @@ void *CuRealloc(void* old, CuSize_t n){
         return CuAlloc(n);
     }else{
         register CuAlloc_t* ptr = CuAlloc_getHeaderAddr(old);
+        CuAlloc_t *ptr2;
 
         switch (CuAlloc_getBufferValidity(old)){
          case true:
+            ptr2 = (CuAlloc_t*)malloc(CuAlloc_calculateTotalSize(n));
             // @todo (mc78#1#09/22/18): May cause dangling pointer if realloc fails!!!
-            CuAlloc_t *ptr2 = (CuAlloc_t*)malloc(CuAlloc_calculateTotalSize(n));
             if (ptr2){
-                memset(ptr1, 0x55, CuAlloc_getTotalSize(ptr));
-                free(ptr1);
+                void *data = CuAlloc_getDataAddr(ptr2);
+                memcpy(ptr2, ptr, CuAlloc_calculateTotalSize(n));
+
+                memset(ptr, 0x55, CuAlloc_getTotalSize(ptr)); // Fill memory from previous alloc
+                free(ptr); // free memory from previous alloc
                 ++realloccount;
                 CuAlloc_initHeader(ptr2, n);
-                return CuAlloc_getDataAddr(ptr2);
+                return data;
             }
          default: return NULL;
         }
