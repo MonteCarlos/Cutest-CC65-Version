@@ -1,18 +1,6 @@
 *.o
-/CuString/*.a
-/CuAlloc/*.bak
-/CuString/*.depend
-/CuString/*.exe
-/*.layout
-/CuString/*.lib
-/CuString/*.lbl
-/*.lnk
-/*.log
-/*.lst
-/CuString/*.map
-/CuString/*.txt
-/CuString/*.prg
-/CuAlloc/*.prg
+*.lnk
+*.log
 *.bak
 *.a
 *.depend
@@ -25,3 +13,5 @@
 *.prg
 *.i
 *.orig
+*.txt
+

@@ -11,7 +11,8 @@ sources = $(wildcard *.c)
 objects = $(patsubst %.c, %.o, $(sources))
 gccDbgDir=obj/gccDebug
 gccRelDir=obj/gccRelease
-targets = gccDebug gccRelease UTest
+gccUTestDir=obj/gccUTests
+targets = gccDebug gccRelease gccUTest
 
 # filter all %.c source-files whose filename begins with "test". These
 # files are considered sources containing tests
@@ -23,6 +24,8 @@ $(gccDbgDir)/%.o: %.c
 	gcc $(cflags) $(Iincdirs) -c -g -o $@ $<
 $(gccRelDir)/%.o: %.c
 	gcc $(cflags) $(Iincdirs) -c -O2 -o $@ $<
+$(gccUTestDir)/%.o: %.c
+	gcc $(cflags) $(Iincdirs) -c -g -DNDEBUG -o $@ $<
 
 gccDebug: $(addprefix $(gccDbgDir)/, $(filter-out $(testsources), $(objects)))
 	@echo
@@ -36,7 +39,7 @@ gccRelease: $(addprefix $(gccRelDir)/, $(filter-out $(testsources), $(objects)))
 	@echo "****"
 	ar rcs libCuAlloc.a $(addprefix $(gccRelDir)/, $(filter-out $(testsources), $(objects)))
 
-UTest: $(addprefix $(gccDbgDir)/, $(testobjects))
+gccUTest: $(addprefix $(gccUTestDir)/, $(objects))
 	@echo
 	@echo "**** Making TESTS ****"
 	@echo "****"
@@ -49,7 +52,7 @@ cleangccDebug:
 	/bin/rm -f $(addprefix $(gccDbgDir)/, $(filter-out $(testobjects), $(objects)))
 cleangccRelease:
 	/bin/rm -f $(addprefix $(gccRelDir)/, $(filter-out $(testobjects), $(objects)))
-cleanUTest:
-	/bin/rm -f $(addprefix $(gccDbgDir)/, $(testobjects))
+cleangccUTest:
+	/bin/rm -f $(addprefix $(gccUTestDir)/, $(objects))
 
 all: $(targets)
