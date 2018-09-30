@@ -232,7 +232,7 @@ int main(void){
 
     CuSuite_t* suite = NULL; //
     suite = CuAlloc_requestEarlyTests();
-    CuSuiteRun(sui*te);
+    CuSuiteRun(suite);
     CuSuiteDetails(suite, stdout);
     Nofails = CuSuiteGetFailcount(suite);
     CuSuiteDelete(suite);

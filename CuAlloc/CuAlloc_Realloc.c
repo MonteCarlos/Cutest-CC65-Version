@@ -17,7 +17,7 @@ void *CuRealloc(void* old, CuSize_t n){
                 void *data = CuAlloc_getDataAddr(ptr2);
                 memcpy(ptr2, ptr, CuAlloc_calculateTotalSize(n));
 
-                memset(ptr, 0x55, CuAlloc_getTotalSize(ptr)); // Fill memory from previous alloc
+                memset(ptr, 0x55, CuAlloc_getTotalSize(old)); // Fill memory from previous alloc
                 free(ptr); // free memory from previous alloc
                 ++realloccount;
                 CuAlloc_initHeader(ptr2, n);
