@@ -27,21 +27,23 @@ $(gccRelDir)/%.o: %.c
 $(gccUTestDir)/%.o: %.c
 	gcc $(cflags) $(Iincdirs) -c -g -DNDEBUG -o $@ $<
 
+all: $(targets)
+
 gccDebug: $(addprefix $(gccDbgDir)/, $(filter-out $(testsources), $(objects)))
 	@echo
-	@echo "**** Compiling DEBUG ****"
+	@echo "**** DEBUG LIB ****"
 	@echo "****"
 	ar rcs libCuAllocDbg.a $(addprefix $(gccDbgDir)/, $(filter-out $(testsources), $(objects)))
 
 gccRelease: $(addprefix $(gccRelDir)/, $(filter-out $(testsources), $(objects)))
 	@echo
-	@echo "**** Compiling RELEASE ****"
+	@echo "**** RELEASE LIB ****"
 	@echo "****"
 	ar rcs libCuAlloc.a $(addprefix $(gccRelDir)/, $(filter-out $(testsources), $(objects)))
 
 gccUTest: $(addprefix $(gccUTestDir)/, $(objects))
 	@echo
-	@echo "**** Making TESTS ****"
+	@echo "**** TESTS ****"
 	@echo "****"
 	g++ -g $? $(Llibdirs) $(addprefix -l,$(libs))  -o CuAlloc_tests.exe
 
@@ -52,7 +54,6 @@ cleangccDebug:
 	/bin/rm -f $(addprefix $(gccDbgDir)/, $(filter-out $(testobjects), $(objects)))
 cleangccRelease:
 	/bin/rm -f $(addprefix $(gccRelDir)/, $(filter-out $(testobjects), $(objects)))
-cleangccUTest:
+cleangccgcUTest:
 	/bin/rm -f $(addprefix $(gccUTestDir)/, $(objects))
 
-all: $(targets)
