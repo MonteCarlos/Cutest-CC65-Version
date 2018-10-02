@@ -37,8 +37,12 @@
 				<Option type="2" />
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
+				<Option projectIncludeDirsRelation="1" />
 				<Compiler>
 					<Add option="-Wall -g -fplan9-extensions -std=gnu11" />
+					<Add directory="./CuString/" />
+					<Add directory="./" />
+					<Add directory="/home/mc78/Dokumente/Programmieren/ownCPrograms/MyCLib" />
 				</Compiler>
 			</Target>
 			<Target title="gccRelease">
@@ -48,8 +52,11 @@
 				<Option type="2" />
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
+				<Option projectIncludeDirsRelation="1" />
 				<Compiler>
 					<Add option="-Wall -O -fplan9-extensions -std=gnu11" />
+					<Add directory="CuString/" />
+					<Add directory="/home/mc78/Dokumente/Programmieren/ownCPrograms/MyCLib" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -75,10 +82,9 @@
 		</Unit>
 		<Unit filename="CuStrGetVAExpandedFormatStringLength.c">
 			<Option compilerVar="CC" />
-			<Option target="Debug" />
-			<Option target="Release" />
-			<Option target="gccDebug" />
-			<Option target="gccRelease" />
+		</Unit>
+		<Unit filename="CuStrLenFormat.c">
+			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="CuStrNULL.c">
 			<Option compilerVar="CC" />
@@ -128,6 +134,9 @@
 		<Unit filename="CuStringInit.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="CuStringInsert.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="CuStringLen.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -144,9 +153,6 @@
 			<Option target="CC65Debug" />
 			<Option target="CC65Release" />
 		</Unit>
-		<Unit filename="CutestString.c">
-			<Option compilerVar="CC" />
-		</Unit>
 		<Unit filename="CutestString.h" />
 		<Unit filename="CutestStringTest.c">
 			<Option compilerVar="CC" />
@@ -154,11 +160,15 @@
 		</Unit>
 		<Unit filename="CutestString_internal.h" />
 		<Unit filename="README.txt" />
+		<Unit filename="RunAllTests.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="license.txt" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
+		<Unit filename="makefile" />
 		<Extensions>
 			<code_completion />
 			<envvars />

@@ -40,7 +40,7 @@ UTest: $(addprefix $(gccDbgDir)/, $(testobjects))
 	@echo
 	@echo "**** Making TESTS ****"
 	@echo "****"
-	g++ $? $(Llibdirs) $(addprefix -l,$(libs))  -o CuAlloc_tests.exe
+	g++ -g $? $(Llibdirs) $(addprefix -l,$(libs))  -o CuAlloc_tests.exe
 
 .PHONY: cleangccDebug
 .PHONY: cleangccRelease

@@ -218,6 +218,7 @@
 			<Option target="CC65Release" />
 			<Option target="gccRelease" />
 		</Unit>
+		<Unit filename="makefile" />
 		<Extensions>
 			<code_completion />
 			<envvars />
