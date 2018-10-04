@@ -13,6 +13,7 @@ objects = $(patsubst %.c, %.o, $(sources))
 gccDbgDir=obj/gccDebug
 gccRelDir=obj/gccRelease
 gccUTestsDir=obj/gccUTests
+gccTests2Dir=obj/gccTests2
 targets = gccDebug gccRelease gccUTest gccTests2
 
 # filter all %.c source-files whose filename begins with "test". These
@@ -42,7 +43,7 @@ gccDebug: $(addprefix $(gccDbgDir)/, $(filter-out $(testobjects) $(testobjects2)
 	@echo "****"
 	ar rcs lib$(outputbasename)Dbg.a $?
 
-gccRelease: $(addprefix $(gccRelDir)/, $(filter-out $(testobjects), $(testobjects2) $(objects)))
+gccRelease: $(addprefix $(gccRelDir)/, $(filter-out $(testobjects) $(testobjects2), $(objects)))
 	@echo
 	@echo "**** Compiling RELEASE ****"
 	@echo "****"
