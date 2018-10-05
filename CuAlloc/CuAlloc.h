@@ -9,12 +9,10 @@
 #include <stddef.h>
 #include <string.h>
 #include "../CuTest.h"
-//#ifdef __CC65__
-    typedef void *CuAllocPtr_t;
-//#else
- //   typedef uint8_t *CuAllocPtr_t;
-//#endif // __CC65__
+
+typedef void *CuAllocPtr_t;
 typedef CuSize_t CuAllocSize_t;
+typedef CuAllocUserData_tag *CuAllocUserDataPtr_t;
 
 CuAllocPtr_t CuAlloc(size_t n);
 CuAllocPtr_t CuCalloc(size_t n);
