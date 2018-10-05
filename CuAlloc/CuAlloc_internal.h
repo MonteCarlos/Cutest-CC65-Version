@@ -19,9 +19,6 @@ struct CuAlloc_tag {
     uint8_t array[];//Variable length array
 };
 
-struct CuAllocUserData_tag{
-    uint8_t array[];
-};
 
 extern CuSize_t alloccount;
 extern CuSize_t freecount;
