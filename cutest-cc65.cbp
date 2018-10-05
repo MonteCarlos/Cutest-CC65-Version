@@ -75,6 +75,9 @@
 		<Unit filename="AllTests.c.lst">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
+		<Unit filename="CuAssertLongEqualsLineMsg.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="CuMallocWrapper.h" />
 		<Unit filename="CuRegisterTestlist.c">
 			<Option compilerVar="CC" />

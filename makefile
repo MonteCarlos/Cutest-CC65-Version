@@ -2,8 +2,10 @@ cflags = -std=c11 -fplan9-extensions
 
 CuStringDir = CuString
 CuAllocDir = CuAlloc
-CuStringLib = $(CuStringDir)/CutestString-cc65_dbg
-CuAllocLib = $(CuAllocDir)/CuAllocDbg
+CuStringLib = $(CuStringDir)/CutestString-cc65
+CuAllocLib = $(CuAllocDir)/CuAlloc
+CuStringDbgLib = $(CuStringDir)/CutestString-cc65_dbg
+CuAllocDbgLib = $(CuAllocDir)/CuAllocDbg
 
 incdirs = ../ /home/mc78/Dokumente/Programmieren/EigeneCProgramme/MCLib/
 Iincdirs = $(addprefix -I, $(incdirs))
@@ -30,27 +32,35 @@ $(gccDbgDir)/%.o: %.c
 $(gccRelDir)/%.o: %.c
 	gcc $(cflags) $(Iincdirs) -c -O2 -o $@ $<
 
-.PHONY $(CuStringLib)
+.PHONY: $(CuStringDbgLib)
 $(CuStringLib):
 	make -f $(CuStringDir)/makefile gccDebug
 
-.PHONY $(CuAllocLib)
+.PHONY: $(CuAllocDbgLib)
 $(CuAllocLib):
 	make -f $(CuAllocDir)/makefile gccDebug
 
-gccDebug: $(addprefix $(gccDbgDir)/, $(filter-out $(testsources), $(objects)))
+.PHONY: $(CuStringLib)
+$(CuStringLib):
+	make -f $(CuStringDir)/makefile gccRelease
+
+.PHONY: $(CuAllocLib)
+$(CuAllocLib):
+	make -f $(CuAllocDir)/makefile gccRelease
+
+gccDebug: $(addprefix $(gccDbgDir)/, $(filter-out $(testobjects), $(objects))) $(CuAllocDbgLib) $(CuStringDbgLib)
 	@echo
 	@echo "**** Compiling DEBUG ****"
 	@echo "****"
-	ar rcs libCuAllocDbg.a $(addprefix $(gccDbgDir)/, $(filter-out $(testsources), $(objects)))
+	ar rcs libCuAllocDbg.a $?
 
-gccRelease: $(addprefix $(gccRelDir)/, $(filter-out $(testsources), $(objects)))
+gccRelease: $(addprefix $(gccRelDir)/, $(filter-out $(testobjects), $(objects))) $(CuAllocLib) $(CuStringLib)
 	@echo
 	@echo "**** Compiling RELEASE ****"
 	@echo "****"
-	ar rcs libCuAlloc.a $(addprefix $(gccRelDir)/, $(filter-out $(testsources), $(objects)))
+	ar rcs libCuAlloc.a $?
 
-UTest: $(addprefix $(gccDbgDir)/, $(testobjects))
+UTest: $(addprefix $(gccDbgDir)/, $(objects))
 	@echo
 	@echo "**** Making TESTS ****"
 	@echo "****"
@@ -59,6 +69,9 @@ UTest: $(addprefix $(gccDbgDir)/, $(testobjects))
 .PHONY: cleangccDebug
 .PHONY: cleangccRelease
 .PHONY: cleanUTest
+.PHONY: cleanAll
+
+cleanAll: cleangccDebug cleangccRelease cleanUtest cleanAll
 cleangccDebug:
 	/bin/rm -f $(addprefix $(gccDbgDir)/, $(filter-out $(testobjects), $(objects)))
 cleangccRelease:
