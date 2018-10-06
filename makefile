@@ -32,29 +32,21 @@ $(gccDbgDir)/%.o: %.c
 $(gccRelDir)/%.o: %.c
 	gcc $(cflags) $(Iincdirs) -c -O2 -o $@ $<
 
-.PHONY: $(CuStringDbgLib)
-$(CuStringLib):
-	make -f $(CuStringDir)/makefile gccDebug
-
-.PHONY: $(CuAllocDbgLib)
-$(CuAllocLib):
-	make -f $(CuAllocDir)/makefile gccDebug
-
 .PHONY: $(CuStringLib)
 $(CuStringLib):
-	make -f $(CuStringDir)/makefile gccRelease
+	$(MAKE) -C $(CuStringDir)
 
 .PHONY: $(CuAllocLib)
 $(CuAllocLib):
-	make -f $(CuAllocDir)/makefile gccRelease
+	$(MAKE) -C $(CuAllocDir)
 
-gccDebug: $(addprefix $(gccDbgDir)/, $(filter-out $(testobjects), $(objects))) $(CuAllocDbgLib) $(CuStringDbgLib)
+gccDebug: $(addprefix $(gccDbgDir)/, $(filter-out $(testobjects), $(objects))) $(CuAllocDbgLib)
 	@echo
 	@echo "**** Compiling DEBUG ****"
 	@echo "****"
 	ar rcs libCuAllocDbg.a $?
 
-gccRelease: $(addprefix $(gccRelDir)/, $(filter-out $(testobjects), $(objects))) $(CuAllocLib) $(CuStringLib)
+gccRelease: $(addprefix $(gccRelDir)/, $(filter-out $(testobjects), $(objects))) $(CuAllocLib)
 	@echo
 	@echo "**** Compiling RELEASE ****"
 	@echo "****"
@@ -71,7 +63,7 @@ UTest: $(addprefix $(gccDbgDir)/, $(objects))
 .PHONY: cleanUTest
 .PHONY: cleanAll
 
-cleanAll: cleangccDebug cleangccRelease cleanUtest cleanAll
+cleanAll: cleangccDebug cleangccRelease cleanUtest
 cleangccDebug:
 	/bin/rm -f $(addprefix $(gccDbgDir)/, $(filter-out $(testobjects), $(objects)))
 cleangccRelease:
@@ -79,4 +71,4 @@ cleangccRelease:
 cleanUTest:
 	/bin/rm -f $(addprefix $(gccDbgDir)/, $(testobjects))
 
-all: $(targets)
+all: $(CUStringLib) $(CuAllocLib) $(targets)
