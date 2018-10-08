@@ -28,6 +28,9 @@ testsources2 = CuStringUnitTests.c
 testobjects = $(patsubst %.c, %.o, $(testsources))
 testobjects2 = $(patsubst %.c, %.o, $(testsources2))
 
+$(gccDbgDir) $(gccRelDir) $(gccUTestsDir) $(gccTests2Dir):
+	mkdir $@
+
 $(gccDbgDir)/%.o: %.c
 	gcc $(cflags) $(Iincdirs) -c -g -o $@ $<
 $(gccRelDir)/%.o: %.c
@@ -39,29 +42,29 @@ $(gccTests2Dir)/%.o: %.c
 
 all: $(targets)
 
-gccDebug: $(addprefix $(gccDbgDir)/, $(filter-out $(testobjects) $(testobjects2), $(objects)))
+gccDebug: $(gccDbgDir) $(addprefix $(gccDbgDir)/, $(filter-out $(testobjects) $(testobjects2), $(objects)))
 	@echo
 	@echo "**** Compiling DEBUG ****"
 	@echo "****"
-	ar rcs lib$(outputbasename)Dbg.a $?
+	ar rcs lib$(outputbasename)Dbg.a $(filter-out $<, $?)
 
-gccRelease: $(addprefix $(gccRelDir)/, $(filter-out $(testobjects) $(testobjects2), $(objects)))
+gccRelease: $(gccRelDir) $(addprefix $(gccRelDir)/, $(filter-out $(testobjects) $(testobjects2), $(objects)))
 	@echo
 	@echo "**** Compiling RELEASE ****"
 	@echo "****"
-	ar rcs lib$(outputbasename).a $?
+	ar rcs lib$(outputbasename).a $(filter-out $<, $?)
 
-gccUTest: $(addprefix $(gccUTestsDir)/, $(filter-out $(testobjects2), $(objects)))
+gccUTest: $(gccUTestsDir) $(addprefix $(gccUTestsDir)/, $(filter-out $(testobjects2), $(objects)))
 	@echo
 	@echo "**** Making TESTS ****"
 	@echo "****"
-	g++ -g $(Llibdirs) -o $(outputbasename)_tests.exe $? -Wl,--start-group $(addprefix -l,$(libs)) ../libcutest.a ../CuAlloc/libCuAlloc.a -Wl,--end-group
+	g++ -g $(Llibdirs) -o $(outputbasename)_tests.exe $(filter-out $<, $?) -Wl,--start-group $(addprefix -l,$(libs)) ../libcutest.a ../CuAlloc/libCuAlloc.a -Wl,--end-group
 
-gccTests2: $(addprefix $(gccTests2Dir)/, $(filter-out $(testobjects), $(objects)))
+gccTests2: $(gccTests2Dir) $(addprefix $(gccTests2Dir)/, $(filter-out $(testobjects), $(objects)))
 	@echo
 	@echo "**** Making TESTS2 ****"
 	@echo "****"
-	g++ -g -o $(outputbasename)_tests2.exe $? $(Llibdirs) -Wl,--start-group $(addprefix -l,$(libs)) -Wl,--end-group
+	g++ -g -o $(outputbasename)_tests2.exe $(filter-out $<, $?) $(Llibdirs) -Wl,--start-group $(addprefix -l,$(libs)) -Wl,--end-group
 
 
 

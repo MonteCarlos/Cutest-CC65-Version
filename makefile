@@ -28,6 +28,9 @@ testsources = main.c AllTests.c CuTestTest.c CuTestTest_shared.c CuTest_setup.c
 
 testobjects = $(patsubst %.c, %.o, $(testsources))
 
+$(gccDbgDir) $(gccRelDir) $(gccUTestsDir):
+	mkdir $@
+
 $(gccDbgDir)/%.o: %.c
 	gcc $(cflags) $(Iincdirs) -c -g -o $@ $<
 $(gccRelDir)/%.o: %.c
@@ -46,23 +49,23 @@ $(CuAllocLib):
 all: $(targets)
 
 
-gccDebug: $(addprefix $(gccDbgDir)/, $(filter-out $(testobjects), $(objects)))
+gccDebug: $(gccDbgDir) $(addprefix $(gccDbgDir)/, $(filter-out $(testobjects), $(objects)))
 	@echo
 	@echo "**** Compiling DEBUG ****"
 	@echo "****"
-	ar rcs libCuTestDbg.a $?
+	ar rcs libCuTestDbg.a $(filter-out $<, $?)
 
-gccRelease: $(addprefix $(gccRelDir)/, $(filter-out $(testobjects), $(objects)))
+gccRelease: $(gccRelDir) $(addprefix $(gccRelDir)/, $(filter-out $(testobjects), $(objects)))
 	@echo
 	@echo "**** Compiling RELEASE ****"
 	@echo "****"
-	ar rcs libCuTest.a $?
+	ar rcs libCuTest.a $(filter-out $<, $?)
 
-gccUTests: $(addprefix $(gccUTestsDir)/, $(objects))
+gccUTests: $(gccUTestsDir) $(addprefix $(gccUTestsDir)/, $(objects))
 	@echo
 	@echo "**** Making TESTS ****"
 	@echo "****"
-	g++ -g $? $(Llibdirs) $(addprefix -l,$(libs))  -o CuTest_tests.exe
+	g++ -g $(filter-out $<, $?) $(Llibdirs) $(addprefix -l,$(libs))  -o CuTest_tests.exe
 
 .PHONY: cleangccDebug
 .PHONY: cleangccRelease
