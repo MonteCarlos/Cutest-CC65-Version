@@ -8,7 +8,7 @@ CuSize_t realloccount = 0;
 void *lastFreed[5] = {0};
 void *lastAllocated[5] = {0};
 
-void *CuAlloc (size_t n) {
+CuAllocUserDataPtr_t CuAlloc (size_t n) {
     register CuAlloc_t *ptr = (CuAlloc_t *) malloc (CuAlloc_calculateTotalSize (n) );
 
     if ( !ptr ) {

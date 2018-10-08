@@ -1,55 +1,79 @@
 cflags = -std=c11 -fplan9-extensions
 
+CuStringDir = CuString
+CuAllocDir = CuAlloc
+CuStringLib = $(CuStringDir)/libCutestString-cc65.a
+CuAllocLib = $(CuAllocDir)/libCuAlloc.a
+CuStringDbgLib = $(CuStringDir)/libCutestString-cc65_dbg.a
+CuAllocDbgLib = $(CuAllocDir)/libCuAllocDbg.a
+
 incdirs = ../ /home/mc78/Dokumente/Programmieren/EigeneCProgramme/MCLib/
 Iincdirs = $(addprefix -I, $(incdirs))
-libdirs = ./ ../ ../CuString/ /home/mc78/Dokumente/Programmieren/EigeneCProgramme/MCLib/
+libdirs = CuString/ CuAlloc/ /home/mc78/Dokumente/Programmieren/EigeneCProgramme/MCLib/
 Llibdirs = $(addprefix -L, $(libdirs))
 
-libs = cutest_Dbg CutestString-cc65_dbg CuAllocDbg MCLib
+libs = CuString CuAlloc MCLib
 
 sources = $(wildcard *.c)
 objects = $(patsubst %.c, %.o, $(sources))
 gccDbgDir=obj/gccDebug
 gccRelDir=obj/gccRelease
-targets = gccDebug gccRelease UTest
+gccUTestsDir=obj/gccUTests
+targets = $(CuStringLib) $(CuAllocLib) gccDebug gccRelease gccUTests
 
 # filter all %.c source-files whose filename begins with "test". These
 # files are considered sources containing tests
 # These files should not be linked into the libraries
-testsources = $(filter $(wildcard test*.c), $(sources))
+testsources = main.c AllTests.c CuTestTest.c CuTestTest_shared.c CuTest_setup.c
+
 testobjects = $(patsubst %.c, %.o, $(testsources))
 
 $(gccDbgDir)/%.o: %.c
 	gcc $(cflags) $(Iincdirs) -c -g -o $@ $<
 $(gccRelDir)/%.o: %.c
 	gcc $(cflags) $(Iincdirs) -c -O2 -o $@ $<
+$(gccUTestsDir)/%.o: %.c
+	gcc $(cflags) $(Iincdirs) -c -g -DNDEBUG -o $@ $<
 
-gccDebug: $(addprefix $(gccDbgDir)/, $(filter-out $(testsources), $(objects)))
+.PHONY: $(CuStringLib)
+$(CuStringLib):
+	$(MAKE) -C $(CuStringDir)
+
+.PHONY: $(CuAllocLib)
+$(CuAllocLib):
+	$(MAKE) -C $(CuAllocDir)
+
+all: $(targets)
+
+
+gccDebug: $(addprefix $(gccDbgDir)/, $(filter-out $(testobjects), $(objects)))
 	@echo
 	@echo "**** Compiling DEBUG ****"
 	@echo "****"
-	ar rcs libCuAllocDbg.a $(addprefix $(gccDbgDir)/, $(filter-out $(testsources), $(objects)))
+	ar rcs libCuTestDbg.a $?
 
-gccRelease: $(addprefix $(gccRelDir)/, $(filter-out $(testsources), $(objects)))
+gccRelease: $(addprefix $(gccRelDir)/, $(filter-out $(testobjects), $(objects)))
 	@echo
 	@echo "**** Compiling RELEASE ****"
 	@echo "****"
-	ar rcs libCuAlloc.a $(addprefix $(gccRelDir)/, $(filter-out $(testsources), $(objects)))
+	ar rcs libCuTest.a $?
 
-UTest: $(addprefix $(gccDbgDir)/, $(testobjects))
+gccUTests: $(addprefix $(gccUTestsDir)/, $(objects))
 	@echo
 	@echo "**** Making TESTS ****"
 	@echo "****"
-	g++ $? $(Llibdirs) $(addprefix -l,$(libs))  -o CuAlloc_tests.exe
+	g++ -g $? $(Llibdirs) $(addprefix -l,$(libs))  -o CuTest_tests.exe
 
 .PHONY: cleangccDebug
 .PHONY: cleangccRelease
-.PHONY: cleanUTest
+.PHONY: cleanUTests
+.PHONY: cleanAll
+
+cleanAll: cleangccDebug cleangccRelease cleanUTests
 cleangccDebug:
 	/bin/rm -f $(addprefix $(gccDbgDir)/, $(filter-out $(testobjects), $(objects)))
 cleangccRelease:
 	/bin/rm -f $(addprefix $(gccRelDir)/, $(filter-out $(testobjects), $(objects)))
-cleanUTest:
-	/bin/rm -f $(addprefix $(gccDbgDir)/, $(testobjects))
+cleanUTests:
+	/bin/rm -f $(addprefix $(gccUTestsDir)/, $(testobjects))
 
-all: $(targets)
