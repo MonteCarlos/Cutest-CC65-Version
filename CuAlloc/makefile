@@ -21,6 +21,9 @@ targets = gccDebug gccRelease UTest
 testsources = $(filter $(wildcard test*.c), $(sources))
 testobjects = $(patsubst %.c, %.o, $(testsources))
 
+$(gccDbgDir) $(gccRelDir) $(gccUTestsDir):
+	mkdir $@
+
 $(gccDbgDir)/%.o: %.c
 	gcc $(cflags) $(Iincdirs) -c -g -o $@ $<
 $(gccRelDir)/%.o: %.c
@@ -31,23 +34,23 @@ $(gccUTestsDir)/%.o: %.c
 
 all: $(targets)
 
-gccDebug: $(addprefix $(gccDbgDir)/, $(filter-out $(testsources), $(objects)))
+gccDebug: $(gccDbgDir) $(addprefix $(gccDbgDir)/, $(filter-out $(testsources), $(objects)))
 	@echo
 	@echo "**** Compiling DEBUG ****"
 	@echo "****"
-	ar rcs libCuAllocDbg.a $?
+	ar rcs libCuAllocDbg.a $(filter-out $(gccDbgDir), $?)
 
-gccRelease: $(addprefix $(gccRelDir)/, $(filter-out $(testsources), $(objects)))
+gccRelease: $(gccRelDir) $(addprefix $(gccRelDir)/, $(filter-out $(testsources), $(objects)))
 	@echo
 	@echo "**** Compiling RELEASE ****"
 	@echo "****"
-	ar rcs libCuAlloc.a $?
+	ar rcs libCuAlloc.a $(filter-out $(gccRelDir), $?)
 
-UTest: $(addprefix $(gccUTestsDir)/, $(objects))
+UTest: $(gccUTestsDir) $(addprefix $(gccUTestsDir)/, $(objects))
 	@echo
 	@echo "**** Making TESTS ****"
 	@echo "****"
-	g++ -g $(Llibdirs) -Wl,--start-group $? $(addprefix -l,$(libs)) $(libs2) -Wl,--end-group -o CuAlloc_tests.exe
+	g++ -g $(Llibdirs) -Wl,--start-group $(filter-out $(gccUTestsDir), $?) $(addprefix -l,$(libs)) $(libs2) -Wl,--end-group -o CuAlloc_tests.exe
 
 .PHONY: cleangccDebug
 .PHONY: cleangccRelease
