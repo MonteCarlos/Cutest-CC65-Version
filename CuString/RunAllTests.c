@@ -3,10 +3,10 @@
 
 #include "CutestString_internal.h"
 
-CuSuite* CuGetSuite(void);
-CuSuite* CuStringGetSuite1(void);
-CuSuite* CuStringGetSuite2(void);
-CuSuite* CuStringGetSuite3(void);
+CuSuite_t* CuGetSuite(void);
+CuSuite_t* CuStringGetSuite1(void);
+CuSuite_t* CuStringGetSuite2(void);
+CuSuite_t* CuStringGetSuite3(void);
 
 //17,89kB (executable prg), 04.07.2015
 //17,74
@@ -16,15 +16,15 @@ CuSuite* CuStringGetSuite3(void);
 //- solve CuStringDelete and CuSuiteDelete problem
 //- solve memory allocation problems (sometimes (m)(c)alloc returns NULL)
 
-typedef CuSuitePtr getSuitefnc_t(void);
+typedef CuSuitePtr_t getSuitefnc_t(void);
 
-CuSuite *GetSuite(getSuitefnc_t* getSuitefnc){
-    CuSuite* suite = NULL;
+CuSuite_t *GetSuite(getSuitefnc_t* getSuitefnc){
+    CuSuite_t* suite = NULL;
     suite = getSuitefnc();
     assert (NULL != suite);
     return suite;
 }
-CuSize_t testRunner(CuSuite *suite){
+CuSize_t testRunner(CuSuite_t *suite){
 	//remember no of total testsuite runs
 	static CuSize_t cnt = 0;
 	//pre and postfixes of filename of test results
@@ -58,7 +58,7 @@ CuSuite *GetSuite(getSuitefnc_t* getSuitefnc){
 void RunAllTests(void)
 {
 	//obtain tests of independent functions
-	CuSuite* suite = GetSuite(CuStringGetSuite1);//CuSuiteNew();
+	CuSuite_t* suite = GetSuite(CuStringGetSuite1);//CuSuiteNew();
 
 	//*********************************
 	//*** Test CuTestString			***

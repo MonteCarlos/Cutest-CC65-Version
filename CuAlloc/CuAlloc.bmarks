@@ -1,28 +1,74 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <BrowseTracker_layout_file>
 	<ActiveTarget name="gccall" />
-	<File name="CuAllocTest.cfg" open="1" top="0" tabpos="3">
-		<Cursor position="979" topLine="12" />
+	<File name="CuAlloc_getDataSize.c" open="1" top="0" tabpos="20">
+		<Cursor position="155" topLine="0" />
+		<BrowseMarks positions="" />
+		<Book_Marks positions="" />
 	</File>
-	<File name="CuAlloc_internal.h" open="1" top="0" tabpos="4">
-		<Cursor position="176" topLine="6" />
+	<File name="CuFree.c" open="1" top="0" tabpos="7">
+		<Cursor position="415" topLine="0" />
+		<BrowseMarks positions="" />
+		<Book_Marks positions="" />
 	</File>
-	<File name="CuAlloc_getBufferValidity.c" open="1" top="0" tabpos="0">
+	<File name="CuAlloc.c" open="1" top="0" tabpos="5">
+		<Cursor position="450" topLine="0" />
+		<BrowseMarks positions="" />
+		<Book_Marks positions="" />
+	</File>
+	<File name="CuAlloc_getBufferValidity.c" open="1" top="0" tabpos="22">
+		<Cursor position="95" topLine="0" />
+		<BrowseMarks positions="" />
+		<Book_Marks positions="" />
+	</File>
+	<File name="CuAlloc_getTotalSize.c" open="1" top="0" tabpos="9">
+		<Cursor position="270" topLine="0" />
+		<BrowseMarks positions="" />
+		<Book_Marks positions="" />
+	</File>
+	<File name="CuCalloc.c" open="1" top="0" tabpos="6">
 		<Cursor position="0" topLine="0" />
+		<BrowseMarks positions="" />
+		<Book_Marks positions="" />
 	</File>
-	<File name="CuAlloc_Realloc.c" open="1" top="1" tabpos="0">
+	<File name="CuAlloc_calculateTotalSize.c" open="1" top="0" tabpos="23">
 		<Cursor position="0" topLine="0" />
+		<BrowseMarks positions="" />
+		<Book_Marks positions="" />
 	</File>
-	<File name="testCuAlloc.c" open="1" top="0" tabpos="1">
-		<Cursor position="52" topLine="0" />
-	</File>
-	<File name="CuAlloc_getTotalSize.c" open="1" top="0" tabpos="0">
-		<Cursor position="0" topLine="0" />
+	<File name="CuAlloc_Realloc.c" open="1" top="0" tabpos="4">
+		<Cursor position="700" topLine="0" />
+		<BrowseMarks positions="" />
+		<Book_Marks positions="" />
 	</File>
 	<File name="CuAlloc.h" open="1" top="0" tabpos="2">
-		<Cursor position="231" topLine="7" />
+		<Cursor position="1063" topLine="15" />
+		<BrowseMarks positions="" />
+		<Book_Marks positions="" />
 	</File>
-	<File name="CuAlloc.c" open="1" top="0" tabpos="0">
+	<File name="CuAlloc_getDataAddr.c" open="1" top="0" tabpos="21">
 		<Cursor position="0" topLine="0" />
+		<BrowseMarks positions="" />
+		<Book_Marks positions="" />
+	</File>
+	<File name="makefile" open="1" top="0" tabpos="24">
+		<Cursor position="1543" topLine="29" />
+		<BrowseMarks positions="" />
+		<Book_Marks positions="" />
+	</File>
+	<File name="CuAlloc_getHeaderAddr.c" open="1" top="0" tabpos="8">
+		<Cursor position="44" topLine="0" />
+		<BrowseMarks positions="" />
+		<Book_Marks positions="" />
+	</File>
+	<File name="CuAlloc_internal.h" open="1" top="0" tabpos="3">
+		<Cursor position="1037" topLine="16" />
+		<BrowseMarks positions="" />
+		<Book_Marks positions="" />
+	</File>
+	<File name="testCuAlloc.c" open="1" top="0" tabpos="1">
+		<Cursor position="7708" topLine="217" />
+		<BrowseMarks positions="7938" />
+		<Book_Marks positions="" />
 	</File>
 </BrowseTracker_layout_file>

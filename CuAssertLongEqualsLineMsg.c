@@ -1,6 +1,6 @@
 #include "CuTest_internal.h"
 
-bool CuAssertLongEquals_LineMsg(CuTest* tc, const char* file, unsigned int line, const char* message,
+bool CuAssertLongEquals_LineMsg(CuTest_t* tc, const char* file, unsigned int line, const char* message,
 	long expected, long actual)
 {
 	//char* buf = (char*)calloc(STRING_MAX, sizeof(char));

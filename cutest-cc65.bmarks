@@ -1,121 +1,96 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <BrowseTracker_layout_file>
 	<ActiveTarget name="gccall" />
-	<File name="CuTestGenerateReportString.c" open="1" top="0" tabpos="12">
-		<Cursor position="336" topLine="0" />
+	<File name="CuTestAssertArrayElementsConstant.c" open="1" top="0" tabpos="17">
+		<Cursor position="31" topLine="0" />
 	</File>
-	<File name="CuTestAssertPtrEqualsLineMsg.c" open="1" top="0" tabpos="11">
-		<Cursor position="201" topLine="0" />
+	<File name="CuTestRun.c" open="1" top="0" tabpos="6">
+		<Cursor position="292" topLine="0" />
 	</File>
-	<File name="CuTest_internal.h" open="1" top="0" tabpos="5">
-		<Cursor position="252" topLine="1" />
+	<File name="CuTest.h" open="1" top="0" tabpos="3">
+		<Cursor position="2770" topLine="63" />
 	</File>
-	<File name="CuTest_Typedefs.h" open="1" top="0" tabpos="18">
-		<Cursor position="624" topLine="7" />
+	<File name="CuTestTest-cc65.map" open="1" top="0" tabpos="10">
+		<Cursor position="124222" topLine="2201" />
 	</File>
-	<File name="CuMallocWrapper.h" open="1" top="0" tabpos="7">
+	<File name="CuTestAssertPtrEqualsLineMsg.c" open="1" top="0" tabpos="13">
+		<Cursor position="438" topLine="0" />
+	</File>
+	<File name="CuTestAssertStrEqualsLineMsg.c" open="1" top="0" tabpos="7">
+		<Cursor position="199" topLine="0" />
+	</File>
+	<File name="CuTestFailInternal.c" open="1" top="0" tabpos="20">
+		<Cursor position="170" topLine="0" />
+	</File>
+	<File name="CuTestNew.c" open="1" top="0" tabpos="22">
 		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="CuSuiteGetFailcount.c" open="1" top="0" tabpos="28">
+	<File name="CuTestOutputResult.c" open="1" top="0" tabpos="26">
 		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="CuSuiteNew.c" open="1" top="0" tabpos="31">
-		<Cursor position="16" topLine="0" />
+	<File name="CuTest_internal.h" open="1" top="0" tabpos="18">
+		<Cursor position="521" topLine="0" />
 	</File>
-	<File name="CuTestReportDestroy.c" open="1" top="0" tabpos="9">
+	<File name="CuTestAssertGeneralEqualsLineMsg.c" open="1" top="0" tabpos="8">
+		<Cursor position="1213" topLine="16" />
+	</File>
+	<File name="CuTestInit.c" open="1" top="0" tabpos="21">
 		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="CuTestAssertArrayEqualsStepFunc.c" open="1" top="0" tabpos="10">
-		<Cursor position="318" topLine="0" />
+	<File name="CuTest_setup.c" open="1" top="0" tabpos="15">
+		<Cursor position="30" topLine="0" />
 	</File>
-	<File name="CuSuiteAddSuite.c" open="1" top="0" tabpos="21">
+	<File name="CuTestFailLine.c" open="1" top="0" tabpos="19">
+		<Cursor position="615" topLine="0" />
+	</File>
+	<File name="CuTestGenerateMessage.c" open="1" top="0" tabpos="4">
+		<Cursor position="357" topLine="10" />
+	</File>
+	<File name="CuTestAppendMessage.c" open="1" top="0" tabpos="16">
+		<Cursor position="30" topLine="0" />
+	</File>
+	<File name="makefile" open="1" top="0" tabpos="29">
+		<Cursor position="1771" topLine="40" />
+		<BrowseMarks positions="" />
+		<Book_Marks positions="" />
+	</File>
+	<File name="CuTestReportDestroy.c" open="1" top="0" tabpos="28">
+		<Cursor position="167" topLine="0" />
+	</File>
+	<File name="CuTest_AssertMacros.h" open="1" top="0" tabpos="23">
+		<Cursor position="2397" topLine="0" />
+	</File>
+	<File name="CuTestDelete.c" open="1" top="0" tabpos="19">
+		<Cursor position="401" topLine="4" />
+	</File>
+	<File name="CuTestAssertArrayEqualsLineMsg.c" open="1" top="0" tabpos="9">
 		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="CuSuiteSummary.c" open="1" top="0" tabpos="33">
+	<File name="CuTestAssertArrayEqualsStepFunc.c" open="1" top="0" tabpos="11">
+		<Cursor position="1727" topLine="30" />
+	</File>
+	<File name="CuSuiteDelete.c" open="1" top="0" tabpos="27">
+		<Cursor position="74" topLine="3" />
+	</File>
+	<File name="CuTest_AssertFunctions.h" open="1" top="0" tabpos="24">
+		<Cursor position="164" topLine="2" />
+	</File>
+	<File name="CuTestGenerateReportString.c" open="1" top="0" tabpos="2">
+		<Cursor position="384" topLine="0" />
+	</File>
+	<File name="CuTest.c" open="1" top="0" tabpos="5">
+		<Cursor position="227" topLine="0" />
+	</File>
+	<File name="README.txt" open="1" top="0" tabpos="14">
+		<Cursor position="4698" topLine="134" />
+	</File>
+	<File name="CuTestAssertIntEqualsLineMsg.c" open="1" top="0" tabpos="12">
+		<Cursor position="478" topLine="0" />
+	</File>
+	<File name="CuTest_Typedefs.h" open="1" top="0" tabpos="25">
+		<Cursor position="107" topLine="0" />
+	</File>
+	<File name="CuTestTest.h" open="1" top="0" tabpos="1">
 		<Cursor position="0" topLine="0" />
-	</File>
-	<File name="CuTestGenerateMessage.c" open="1" top="0" tabpos="36">
-		<Cursor position="0" topLine="0" />
-	</File>
-	<File name="CuTest.c" open="1" top="0" tabpos="34">
-		<Cursor position="0" topLine="0" />
-	</File>
-	<File name="CuTest_AssertMacros.h" open="1" top="0" tabpos="17">
-		<Cursor position="2183" topLine="18" />
-	</File>
-	<File name="CuSuiteRegisterTests.c" open="1" top="0" tabpos="32">
-		<Cursor position="808" topLine="24" />
-	</File>
-	<File name="CuSuiteDelete.c" open="1" top="0" tabpos="26">
-		<Cursor position="0" topLine="0" />
-	</File>
-	<File name="README.txt" open="0" top="0" tabpos="0">
-		<Cursor position="6786" topLine="184" />
-	</File>
-	<File name="CuTest_AssertFunctions.h" open="1" top="0" tabpos="23">
-		<Cursor position="113" topLine="0" />
-	</File>
-	<File name="CuSuiteGetTestcount.c" open="1" top="0" tabpos="29">
-		<Cursor position="146" topLine="0" />
-	</File>
-	<File name="license.txt" open="0" top="0" tabpos="0">
-		<Cursor position="556" topLine="0" />
-	</File>
-	<File name="CuTest_setup.c" open="1" top="0" tabpos="34">
-		<Cursor position="0" topLine="0" />
-	</File>
-	<File name="CuTestTest.h" open="1" top="0" tabpos="6">
-		<Cursor position="130" topLine="0" />
-	</File>
-	<File name="CuTestRun.c" open="1" top="0" tabpos="14">
-		<Cursor position="0" topLine="0" />
-	</File>
-	<File name="CuTestAssertIntEqualsLineMsg.c" open="1" top="0" tabpos="13">
-		<Cursor position="436" topLine="0" />
-	</File>
-	<File name="CuSuiteAddTest.c" open="1" top="0" tabpos="22">
-		<Cursor position="0" topLine="0" />
-	</File>
-	<File name="CuTestOutputResult.c" open="1" top="0" tabpos="15">
-		<Cursor position="0" topLine="0" />
-	</File>
-	<File name="CuTestAssertStrEqualsLineMsg.c" open="1" top="0" tabpos="1">
-		<Cursor position="263" topLine="0" />
-	</File>
-	<File name="CuTest.h" open="1" top="0" tabpos="4">
-		<Cursor position="3157" topLine="22" />
-	</File>
-	<File name="CuRegisterTestlist.c" open="1" top="0" tabpos="20">
-		<Cursor position="339" topLine="17" />
-	</File>
-	<File name="CuSuiteInit.c" open="1" top="0" tabpos="30">
-		<Cursor position="0" topLine="0" />
-	</File>
-	<File name="CuTestAssertArrayEqualsLineMsg.c" open="1" top="0" tabpos="3">
-		<Cursor position="284" topLine="0" />
-	</File>
-	<File name="CuSuiteDetails.c" open="1" top="0" tabpos="27">
-		<Cursor position="0" topLine="0" />
-	</File>
-	<File name="CuTestAssertGeneralEqualsLineMsg.c" open="1" top="0" tabpos="25">
-		<Cursor position="73" topLine="0" />
-	</File>
-	<File name="CuTestNew.c" open="1" top="0" tabpos="35">
-		<Cursor position="0" topLine="0" />
-	</File>
-	<File name="CuTestAssertArrayElementsConstant.c" open="1" top="0" tabpos="2">
-		<Cursor position="261" topLine="0" />
-	</File>
-	<File name="CuSuiteRun.c" open="1" top="0" tabpos="24">
-		<Cursor position="2066" topLine="55" />
-	</File>
-	<File name="CuTestReportNew.c" open="1" top="0" tabpos="8">
-		<Cursor position="0" topLine="0" />
-	</File>
-	<File name="CuTestFprintf.c" open="1" top="0" tabpos="16">
-		<Cursor position="45" topLine="0" />
-	</File>
-	<File name="CuSuiteInitRunReport.c" open="1" top="0" tabpos="55">
-		<Cursor position="148" topLine="0" />
 	</File>
 </BrowseTracker_layout_file>

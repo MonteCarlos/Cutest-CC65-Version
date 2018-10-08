@@ -1,7 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <BrowseTracker_layout_file>
 	<ActiveTarget name="gccDebug" />
-	<File name="CUnit_CuTest.h" open="1" top="1" tabpos="1">
-		<Cursor position="137" topLine="0" />
+	<File name="CuString_BasicIntegrationTests.c" open="1" top="0" tabpos="4">
+		<Cursor position="1580" topLine="0" />
+	</File>
+	<File name="CuString_AppendISvsNOT_tests.c" open="1" top="1" tabpos="6">
+		<Cursor position="325" topLine="17" />
+	</File>
+	<File name="CuString_FormatGenerator.c" open="1" top="0" tabpos="5">
+		<Cursor position="0" topLine="0" />
+	</File>
+	<File name="CUnit_CuTest.h" open="1" top="0" tabpos="2">
+		<Cursor position="0" topLine="0" />
+	</File>
+	<File name="CUnit_example.c" open="1" top="0" tabpos="3">
+		<Cursor position="0" topLine="0" />
+	</File>
+	<File name="CUnit_tests.c" open="1" top="0" tabpos="1">
+		<Cursor position="3373" topLine="104" />
 	</File>
 </BrowseTracker_layout_file>

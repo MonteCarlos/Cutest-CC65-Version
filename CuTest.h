@@ -1,7 +1,7 @@
 #ifndef CU_TEST_H
 #define CU_TEST_H
 
-#define CUTEST_VERSION  "CuTest_t 1.5"
+#define CUTEST_VERSION  "CuTest V 07_08_10"
 
 #include <stdheaders.h>
 

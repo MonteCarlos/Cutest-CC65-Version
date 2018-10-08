@@ -63,7 +63,7 @@ void testCuAllocGetBufferValidity(CuTest_t* tc){
 }
 
 void testCuFree(CuTest_t* tc){
-    int *iVar = CuAlloc(sizeof(int));
+    int *iVar = (int*)CuAlloc(sizeof(int));
     CuSize_t freecount = CuAlloc_getFreeCount();
     CuSize_t alloccount = CuAlloc_getAllocCount();
     bool freeResult = CuFree(iVar);
@@ -83,7 +83,7 @@ void testCuFree(CuTest_t* tc){
 void testCuCalloc(CuTest_t* tc){
     int intArray[] = {100,200,300,400,500,23};
     unsigned int alloccount = CuAlloc_getAllocCount();
-    int *ptr2IntArray = CuCalloc(sizeof(intArray));
+    int *ptr2IntArray = (int*)CuCalloc(sizeof(intArray));
     int8_t i;
     //Test, if block is empty
     for ( i = sizeof(intArray)/sizeof(*intArray)-1; i>0; --i){
@@ -113,7 +113,7 @@ void testCuRealloc(CuTest_t* tc){
     CuSize_t realloccount = CuAlloc_getReallocCount();
 	int8_t i;
 
-    ptr2IntArray = CuRealloc(NULL, sizeof(intArray1));
+    ptr2IntArray = (int*)CuRealloc(NULL, sizeof(intArray1));
 
     //Check correct counting of allocs and reallocs
     CuAssertIntEquals(tc, alloccount+1, CuAlloc_getAllocCount());
@@ -131,7 +131,7 @@ void testCuRealloc(CuTest_t* tc){
     CuAssertIntEquals(tc, true, CuAlloc_getBufferValidity(ptr2IntArray));
 
     //Realloc, content should be copied to new block
-    ptr2IntArray = CuRealloc(ptr2IntArray, sizeof(intArray2));
+    ptr2IntArray = (int*)CuRealloc(ptr2IntArray, sizeof(intArray2));
 
     //Check correct counting of allocs and reallocs
     CuAssertIntEquals(tc, alloccount, CuAlloc_getAllocCount());
@@ -160,7 +160,7 @@ void testCuAlloc(CuTest_t* tc){
     enum {constTestValInt = 10054};
     unsigned int alloccount = CuAlloc_getAllocCount();
 
-    int *iVar = CuAlloc(sizeof(int));
+    int *iVar = (int*)CuAlloc(sizeof(int));
     CuAssertIntEquals(tc, sizeof(*iVar), CuAlloc_getDataSize(iVar));
     CuAssertIntEquals(tc, sizeof(*iVar)+sizeof(CuAlloc_BufHeader_t), CuAlloc_getTotalSize(iVar));
     CuAssertTrue(tc, CuAlloc_getBufferValidity(iVar));
