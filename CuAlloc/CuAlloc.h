@@ -1,6 +1,8 @@
 #ifndef CUALLOC_H_INCLUDED
 #define CUALLOC_H_INCLUDED
 
+#define CUALLOC_VERSION  "CuAlloc V 06_08_10"
+
 #define CU_ALLOC(TYPE) ((TYPE*) CuAlloc(sizeof(TYPE)))
 #include <stdbool.h>
 #include <stdint.h>

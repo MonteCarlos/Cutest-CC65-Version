@@ -1,7 +1,7 @@
 #ifndef CUTESTSTRING_H
 #define CUTESTSTRING_H
 
-#define CUSTRING_VERSION  "CuString 1.5"
+#define CUSTRING_VERSION  "CuString V 06_08_10"
 
 #define CUSTRID(x) x
 #define CUSTRINGIFY(x) #x
