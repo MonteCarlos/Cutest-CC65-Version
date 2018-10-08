@@ -2,15 +2,17 @@ cflags = -std=c11 -fplan9-extensions
 
 incdirs = ../ /home/mc78/Dokumente/Programmieren/EigeneCProgramme/MCLib/
 Iincdirs = $(addprefix -I, $(incdirs))
-libdirs = ./ ../ ../CuString/ /home/mc78/Dokumente/Programmieren/EigeneCProgramme/MCLib/
+libdirs = . .. ../CuString /home/mc78/Dokumente/Programmieren/EigeneCProgramme/MCLib
 Llibdirs = $(addprefix -L, $(libdirs))
 
-libs = cutest_Dbg CutestString-cc65_dbg CuAllocDbg MCLib
+libs = MCLib
+libs2 = ../libcutest.a ../CuString/libCuString.a
 
 sources = $(wildcard *.c)
 objects = $(patsubst %.c, %.o, $(sources))
 gccDbgDir=obj/gccDebug
 gccRelDir=obj/gccRelease
+gccUTestsDir=obj/gccUTests
 targets = gccDebug gccRelease UTest
 
 # filter all %.c source-files whose filename begins with "test". These
@@ -23,24 +25,29 @@ $(gccDbgDir)/%.o: %.c
 	gcc $(cflags) $(Iincdirs) -c -g -o $@ $<
 $(gccRelDir)/%.o: %.c
 	gcc $(cflags) $(Iincdirs) -c -O2 -o $@ $<
+$(gccUTestsDir)/%.o: %.c
+	gcc $(cflags) $(Iincdirs) -c -g -DNDEBUG -o $@ $<
+
+
+all: $(targets)
 
 gccDebug: $(addprefix $(gccDbgDir)/, $(filter-out $(testsources), $(objects)))
 	@echo
 	@echo "**** Compiling DEBUG ****"
 	@echo "****"
-	ar rcs libCuAllocDbg.a $(addprefix $(gccDbgDir)/, $(filter-out $(testsources), $(objects)))
+	ar rcs libCuAllocDbg.a $?
 
 gccRelease: $(addprefix $(gccRelDir)/, $(filter-out $(testsources), $(objects)))
 	@echo
 	@echo "**** Compiling RELEASE ****"
 	@echo "****"
-	ar rcs libCuAlloc.a $(addprefix $(gccRelDir)/, $(filter-out $(testsources), $(objects)))
+	ar rcs libCuAlloc.a $?
 
-UTest: $(addprefix $(gccDbgDir)/, $(testobjects))
+UTest: $(addprefix $(gccUTestsDir)/, $(objects))
 	@echo
 	@echo "**** Making TESTS ****"
 	@echo "****"
-	g++ -g $? $(Llibdirs) $(addprefix -l,$(libs))  -o CuAlloc_tests.exe
+	g++ -g $(Llibdirs) -Wl,--start-group $? $(addprefix -l,$(libs)) $(libs2) -Wl,--end-group -o CuAlloc_tests.exe
 
 .PHONY: cleangccDebug
 .PHONY: cleangccRelease
@@ -51,5 +58,3 @@ cleangccRelease:
 	/bin/rm -f $(addprefix $(gccRelDir)/, $(filter-out $(testobjects), $(objects)))
 cleanUTest:
 	/bin/rm -f $(addprefix $(gccDbgDir)/, $(testobjects))
-
-all: $(targets)

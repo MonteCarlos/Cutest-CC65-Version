@@ -190,6 +190,7 @@
 			<Option target="gccDebug" />
 			<Option target="gccRelease" />
 		</Unit>
+		<Unit filename="makefile" />
 		<Unit filename="testCuAlloc.c">
 			<Option compilerVar="CC" />
 			<Option target="gccRelease" />

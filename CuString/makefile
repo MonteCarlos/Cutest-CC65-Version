@@ -3,10 +3,10 @@ cflags = -std=gnu11 -fplan9-extensions
 outputbasename = CuString
 incdirs = ../ /home/mc78/Dokumente/Programmieren/EigeneCProgramme/MCLib/
 Iincdirs = $(addprefix -I, $(incdirs))
-libdirs = ./ ../ ../CuAlloc/ /home/mc78/Dokumente/Programmieren/EigeneCProgramme/MCLib/
+libdirs = . .. ../CuAlloc /home/mc78/Dokumente/Programmieren/EigeneCProgramme/MCLib
 Llibdirs = $(addprefix -L, $(libdirs))
 
-libs = cutest_Dbg CuAllocDbg MCLib
+libs = MCLib
 
 sources = $(wildcard *.c)
 objects = $(patsubst %.c, %.o, $(sources))
@@ -14,7 +14,9 @@ gccDbgDir=obj/gccDebug
 gccRelDir=obj/gccRelease
 gccUTestsDir=obj/gccUTests
 gccTests2Dir=obj/gccTests2
-targets = gccDebug gccRelease gccUTest gccTests2
+targets = gccDebug gccRelease gccUTest
+#gccTests2 #removed from targets because it prevents compilation of project
+
 
 # filter all %.c source-files whose filename begins with "test". These
 # files are considered sources containing tests
@@ -53,13 +55,13 @@ gccUTest: $(addprefix $(gccUTestsDir)/, $(filter-out $(testobjects2), $(objects)
 	@echo
 	@echo "**** Making TESTS ****"
 	@echo "****"
-	g++ -g $? $(Llibdirs) $(addprefix -l,$(libs))  -o $(outputbasename)_tests.exe
+	g++ -g $(Llibdirs) -o $(outputbasename)_tests.exe $? -Wl,--start-group $(addprefix -l,$(libs)) ../libcutest.a ../CuAlloc/libCuAlloc.a -Wl,--end-group
 
 gccTests2: $(addprefix $(gccTests2Dir)/, $(filter-out $(testobjects), $(objects)))
 	@echo
 	@echo "**** Making TESTS2 ****"
 	@echo "****"
-	g++ -g $? $(Llibdirs) $(addprefix -l,$(libs))  -o $(outputbasename)_tests2.exe
+	g++ -g -o $(outputbasename)_tests2.exe $? $(Llibdirs) -Wl,--start-group $(addprefix -l,$(libs)) -Wl,--end-group
 
 
 
