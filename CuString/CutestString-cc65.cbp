@@ -8,9 +8,9 @@
 		<Option compiler="cc65" />
 		<Build>
 			<Target title="CC65Debug">
-				<Option output="CutestString-cc65Dbg.lib" prefix_auto="0" extension_auto="0" />
+				<Option output="CuStringDbg.lib" prefix_auto="0" extension_auto="0" />
 				<Option working_dir="" />
-				<Option object_output="obj/Debug/" />
+				<Option object_output="obj/cc65Debug/" />
 				<Option external_deps="../../MyCLib/libMCLib.a;" />
 				<Option type="2" />
 				<Option compiler="cc65" />
@@ -19,9 +19,9 @@
 				</Compiler>
 			</Target>
 			<Target title="CC65Release">
-				<Option output="CutestString_cc65.lib" prefix_auto="0" extension_auto="0" />
+				<Option output="CuString.lib" prefix_auto="0" extension_auto="0" />
 				<Option working_dir="" />
-				<Option object_output="obj/Release/" />
+				<Option object_output="obj/cc65Release/" />
 				<Option type="2" />
 				<Option compiler="cc65" />
 				<Compiler>
@@ -31,7 +31,7 @@
 				</Compiler>
 			</Target>
 			<Target title="gccDebug">
-				<Option output="CutestString-cc65_dbg" prefix_auto="1" extension_auto="1" />
+				<Option output="CuStringDbg" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="" />
 				<Option object_output="obj/gccDebug" />
 				<Option type="2" />
@@ -46,7 +46,7 @@
 				</Compiler>
 			</Target>
 			<Target title="gccRelease">
-				<Option output="CutestString-cc65" prefix_auto="1" extension_auto="1" />
+				<Option output="CuString" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="" />
 				<Option object_output="obj/gccRelease" />
 				<Option type="2" />
@@ -64,7 +64,6 @@
 			</Target>
 			<Target title="gccUTests">
 				<Option output="CutestString_UTests" prefix_auto="1" extension_auto="1" />
-				<Option working_dir="" />
 				<Option object_output="obj/gccUTests" />
 				<Option type="1" />
 				<Option compiler="gcc" />

@@ -7,9 +7,9 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="CC65Debug">
-				<Option output="cutest-cc65_Dbg.lib" prefix_auto="0" extension_auto="0" />
+				<Option output="CuTestDbg.lib" prefix_auto="0" extension_auto="0" />
 				<Option working_dir="" />
-				<Option object_output="cc65/obj/Debug/" />
+				<Option object_output="obj/cc65Debug/" />
 				<Option type="2" />
 				<Option compiler="cc65" />
 				<Compiler>
@@ -21,9 +21,9 @@
 				</Linker>
 			</Target>
 			<Target title="CC65Release">
-				<Option output="cutest-cc65.lib" prefix_auto="0" extension_auto="0" />
+				<Option output="CuTest.lib" prefix_auto="0" extension_auto="0" />
 				<Option working_dir="" />
-				<Option object_output="cc65/obj/Release/" />
+				<Option object_output="obj/cc65Release/" />
 				<Option type="2" />
 				<Option compiler="cc65" />
 				<Compiler>
@@ -35,9 +35,9 @@
 				</Linker>
 			</Target>
 			<Target title="gccDebug">
-				<Option output="cutest_Dbg" prefix_auto="1" extension_auto="1" />
+				<Option output="CuTestDbg" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="" />
-				<Option object_output="obj/Debug" />
+				<Option object_output="obj/gccDebug" />
 				<Option type="2" />
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
@@ -48,9 +48,9 @@
 				</Compiler>
 			</Target>
 			<Target title="gccRelease">
-				<Option output="cutest.a" prefix_auto="1" extension_auto="0" />
+				<Option output="CuTest.a" prefix_auto="1" extension_auto="0" />
 				<Option working_dir="" />
-				<Option object_output="obj/Release" />
+				<Option object_output="obj/gccRelease" />
 				<Option type="2" />
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />

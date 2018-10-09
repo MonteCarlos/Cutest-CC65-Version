@@ -8,7 +8,7 @@
 		<Option compiler="cc65" />
 		<Build>
 			<Target title="gccDebug">
-				<Option output="CutestString-test.exe" prefix_auto="0" extension_auto="0" />
+				<Option output="CuString_UTests.exe" prefix_auto="0" extension_auto="0" />
 				<Option object_output="obj/gccUTests" />
 				<Option external_deps="libCutestString-cc65_dbg.a;../CuAlloc/libCuAllocDbg.a;../libcutest_Dbg.a;" />
 				<Option type="1" />
