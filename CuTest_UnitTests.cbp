@@ -7,8 +7,8 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="gccDebug">
-				<Option output="cutest.exe" prefix_auto="1" extension_auto="0" />
-				<Option object_output="obj/UTests" />
+				<Option output="CuTest_UTests.exe" prefix_auto="1" extension_auto="0" />
+				<Option object_output="obj/gccUTests" />
 				<Option external_deps="CuAlloc/libCuAllocDbg.a;CuString/libCutestString-cc65_dbg.a;libcutest_Dbg.a;" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -37,8 +37,8 @@
 				</MakeCommands>
 			</Target>
 			<Target title="CC65Debug">
-				<Option output="cutest.exe" prefix_auto="1" extension_auto="0" />
-				<Option object_output="obj/UTests" />
+				<Option output="CuTest_UTests.prg" prefix_auto="1" extension_auto="0" />
+				<Option object_output="obj/cc65UTests" />
 				<Option external_deps="CuAlloc/libCuAllocDbg.a;CuString/libCutestString-cc65_dbg.a;libcutest_Dbg.a;" />
 				<Option type="1" />
 				<Option compiler="gcc" />

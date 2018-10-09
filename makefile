@@ -65,7 +65,7 @@ gccUTests: $(gccUTestsDir) $(addprefix $(gccUTestsDir)/, $(objects))
 	@echo
 	@echo "**** Making TESTS ****"
 	@echo "****"
-	g++ -g $(filter-out $<, $?) $(Llibdirs) $(addprefix -l,$(libs))  -o CuTest_tests.exe
+	g++ -g $(filter-out $<, $?) $(Llibdirs) $(addprefix -l,$(libs))  -o CuTest_UTests.exe
 
 .PHONY: cleangccDebug
 .PHONY: cleangccRelease
