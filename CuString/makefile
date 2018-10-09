@@ -58,7 +58,7 @@ gccUTest: $(gccUTestsDir) $(addprefix $(gccUTestsDir)/, $(filter-out $(testobjec
 	@echo
 	@echo "**** Making TESTS ****"
 	@echo "****"
-	g++ -g $(Llibdirs) -o $(outputbasename)_tests.exe $(filter-out $<, $?) -Wl,--start-group $(addprefix -l,$(libs)) ../libcutest.a ../CuAlloc/libCuAlloc.a -Wl,--end-group
+	g++ -g $(Llibdirs) -o $(outputbasename)_UTests.exe $(filter-out $<, $?) -Wl,--start-group $(addprefix -l,$(libs)) ../libcutest.a ../CuAlloc/libCuAlloc.a -Wl,--end-group
 
 gccTests2: $(gccTests2Dir) $(addprefix $(gccTests2Dir)/, $(filter-out $(testobjects), $(objects)))
 	@echo

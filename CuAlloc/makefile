@@ -50,7 +50,7 @@ UTest: $(gccUTestsDir) $(addprefix $(gccUTestsDir)/, $(objects))
 	@echo
 	@echo "**** Making TESTS ****"
 	@echo "****"
-	g++ -g $(Llibdirs) -Wl,--start-group $(filter-out $(gccUTestsDir), $?) $(addprefix -l,$(libs)) $(libs2) -Wl,--end-group -o CuAlloc_tests.exe
+	g++ -g $(Llibdirs) -Wl,--start-group $(filter-out $(gccUTestsDir), $?) $(addprefix -l,$(libs)) $(libs2) -Wl,--end-group -o CuAlloc_UTests.exe
 
 .PHONY: cleangccDebug
 .PHONY: cleangccRelease
